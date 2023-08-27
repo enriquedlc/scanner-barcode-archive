@@ -4,10 +4,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import { LandingScreen } from "./src/screens/landing-screen";
+import { Login } from "./src/screens/login-screen";
+import { SignUp } from "./src/screens/signup-screen";
 
-import { ROUTES } from "./src/constants/routes";
+import { RootStackParamList } from "./src/constants/routes";
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
@@ -15,12 +17,22 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{ animationEnabled: true }}
-          initialRouteName={ROUTES.LANDING}
+          initialRouteName={"LOGIN"}
         >
           <Stack.Screen
             options={{ headerShown: false }}
-            name={ROUTES.LANDING}
+            name={"LANDING"}
             component={LandingScreen}
+          />
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name={"LOGIN"}
+            component={Login}
+          />
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name={"SIGN_UP"}
+            component={SignUp}
           />
         </Stack.Navigator>
       </NavigationContainer>

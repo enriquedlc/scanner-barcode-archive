@@ -1,10 +1,19 @@
 import { Text, StyleSheet, View, Image } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { ButtonLanding } from "../components/button-landing";
 
 import { LOGOS, TOOLS } from "../../assets";
+import { RootStackParamList, RootStackParamName } from "../constants/routes";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { FONT_SIZES } from "../constants/font";
 
 export function LandingScreen() {
+  const navigation =
+    useNavigation<
+      StackNavigationProp<RootStackParamList, RootStackParamName>
+    >();
+
   return (
     <View style={styles.container}>
       <Image
@@ -15,8 +24,15 @@ export function LandingScreen() {
       <Text style={styles.title}>ARTICLE SCANNER</Text>
       <View style={styles.firstBubble}>
         <View style={styles.buttonsContainer}>
-          <ButtonLanding title="Iniciar sesión" />
-          <ButtonLanding title="Crear cuenta" outLined={true} />
+          <ButtonLanding
+            title="Iniciar sesión"
+            onPress={() => navigation.navigate("LOGIN")}
+          />
+          <ButtonLanding
+            title="Crear cuenta"
+            outLined={true}
+            onPress={() => navigation.navigate("SIGN_UP")}
+          />
         </View>
       </View>
       <Image source={TOOLS.hammer} alt="hammer" style={toolStyles.hammer} />
@@ -50,7 +66,7 @@ const styles = StyleSheet.create({
     top: "35%",
     position: "absolute",
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: FONT_SIZES.EXTRA_EXTRA_LARGE,
   },
   firstBubble: {
     zIndex: -10,
