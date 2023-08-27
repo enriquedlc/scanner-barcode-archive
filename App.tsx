@@ -1,20 +1,46 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+
+import { LandingScreen } from "./src/screens/landing-screen";
+
+import { ROUTES } from "./src/constants/routes";
+import { useCallback } from "react";
+
+const Stack = createStackNavigator();
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    "Cascadia-code": require("./assets/fonts/CascadiaCodePL-Regular.otf"),
+  });
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>hola soy enrique</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider onLayout={onLayoutRootView}>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{ animationEnabled: true }}
+          initialRouteName={ROUTES.LANDING}
+        >
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name={ROUTES.LANDING}
+            component={LandingScreen}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
