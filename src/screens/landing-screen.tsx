@@ -1,13 +1,15 @@
 import { Text, StyleSheet, View, Image } from "react-native";
-import { SPLASH_LOGO } from "../../assets";
+
 import { ButtonLanding } from "../components/button-landing";
+
+import { LOGOS, TOOLS } from "../../assets";
 
 export function LandingScreen() {
   return (
     <View style={styles.container}>
       <Image
         style={styles.splashLogo}
-        source={SPLASH_LOGO}
+        source={LOGOS.SPLASH_LOGO}
         alt="article-scanner-logo"
       />
       <Text style={styles.title}>ARTICLE SCANNER</Text>
@@ -17,6 +19,13 @@ export function LandingScreen() {
           <ButtonLanding title="Crear cuenta" outLined={true} />
         </View>
       </View>
+      <Image source={TOOLS.hammer} alt="hammer" style={toolStyles.hammer} />
+      <Image source={TOOLS.saw} alt="saw" style={toolStyles.saw} />
+      <Image
+        source={TOOLS.work_tools}
+        alt="saw"
+        style={toolStyles.work_tools}
+      />
       <View style={styles.secondBubble} />
       <View style={styles.thridBubble} />
     </View>
@@ -40,7 +49,6 @@ const styles = StyleSheet.create({
   title: {
     top: "35%",
     position: "absolute",
-    fontFamily: "Cascadia-code",
     fontWeight: "bold",
     fontSize: 20,
   },
@@ -80,5 +88,29 @@ const styles = StyleSheet.create({
     borderTopStartRadius: 400,
     position: "absolute",
     bottom: 210,
+  },
+});
+
+const toolStyles = StyleSheet.create({
+  hammer: {
+    width: 80,
+    height: 80,
+    position: "absolute",
+    bottom: 160,
+    right: 40,
+  },
+  saw: {
+    width: 80,
+    height: 80,
+    position: "absolute",
+    bottom: 170,
+    alignSelf: "center",
+  },
+  work_tools: {
+    width: 80,
+    height: 80,
+    position: "absolute",
+    bottom: 160,
+    left: 40,
   },
 });
