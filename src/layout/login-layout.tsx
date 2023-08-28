@@ -1,5 +1,11 @@
 import { ReactNode } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import { BLUE_PALLETE } from "../constants/colors";
 
 type LoginLayoutProps = {
@@ -10,7 +16,7 @@ export function LoginLayout(props: LoginLayoutProps) {
   const { children } = props;
 
   return (
-    <>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
         <View style={styles.firstBubble}>{children}</View>
         <View style={styles.secondBubble} />
@@ -18,7 +24,7 @@ export function LoginLayout(props: LoginLayoutProps) {
           <Text style={styles.title}>ARTICLE SCANNER📦</Text>
         </View>
       </View>
-    </>
+    </TouchableWithoutFeedback>
   );
 }
 
