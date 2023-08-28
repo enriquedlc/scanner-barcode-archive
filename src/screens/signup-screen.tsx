@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 
-export function SignUp() {
+export function SignUpScreen() {
   return (
     <View style={signupStyles.signupContainer}>
       <Text>SignUp</Text>

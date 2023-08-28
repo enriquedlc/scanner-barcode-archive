@@ -1,18 +1,14 @@
 import { Text, StyleSheet, View, Image } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 
-import { ButtonLanding } from "../components/button-landing";
+import { ButtonLanding } from "../components/button-landing/button-landing";
+
+import { useAppNavigation } from "../hooks/useAppNavigation";
 
 import { LOGOS, TOOLS } from "../../assets";
-import { RootStackParamList, RootStackParamName } from "../constants/routes";
-import { StackNavigationProp } from "@react-navigation/stack";
 import { FONT_SIZES } from "../constants/font";
 
 export function LandingScreen() {
-  const navigation =
-    useNavigation<
-      StackNavigationProp<RootStackParamList, RootStackParamName>
-    >();
+  const { navigation } = useAppNavigation();
 
   return (
     <View style={styles.container}>
