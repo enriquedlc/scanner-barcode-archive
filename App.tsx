@@ -1,43 +1,38 @@
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { useFonts } from "expo-font";
-import * as SplashScreen from "expo-splash-screen";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import { LandingScreen } from "./src/screens/landing-screen";
+import { LoginScreen } from "./src/screens/login-screen";
+import { SignUpScreen } from "./src/screens/signup-screen";
 
-import { ROUTES } from "./src/constants/routes";
-import { useCallback } from "react";
+import { RootStackParamList } from "./src/constants/routes";
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
-  const [fontsLoaded] = useFonts({
-    "Cascadia-code": require("./assets/fonts/CascadiaCodePL-Regular.otf"),
-  });
-
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-
-  if (!fontsLoaded) {
-    return null;
-  }
-
   return (
-    <SafeAreaProvider onLayout={onLayoutRootView}>
+    <SafeAreaProvider>
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{ animationEnabled: true }}
-          initialRouteName={ROUTES.LANDING}
+          initialRouteName={"LANDING"}
         >
           <Stack.Screen
             options={{ headerShown: false }}
-            name={ROUTES.LANDING}
+            name={"LANDING"}
             component={LandingScreen}
+          />
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name={"LOGIN"}
+            component={LoginScreen}
+          />
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name={"SIGN_UP"}
+            component={SignUpScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>
