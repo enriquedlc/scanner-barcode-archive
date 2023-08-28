@@ -91,7 +91,7 @@ export function Login() {
             />
             <ButtonLanding
               title="Atrás"
-              onPress={() => console.log("login action")}
+              onPress={() => navigation.navigate("LANDING")}
               width={120}
               outLined={true}
             />

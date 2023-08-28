@@ -17,7 +17,7 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{ animationEnabled: true }}
-          initialRouteName={"LOGIN"}
+          initialRouteName={"LANDING"}
         >
           <Stack.Screen
             options={{ headerShown: false }}
