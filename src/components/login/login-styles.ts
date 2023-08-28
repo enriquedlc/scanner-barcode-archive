@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native'
 
 import { FONT_SIZES } from '../../constants/font';
-import { LOGIN_COLORS, TEXT_COLOR } from '../../constants/colors';
+import { BLUE_PALLETE } from '../../constants/colors';
 
 export const loginStyles = StyleSheet.create({
     loginContainer: {
@@ -18,14 +18,14 @@ export const loginStyles = StyleSheet.create({
     },
     inputLabel: {
         fontSize: FONT_SIZES.LARGE,
-        color: TEXT_COLOR.PRIMARY_WHITE,
+        color: BLUE_PALLETE.PRIMARY_WHITE,
         fontWeight: "800",
         paddingBottom: 5,
     },
     input: {
         fontSize: FONT_SIZES.LARGE,
-        color: TEXT_COLOR.SECONDARY_WHITE,
-        backgroundColor: LOGIN_COLORS.LIGHT_BLUE_BACKGROUND,
+        color: BLUE_PALLETE.SECONDARY_WHITE,
+        backgroundColor: BLUE_PALLETE.SECONDARY,
         fontWeight: "500",
         paddingVertical: 7,
         borderRadius: 5,

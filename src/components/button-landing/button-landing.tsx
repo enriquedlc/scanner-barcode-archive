@@ -1,5 +1,5 @@
 import { Pressable, Text, StyleSheet } from "react-native";
-import { BUTTON_LADING_COLORS } from "../../constants/colors";
+import { BLUE_PALLETE } from "../../constants/colors";
 
 type ButtonLandingProps = {
   title: string;
@@ -23,7 +23,14 @@ export function ButtonLanding(props: ButtonLandingProps) {
       ]}
     >
       <Text
-        style={[styles.textButton, { color: outLined ? "#2f54f0" : "white" }]}
+        style={[
+          styles.textButton,
+          {
+            color: outLined
+              ? BLUE_PALLETE.BUTTON_DEFALUT
+              : BLUE_PALLETE.PRIMARY_WHITE,
+          },
+        ]}
       >
         {title}
       </Text>
@@ -36,7 +43,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     paddingVertical: 12,
     paddingHorizontal: 30,
-    borderColor: BUTTON_LADING_COLORS.DEFAULT,
+    borderColor: BLUE_PALLETE.BUTTON_DEFALUT,
     borderWidth: 2,
   },
   textButton: {

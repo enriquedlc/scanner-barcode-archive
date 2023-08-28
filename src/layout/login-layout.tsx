@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import { StyleSheet, View, Text } from "react-native";
-
-import { LOGIN_COLORS } from "../constants/colors";
+import { BLUE_PALLETE } from "../constants/colors";
 
 type LoginLayoutProps = {
   children: ReactNode;
@@ -33,14 +32,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 26,
     fontWeight: "bold",
-    color: LOGIN_COLORS.BLUE_BACKGROUND,
+    color: BLUE_PALLETE.PRIMARY_BLACK,
     alignSelf: "center",
     bottom: 30,
   },
   firstBubble: {
     zIndex: -10,
     width: "130%",
-    backgroundColor: LOGIN_COLORS.BLUE_BACKGROUND,
+    backgroundColor: BLUE_PALLETE.PRIMARY,
     height: "80%",
     borderTopEndRadius: 400,
     borderTopStartRadius: 400,
@@ -52,7 +51,7 @@ const styles = StyleSheet.create({
   secondBubble: {
     zIndex: -20,
     width: "130%",
-    backgroundColor: LOGIN_COLORS.GRAY_BACKGROUND,
+    backgroundColor: BLUE_PALLETE.SECONDARY,
     height: "100%",
     borderTopEndRadius: 400,
     borderTopStartRadius: 400,
@@ -62,7 +61,7 @@ const styles = StyleSheet.create({
   thridBubble: {
     zIndex: -30,
     width: "130%",
-    backgroundColor: LOGIN_COLORS.LIGHT_GRAY_BACKGROUND,
+    backgroundColor: BLUE_PALLETE.TERTIARY,
     height: "100%",
     borderTopEndRadius: 400,
     borderTopStartRadius: 400,
