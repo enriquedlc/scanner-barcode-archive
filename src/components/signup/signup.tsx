@@ -21,21 +21,19 @@ export function SignUp(props: SignUpProps) {
   const { navigation } = useAppNavigation();
 
   const handleInputFocus = (input: keyof SignUpInputFocus) => {
-    if (input === "username") {
-      setIsFocused({ ...isFocused, username: true });
-    }
-    if (input === "password") {
-      setIsFocused({ ...isFocused, password: true });
-    }
+    if (input === "username") setIsFocused({ ...isFocused, username: true });
+    if (input === "password") setIsFocused({ ...isFocused, password: true });
+    if (input === "confirmPassword")
+      setIsFocused({ ...isFocused, confirmPassword: true });
+    if (input === "email") setIsFocused({ ...isFocused, email: true });
   };
 
   const handleInputBlur = (input: keyof SignUpInputFocus) => {
-    if (input === "username") {
-      setIsFocused({ ...isFocused, username: false });
-    }
-    if (input === "password") {
-      setIsFocused({ ...isFocused, password: false });
-    }
+    if (input === "username") setIsFocused({ ...isFocused, username: false });
+    if (input === "password") setIsFocused({ ...isFocused, password: false });
+    if (input === "confirmPassword")
+      setIsFocused({ ...isFocused, confirmPassword: false });
+    if (input === "email") setIsFocused({ ...isFocused, email: false });
   };
 
   const inputStyles: StyleProp<ViewStyle> = {
@@ -44,6 +42,7 @@ export function SignUp(props: SignUpProps) {
       : IS_NOT_FOCUSED_BORDER_INPUT_COLOR,
     borderBottomWidth: 1,
   };
+
   return (
     <View style={signUpStyles.loginContainer}>
       <View style={signUpStyles.inputContainer}>
@@ -68,7 +67,7 @@ export function SignUp(props: SignUpProps) {
       </View>
       <ButtonLanding
         title="Iniciar sesión"
-        onPress={() => console.log("login action")}
+        onPress={() => console.log("signup action")}
       />
       <ButtonLanding
         title="Atrás"

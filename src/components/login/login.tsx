@@ -53,17 +53,17 @@ export function Login(props: LoginProps) {
         <TextInput
           placeholderTextColor={"lightgray"}
           style={[loginStyles.input, isFocused.username && inputStyles]}
-          placeholder="Usuario"
+          placeholder="Correo electrónico"
           onFocus={() => handleInputFocus("username")}
           onBlur={() => handleInputBlur("username")}
         />
       </View>
       <View style={loginStyles.inputContainer}>
-        <Text style={loginStyles.inputLabel}>Correo electrónico</Text>
+        <Text style={loginStyles.inputLabel}>Contraseña</Text>
         <TextInput
           placeholderTextColor={"lightgray"}
           style={[loginStyles.input, isFocused.password && inputStyles]}
-          placeholder="Usuario"
+          placeholder="Contraseña"
           onFocus={() => handleInputFocus("password")}
           onBlur={() => handleInputBlur("password")}
         />
