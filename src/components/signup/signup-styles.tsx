@@ -31,7 +31,7 @@ export const signUpStyles = StyleSheet.create({
     fontSize: FONT_SIZES.LARGE,
     color: BLUE_PALLETE.SECONDARY_WHITE,
     backgroundColor: BLUE_PALLETE.SECONDARY,
-    fontWeight: "500",
+    fontWeight: "300",
     paddingVertical: 7,
     borderRadius: 5,
     paddingLeft: 10,

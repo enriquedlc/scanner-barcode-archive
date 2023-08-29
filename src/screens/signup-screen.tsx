@@ -24,9 +24,9 @@ export function SignUpScreen() {
 
   return (
     <LoginLayout
-      firstBubbleButtomY={-80}
+      firstBubbleButtomY={-100}
       secondBubbleButtomY={-150}
-      thirdBubbleButtomY={-70}
+      thirdBubbleButtomY={-90}
       children={
         <SignUp
           formTitle="Crear cuenta"

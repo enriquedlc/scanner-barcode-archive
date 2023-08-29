@@ -7,7 +7,7 @@ export const BLUE_PALLETE = {
     TERTIARY: "#e9eaef", // gray
     QUATERNARY: "#f2f3f7", // light gray
     PRIMARY_WHITE: "white",
-    SECONDARY_WHITE: "rgba(255, 255, 255, 0.7)",
+    SECONDARY_WHITE: "rgb(175, 175, 175)",
     PRIMARY_BLACK: "black",
     SECONDARY_BLACK: "rgba(0, 0, 0, 0.7)",
     BUTTON_DEFALUT: "#2f54f0"

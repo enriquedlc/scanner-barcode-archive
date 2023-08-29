@@ -1,4 +1,11 @@
-import { StyleProp, Text, TextInput, View, ViewStyle } from "react-native";
+import {
+  StyleProp,
+  Text,
+  TextInput,
+  View,
+  ViewStyle,
+  ScrollView,
+} from "react-native";
 
 import { useAppNavigation } from "../../hooks/useAppNavigation";
 import {
@@ -48,56 +55,71 @@ export function SignUp(props: SignUpProps) {
   return (
     <View style={signUpStyles.signUpContainer}>
       <Text style={signUpStyles.formTitle}>{formTitle}</Text>
-      <View style={signUpStyles.inputContainer}>
-        <Text style={signUpStyles.inputLabel}>Correo electrónico</Text>
-        <TextInput
-          placeholderTextColor={"lightgray"}
-          style={[signUpStyles.input, isFocused.email && inputStyles]}
-          placeholder="Correo electrónico"
-          onFocus={() => handleInputFocus("email")}
-          onBlur={() => handleInputBlur("email")}
-        />
-      </View>
-      <View style={signUpStyles.inputContainer}>
-        <Text style={signUpStyles.inputLabel}>Nombre de usuario</Text>
-        <TextInput
-          placeholderTextColor={"lightgray"}
-          style={[signUpStyles.input, isFocused.username && inputStyles]}
-          placeholder="Nombre de usuario"
-          onFocus={() => handleInputFocus("username")}
-          onBlur={() => handleInputBlur("username")}
-        />
-      </View>
-      <View style={signUpStyles.inputContainer}>
-        <Text style={signUpStyles.inputLabel}>Contraseña</Text>
-        <TextInput
-          placeholderTextColor={"lightgray"}
-          style={[signUpStyles.input, isFocused.password && inputStyles]}
-          placeholder="Contraseña"
-          onFocus={() => handleInputFocus("password")}
-          onBlur={() => handleInputBlur("password")}
-        />
-      </View>
-      <View style={signUpStyles.inputContainer}>
-        <Text style={signUpStyles.inputLabel}>Confirmar contraseña</Text>
-        <TextInput
-          placeholderTextColor={"lightgray"}
-          style={[signUpStyles.input, isFocused.confirmPassword && inputStyles]}
-          placeholder="Confirmar contraseña"
-          onFocus={() => handleInputFocus("confirmPassword")}
-          onBlur={() => handleInputBlur("confirmPassword")}
-        />
-      </View>
-      <ButtonLanding
-        title="Iniciar sesión"
-        onPress={() => console.log("signup action")}
-      />
-      <ButtonLanding
-        title="Atrás"
-        onPress={() => navigation.navigate("LANDING")}
-        width={120}
-        outLined={true}
-      />
+      <ScrollView>
+        <View
+          style={{
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 15,
+            minWidth: "100%",
+          }}
+        >
+          <View style={signUpStyles.inputContainer}>
+            <Text style={signUpStyles.inputLabel}>Correo electrónico</Text>
+            <TextInput
+              placeholderTextColor={"lightgray"}
+              style={[signUpStyles.input, isFocused.email && inputStyles]}
+              placeholder="Correo electrónico"
+              onFocus={() => handleInputFocus("email")}
+              onBlur={() => handleInputBlur("email")}
+            />
+          </View>
+          <View style={signUpStyles.inputContainer}>
+            <Text style={signUpStyles.inputLabel}>Nombre de usuario</Text>
+            <TextInput
+              placeholderTextColor={"lightgray"}
+              style={[signUpStyles.input, isFocused.username && inputStyles]}
+              placeholder="Nombre de usuario"
+              onFocus={() => handleInputFocus("username")}
+              onBlur={() => handleInputBlur("username")}
+            />
+          </View>
+          <View style={signUpStyles.inputContainer}>
+            <Text style={signUpStyles.inputLabel}>Contraseña</Text>
+            <TextInput
+              placeholderTextColor={"lightgray"}
+              style={[signUpStyles.input, isFocused.password && inputStyles]}
+              placeholder="Contraseña"
+              onFocus={() => handleInputFocus("password")}
+              onBlur={() => handleInputBlur("password")}
+            />
+          </View>
+          <View style={signUpStyles.inputContainer}>
+            <Text style={signUpStyles.inputLabel}>Confirmar contraseña</Text>
+            <TextInput
+              placeholderTextColor={"lightgray"}
+              style={[
+                signUpStyles.input,
+                isFocused.confirmPassword && inputStyles,
+              ]}
+              placeholder="Confirmar contraseña"
+              onFocus={() => handleInputFocus("confirmPassword")}
+              onBlur={() => handleInputBlur("confirmPassword")}
+            />
+          </View>
+          <ButtonLanding
+            title="Iniciar sesión"
+            onPress={() => console.log("signup action")}
+          />
+          <ButtonLanding
+            title="Atrás"
+            onPress={() => navigation.navigate("LANDING")}
+            width={120}
+            outLined={true}
+          />
+        </View>
+      </ScrollView>
     </View>
   );
 }
