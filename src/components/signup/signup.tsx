@@ -11,12 +11,13 @@ import { SignUpInputFocus } from "../../screens/signup-screen";
 import { signUpStyles } from "./signup-styles";
 
 type SignUpProps = {
+  formTitle: string;
   isFocused: SignUpInputFocus;
   setIsFocused: (focused: SignUpInputFocus) => void;
 };
 
 export function SignUp(props: SignUpProps) {
-  const { isFocused, setIsFocused } = props;
+  const { formTitle, isFocused, setIsFocused } = props;
 
   const { navigation } = useAppNavigation();
 
@@ -29,6 +30,7 @@ export function SignUp(props: SignUpProps) {
   };
 
   const handleInputBlur = (input: keyof SignUpInputFocus) => {
+    console.log("blur", isFocused);
     if (input === "username") setIsFocused({ ...isFocused, username: false });
     if (input === "password") setIsFocused({ ...isFocused, password: false });
     if (input === "confirmPassword")
@@ -44,25 +46,46 @@ export function SignUp(props: SignUpProps) {
   };
 
   return (
-    <View style={signUpStyles.loginContainer}>
+    <View style={signUpStyles.signUpContainer}>
+      <Text style={signUpStyles.formTitle}>{formTitle}</Text>
       <View style={signUpStyles.inputContainer}>
         <Text style={signUpStyles.inputLabel}>Correo electrónico</Text>
         <TextInput
           placeholderTextColor={"lightgray"}
+          style={[signUpStyles.input, isFocused.email && inputStyles]}
+          placeholder="Correo electrónico"
+          onFocus={() => handleInputFocus("email")}
+          onBlur={() => handleInputBlur("email")}
+        />
+      </View>
+      <View style={signUpStyles.inputContainer}>
+        <Text style={signUpStyles.inputLabel}>Nombre de usuario</Text>
+        <TextInput
+          placeholderTextColor={"lightgray"}
           style={[signUpStyles.input, isFocused.username && inputStyles]}
-          placeholder="Usuario"
+          placeholder="Nombre de usuario"
           onFocus={() => handleInputFocus("username")}
           onBlur={() => handleInputBlur("username")}
         />
       </View>
       <View style={signUpStyles.inputContainer}>
-        <Text style={signUpStyles.inputLabel}>Correo electrónico</Text>
+        <Text style={signUpStyles.inputLabel}>Contraseña</Text>
         <TextInput
           placeholderTextColor={"lightgray"}
           style={[signUpStyles.input, isFocused.password && inputStyles]}
-          placeholder="Usuario"
+          placeholder="Contraseña"
           onFocus={() => handleInputFocus("password")}
           onBlur={() => handleInputBlur("password")}
+        />
+      </View>
+      <View style={signUpStyles.inputContainer}>
+        <Text style={signUpStyles.inputLabel}>Confirmar contraseña</Text>
+        <TextInput
+          placeholderTextColor={"lightgray"}
+          style={[signUpStyles.input, isFocused.confirmPassword && inputStyles]}
+          placeholder="Confirmar contraseña"
+          onFocus={() => handleInputFocus("confirmPassword")}
+          onBlur={() => handleInputBlur("confirmPassword")}
         />
       </View>
       <ButtonLanding

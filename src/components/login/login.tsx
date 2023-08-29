@@ -12,12 +12,13 @@ import {
 import { loginStyles } from "./login-styles";
 
 type LoginProps = {
+  formTitle: string;
   isFocused: LoginInputFocus;
   setIsFocused: (focused: LoginInputFocus) => void;
 };
 
 export function Login(props: LoginProps) {
-  const { isFocused, setIsFocused } = props;
+  const { formTitle, isFocused, setIsFocused } = props;
 
   const { navigation } = useAppNavigation();
 
@@ -48,6 +49,7 @@ export function Login(props: LoginProps) {
 
   return (
     <View style={loginStyles.loginContainer}>
+      <Text style={loginStyles.formTitle}>{formTitle}</Text>
       <View style={loginStyles.inputContainer}>
         <Text style={loginStyles.inputLabel}>Correo electrónico</Text>
         <TextInput

@@ -24,10 +24,16 @@ export function LoginScreen() {
 
   return (
     <LoginLayout
-      firstBubbleButtomY={-30}
-      secondBubbleButtomY={-150}
+      firstBubbleButtomY={-160}
+      secondBubbleButtomY={-130}
       thirdBubbleButtomY={-100}
-      children={<Login isFocused={isFocused} setIsFocused={setIsFocused} />}
+      children={
+        <Login
+          formTitle="Iniciar sesión"
+          isFocused={isFocused}
+          setIsFocused={setIsFocused}
+        />
+      }
     />
   );
 }

@@ -31,7 +31,7 @@ export function LoginLayout(props: LoginLayoutProps) {
         </View>
         <View style={[{ bottom: secondBubbleButtomY }, styles.secondBubble]} />
         <View style={[{ bottom: thirdBubbleButtomY }, styles.thridBubble]}>
-          <Text style={styles.title}>ARTICLE SCANNER📦</Text>
+          <Text style={styles.title}>scan 📦</Text>
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     zIndex: -10,
     width: "130%",
     backgroundColor: BLUE_PALLETE.PRIMARY,
-    height: "80%",
+    height: "100%",
     borderTopEndRadius: 400,
     borderTopStartRadius: 400,
     justifyContent: "center",
