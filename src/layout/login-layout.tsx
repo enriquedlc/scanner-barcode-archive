@@ -2,26 +2,38 @@ import { ReactNode } from "react";
 import {
   StyleSheet,
   View,
-  Text,
+  Image,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
 import { BLUE_PALLETE } from "../constants/colors";
+import { LANDING } from "../../assets";
 
 type LoginLayoutProps = {
   children: ReactNode;
+  firstBubbleButtomY: number;
+  secondBubbleButtomY: number;
+  thirdBubbleButtomY: number;
 };
 
 export function LoginLayout(props: LoginLayoutProps) {
-  const { children } = props;
+  const {
+    children,
+    firstBubbleButtomY,
+    secondBubbleButtomY,
+    thirdBubbleButtomY,
+  } = props;
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
-        <View style={styles.firstBubble}>{children}</View>
-        <View style={styles.secondBubble} />
-        <View style={styles.thridBubble}>
-          <Text style={styles.title}>ARTICLE SCANNER📦</Text>
+        <View style={[{ bottom: firstBubbleButtomY }, styles.firstBubble]}>
+          {children}
+        </View>
+        <View style={[{ bottom: secondBubbleButtomY }, styles.secondBubble]} />
+        <View style={[{ bottom: thirdBubbleButtomY }, styles.thridBubble]}>
+          <Image source={LANDING.scanner} style={styles.icon} alt="scanner" />
+          <Image source={LANDING.box} style={styles.icon} alt="box" />
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -46,13 +58,13 @@ const styles = StyleSheet.create({
     zIndex: -10,
     width: "130%",
     backgroundColor: BLUE_PALLETE.PRIMARY,
-    height: "80%",
+    height: "100%",
     borderTopEndRadius: 400,
     borderTopStartRadius: 400,
-    position: "absolute",
-    bottom: -30,
     justifyContent: "center",
+    position: "absolute",
     alignItems: "center",
+    // bottom: -30,
   },
   secondBubble: {
     zIndex: -20,
@@ -62,7 +74,7 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 400,
     borderTopStartRadius: 400,
     position: "absolute",
-    bottom: -150,
+    // bottom: -150,
   },
   thridBubble: {
     zIndex: -30,
@@ -71,7 +83,14 @@ const styles = StyleSheet.create({
     height: "100%",
     borderTopEndRadius: 400,
     borderTopStartRadius: 400,
-    position: "relative",
-    bottom: -100,
+    flexDirection: "row",
+    justifyContent: "center",
+    position: "absolute",
+  },
+  icon: {
+    width: 50,
+    height: 50,
+    resizeMode: "contain",
+    top: -50,
   },
 });

@@ -9,8 +9,13 @@ export const loginStyles = StyleSheet.create({
         backgroundColor: "transparent",
         justifyContent: "flex-start",
         alignItems: "center",
-        marginTop: 100,
+        marginTop: 30,
         gap: 25,
+    },
+    formTitle: {
+        fontSize: FONT_SIZES.EXTRA_EXTRA_LARGE,
+        color: BLUE_PALLETE.PRIMARY_WHITE,
+        fontWeight: "800",
     },
     inputContainer: {
         borderColor: "black",

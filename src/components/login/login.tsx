@@ -12,31 +12,24 @@ import {
 import { loginStyles } from "./login-styles";
 
 type LoginProps = {
+  formTitle: string;
   isFocused: LoginInputFocus;
   setIsFocused: (focused: LoginInputFocus) => void;
 };
 
 export function Login(props: LoginProps) {
-  const { isFocused, setIsFocused } = props;
+  const { formTitle, isFocused, setIsFocused } = props;
 
   const { navigation } = useAppNavigation();
 
-  const handleInputFocus = (input: string) => {
-    if (input === "username") {
-      setIsFocused({ ...isFocused, username: true });
-    }
-    if (input === "password") {
-      setIsFocused({ ...isFocused, password: true });
-    }
+  const handleInputFocus = (input: keyof LoginInputFocus) => {
+    if (input === "username") setIsFocused({ ...isFocused, username: true });
+    if (input === "password") setIsFocused({ ...isFocused, password: true });
   };
 
-  const handleInputBlur = (input: string) => {
-    if (input === "username") {
-      setIsFocused({ ...isFocused, username: false });
-    }
-    if (input === "password") {
-      setIsFocused({ ...isFocused, password: false });
-    }
+  const handleInputBlur = (input: keyof LoginInputFocus) => {
+    if (input === "username") setIsFocused({ ...isFocused, username: false });
+    if (input === "password") setIsFocused({ ...isFocused, password: false });
   };
 
   const inputStyles: StyleProp<ViewStyle> = {
@@ -48,22 +41,23 @@ export function Login(props: LoginProps) {
 
   return (
     <View style={loginStyles.loginContainer}>
+      <Text style={loginStyles.formTitle}>{formTitle}</Text>
       <View style={loginStyles.inputContainer}>
         <Text style={loginStyles.inputLabel}>Correo electrónico</Text>
         <TextInput
           placeholderTextColor={"lightgray"}
           style={[loginStyles.input, isFocused.username && inputStyles]}
-          placeholder="Usuario"
+          placeholder="Correo electrónico"
           onFocus={() => handleInputFocus("username")}
           onBlur={() => handleInputBlur("username")}
         />
       </View>
       <View style={loginStyles.inputContainer}>
-        <Text style={loginStyles.inputLabel}>Correo electrónico</Text>
+        <Text style={loginStyles.inputLabel}>Contraseña</Text>
         <TextInput
           placeholderTextColor={"lightgray"}
           style={[loginStyles.input, isFocused.password && inputStyles]}
-          placeholder="Usuario"
+          placeholder="Contraseña"
           onFocus={() => handleInputFocus("password")}
           onBlur={() => handleInputBlur("password")}
         />
