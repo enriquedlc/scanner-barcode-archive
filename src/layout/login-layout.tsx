@@ -2,11 +2,12 @@ import { ReactNode } from "react";
 import {
   StyleSheet,
   View,
-  Text,
+  Image,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
 import { BLUE_PALLETE } from "../constants/colors";
+import { LANDING } from "../../assets";
 
 type LoginLayoutProps = {
   children: ReactNode;
@@ -31,7 +32,8 @@ export function LoginLayout(props: LoginLayoutProps) {
         </View>
         <View style={[{ bottom: secondBubbleButtomY }, styles.secondBubble]} />
         <View style={[{ bottom: thirdBubbleButtomY }, styles.thridBubble]}>
-          <Text style={styles.title}>ARTICLE SCANNER📦</Text>
+          <Image source={LANDING.scanner} style={styles.icon} alt="scanner" />
+          <Image source={LANDING.box} style={styles.icon} alt="box" />
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -56,7 +58,7 @@ const styles = StyleSheet.create({
     zIndex: -10,
     width: "130%",
     backgroundColor: BLUE_PALLETE.PRIMARY,
-    height: "80%",
+    height: "100%",
     borderTopEndRadius: 400,
     borderTopStartRadius: 400,
     justifyContent: "center",
@@ -81,7 +83,14 @@ const styles = StyleSheet.create({
     height: "100%",
     borderTopEndRadius: 400,
     borderTopStartRadius: 400,
-    position: "relative",
-    // bottom: -100,
+    flexDirection: "row",
+    justifyContent: "center",
+    position: "absolute",
+  },
+  icon: {
+    width: 50,
+    height: 50,
+    resizeMode: "contain",
+    top: -50,
   },
 });
