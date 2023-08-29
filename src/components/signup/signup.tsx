@@ -1,27 +1,26 @@
 import { StyleProp, Text, TextInput, View, ViewStyle } from "react-native";
 
 import { useAppNavigation } from "../../hooks/useAppNavigation";
-
-import { ButtonLanding } from "../button-landing/button-landing";
-import { LoginInputFocus } from "../../screens/login-screen";
 import {
   IS_FOCUSED_BORDER_INPUT_COLOR,
   IS_NOT_FOCUSED_BORDER_INPUT_COLOR,
 } from "../../constants/colors";
+import { ButtonLanding } from "../button-landing/button-landing";
+import { SignUpInputFocus } from "../../screens/signup-screen";
 
-import { loginStyles } from "./login-styles";
+import { signUpStyles } from "./signup-styles";
 
-type LoginProps = {
-  isFocused: LoginInputFocus;
-  setIsFocused: (focused: LoginInputFocus) => void;
+type SignUpProps = {
+  isFocused: SignUpInputFocus;
+  setIsFocused: (focused: SignUpInputFocus) => void;
 };
 
-export function Login(props: LoginProps) {
+export function SignUp(props: SignUpProps) {
   const { isFocused, setIsFocused } = props;
 
   const { navigation } = useAppNavigation();
 
-  const handleInputFocus = (input: keyof LoginInputFocus) => {
+  const handleInputFocus = (input: keyof SignUpInputFocus) => {
     if (input === "username") {
       setIsFocused({ ...isFocused, username: true });
     }
@@ -30,7 +29,7 @@ export function Login(props: LoginProps) {
     }
   };
 
-  const handleInputBlur = (input: keyof LoginInputFocus) => {
+  const handleInputBlur = (input: keyof SignUpInputFocus) => {
     if (input === "username") {
       setIsFocused({ ...isFocused, username: false });
     }
@@ -45,24 +44,23 @@ export function Login(props: LoginProps) {
       : IS_NOT_FOCUSED_BORDER_INPUT_COLOR,
     borderBottomWidth: 1,
   };
-
   return (
-    <View style={loginStyles.loginContainer}>
-      <View style={loginStyles.inputContainer}>
-        <Text style={loginStyles.inputLabel}>Correo electrónico</Text>
+    <View style={signUpStyles.loginContainer}>
+      <View style={signUpStyles.inputContainer}>
+        <Text style={signUpStyles.inputLabel}>Correo electrónico</Text>
         <TextInput
           placeholderTextColor={"lightgray"}
-          style={[loginStyles.input, isFocused.username && inputStyles]}
+          style={[signUpStyles.input, isFocused.username && inputStyles]}
           placeholder="Usuario"
           onFocus={() => handleInputFocus("username")}
           onBlur={() => handleInputBlur("username")}
         />
       </View>
-      <View style={loginStyles.inputContainer}>
-        <Text style={loginStyles.inputLabel}>Correo electrónico</Text>
+      <View style={signUpStyles.inputContainer}>
+        <Text style={signUpStyles.inputLabel}>Correo electrónico</Text>
         <TextInput
           placeholderTextColor={"lightgray"}
-          style={[loginStyles.input, isFocused.password && inputStyles]}
+          style={[signUpStyles.input, isFocused.password && inputStyles]}
           placeholder="Usuario"
           onFocus={() => handleInputFocus("password")}
           onBlur={() => handleInputBlur("password")}
