@@ -21,7 +21,7 @@ export function Login(props: LoginProps) {
 
   const { navigation } = useAppNavigation();
 
-  const handleInputFocus = (input: string) => {
+  const handleInputFocus = (input: keyof LoginInputFocus) => {
     if (input === "username") {
       setIsFocused({ ...isFocused, username: true });
     }
@@ -30,7 +30,7 @@ export function Login(props: LoginProps) {
     }
   };
 
-  const handleInputBlur = (input: string) => {
+  const handleInputBlur = (input: keyof LoginInputFocus) => {
     if (input === "username") {
       setIsFocused({ ...isFocused, username: false });
     }

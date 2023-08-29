@@ -10,17 +10,27 @@ import { BLUE_PALLETE } from "../constants/colors";
 
 type LoginLayoutProps = {
   children: ReactNode;
+  firstBubbleButtomY: number;
+  secondBubbleButtomY: number;
+  thirdBubbleButtomY: number;
 };
 
 export function LoginLayout(props: LoginLayoutProps) {
-  const { children } = props;
+  const {
+    children,
+    firstBubbleButtomY,
+    secondBubbleButtomY,
+    thirdBubbleButtomY,
+  } = props;
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
-        <View style={styles.firstBubble}>{children}</View>
-        <View style={styles.secondBubble} />
-        <View style={styles.thridBubble}>
+        <View style={[{ bottom: firstBubbleButtomY }, styles.firstBubble]}>
+          {children}
+        </View>
+        <View style={[{ bottom: secondBubbleButtomY }, styles.secondBubble]} />
+        <View style={[{ bottom: thirdBubbleButtomY }, styles.thridBubble]}>
           <Text style={styles.title}>ARTICLE SCANNER📦</Text>
         </View>
       </View>
@@ -49,10 +59,10 @@ const styles = StyleSheet.create({
     height: "80%",
     borderTopEndRadius: 400,
     borderTopStartRadius: 400,
-    position: "absolute",
-    bottom: -30,
     justifyContent: "center",
+    position: "absolute",
     alignItems: "center",
+    // bottom: -30,
   },
   secondBubble: {
     zIndex: -20,
@@ -62,7 +72,7 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 400,
     borderTopStartRadius: 400,
     position: "absolute",
-    bottom: -150,
+    // bottom: -150,
   },
   thridBubble: {
     zIndex: -30,
@@ -72,6 +82,6 @@ const styles = StyleSheet.create({
     borderTopEndRadius: 400,
     borderTopStartRadius: 400,
     position: "relative",
-    bottom: -100,
+    // bottom: -100,
   },
 });
