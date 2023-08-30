@@ -1,5 +1,5 @@
 import { Pressable, Text, StyleSheet } from "react-native";
-import { BLUE_PALLETE } from "../../constants/colors";
+import { BLUE_PALLETE } from "../../constants/colors/colors";
 
 type ButtonLandingProps = {
   title: string;

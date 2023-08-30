@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 import { FONT_SIZES } from "../../constants/font";
-import { BLUE_PALLETE } from "../../constants/colors";
+import { BLUE_PALLETE } from "../../constants/colors/colors";
 
 export const landingStyles = StyleSheet.create({
     container: {

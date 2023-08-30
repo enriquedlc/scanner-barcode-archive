@@ -8,6 +8,7 @@ import { LoginScreen } from "./src/screens/login-screen";
 import { SignUpScreen } from "./src/screens/signup-screen";
 
 import { RootStackParamList } from "./src/constants/routes";
+import { HomeScreen } from "./src/screens/home-screen";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -17,23 +18,30 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{ animationEnabled: true }}
-          initialRouteName={"LANDING"}
+          initialRouteName={"LANDING_SCREEN"}
         >
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name={"LANDING"}
-            component={LandingScreen}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name={"LOGIN"}
-            component={LoginScreen}
-          />
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name={"SIGN_UP"}
-            component={SignUpScreen}
-          />
+          <Stack.Group>
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name={"LANDING_SCREEN"}
+              component={LandingScreen}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name={"LOGIN_SCREEN"}
+              component={LoginScreen}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name={"SIGN_UP_SCREEN"}
+              component={SignUpScreen}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name={"HOME_SCREEN"}
+              component={HomeScreen}
+            />
+          </Stack.Group>
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
