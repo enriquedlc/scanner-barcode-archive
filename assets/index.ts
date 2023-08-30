@@ -10,6 +10,9 @@ import saw from "./tools/saw.png";
 import box from "./landing/box.png";
 import scanner from "./landing/scanner.png";
 
+// navbar icons
+import SCANNABLE_BARCODE from "./barcode/scannable-barcode.png";
+
 const LOGOS = {
     SPLASH_LOGO
 } as const;
@@ -25,4 +28,8 @@ const LANDING = {
     scanner
 } as const;
 
-export { LOGOS, TOOLS, LANDING }
+const BARCODE = {
+    SCANNABLE_BARCODE
+} as const;
+
+export { LOGOS, TOOLS, LANDING, BARCODE }

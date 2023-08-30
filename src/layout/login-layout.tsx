@@ -6,7 +6,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import { BLUE_PALLETE } from "../constants/colors";
+import { BLUE_PALLETE } from "../constants/colors/colors";
 import { LANDING } from "../../assets";
 
 type LoginLayoutProps = {

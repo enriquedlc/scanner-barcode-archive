@@ -22,12 +22,12 @@ export function Landing() {
         <View style={landingStyles.buttonsContainer}>
           <ButtonLanding
             title="Iniciar sesión"
-            onPress={() => navigation.navigate("LOGIN")}
+            onPress={() => navigation.navigate("LOGIN_SCREEN")}
           />
           <ButtonLanding
             title="Crear cuenta"
             outLined={true}
-            onPress={() => navigation.navigate("SIGN_UP")}
+            onPress={() => navigation.navigate("SIGN_UP_SCREEN")}
           />
         </View>
       </View>
