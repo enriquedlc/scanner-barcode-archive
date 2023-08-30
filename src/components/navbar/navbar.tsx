@@ -73,7 +73,7 @@ export function Navbar() {
               </View>
             ),
           }}
-          listeners={() => ({
+          listeners={({ navigation }) => ({
             tabPress: () => {
               Animated.spring(tabOffsetValue, {
                 toValue: 0,
@@ -173,7 +173,7 @@ export function Navbar() {
         />
 
         <Tab.Screen
-          name={"Settings"}
+          name={"PROFILE"}
           component={ProfileScreen}
           options={{
             tabBarIcon: ({ focused }) => (
