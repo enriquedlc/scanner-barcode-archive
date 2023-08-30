@@ -7,43 +7,37 @@ import {
   ScrollView,
 } from "react-native";
 
+import { SignUpInputFocus } from "../../screens/signup-screen";
+import { ButtonLanding } from "../button-landing/button-landing";
+
 import { useAppNavigation } from "../../hooks/useAppNavigation";
+import { useInputFocus } from "../login/useLoginInput";
+
 import {
   IS_FOCUSED_BORDER_INPUT_COLOR,
   IS_NOT_FOCUSED_BORDER_INPUT_COLOR,
-} from "../../constants/colors";
-import { ButtonLanding } from "../button-landing/button-landing";
-import { SignUpInputFocus } from "../../screens/signup-screen";
+} from "../../constants/colors/colors";
 
 import { signUpStyles } from "./signup-styles";
 
 type SignUpProps = {
   formTitle: string;
-  isFocused: SignUpInputFocus;
-  setIsFocused: (focused: SignUpInputFocus) => void;
+};
+
+const INITIAL_SIGNUP_FOCUS: SignUpInputFocus = {
+  email: false,
+  username: false,
+  password: false,
+  confirmPassword: false,
 };
 
 export function SignUp(props: SignUpProps) {
-  const { formTitle, isFocused, setIsFocused } = props;
+  const { formTitle } = props;
 
   const { navigation } = useAppNavigation();
 
-  const handleInputFocus = (input: keyof SignUpInputFocus) => {
-    if (input === "username") setIsFocused({ ...isFocused, username: true });
-    if (input === "password") setIsFocused({ ...isFocused, password: true });
-    if (input === "confirmPassword")
-      setIsFocused({ ...isFocused, confirmPassword: true });
-    if (input === "email") setIsFocused({ ...isFocused, email: true });
-  };
-
-  const handleInputBlur = (input: keyof SignUpInputFocus) => {
-    console.log("blur", isFocused);
-    if (input === "username") setIsFocused({ ...isFocused, username: false });
-    if (input === "password") setIsFocused({ ...isFocused, password: false });
-    if (input === "confirmPassword")
-      setIsFocused({ ...isFocused, confirmPassword: false });
-    if (input === "email") setIsFocused({ ...isFocused, email: false });
-  };
+  const { handleInputFocus, isFocused } =
+    useInputFocus<SignUpInputFocus>(INITIAL_SIGNUP_FOCUS);
 
   const inputStyles: StyleProp<ViewStyle> = {
     borderBottomColor: isFocused
@@ -51,6 +45,8 @@ export function SignUp(props: SignUpProps) {
       : IS_NOT_FOCUSED_BORDER_INPUT_COLOR,
     borderBottomWidth: 1,
   };
+
+  console.log("isFocused", isFocused);
 
   return (
     <View style={signUpStyles.signUpContainer}>
@@ -71,8 +67,8 @@ export function SignUp(props: SignUpProps) {
               placeholderTextColor={"lightgray"}
               style={[signUpStyles.input, isFocused.email && inputStyles]}
               placeholder="Correo electrónico"
-              onFocus={() => handleInputFocus("email")}
-              onBlur={() => handleInputBlur("email")}
+              onFocus={() => handleInputFocus("email", true)}
+              onBlur={() => handleInputFocus("email", false)}
             />
           </View>
           <View style={signUpStyles.inputContainer}>
@@ -81,8 +77,8 @@ export function SignUp(props: SignUpProps) {
               placeholderTextColor={"lightgray"}
               style={[signUpStyles.input, isFocused.username && inputStyles]}
               placeholder="Nombre de usuario"
-              onFocus={() => handleInputFocus("username")}
-              onBlur={() => handleInputBlur("username")}
+              onFocus={() => handleInputFocus("username", true)}
+              onBlur={() => handleInputFocus("username", false)}
             />
           </View>
           <View style={signUpStyles.inputContainer}>
@@ -91,8 +87,8 @@ export function SignUp(props: SignUpProps) {
               placeholderTextColor={"lightgray"}
               style={[signUpStyles.input, isFocused.password && inputStyles]}
               placeholder="Contraseña"
-              onFocus={() => handleInputFocus("password")}
-              onBlur={() => handleInputBlur("password")}
+              onFocus={() => handleInputFocus("password", true)}
+              onBlur={() => handleInputFocus("password", false)}
             />
           </View>
           <View style={signUpStyles.inputContainer}>
@@ -104,8 +100,8 @@ export function SignUp(props: SignUpProps) {
                 isFocused.confirmPassword && inputStyles,
               ]}
               placeholder="Confirmar contraseña"
-              onFocus={() => handleInputFocus("confirmPassword")}
-              onBlur={() => handleInputBlur("confirmPassword")}
+              onFocus={() => handleInputFocus("confirmPassword", true)}
+              onBlur={() => handleInputFocus("confirmPassword", false)}
             />
           </View>
           <ButtonLanding
@@ -114,7 +110,7 @@ export function SignUp(props: SignUpProps) {
           />
           <ButtonLanding
             title="Atrás"
-            onPress={() => navigation.navigate("LANDING")}
+            onPress={() => navigation.navigate("LANDING_SCREEN")}
             width={120}
             outLined={true}
           />

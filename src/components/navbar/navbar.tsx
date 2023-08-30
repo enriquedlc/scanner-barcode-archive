@@ -2,7 +2,6 @@ import { useRef } from "react";
 import React from "react";
 import {
   Animated,
-  Dimensions,
   Image,
   Platform,
   TouchableOpacity,
@@ -12,22 +11,16 @@ import "react-native-gesture-handler";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome5 } from "@expo/vector-icons";
 
-import { useAppNavigation } from "../../hooks/useAppNavigation";
-
-import { BARCODE, LOGOS } from "../../../assets";
 import { Home } from "../../home/home";
-import { ProfileScreen } from "../../screens/profile-screen";
-import { BLUE_PALLETE } from "../../constants/colors";
+import { Profile } from "../profile/profile";
+
+import { useAppNavigation } from "../../hooks/useAppNavigation";
+import { getColor, getWidth } from "../../constants/colors/utils";
+
+import { BARCODE } from "../../../assets";
+import { BLUE_PALLETE } from "../../constants/colors/colors";
 
 const Tab = createBottomTabNavigator();
-
-const getWidth = () => {
-  return (Dimensions.get("window").width - 80) / 5;
-};
-
-const getColor = (isFocused: boolean) => {
-  return isFocused ? BLUE_PALLETE.BLUE : BLUE_PALLETE.GRAY;
-};
 
 export function Navbar() {
   const { navigation } = useAppNavigation();
@@ -59,7 +52,7 @@ export function Navbar() {
         }}
       >
         <Tab.Screen
-          name={"HOMEc"}
+          name={"HOME"}
           component={Home}
           options={{
             tabBarIcon: ({ focused }) => (
@@ -173,8 +166,8 @@ export function Navbar() {
         />
 
         <Tab.Screen
-          name={"PROFILE"}
-          component={ProfileScreen}
+          name={"PROFILE_SCREEN"}
+          component={Profile}
           options={{
             tabBarIcon: ({ focused }) => (
               <View
@@ -197,7 +190,7 @@ export function Navbar() {
                 toValue: getWidth() * 4 + 16,
                 useNativeDriver: true,
               }).start();
-              navigation.navigate("PROFILE");
+              navigation.navigate("PROFILE_SCREEN");
             },
           })}
         />

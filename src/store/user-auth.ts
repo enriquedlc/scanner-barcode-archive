@@ -1,8 +1,9 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export type User = {
-    email: string;
+    username: string;
     password: string;
 };
 
@@ -17,8 +18,8 @@ type Actions = {
     logout: () => void;
 }
 
-export const useUserAuthStore = create<State & Actions>()(
-    persist((set, get) => ({
+export const useUserAuthStore = create<State & Actions>(
+    (set, get) => ({
         user: null,
 
         setUser: (user) => set({ user }),
@@ -28,14 +29,12 @@ export const useUserAuthStore = create<State & Actions>()(
         login: async (user) => {
 
             // Simulate a login request
-            await new Promise((resolve) => setTimeout(resolve, 2000));
+            await sleep(2000);
 
             // Set the user
             set({ user });
         },
 
         logout: () => set({ user: null }),
-    }), {
-        name: 'user-auth-info',
-    })
+    }),
 )

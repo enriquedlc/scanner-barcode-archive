@@ -1,14 +1,14 @@
 import { Text, View, StyleSheet } from "react-native";
 
-export function ProfileScreen() {
+export function Profile() {
   return (
-    <View style={profileScreenStyles.container}>
+    <View style={profileStyles.container}>
       <Text>Profile Screen</Text>
     </View>
   );
 }
 
-const profileScreenStyles = StyleSheet.create({
+const profileStyles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
