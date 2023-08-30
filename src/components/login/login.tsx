@@ -4,7 +4,7 @@ import { StyleProp, Text, TextInput, View, ViewStyle } from "react-native";
 import { ButtonLanding } from "../button-landing/button-landing";
 
 import { useAppNavigation } from "../../hooks/useAppNavigation";
-import { useInputFocus } from "./useLoginInput";
+import { useInputFocus } from "../../hooks/useLoginInput";
 import { User, useUserAuthStore } from "../../store/user-auth";
 
 import { LoginInputFocus } from "../../screens/login-screen";

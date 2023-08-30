@@ -11,7 +11,7 @@ import { SignUpInputFocus } from "../../screens/signup-screen";
 import { ButtonLanding } from "../button-landing/button-landing";
 
 import { useAppNavigation } from "../../hooks/useAppNavigation";
-import { useInputFocus } from "../login/useLoginInput";
+import { useInputFocus } from "../../hooks/useLoginInput";
 
 import {
   IS_FOCUSED_BORDER_INPUT_COLOR,
