@@ -64,7 +64,7 @@ export function Login(props: LoginProps) {
       </View>
       <ButtonLanding
         title="Iniciar sesión"
-        onPress={() => console.log("login action")}
+        onPress={() => navigation.navigate("HOME")}
       />
       <ButtonLanding
         title="Atrás"

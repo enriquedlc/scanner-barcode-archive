@@ -8,6 +8,8 @@ import { LoginScreen } from "./src/screens/login-screen";
 import { SignUpScreen } from "./src/screens/signup-screen";
 
 import { RootStackParamList } from "./src/constants/routes";
+import { HomeScreen } from "./src/screens/home-screen";
+import { ProfileScreen } from "./src/screens/profile-screen";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -33,6 +35,16 @@ export default function App() {
             options={{ headerShown: false }}
             name={"SIGN_UP"}
             component={SignUpScreen}
+          />
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name={"HOME"}
+            component={HomeScreen}
+          />
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name={"PROFILE"}
+            component={ProfileScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>
