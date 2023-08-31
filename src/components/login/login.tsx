@@ -14,6 +14,8 @@ import {
 } from "../../constants/colors/colors";
 
 import { loginStyles } from "./login-styles";
+import { LoadingLandingModal } from "../modal/loading-landing-modal/loading-landing-modal";
+import { useShowToast } from "../../hooks/useShowToast";
 
 type LoginProps = {
   formTitle: string;
@@ -32,14 +34,15 @@ export function Login(props: LoginProps) {
   const { handleInputFocus, isFocused } =
     useInputFocus<LoginInputFocus>(INITIAL_LOGIN_FOCUS);
 
-  const login = useUserAuthStore((state) => state.login);
+  const { showToast } = useShowToast();
 
-  console.log(isFocused);
+  const login = useUserAuthStore((state) => state.login);
 
   const [userLoginForm, setUserLoginForm] = useState<User>({
     username: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const inputStyles: StyleProp<ViewStyle> = {
     borderBottomColor: isFocused
@@ -54,17 +57,32 @@ export function Login(props: LoginProps) {
   };
 
   const handleSubmit = async () => {
+    setLoading(true);
     if (
       userLoginForm.username === "test" &&
       userLoginForm.password === "test"
     ) {
       await login(userLoginForm);
+      setLoading(false);
+      showToast("success", "Inicio de sesión exitoso", "Bienvenido! 🎉");
       navigation.navigate("HOME_SCREEN");
+      return;
     }
+    showToast(
+      "error",
+      "Inicio de sesión fallido",
+      "Usuario o contraseña incorrectos ❌"
+    );
+    setLoading(false);
   };
 
   return (
     <View style={loginStyles.loginContainer}>
+      <LoadingLandingModal
+        modalVisible={loading}
+        setModalVisible={setLoading}
+        modalText="Iniciando sesión..."
+      />
       <Text style={loginStyles.formTitle}>{formTitle}</Text>
       <View style={loginStyles.inputContainer}>
         <Text style={loginStyles.inputLabel}>Usuario</Text>

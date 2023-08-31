@@ -100,7 +100,6 @@ export function Navbar() {
             ),
           }}
           listeners={() => ({
-            // Onpress Update....
             tabPress: () => {
               Animated.spring(tabOffsetValue, {
                 toValue: getWidth() + 1,
@@ -148,7 +147,6 @@ export function Navbar() {
             tabBarIcon: ({ focused }) => (
               <View
                 style={{
-                  // centring Tab Button...
                   position: "absolute",
                   top: 20,
                 }}
@@ -158,7 +156,6 @@ export function Navbar() {
             ),
           }}
           listeners={() => ({
-            // Onpress Update....
             tabPress: () => {
               Animated.spring(tabOffsetValue, {
                 toValue: getWidth() * 3 + 12,
