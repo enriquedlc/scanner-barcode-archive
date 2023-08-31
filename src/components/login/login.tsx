@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { StyleProp, Text, TextInput, View, ViewStyle } from "react-native";
+import Toast from "react-native-toast-message";
 
 import { ButtonLanding } from "../button-landing/button-landing";
 
@@ -25,6 +26,8 @@ const INITIAL_LOGIN_FOCUS: LoginInputFocus = {
   password: false,
 };
 
+type ToastType = "success" | "error" | "info";
+
 export function Login(props: LoginProps) {
   const { formTitle } = props;
 
@@ -48,12 +51,22 @@ export function Login(props: LoginProps) {
     borderBottomWidth: 1,
   };
 
+  const showToast = (type: ToastType, title: string, message: string) => {
+    Toast.show({
+      type,
+      position: "top",
+      text1: title,
+      text2: message,
+      visibilityTime: 4000,
+      autoHide: true,
+      topOffset: 60,
+    });
+  };
+
   const handleChangeText = (text: string, input: keyof LoginInputFocus) => {
     setUserLoginForm({ ...userLoginForm, [input]: text });
     console.log("user login", userLoginForm);
   };
-
-  console.log(loading);
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -63,8 +76,14 @@ export function Login(props: LoginProps) {
     ) {
       await login(userLoginForm);
       setLoading(false);
+      showToast("success", "Inicio de sesión exitoso", "Bienvenido! 🎉");
       // navigation.navigate("HOME_SCREEN");
     }
+    showToast(
+      "error",
+      "Inicio de sesión fallido",
+      "Usuario o contraseña incorrectos ❌"
+    );
     setLoading(false);
   };
 
