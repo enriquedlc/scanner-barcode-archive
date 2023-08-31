@@ -14,6 +14,7 @@ import {
 } from "../../constants/colors/colors";
 
 import { loginStyles } from "./login-styles";
+import { LoadingLandingModal } from "../modal/loading-landing-modal/loading-landing-modal";
 
 type LoginProps = {
   formTitle: string;
@@ -34,12 +35,11 @@ export function Login(props: LoginProps) {
 
   const login = useUserAuthStore((state) => state.login);
 
-  console.log(isFocused);
-
   const [userLoginForm, setUserLoginForm] = useState<User>({
     username: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const inputStyles: StyleProp<ViewStyle> = {
     borderBottomColor: isFocused
@@ -53,18 +53,28 @@ export function Login(props: LoginProps) {
     console.log("user login", userLoginForm);
   };
 
+  console.log(loading);
+
   const handleSubmit = async () => {
+    setLoading(true);
     if (
       userLoginForm.username === "test" &&
       userLoginForm.password === "test"
     ) {
       await login(userLoginForm);
-      navigation.navigate("HOME_SCREEN");
+      setLoading(false);
+      // navigation.navigate("HOME_SCREEN");
     }
+    setLoading(false);
   };
 
   return (
     <View style={loginStyles.loginContainer}>
+      <LoadingLandingModal
+        modalVisible={loading}
+        setModalVisible={setLoading}
+        modalText="Iniciando sesión..."
+      />
       <Text style={loginStyles.formTitle}>{formTitle}</Text>
       <View style={loginStyles.inputContainer}>
         <Text style={loginStyles.inputLabel}>Usuario</Text>
