@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { StyleProp, Text, TextInput, View, ViewStyle } from "react-native";
-import Toast from "react-native-toast-message";
 
 import { ButtonLanding } from "../button-landing/button-landing";
 
@@ -16,6 +15,7 @@ import {
 
 import { loginStyles } from "./login-styles";
 import { LoadingLandingModal } from "../modal/loading-landing-modal/loading-landing-modal";
+import { useShowToast } from "../../hooks/useShowToast";
 
 type LoginProps = {
   formTitle: string;
@@ -26,8 +26,6 @@ const INITIAL_LOGIN_FOCUS: LoginInputFocus = {
   password: false,
 };
 
-type ToastType = "success" | "error" | "info";
-
 export function Login(props: LoginProps) {
   const { formTitle } = props;
 
@@ -35,6 +33,8 @@ export function Login(props: LoginProps) {
 
   const { handleInputFocus, isFocused } =
     useInputFocus<LoginInputFocus>(INITIAL_LOGIN_FOCUS);
+
+  const { showToast } = useShowToast();
 
   const login = useUserAuthStore((state) => state.login);
 
@@ -51,18 +51,6 @@ export function Login(props: LoginProps) {
     borderBottomWidth: 1,
   };
 
-  const showToast = (type: ToastType, title: string, message: string) => {
-    Toast.show({
-      type,
-      position: "top",
-      text1: title,
-      text2: message,
-      visibilityTime: 4000,
-      autoHide: true,
-      topOffset: 60,
-    });
-  };
-
   const handleChangeText = (text: string, input: keyof LoginInputFocus) => {
     setUserLoginForm({ ...userLoginForm, [input]: text });
     console.log("user login", userLoginForm);
@@ -77,7 +65,8 @@ export function Login(props: LoginProps) {
       await login(userLoginForm);
       setLoading(false);
       showToast("success", "Inicio de sesión exitoso", "Bienvenido! 🎉");
-      // navigation.navigate("HOME_SCREEN");
+      navigation.navigate("HOME_SCREEN");
+      return;
     }
     showToast(
       "error",
