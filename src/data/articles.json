@@ -1,0 +1,102 @@
+[
+  {
+    "id": "1",
+    "createdAt": "2023-01-01T15:00:00.000Z",
+    "updatedAt": "2023-01-01T15:00:00.000Z",
+    "name": "Artículo 1",
+    "barcode": "1111",
+    "exhibition": 5,
+    "shelf": 20,
+    "warehouse": 100
+  },
+  {
+    "id": "2",
+    "createdAt": "2023-02-02T15:00:00.000Z",
+    "updatedAt": "2023-02-02T15:00:00.000Z",
+    "name": "Artículo 2",
+    "barcode": "2222",
+    "exhibition": 8,
+    "shelf": 15,
+    "warehouse": 75
+  },
+  {
+    "id": "3",
+    "createdAt": "2023-03-03T15:00:00.000Z",
+    "updatedAt": "2023-03-03T15:00:00.000Z",
+    "name": "Artículo 3",
+    "barcode": "3333",
+    "exhibition": 3,
+    "shelf": 10,
+    "warehouse": 50
+  },
+  {
+    "id": "4",
+    "createdAt": "2023-04-04T15:00:00.000Z",
+    "updatedAt": "2023-04-04T15:00:00.000Z",
+    "name": "Artículo 4",
+    "barcode": "4444",
+    "exhibition": 6,
+    "shelf": 18,
+    "warehouse": 90
+  },
+  {
+    "id": "5",
+    "createdAt": "2023-05-05T15:00:00.000Z",
+    "updatedAt": "2023-05-05T15:00:00.000Z",
+    "name": "Artículo 5",
+    "barcode": "5555",
+    "exhibition": 7,
+    "shelf": 12,
+    "warehouse": 60
+  },
+  {
+    "id": "6",
+    "createdAt": "2023-06-06T15:00:00.000Z",
+    "updatedAt": "2023-06-06T15:00:00.000Z",
+    "name": "Artículo 6",
+    "barcode": "6666",
+    "exhibition": 4,
+    "shelf": 22,
+    "warehouse": 110
+  },
+  {
+    "id": "7",
+    "createdAt": "2023-07-07T15:00:00.000Z",
+    "updatedAt": "2023-07-07T15:00:00.000Z",
+    "name": "Artículo 7",
+    "barcode": "7777",
+    "exhibition": 9,
+    "shelf": 14,
+    "warehouse": 70
+  },
+  {
+    "id": "8",
+    "createdAt": "2023-08-08T15:00:00.000Z",
+    "updatedAt": "2023-08-08T15:00:00.000Z",
+    "name": "Artículo 8",
+    "barcode": "8888",
+    "exhibition": 2,
+    "shelf": 25,
+    "warehouse": 125
+  },
+  {
+    "id": "9",
+    "createdAt": "2023-09-09T15:00:00.000Z",
+    "updatedAt": "2023-09-09T15:00:00.000Z",
+    "name": "Artículo 9",
+    "barcode": "9999",
+    "exhibition": 7,
+    "shelf": 16,
+    "warehouse": 80
+  },
+  {
+    "id": "10",
+    "createdAt": "2023-10-10T15:00:00.000Z",
+    "updatedAt": "2023-10-10T15:00:00.000Z",
+    "name": "Artículo 10",
+    "barcode": "0000",
+    "exhibition": 6,
+    "shelf": 20,
+    "warehouse": 100
+  }
+]
