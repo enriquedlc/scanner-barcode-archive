@@ -1,4 +1,5 @@
-import { FlatList, View, DimensionValue } from "react-native";
+import { FlatList, View, DimensionValue, ViewToken } from "react-native";
+import { useSharedValue } from "react-native-reanimated";
 
 import { ArticleItem } from "../article-item/article-item";
 
@@ -19,6 +20,8 @@ interface ArticleListProps {
 export function ArticleList(props: ArticleListProps) {
   const { articleListStyleComponentProps } = props;
 
+  const viewableArticles = useSharedValue<ViewToken[]>([]);
+
   console.log(articles);
 
   return (
@@ -30,7 +33,12 @@ export function ArticleList(props: ArticleListProps) {
     >
       <FlatList
         data={articles}
-        renderItem={({ item }) => <ArticleItem item={item} />}
+        onViewableItemsChanged={({ viewableItems }) => {
+          viewableArticles.value = viewableItems;
+        }}
+        renderItem={({ item }) => (
+          <ArticleItem item={item} viewableArticles={viewableArticles} />
+        )}
         keyExtractor={(item) => item.id}
       />
     </View>
