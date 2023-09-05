@@ -1,4 +1,4 @@
-import { FlatList, View } from "react-native";
+import { FlatList, View, DimensionValue } from "react-native";
 
 import { ArticleItem } from "../article-item/article-item";
 
@@ -6,17 +6,26 @@ import { Article } from "../../types/article";
 
 import articlesMock from "../../data/articles.json";
 
+import { articleListStyles } from "./article-list-styles";
+
 const articles: Article[] = articlesMock;
 
-export function ArticleList() {
+interface ArticleListProps {
+  articleListStyleComponentProps: {
+    height: DimensionValue;
+  };
+}
+
+export function ArticleList(props: ArticleListProps) {
+  const { articleListStyleComponentProps } = props;
+
   console.log(articles);
 
   return (
     <View
       style={{
-        height: "80%",
-        alignItems: "center",
-        justifyContent: "center",
+        height: articleListStyleComponentProps.height,
+        ...articleListStyles.articleListContainer,
       }}
     >
       <FlatList

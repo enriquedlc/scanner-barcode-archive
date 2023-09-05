@@ -1,10 +1,17 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 
 export const articleListStyles = StyleSheet.create({
     articleListContainer: {
-        flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        minWidth: '100%',
+        ...Platform.select({
+            ios: {
+                color: 'blue', // Estilo específico de iOS
+            },
+            android: {
+                color: 'green', // Estilo específico de Android
+            },
+
+        }),
     },
 })
