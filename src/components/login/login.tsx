@@ -59,8 +59,8 @@ export function Login(props: LoginProps) {
   const handleSubmit = async () => {
     setLoading(true);
     if (
-      userLoginForm.username === "test" &&
-      userLoginForm.password === "test"
+      userLoginForm.username === "Test" &&
+      userLoginForm.password === "Test"
     ) {
       await login(userLoginForm);
       setLoading(false);

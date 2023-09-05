@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, SafeAreaView } from "react-native";
 
+import { ArticleList } from "../components/article-list/article-list";
 import { useUserAuthStore } from "../store/user-auth";
 
 export function Home() {
@@ -8,9 +9,10 @@ export function Home() {
   console.log(user);
 
   return (
-    <View style={homeStyles.container}>
+    <SafeAreaView style={homeStyles.container}>
       <Text>Home component</Text>
-    </View>
+      <ArticleList />
+    </SafeAreaView>
   );
 }
 
