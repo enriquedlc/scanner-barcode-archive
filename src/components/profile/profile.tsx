@@ -14,13 +14,18 @@ export function Profile() {
             source={USER_PROFILE_IMAGES.BLUE_GRADIENT_USER}
             alt="user photo"
             style={{
-              width: 70,
-              height: 70,
+              width: 60,
+              height: 60,
               objectFit: "contain",
+              tintColor: "black",
             }}
           />
+          <View style={profileStyles.editPhotoButton}>
+            <TouchableOpacity onPress={() => console.log("hola")}>
+              <FontAwesome5 name="camera" size={16} color="white" />
+            </TouchableOpacity>
+          </View>
         </View>
-        <Text>hello</Text>
       </View>
       <Text>Profile Screen</Text>
     </View>
