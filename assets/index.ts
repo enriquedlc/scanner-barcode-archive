@@ -13,6 +13,9 @@ import scanner from "./landing/scanner.png";
 // navbar icons
 import SCANNABLE_BARCODE from "./barcode/scannable-barcode.png";
 
+// user profile photos
+import BLUE_GRADIENT_USER from "./users/blue-gradient-user.png";
+
 const LOGOS = {
     SPLASH_LOGO
 } as const;
@@ -32,4 +35,8 @@ const BARCODE = {
     SCANNABLE_BARCODE
 } as const;
 
-export { LOGOS, TOOLS, LANDING, BARCODE }
+const USER_PROFILE_IMAGES = {
+    BLUE_GRADIENT_USER
+} as const;
+
+export { LOGOS, TOOLS, LANDING, BARCODE, USER_PROFILE_IMAGES }
