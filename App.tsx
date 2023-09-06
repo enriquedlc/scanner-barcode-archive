@@ -20,7 +20,7 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{ animationEnabled: true }}
-          initialRouteName={"HOME_SCREEN"}
+          initialRouteName={"PROFILE_SCREEN"}
         >
           <Stack.Group>
             <Stack.Screen
