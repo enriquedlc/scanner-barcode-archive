@@ -10,6 +10,8 @@ import { SignUpScreen } from "./src/screens/signup-screen";
 import { RootStackParamList } from "./src/constants/routes";
 import { HomeScreen } from "./src/screens/home-screen";
 
+import Toast from "react-native-toast-message";
+
 const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
@@ -18,7 +20,7 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{ animationEnabled: true }}
-          initialRouteName={"LANDING_SCREEN"}
+          initialRouteName={"HOME_SCREEN"}
         >
           <Stack.Group>
             <Stack.Screen
@@ -44,6 +46,7 @@ export default function App() {
           </Stack.Group>
         </Stack.Navigator>
       </NavigationContainer>
+      <Toast />
     </SafeAreaProvider>
   );
 }

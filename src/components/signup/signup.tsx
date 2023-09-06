@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   StyleProp,
   Text,
@@ -9,6 +10,7 @@ import {
 
 import { SignUpInputFocus } from "../../screens/signup-screen";
 import { ButtonLanding } from "../button-landing/button-landing";
+import { LoadingLandingModal } from "../modal/loading-landing-modal/loading-landing-modal";
 
 import { useAppNavigation } from "../../hooks/useAppNavigation";
 import { useInputFocus } from "../../hooks/useLoginInput";
@@ -39,6 +41,8 @@ export function SignUp(props: SignUpProps) {
   const { handleInputFocus, isFocused } =
     useInputFocus<SignUpInputFocus>(INITIAL_SIGNUP_FOCUS);
 
+  const [loading, setLoading] = useState(false);
+
   const inputStyles: StyleProp<ViewStyle> = {
     borderBottomColor: isFocused
       ? IS_FOCUSED_BORDER_INPUT_COLOR
@@ -50,6 +54,11 @@ export function SignUp(props: SignUpProps) {
 
   return (
     <View style={signUpStyles.signUpContainer}>
+      <LoadingLandingModal
+        modalVisible={loading}
+        setModalVisible={setLoading}
+        modalText="Iniciando sesión..."
+      />
       <Text style={signUpStyles.formTitle}>{formTitle}</Text>
       <ScrollView>
         <View
