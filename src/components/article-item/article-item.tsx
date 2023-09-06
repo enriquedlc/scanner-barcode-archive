@@ -112,9 +112,11 @@ export const ArticleItem: React.FC<ArticleItemProps> = React.memo(
     return (
       <View style={articleItemStyles.articleItemContainer}>
         <Pressable onPress={() => setShowDeleteModal(true)}>
-          <View style={articleItemStyles.iconContainer}>
+          <Animated.View
+            style={[articleItemStyles.iconContainer, reanimatedStyle]}
+          >
             <FontAwesome5 name="trash-alt" size={24} color="red" />
-          </View>
+          </Animated.View>
         </Pressable>
         <PanGestureHandler
           onGestureEvent={panGesture}
