@@ -32,6 +32,7 @@ export function Navbar() {
   return (
     <>
       <Tab.Navigator
+        initialRouteName="PROFILE_SCREEN"
         screenOptions={{
           headerShown: false,
           tabBarShowLabel: false,
