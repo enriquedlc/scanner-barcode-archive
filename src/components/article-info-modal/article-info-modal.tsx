@@ -1,4 +1,11 @@
-import { Modal, Text, TouchableOpacity, View, Platform } from "react-native";
+import {
+  Modal,
+  Text,
+  TouchableOpacity,
+  View,
+  Platform,
+  Dimensions,
+} from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 import { Article } from "../../types/article";
@@ -10,6 +17,8 @@ interface ArticleInfoModalProps {
   setShowDeleteArticleModal: (showDeleteArticleModal: boolean) => void;
   article: Article;
 }
+
+const WINDOW_HEIGHT = Dimensions.get("window").height;
 
 export function ArticleInfoModal(props: ArticleInfoModalProps) {
   const { showDeleteArticleModal, setShowDeleteArticleModal, article } = props;
@@ -31,7 +40,7 @@ export function ArticleInfoModal(props: ArticleInfoModalProps) {
                 top: "32%",
               },
               android: {
-                top: "31%",
+                top: WINDOW_HEIGHT - 540,
               },
             }),
             zIndex: 10,
