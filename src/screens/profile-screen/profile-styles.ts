@@ -85,35 +85,5 @@ export const profileStyles = StyleSheet.create({
         width: "80%",
         paddingTop: 20,
     },
-    appThemeChangerLabelContainer: {
-        flexDirection: "column"
-    },
-    profileDefaultLabel: {
-        fontSize: FONT_SIZES.MEDIUM,
-        fontWeight: "bold",
-        paddingTop: 20,
-        textAlign: "left"
-    },
-    themeColorsContainer: {
-        flexDirection: "row",
-    },
-    themeColor: {
-        width: 30,
-        height: 30,
-        borderRadius: 100,
-        borderWidth: 1,
-        marginRight: 40,
-        marginTop: 10,
-    },
-    themeColorSelected: {
-        width: 30,
-        height: 30,
-        borderRadius: 100,
-        borderWidth: 1,
-        marginRight: 40,
-        marginTop: 10,
 
-        borderColor: BLUE_PALLETE.BLUE,
-        backgroundColor: BLUE_PALLETE.BLUE,
-    },
 })

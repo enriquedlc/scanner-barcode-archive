@@ -1,13 +1,13 @@
 import { Text, View, Image } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient";
 
 import { USER_PROFILE_IMAGES } from "../../../assets";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 import { profileStyles } from "./profile-styles";
+import { ApplicationTheme } from "../../components/profile/application-theme";
 
-export function Profile() {
+export function ProfileScreen() {
   return (
     <View style={profileStyles.profileContainer}>
       <View style={profileStyles.profileCard}>
@@ -37,36 +37,7 @@ export function Profile() {
         Artículos escaneados: 10
       </Text>
       <View style={profileStyles.profileLabelContainer}>
-        <View style={profileStyles.appThemeChangerLabelContainer}>
-          <Text style={profileStyles.profileDefaultLabel}>
-            Tema de la aplicación
-          </Text>
-          <View style={profileStyles.themeColorsContainer}>
-            <LinearGradient
-              style={profileStyles.themeColor}
-              colors={["blue", "#3b5998", "blue"]}
-              start={{ x: 0, y: 3 }}
-            />
-            <LinearGradient
-              style={profileStyles.themeColor}
-              // orange
-              colors={["#ff9966", "#ff5e62", "#ff9966"]}
-              start={{ x: 0, y: 3 }}
-            />
-            <LinearGradient
-              style={profileStyles.themeColor}
-              // purple
-              colors={["#cc2b5e", "#753a88", "#cc2b5e"]}
-              start={{ x: 0, y: 3 }}
-            />
-            <LinearGradient
-              style={profileStyles.themeColor}
-              // green
-              colors={["#11998e", "#38ef7d", "#11998e"]}
-              start={{ x: 0, y: 3 }}
-            />
-          </View>
-        </View>
+        <ApplicationTheme />
       </View>
     </View>
   );

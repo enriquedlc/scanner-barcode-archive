@@ -12,7 +12,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 import { Home } from "../../home/home";
-import { Profile } from "../profile/profile";
+import { ProfileScreen } from "../../screens/profile-screen/profile-screen";
 
 import { useAppNavigation } from "../../hooks/useAppNavigation";
 import { getColor, getWidth } from "../../constants/colors/utils";
@@ -166,7 +166,7 @@ export function Navbar() {
 
         <Tab.Screen
           name={"PROFILE_SCREEN"}
-          component={Profile}
+          component={ProfileScreen}
           options={{
             tabBarIcon: ({ focused }) => (
               <View
