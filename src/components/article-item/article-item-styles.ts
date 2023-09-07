@@ -20,10 +20,9 @@ export const articleItemStyles = StyleSheet.create({
     },
     iconContainer: {
         alignSelf: "flex-end",
-        justifyContent: "center",
-        alignItems: "center",
-        width: 50,
-        bottom: 20,
+        position: "absolute",
+        top: "40%",
+        right: 15,
     }
 });
 

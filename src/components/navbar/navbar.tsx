@@ -22,8 +22,6 @@ import { BLUE_PALLETE } from "../../constants/colors/colors";
 
 const Tab = createBottomTabNavigator();
 
-// TODO: refactor this component
-
 export function Navbar() {
   const { navigation } = useAppNavigation();
 
