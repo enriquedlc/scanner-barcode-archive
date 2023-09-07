@@ -1,4 +1,5 @@
-import { Modal, Text, TouchableOpacity, View } from "react-native";
+import { Modal, Text, TouchableOpacity, View, Platform } from "react-native";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 import { Article } from "../../types/article";
 
@@ -20,6 +21,31 @@ export function ArticleInfoModal(props: ArticleInfoModalProps) {
       visible={showDeleteArticleModal}
     >
       <View style={articleInfoModalStyles.centeredView}>
+        <TouchableOpacity
+          onPress={() => setShowDeleteArticleModal(false)}
+          style={{
+            position: "absolute",
+            right: "13%",
+            ...Platform.select({
+              ios: {
+                top: "32%",
+              },
+              android: {
+                top: "31%",
+              },
+            }),
+            zIndex: 10,
+            backgroundColor: "red",
+            borderRadius: 100,
+            width: 30,
+            height: 30,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <FontAwesome5 name="times" size={18} color="white" />
+        </TouchableOpacity>
         <View style={articleInfoModalStyles.modalView}>
           <View style={{ gap: 5, marginBottom: 15 }}>
             <Text style={articleInfoModalStyles.title}>
@@ -47,13 +73,13 @@ export function ArticleInfoModal(props: ArticleInfoModalProps) {
           </View>
           <View style={articleInfoModalStyles.buttonsContainer}>
             <TouchableOpacity
-              onPress={() => setShowDeleteArticleModal(true)}
+              onPress={() => console.log("edit action!")}
               style={articleInfoModalStyles.editButton}
             >
               <Text style={articleInfoModalStyles.deleteText}>Editar</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => setShowDeleteArticleModal(false)}
+              onPress={() => console.log("delete action!")}
               style={articleInfoModalStyles.deleteButton}
             >
               <Text style={articleInfoModalStyles.cancelText}>Borrar</Text>
