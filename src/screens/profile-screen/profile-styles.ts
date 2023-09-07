@@ -88,6 +88,7 @@ export const profileStyles = StyleSheet.create({
         gap: 40,
     },
     profileDefaultLabel: {
+        paddingBottom: 10,
         fontSize: FONT_SIZES.MEDIUM,
         fontWeight: "bold",
         textAlign: "left",
