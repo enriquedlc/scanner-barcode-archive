@@ -7,16 +7,17 @@ export const articleItemStyles = StyleSheet.create({
         marginVertical: 10,
     },
     articleItem: {
+        backgroundColor: 'white',
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: 5 },
+        shadowOpacity: 0.5,
+        shadowRadius: 5,
+        elevation: 5,
         height: 100,
         minWidth: '90%',
-        backgroundColor: 'white',
         borderRadius: 10,
         alignSelf: 'center',
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: 7 },
-        shadowOpacity: 0.3,
-        shadowRadius: 10,
-        elevation: 50,
+
     },
     iconContainer: {
         alignSelf: "flex-end",
