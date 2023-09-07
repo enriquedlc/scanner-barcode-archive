@@ -1,12 +1,15 @@
 import { View, Text, StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { FONT_SIZES } from "../../constants/font";
+
 import { BLUE_PALLETE } from "../../constants/colors/colors";
 
-export function ApplicationTheme() {
+import { profileStyles } from "../../screens/profile-screen/profile-styles";
+
+export function ThemeSelector() {
+  // TODO: implement theme selector zustand store
   return (
     <View style={applicationThemeSelector.appThemeChangerLabelContainer}>
-      <Text style={applicationThemeSelector.profileDefaultLabel}>
+      <Text style={profileStyles.profileDefaultLabel}>
         Tema de la aplicación
       </Text>
       <View style={applicationThemeSelector.themeColorsContainer}>
@@ -42,12 +45,7 @@ const applicationThemeSelector = StyleSheet.create({
   appThemeChangerLabelContainer: {
     flexDirection: "column",
   },
-  profileDefaultLabel: {
-    fontSize: FONT_SIZES.MEDIUM,
-    fontWeight: "bold",
-    paddingTop: 20,
-    textAlign: "left",
-  },
+
   themeColorsContainer: {
     flexDirection: "row",
   },
@@ -66,7 +64,6 @@ const applicationThemeSelector = StyleSheet.create({
     borderWidth: 1,
     marginRight: 40,
     marginTop: 10,
-
     borderColor: BLUE_PALLETE.BLUE,
     backgroundColor: BLUE_PALLETE.BLUE,
   },

@@ -1,11 +1,13 @@
 import { Text, View, Image } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
-
-import { USER_PROFILE_IMAGES } from "../../../assets";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
+import { ThemeSelector } from "../../components/profile/theme-selector";
+import { LanguageSelector } from "../../components/profile/language-selector";
+
+import { USER_PROFILE_IMAGES } from "../../../assets";
+
 import { profileStyles } from "./profile-styles";
-import { ApplicationTheme } from "../../components/profile/application-theme";
 
 export function ProfileScreen() {
   return (
@@ -37,7 +39,8 @@ export function ProfileScreen() {
         Artículos escaneados: 10
       </Text>
       <View style={profileStyles.profileLabelContainer}>
-        <ApplicationTheme />
+        <ThemeSelector />
+        <LanguageSelector />
       </View>
     </View>
   );

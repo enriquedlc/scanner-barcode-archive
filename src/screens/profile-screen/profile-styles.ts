@@ -80,10 +80,17 @@ export const profileStyles = StyleSheet.create({
         fontSize: FONT_SIZES.EXTRA_LARGE,
         fontWeight: "bold",
         paddingTop: 20,
+        paddingBottom: 10,
     },
     profileLabelContainer: {
         width: "80%",
         paddingTop: 20,
+        gap: 40,
+    },
+    profileDefaultLabel: {
+        fontSize: FONT_SIZES.MEDIUM,
+        fontWeight: "bold",
+        textAlign: "left",
     },
 
 })
