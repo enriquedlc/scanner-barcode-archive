@@ -1,5 +1,7 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
+
 import { BLUE_PALLETE } from '../../constants/colors/colors'
+import { FONT_SIZES } from '../../constants/font'
 
 // TODO: refactor colors to constants 
 
@@ -17,7 +19,7 @@ export const profileStyles = StyleSheet.create({
         backgroundColor: "#fff",
         borderRadius: 10,
         marginTop: 80,
-        shadowColor: "darkblue",
+        shadowColor: BLUE_PALLETE.BLUE,
         shadowOffset: {
             width: 0,
             height: 5,
@@ -28,7 +30,7 @@ export const profileStyles = StyleSheet.create({
     },
     photo: {
         borderWidth: 2,
-        borderColor: "darkblue",
+        borderColor: BLUE_PALLETE.BLUE,
         backgroundColor: "#fff",
         borderRadius: 100,
         width: 95,
@@ -37,7 +39,7 @@ export const profileStyles = StyleSheet.create({
         marginLeft: 20,
         alignItems: "center",
         justifyContent: "center",
-        shadowColor: "darkblue",
+        shadowColor: BLUE_PALLETE.BLUE,
         shadowOffset: {
             width: 0,
             height: 5,
@@ -50,7 +52,7 @@ export const profileStyles = StyleSheet.create({
         position: "absolute",
         borderRadius: 100,
         borderWidth: 1,
-        backgroundColor: "darkblue",
+        backgroundColor: BLUE_PALLETE.BLUE,
         alignItems: "center",
         justifyContent: "center",
         width: 30,
@@ -67,15 +69,44 @@ export const profileStyles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "bold",
         color: BLUE_PALLETE.PRIMARY_BLACK,
-        // color: "darkblue"
     },
     email: {
         fontSize: 15,
         color: BLUE_PALLETE.SECONDARY_BLACK,
-        // color: "darkblue"
         paddingTop: 3,
         paddingLeft: 1,
     },
-
-
+    scannedArticlesLabel: {
+        fontSize: FONT_SIZES.EXTRA_LARGE,
+        fontWeight: "bold",
+        paddingTop: 20,
+        paddingBottom: 10,
+    },
+    profileLabelContainer: {
+        width: "80%",
+        paddingTop: 20,
+        gap: 40,
+    },
+    profileDefaultLabel: {
+        paddingBottom: 10,
+        fontSize: FONT_SIZES.MEDIUM,
+        fontWeight: "bold",
+        textAlign: "left",
+    },
+    profileDefaultLabelValue: {
+        fontSize: FONT_SIZES.MEDIUM,
+        textAlign: "left",
+        color: BLUE_PALLETE.SECONDARY_BLACK,
+    },
+    profileIcon: {
+        width: 20,
+        height: 20,
+        objectFit: "contain",
+        marginLeft: 10,
+        ...Platform.select({
+            ios: {
+                bottom: 2,
+            },
+        }),
+    },
 })
