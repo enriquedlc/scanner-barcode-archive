@@ -12,7 +12,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 import { Home } from "../../home/home";
-import { Profile } from "../profile/profile";
+import { ProfileScreen } from "../../screens/profile-screen/profile-screen";
 
 import { useAppNavigation } from "../../hooks/useAppNavigation";
 import { getColor, getWidth } from "../../constants/colors/utils";
@@ -22,8 +22,6 @@ import { BLUE_PALLETE } from "../../constants/colors/colors";
 
 const Tab = createBottomTabNavigator();
 
-// TODO: refactor this component
-
 export function Navbar() {
   const { navigation } = useAppNavigation();
 
@@ -32,6 +30,7 @@ export function Navbar() {
   return (
     <>
       <Tab.Navigator
+        initialRouteName="PROFILE_SCREEN"
         screenOptions={{
           headerShown: false,
           tabBarShowLabel: false,
@@ -167,7 +166,7 @@ export function Navbar() {
 
         <Tab.Screen
           name={"PROFILE_SCREEN"}
-          component={Profile}
+          component={ProfileScreen}
           options={{
             tabBarIcon: ({ focused }) => (
               <View
