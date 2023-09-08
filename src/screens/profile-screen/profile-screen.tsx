@@ -9,6 +9,8 @@ import { UpdateProfile } from "../../components/profile/update-profile";
 import { USER_PROFILE_IMAGES } from "../../../assets";
 
 import { profileStyles } from "./profile-styles";
+import { INFO_CIRCLE, LOGOUT } from "../../../assets/profile-images";
+import { BLUE_PALLETE } from "../../constants/colors/colors";
 
 export function ProfileScreen() {
   return (
@@ -43,6 +45,45 @@ export function ProfileScreen() {
         <ThemeSelector />
         <LanguageSelector />
         <UpdateProfile />
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 20,
+          }}
+        >
+          <TouchableOpacity
+            style={{
+              flexDirection: "row",
+              alignSelf: "center",
+              borderWidth: 2,
+              borderColor: BLUE_PALLETE.BLUE,
+              paddingHorizontal: 10,
+              paddingTop: 10,
+              paddingBottom: 2,
+              borderRadius: 10,
+            }}
+          >
+            <Text style={profileStyles.profileDefaultLabel}>Atribuciones</Text>
+            <Image source={INFO_CIRCLE} style={profileStyles.profileIcon} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              flexDirection: "row",
+              alignSelf: "center",
+              borderWidth: 2,
+              borderColor: "red",
+              paddingHorizontal: 10,
+              paddingTop: 10,
+              paddingBottom: 2,
+              borderRadius: 10,
+            }}
+          >
+            <Text style={profileStyles.profileDefaultLabel}>Cerrar Sesión</Text>
+            <Image source={LOGOUT} style={profileStyles.profileIcon} />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
