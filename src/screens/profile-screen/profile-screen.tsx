@@ -4,6 +4,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 import { ThemeSelector } from "../../components/profile/theme-selector";
 import { LanguageSelector } from "../../components/profile/language-selector";
+import { UpdateProfile } from "../../components/profile/update-profile";
 
 import { USER_PROFILE_IMAGES } from "../../../assets";
 
@@ -41,6 +42,7 @@ export function ProfileScreen() {
       <View style={profileStyles.profileLabelContainer}>
         <ThemeSelector />
         <LanguageSelector />
+        <UpdateProfile />
       </View>
     </View>
   );

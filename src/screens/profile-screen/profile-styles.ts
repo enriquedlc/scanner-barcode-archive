@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 
 import { BLUE_PALLETE } from '../../constants/colors/colors'
 import { FONT_SIZES } from '../../constants/font'
@@ -93,5 +93,20 @@ export const profileStyles = StyleSheet.create({
         fontWeight: "bold",
         textAlign: "left",
     },
-
+    profileDefaultLabelValue: {
+        fontSize: FONT_SIZES.MEDIUM,
+        textAlign: "left",
+        color: BLUE_PALLETE.SECONDARY_BLACK,
+    },
+    profileIcon: {
+        width: 20,
+        height: 20,
+        objectFit: "contain",
+        marginLeft: 10,
+        ...Platform.select({
+            ios: {
+                bottom: 2,
+            },
+        }),
+    },
 })

@@ -1,7 +1,8 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 import { BLUE_PALLETE } from "../../constants/colors/colors";
+import { BRUSH } from "../../../assets/profile-images";
 
 import { profileStyles } from "../../screens/profile-screen/profile-styles";
 
@@ -9,9 +10,12 @@ export function ThemeSelector() {
   // TODO: implement theme selector zustand store
   return (
     <View style={applicationThemeSelector.appThemeChangerLabelContainer}>
-      <Text style={profileStyles.profileDefaultLabel}>
-        Tema de la aplicación
-      </Text>
+      <View style={{ flexDirection: "row" }}>
+        <Text style={profileStyles.profileDefaultLabel}>
+          Tema de la applicación
+        </Text>
+        <Image source={BRUSH} style={profileStyles.profileIcon} />
+      </View>
       <View style={applicationThemeSelector.themeColorsContainer}>
         <LinearGradient
           style={applicationThemeSelector.themeColor}
