@@ -5,13 +5,11 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { ThemeSelector } from "../../components/profile/theme-selector";
 import { LanguageSelector } from "../../components/profile/language-selector";
 import { UpdateProfile } from "../../components/profile/update-profile";
+import { ProfileFooter } from "../../components/profile/profile-footer/profile-footer";
 
 import { USER_PROFILE_IMAGES } from "../../../assets";
 
 import { profileStyles } from "./profile-styles";
-import { INFO_CIRCLE, LOGOUT } from "../../../assets/profile-images";
-import { BLUE_PALLETE } from "../../constants/colors/colors";
-import { ProfileFooter } from "../../components/profile/profile-footer/profile-footer";
 
 export function ProfileScreen() {
   return (
