@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  Button,
-  StatusBar,
-  Dimensions,
-} from "react-native";
+import { Text, View, StyleSheet, Button, Dimensions } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
+
+// TODO: refactor types
+// TODO: extract functions / custom hook
 
 export function BarcodeScanner() {
   const [hasPermission, setHasPermission] = useState(false);
@@ -47,9 +43,9 @@ export function BarcodeScanner() {
         onBarCodeScanned={scannedData ? undefined : handleBarCodeScanned}
       />
       {scannedData && (
-        <Button title="Scan Again?" onPress={() => setScannedData("")} />
+        // TODO: article form
+        <Button title={"Scan Again"} onPress={() => setScannedData("")} />
       )}
-      <StatusBar barStyle={"dark-content"} />
     </View>
   );
 }
