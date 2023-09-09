@@ -39,11 +39,12 @@ export function Navbar() {
             height: 60,
             borderRadius: 10,
             shadowColor: "#000",
-            shadowOpacity: 0.09,
+            shadowOpacity: 0.2,
             shadowOffset: {
               width: 10,
               height: 10,
             },
+            elevation: 10,
             paddingHorizontal: 20,
             alignSelf: "center",
           },
