@@ -1,18 +1,12 @@
-import { useRef } from "react";
-import React from "react";
-import {
-  Animated,
-  Image,
-  Platform,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { useRef, useState } from "react";
+import { Animated, Image, Platform, View } from "react-native";
 import "react-native-gesture-handler";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 import { Home } from "../../home/home";
 import { ProfileScreen } from "../../screens/profile-screen/profile-screen";
+import { BarcodeScanner } from "../barcode-scanner/barcode-scanner";
 
 import { useAppNavigation } from "../../hooks/useAppNavigation";
 import { getColor, getWidth } from "../../constants/colors/utils";
@@ -25,6 +19,7 @@ const Tab = createBottomTabNavigator();
 export function Navbar() {
   const { navigation } = useAppNavigation();
 
+  const [isOnFocusableTap, setIsOnFocusableTab] = useState(true);
   const tabOffsetValue = useRef(new Animated.Value(0)).current;
 
   return (
@@ -43,11 +38,12 @@ export function Navbar() {
             height: 60,
             borderRadius: 10,
             shadowColor: "#000",
-            shadowOpacity: 0.09,
+            shadowOpacity: 0.2,
             shadowOffset: {
               width: 10,
               height: 10,
             },
+            elevation: 10,
             paddingHorizontal: 20,
             alignSelf: "center",
           },
@@ -75,6 +71,7 @@ export function Navbar() {
                 useNativeDriver: true,
               }).start();
               navigation.navigate("HOME");
+              setIsOnFocusableTab(true);
             },
           })}
         />
@@ -104,41 +101,44 @@ export function Navbar() {
                 toValue: getWidth() + 1,
                 useNativeDriver: true,
               }).start();
+              setIsOnFocusableTab(true);
             },
           })}
         />
         <Tab.Screen
-          name={"ActionButton"}
-          component={Home}
+          name={"BARCODE_SCANNER"}
+          component={BarcodeScanner}
           options={{
             tabBarIcon: () => (
-              <TouchableOpacity>
-                <View
+              <View
+                style={{
+                  width: 55,
+                  height: 55,
+                  backgroundColor: BLUE_PALLETE.BLUE,
+                  borderRadius: 30,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginBottom: Platform.OS === "android" ? 50 : 30,
+                }}
+              >
+                <Image
+                  source={BARCODE.SCANNABLE_BARCODE}
                   style={{
-                    width: 55,
-                    height: 55,
-                    backgroundColor: BLUE_PALLETE.BLUE,
-                    borderRadius: 30,
-                    justifyContent: "center",
-                    alignItems: "center",
-                    marginBottom: Platform.OS === "android" ? 50 : 30,
+                    width: 25,
+                    height: 25,
+                    tintColor: "white",
                   }}
-                >
-                  <Image
-                    source={BARCODE.SCANNABLE_BARCODE}
-                    style={{
-                      width: 25,
-                      height: 25,
-                      tintColor: "white",
-                    }}
-                    alt="plus"
-                  />
-                </View>
-              </TouchableOpacity>
+                  alt="plus"
+                />
+              </View>
             ),
           }}
+          listeners={() => ({
+            tabPress: () => {
+              setIsOnFocusableTab(false);
+            },
+          })}
         />
-
         <Tab.Screen
           name={"Notifications"}
           component={Home}
@@ -160,6 +160,7 @@ export function Navbar() {
                 toValue: getWidth() * 3 + 12,
                 useNativeDriver: true,
               }).start();
+              setIsOnFocusableTab(true);
             },
           })}
         />
@@ -190,22 +191,25 @@ export function Navbar() {
                 useNativeDriver: true,
               }).start();
               navigation.navigate("PROFILE_SCREEN");
+              setIsOnFocusableTab(true);
             },
           })}
         />
       </Tab.Navigator>
-      <Animated.View
-        style={{
-          width: 40,
-          height: 2,
-          backgroundColor: BLUE_PALLETE.BLUE,
-          position: "absolute",
-          bottom: 83,
-          left: "11.5%",
-          borderRadius: 20,
-          transform: [{ translateX: tabOffsetValue }],
-        }}
-      />
+      {isOnFocusableTap && (
+        <Animated.View
+          style={{
+            width: 40,
+            height: 2,
+            backgroundColor: BLUE_PALLETE.BLUE,
+            position: "absolute",
+            bottom: 83,
+            left: "11.5%",
+            borderRadius: 20,
+            transform: [{ translateX: tabOffsetValue }],
+          }}
+        />
+      )}
     </>
   );
 }
