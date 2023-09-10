@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-import React from "react";
 import { Animated, Image, Platform, View } from "react-native";
 import "react-native-gesture-handler";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";

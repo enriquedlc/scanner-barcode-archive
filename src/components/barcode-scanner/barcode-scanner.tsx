@@ -1,20 +1,11 @@
-import { useEffect, useState } from "react";
 import { Text, View, StyleSheet, Button, Dimensions } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 
-// TODO: refactor types
-// TODO: extract functions / custom hook
+import { useScanner } from "./useScanner";
 
 export function BarcodeScanner() {
-  const [hasPermission, setHasPermission] = useState(false);
-  const [scannedData, setScannedData] = useState("");
-
-  useEffect(() => {
-    (async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === "granted");
-    })();
-  }, []);
+  const { handleBarCodeScanned, hasPermission, scannedData, setScannedData } =
+    useScanner();
 
   if (!hasPermission) {
     return (
@@ -23,18 +14,6 @@ export function BarcodeScanner() {
       </View>
     );
   }
-
-  const handleBarCodeScanned = ({
-    type,
-    data,
-  }: {
-    type: string;
-    data: string;
-  }) => {
-    setScannedData(data);
-    console.log(`Data: ${data}`);
-    console.log(`Type: ${type}`);
-  };
 
   return (
     <View style={styles.container}>
