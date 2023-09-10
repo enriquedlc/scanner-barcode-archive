@@ -19,8 +19,6 @@ interface ArticleListProps {
 export function ArticleList(props: ArticleListProps) {
   const { articleListStyleComponentProps } = props;
 
-  console.log(articles);
-
   return (
     <View
       style={{
