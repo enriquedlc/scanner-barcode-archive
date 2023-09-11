@@ -2,6 +2,7 @@ import { Text, View, StyleSheet, Button, Dimensions } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 
 import { useScanner } from "./useScanner";
+import { ArticleForm } from "../article-form/article-form";
 
 export function BarcodeScanner() {
   const { handleBarCodeScanned, hasPermission, scannedData, setScannedData } =
@@ -22,8 +23,10 @@ export function BarcodeScanner() {
         onBarCodeScanned={scannedData ? undefined : handleBarCodeScanned}
       />
       {scannedData && (
-        // TODO: article form
-        <Button title={"Scan Again"} onPress={() => setScannedData("")} />
+        <>
+          <ArticleForm />
+          <Button title={"Scan Again"} onPress={() => setScannedData("")} />
+        </>
       )}
     </View>
   );
