@@ -1,6 +1,8 @@
 import { TextInput } from "react-native";
-import { articleFormStyles } from "../article-form-styles";
+
 import { Article } from "../../../types/article";
+
+import { articleFormStyles } from "../article-form-styles";
 
 interface ArticleFormInputProps {
   value: string;
@@ -18,7 +20,6 @@ export function ArticleFormTextInput(props: ArticleFormInputProps) {
       onChange={(e) => {
         setValue(e.nativeEvent.text, value as keyof Article);
       }}
-      value={value}
     />
   );
 }

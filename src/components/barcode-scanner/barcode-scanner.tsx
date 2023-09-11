@@ -22,12 +22,7 @@ export function BarcodeScanner() {
         style={styles.barcodeScannerCamera}
         onBarCodeScanned={scannedData ? undefined : handleBarCodeScanned}
       />
-      {scannedData && (
-        <>
-          <ArticleForm />
-          <Button title={"Scan Again"} onPress={() => setScannedData("")} />
-        </>
-      )}
+      <ArticleForm visible={scannedData !== ""} />
     </View>
   );
 }

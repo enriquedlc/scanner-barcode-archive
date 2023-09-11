@@ -5,7 +5,8 @@ import { FONT_SIZES } from '../../constants/font';
 export const articleFormStyles = StyleSheet.create({
     centeredView: {
         flex: 1,
-        justifyContent: "center",
+        justifyContent: "flex-start",
+        paddingTop: 100,
         alignItems: "center",
         backgroundColor: "rgba(0, 0, 0, 0.5)",
     },

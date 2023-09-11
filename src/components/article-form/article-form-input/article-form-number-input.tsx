@@ -1,6 +1,7 @@
 import { TextInput, View, Text, StyleSheet } from "react-native";
 
 import { Article } from "../../../types/article";
+import { FONT_SIZES } from "../../../constants/font";
 
 interface ArticleFormNumberInputProps {
   label: string;
@@ -12,13 +13,13 @@ interface ArticleFormNumberInputProps {
 export function ArticleFormNumberInput(props: ArticleFormNumberInputProps) {
   const { label, value, setValue, placeholder } = props;
   return (
-    <View>
-      <Text>{label}</Text>
+    <View style={styles.numericInputContainer}>
+      <Text style={styles.label}>{label}</Text>
       <TextInput
+        style={styles.input}
         keyboardType="numeric"
         placeholder={placeholder}
         placeholderTextColor={"lightgray"}
-        value={value}
         onChange={(e) => setValue(e.nativeEvent.text, value as keyof Article)}
       />
     </View>
@@ -30,7 +31,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "80%",
     justifyContent: "space-between",
+    paddingVertical: 10,
   },
-  label: {},
-  input: {},
+  label: {
+    fontSize: FONT_SIZES.MEDIUM,
+  },
+  input: {
+    fontSize: FONT_SIZES.MEDIUM,
+    width: "20%",
+    height: 25,
+    borderWidth: 1,
+    borderColor: "lightgray",
+    textAlign: "center",
+    borderRadius: 5,
+  },
 });
