@@ -1,50 +1,47 @@
 import { useState } from "react";
-import { Modal, View, StyleSheet, Text, TextInput } from "react-native";
+import { Modal, Text, View } from "react-native";
+
+import { ArticleFormTextInput } from "./article-form-input/article-form-text-input";
+
+import { articleFormStyles } from "./article-form-styles";
+import { Article } from "../../types/article";
+
+const INITIAL_ARTICLE_FORM_STATE: Article = {
+  id: "",
+  name: "",
+  exhibition: 0,
+  shelf: 0,
+  warehouse: 0,
+  barcode: "",
+  createdAt: "",
+  updatedAt: "",
+};
 
 export function ArticleForm() {
-  const [name, setName] = useState("");
+  const [scannedArticle, setScannedArticle] = useState(
+    INITIAL_ARTICLE_FORM_STATE
+  );
+
+  const handleChangeText = (text: string, input: keyof Article) => {
+    setScannedArticle({ ...scannedArticle, [input]: text });
+    console.log(scannedArticle);
+  };
+
   return (
-    <Modal>
+    <Modal
+      animationType="fade"
+      // visible={    }
+    >
       <View style={articleFormStyles.centeredView}>
         <View style={articleFormStyles.modalView}>
-          <Text>Article Form</Text>
-          <TextInput
-            placeholder="Name"
-            onChange={(e) => {
-              setName(e.nativeEvent.text);
-              console.log(name);
-            }}
-            value={name}
-            id="name"
-            nativeID="name"
+          <Text style={articleFormStyles.title}>Article Form</Text>
+          <ArticleFormTextInput
+            value={scannedArticle.name}
+            setValue={handleChangeText}
+            placeholder={"Nombre"}
           />
         </View>
       </View>
     </Modal>
   );
 }
-
-const articleFormStyles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-  },
-  modalView: {
-    minWidth: "70%",
-    maxWidth: "90%",
-    backgroundColor: "white",
-    borderRadius: 10,
-    padding: 20,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-});
