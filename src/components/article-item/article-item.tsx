@@ -34,6 +34,22 @@ const ArticleItemStats = ({
   </View>
 );
 
+const ArticleItemHeader = ({ name, barcode }: Partial<Article>) => (
+  <View style={articleItemStyles.articleItemHeader}>
+    <Image
+      style={articleItemStyles.articleHeaderIcon}
+      source={TOOLS.toolBox}
+      alt="tool-box"
+    />
+    <View style={articleItemStyles.articleItemHeaderDescription}>
+      <Text style={articleItemStyles.articleItemTitle}>{name}</Text>
+      <Text style={articleItemStyles.articleItemBarcode}>
+        {barcode}123412341
+      </Text>
+    </View>
+  </View>
+);
+
 export const ArticleItem: React.FC<ArticleItemProps> = React.memo(
   ({ item }) => {
     const [showDeleteArticleModal, setShowDeleteArticleModal] = useState(false);
@@ -41,21 +57,7 @@ export const ArticleItem: React.FC<ArticleItemProps> = React.memo(
     return (
       <View style={articleItemStyles.articleItemContainer}>
         <View style={[articleItemStyles.articleItem]}>
-          <View style={articleItemStyles.articleItemHeader}>
-            <Image
-              style={articleItemStyles.articleHeaderIcon}
-              source={TOOLS.toolBox}
-              alt="tool-box"
-            />
-            <View style={articleItemStyles.articleItemHeaderDescription}>
-              <Text style={articleItemStyles.articleItemTitle}>
-                {item.name}
-              </Text>
-              <Text style={articleItemStyles.articleItemBarcode}>
-                {item.barcode}123412341
-              </Text>
-            </View>
-          </View>
+          <ArticleItemHeader {...item} />
           <ArticleItemStats {...item} />
           <View style={[articleItemStyles.iconContainer]}>
             <TouchableOpacity onPress={() => setShowDeleteArticleModal(true)}>
