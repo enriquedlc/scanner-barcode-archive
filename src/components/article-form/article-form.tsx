@@ -8,6 +8,7 @@ import { ArticleFormTextInput } from "./article-form-input/article-form-text-inp
 
 import { articleInfoModalStyles } from "../article-info-modal/article-info-modal-styles";
 import { articleFormStyles } from "./article-form-styles";
+import { ScannedData } from "../../types/types";
 
 const INITIAL_ARTICLE_FORM_STATE: Article = {
   id: "",
@@ -22,10 +23,12 @@ const INITIAL_ARTICLE_FORM_STATE: Article = {
 
 interface ArticleFormProps {
   visible: boolean;
+  scannedBarcode: ScannedData["data"];
+  setScannedBarcode: (scannedBarcode: ScannedData["data"]) => void;
 }
 
 export function ArticleForm(props: ArticleFormProps) {
-  const { visible } = props;
+  const { visible, scannedBarcode, setScannedBarcode } = props;
 
   const [scannedArticle, setScannedArticle] = useState(
     INITIAL_ARTICLE_FORM_STATE
@@ -41,7 +44,7 @@ export function ArticleForm(props: ArticleFormProps) {
       <View style={articleFormStyles.centeredView}>
         <View style={articleFormStyles.modalView}>
           <Text style={articleFormStyles.title}>Crear Artículo</Text>
-          <Text style={articleFormStyles.title}>(Codigo de barras)</Text>
+          <Text style={articleFormStyles.title}>{scannedBarcode}</Text>
           <ArticleFormTextInput
             value={scannedArticle.name}
             setValue={handleChangeText}
@@ -73,7 +76,10 @@ export function ArticleForm(props: ArticleFormProps) {
               <Text style={articleInfoModalStyles.deleteText}>Crear</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => console.log("go back action!")}
+              onPress={() => {
+                setScannedBarcode("");
+                console.log("go back home!");
+              }}
               style={articleInfoModalStyles.deleteButton}
             >
               <Text style={articleInfoModalStyles.cancelText}>Volver</Text>

@@ -1,12 +1,17 @@
-import { Text, View, StyleSheet, Button, Dimensions } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
+import { Dimensions, StyleSheet, Text, View } from "react-native";
 
-import { useScanner } from "./useScanner";
 import { ArticleForm } from "../article-form/article-form";
 
+import { useScanner } from "./useScanner";
+
 export function BarcodeScanner() {
-  const { handleBarCodeScanned, hasPermission, scannedData, setScannedData } =
-    useScanner();
+  const {
+    handleBarCodeScanned,
+    hasPermission,
+    scannedBarcode,
+    setScannedBarcode,
+  } = useScanner();
 
   if (!hasPermission) {
     return (
@@ -20,9 +25,13 @@ export function BarcodeScanner() {
     <View style={styles.container}>
       <BarCodeScanner
         style={styles.barcodeScannerCamera}
-        onBarCodeScanned={scannedData ? undefined : handleBarCodeScanned}
+        onBarCodeScanned={scannedBarcode ? undefined : handleBarCodeScanned}
       />
-      <ArticleForm visible={scannedData !== ""} />
+      <ArticleForm
+        visible={scannedBarcode !== ""}
+        scannedBarcode={scannedBarcode}
+        setScannedBarcode={setScannedBarcode}
+      />
     </View>
   );
 }

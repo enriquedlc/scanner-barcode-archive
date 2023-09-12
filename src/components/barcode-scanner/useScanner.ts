@@ -1,16 +1,12 @@
-import { useState, useEffect } from 'react'
 import { BarCodeScanner } from 'expo-barcode-scanner';
-
-import { useShowToast } from '../../hooks/useShowToast';
+import { useEffect, useState } from 'react';
 
 import { ScannedData } from '../../types/types';
 
 export const useScanner = () => {
 
-    const { showToast } = useShowToast();
-
     const [hasPermission, setHasPermission] = useState(false);
-    const [scannedData, setScannedData] = useState("");
+    const [scannedBarcode, setScannedBarcode] = useState<ScannedData["data"]>("");
 
     console.log('has persmission', hasPermission)
 
@@ -23,13 +19,11 @@ export const useScanner = () => {
     }, [hasPermission]);
 
     const handleBarCodeScanned = (scannedData: ScannedData) => {
-        setScannedData(scannedData.data);
-
-        if (scannedData) showToast("info", "Artículo escaneado", "artículo escaneado correctamente", 5000);
+        setScannedBarcode(scannedData.data);
 
         console.log(`Type: ${scannedData.type}`);
         console.log(`Data: ${scannedData.data}`);
     };
 
-    return { hasPermission, scannedData, setScannedData, handleBarCodeScanned }
+    return { hasPermission, scannedBarcode, setScannedBarcode, handleBarCodeScanned }
 }
