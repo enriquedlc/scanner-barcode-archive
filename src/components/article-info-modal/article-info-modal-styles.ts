@@ -26,14 +26,19 @@ export const articleInfoModalStyles = StyleSheet.create({
         elevation: 5,
     },
     title: {
-        fontSize: FONT_SIZES.LARGE,
+        fontSize: FONT_SIZES.EXTRA_LARGE,
         fontWeight: 'bold',
         marginBottom: 10,
         textAlign: 'center',
     },
     label: {
         fontSize: FONT_SIZES.MEDIUM,
-        color: BLUE_PALLETE.SECONDARY_BLACK
+        color: BLUE_PALLETE.PRIMARY_BLACK,
+        fontWeight: 'bold',
+    }, value: {
+        fontSize: FONT_SIZES.MEDIUM,
+        color: BLUE_PALLETE.SECONDARY_BLACK,
+        fontWeight: 'normal'
     },
     editButton: {
         backgroundColor: 'blue',

@@ -28,7 +28,7 @@ export function ArticleList(props: ArticleListProps) {
     >
       <FlatList
         data={articles}
-        renderItem={({ item }) => <ArticleItem item={item} />}
+        renderItem={({ item }) => <ArticleItem article={item} />}
         keyExtractor={(item) => item.id}
       />
     </View>

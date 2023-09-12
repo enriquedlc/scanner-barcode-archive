@@ -11,18 +11,18 @@ import { ArticleItemStats } from "./components/article-item-stats";
 import { articleItemStyles } from "./article-item-styles";
 
 interface ArticleItemProps {
-  item: Article;
+  article: Article;
 }
 
 export const ArticleItem: React.FC<ArticleItemProps> = React.memo(
-  ({ item }) => {
+  ({ article }) => {
     const [showDeleteArticleModal, setShowDeleteArticleModal] = useState(false);
 
     return (
       <View style={articleItemStyles.articleItemContainer}>
         <View style={[articleItemStyles.articleItem]}>
-          <ArticleItemHeader {...item} />
-          <ArticleItemStats {...item} />
+          <ArticleItemHeader {...article} />
+          <ArticleItemStats {...article} />
           <View style={[articleItemStyles.iconContainer]}>
             <TouchableOpacity onPress={() => setShowDeleteArticleModal(true)}>
               <FontAwesome5 name="info-circle" size={24} color="blue" />
@@ -33,7 +33,7 @@ export const ArticleItem: React.FC<ArticleItemProps> = React.memo(
         <ArticleInfoModal
           showDeleteArticleModal={showDeleteArticleModal}
           setShowDeleteArticleModal={setShowDeleteArticleModal}
-          article={item}
+          article={article}
         />
       </View>
     );

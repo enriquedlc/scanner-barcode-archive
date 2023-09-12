@@ -35,13 +35,12 @@ export function ArticleInfoModal(props: ArticleInfoModalProps) {
           style={{
             position: "absolute",
             right: "13%",
-            // fix the button position to close the modal
             ...Platform.select({
               ios: {
                 top: "32%",
               },
               android: {
-                top: WINDOW_HEIGHT - 540,
+                top: WINDOW_HEIGHT - WINDOW_HEIGHT * 0.715,
               },
             }),
             zIndex: 10,
@@ -63,23 +62,47 @@ export function ArticleInfoModal(props: ArticleInfoModalProps) {
               Información del artículo
             </Text>
             <Text style={articleInfoModalStyles.label}>
-              Código de barras: {article.barcode}
+              Código de barras:{" "}
+              <Text style={articleInfoModalStyles.value}>
+                {article.barcode}
+              </Text>
+            </Text>
+
+            <Text style={articleInfoModalStyles.label}>
+              Creado:{" "}
+              <Text style={articleInfoModalStyles.value}>
+                {article.createdAt.split("T")[0].split("-").reverse().join("/")}
+              </Text>
             </Text>
             <Text style={articleInfoModalStyles.label}>
-              Nombre: {article.name}
+              Actualizado:{" "}
+              <Text style={articleInfoModalStyles.value}>
+                {article.updatedAt.split("T")[0].split("-").reverse().join("/")}
+              </Text>
             </Text>
+
             <Text style={articleInfoModalStyles.label}>
-              Fecha:{" "}
-              {article.createdAt.split("T")[0].split("-").reverse().join("/")}
+              Nombre:{" "}
+              <Text style={articleInfoModalStyles.value}>{article.name}</Text>
             </Text>
+
             <Text style={articleInfoModalStyles.label}>
-              Exhibición: {article.exhibition}
+              Exhibición:{" "}
+              <Text style={articleInfoModalStyles.value}>
+                {article.exhibition}
+              </Text>
             </Text>
+
             <Text style={articleInfoModalStyles.label}>
-              Almacén: {article.warehouse}
+              Estantería:{" "}
+              <Text style={articleInfoModalStyles.value}>{article.shelf}</Text>
             </Text>
+
             <Text style={articleInfoModalStyles.label}>
-              Estantería: {article.shelf}
+              Almacén:{" "}
+              <Text style={articleInfoModalStyles.value}>
+                {article.warehouse}
+              </Text>
             </Text>
           </View>
           <View style={articleInfoModalStyles.buttonsContainer}>
