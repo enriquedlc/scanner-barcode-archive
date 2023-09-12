@@ -9,6 +9,9 @@ import {
 import { FontAwesome5 } from "@expo/vector-icons";
 
 import { Article } from "../../types/article";
+import { formatDate } from "../../utils/date";
+
+import { ArticleModalStat } from "./article-info-modal-stat";
 
 import { articleInfoModalStyles } from "./article-info-modal-styles";
 
@@ -61,49 +64,19 @@ export function ArticleInfoModal(props: ArticleInfoModalProps) {
             <Text style={articleInfoModalStyles.title}>
               Información del artículo
             </Text>
-            <Text style={articleInfoModalStyles.label}>
-              Código de barras:{" "}
-              <Text style={articleInfoModalStyles.value}>
-                {article.barcode}
-              </Text>
-            </Text>
-
-            <Text style={articleInfoModalStyles.label}>
-              Creado:{" "}
-              <Text style={articleInfoModalStyles.value}>
-                {article.createdAt.split("T")[0].split("-").reverse().join("/")}
-              </Text>
-            </Text>
-            <Text style={articleInfoModalStyles.label}>
-              Actualizado:{" "}
-              <Text style={articleInfoModalStyles.value}>
-                {article.updatedAt.split("T")[0].split("-").reverse().join("/")}
-              </Text>
-            </Text>
-
-            <Text style={articleInfoModalStyles.label}>
-              Nombre:{" "}
-              <Text style={articleInfoModalStyles.value}>{article.name}</Text>
-            </Text>
-
-            <Text style={articleInfoModalStyles.label}>
-              Exhibición:{" "}
-              <Text style={articleInfoModalStyles.value}>
-                {article.exhibition}
-              </Text>
-            </Text>
-
-            <Text style={articleInfoModalStyles.label}>
-              Estantería:{" "}
-              <Text style={articleInfoModalStyles.value}>{article.shelf}</Text>
-            </Text>
-
-            <Text style={articleInfoModalStyles.label}>
-              Almacén:{" "}
-              <Text style={articleInfoModalStyles.value}>
-                {article.warehouse}
-              </Text>
-            </Text>
+            <ArticleModalStat label="Código" value={article.barcode} />
+            <ArticleModalStat label="Nombre" value={article.name} />
+            <ArticleModalStat label="Exhibición" value={article.exhibition} />
+            <ArticleModalStat label="Estantería" value={article.shelf} />
+            <ArticleModalStat label="Almacén" value={article.warehouse} />
+            <ArticleModalStat
+              label="Creado"
+              value={formatDate(article.createdAt)}
+            />
+            <ArticleModalStat
+              label="Actualizado"
+              value={formatDate(article.updatedAt)}
+            />
           </View>
           <View style={articleInfoModalStyles.buttonsContainer}>
             <TouchableOpacity
