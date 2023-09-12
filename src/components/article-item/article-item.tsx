@@ -8,31 +8,11 @@ import { TOOLS } from "../../../assets";
 
 import { articleItemStyles } from "./article-item-styles";
 import { ArticleInfoModal } from "../article-info-modal/article-info-modal";
+import { ArticleItemStats } from "./components/article-item-stats";
 
 interface ArticleItemProps {
   item: Article;
 }
-
-const ArticleItemStats = ({
-  exhibition,
-  shelf,
-  warehouse,
-}: Partial<Article>) => (
-  <View style={articleItemStyles.articleItemDescription}>
-    <View style={{ alignItems: "center" }}>
-      <Text>{exhibition}</Text>
-      <Text style={{ fontWeight: "bold" }}>Exhibición</Text>
-    </View>
-    <View style={{ alignItems: "center" }}>
-      <Text>{shelf}</Text>
-      <Text style={{ fontWeight: "bold" }}>Estantería</Text>
-    </View>
-    <View style={{ alignItems: "center" }}>
-      <Text>{warehouse}</Text>
-      <Text style={{ fontWeight: "bold" }}>Almacén</Text>
-    </View>
-  </View>
-);
 
 const ArticleItemHeader = ({ name, barcode }: Partial<Article>) => (
   <View style={articleItemStyles.articleItemHeader}>
