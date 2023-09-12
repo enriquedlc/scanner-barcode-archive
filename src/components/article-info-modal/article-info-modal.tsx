@@ -35,6 +35,7 @@ export function ArticleInfoModal(props: ArticleInfoModalProps) {
           style={{
             position: "absolute",
             right: "13%",
+            // fix the button position to close the modal
             ...Platform.select({
               ios: {
                 top: "32%",
@@ -53,6 +54,7 @@ export function ArticleInfoModal(props: ArticleInfoModalProps) {
             alignItems: "center",
           }}
         >
+          {/* TODO: prettify this component */}
           <FontAwesome5 name="times" size={18} color="white" />
         </TouchableOpacity>
         <View style={articleInfoModalStyles.modalView}>
