@@ -27,20 +27,27 @@ export const ArticleItem: React.FC<ArticleItemProps> = React.memo(
               alt="tool-box"
             />
             <View style={articleItemStyles.articleItemHeaderDescription}>
-              <Text>{item.name}</Text>
-              <Text>{item.barcode}</Text>
+              <Text style={articleItemStyles.articleItemTitle}>
+                {item.name}
+              </Text>
+              <Text style={articleItemStyles.articleItemBarcode}>
+                {item.barcode}123412341
+              </Text>
             </View>
           </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-around",
-              paddingTop: 15,
-            }}
-          >
-            <Text>{item.exhibition}</Text>
-            <Text>{item.shelf}</Text>
-            <Text>{item.warehouse}</Text>
+          <View style={articleItemStyles.articleItemDescription}>
+            <View style={{ alignItems: "center" }}>
+              <Text>{item.exhibition}</Text>
+              <Text style={{ fontWeight: "bold" }}>Exhibición</Text>
+            </View>
+            <View style={{ alignItems: "center" }}>
+              <Text>{item.shelf}</Text>
+              <Text style={{ fontWeight: "bold" }}>Estantería</Text>
+            </View>
+            <View style={{ alignItems: "center" }}>
+              <Text>{item.warehouse}</Text>
+              <Text style={{ fontWeight: "bold" }}>Almacén</Text>
+            </View>
           </View>
           <View style={[articleItemStyles.iconContainer]}>
             <TouchableOpacity onPress={() => setShowDeleteArticleModal(true)}>
