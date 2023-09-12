@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Modal, Text, TouchableOpacity, View } from "react-native";
 
+import { ScannedData } from "../../types/types";
+import { INITIAL_ARTICLE_FORM_STATE } from "../../constants/states/initial-states";
 import { Article } from "../../types/article";
 
 import { ArticleFormNumberInput } from "./article-form-input/article-form-number-input";
@@ -8,18 +10,6 @@ import { ArticleFormTextInput } from "./article-form-input/article-form-text-inp
 
 import { articleInfoModalStyles } from "../article-info-modal/article-info-modal-styles";
 import { articleFormStyles } from "./article-form-styles";
-import { ScannedData } from "../../types/types";
-
-const INITIAL_ARTICLE_FORM_STATE: Article = {
-  id: "",
-  name: "",
-  exhibition: "",
-  shelf: "",
-  warehouse: "",
-  barcode: "",
-  createdAt: "",
-  updatedAt: "",
-};
 
 interface ArticleFormProps {
   visible: boolean;
