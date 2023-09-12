@@ -13,6 +13,27 @@ interface ArticleItemProps {
   item: Article;
 }
 
+const ArticleItemStats = ({
+  exhibition,
+  shelf,
+  warehouse,
+}: Partial<Article>) => (
+  <View style={articleItemStyles.articleItemDescription}>
+    <View style={{ alignItems: "center" }}>
+      <Text>{exhibition}</Text>
+      <Text style={{ fontWeight: "bold" }}>Exhibición</Text>
+    </View>
+    <View style={{ alignItems: "center" }}>
+      <Text>{shelf}</Text>
+      <Text style={{ fontWeight: "bold" }}>Estantería</Text>
+    </View>
+    <View style={{ alignItems: "center" }}>
+      <Text>{warehouse}</Text>
+      <Text style={{ fontWeight: "bold" }}>Almacén</Text>
+    </View>
+  </View>
+);
+
 export const ArticleItem: React.FC<ArticleItemProps> = React.memo(
   ({ item }) => {
     const [showDeleteArticleModal, setShowDeleteArticleModal] = useState(false);
@@ -35,20 +56,7 @@ export const ArticleItem: React.FC<ArticleItemProps> = React.memo(
               </Text>
             </View>
           </View>
-          <View style={articleItemStyles.articleItemDescription}>
-            <View style={{ alignItems: "center" }}>
-              <Text>{item.exhibition}</Text>
-              <Text style={{ fontWeight: "bold" }}>Exhibición</Text>
-            </View>
-            <View style={{ alignItems: "center" }}>
-              <Text>{item.shelf}</Text>
-              <Text style={{ fontWeight: "bold" }}>Estantería</Text>
-            </View>
-            <View style={{ alignItems: "center" }}>
-              <Text>{item.warehouse}</Text>
-              <Text style={{ fontWeight: "bold" }}>Almacén</Text>
-            </View>
-          </View>
+          <ArticleItemStats {...item} />
           <View style={[articleItemStyles.iconContainer]}>
             <TouchableOpacity onPress={() => setShowDeleteArticleModal(true)}>
               <FontAwesome5 name="info-circle" size={24} color="blue" />
