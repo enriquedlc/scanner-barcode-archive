@@ -24,6 +24,22 @@ export const articleItemStyles = StyleSheet.create({
         position: "absolute",
         top: "40%",
         right: 15,
+    },
+    articleItemHeader: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 10,
+        marginLeft: 10,
+        gap: 15
+
+    },
+    articleHeaderIcon: {
+        width: 50,
+        height: 50,
+    },
+    articleItemHeaderDescription: {
+        flexDirection: 'column',
+        gap: 5,
     }
 });
 

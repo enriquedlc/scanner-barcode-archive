@@ -58,6 +58,7 @@ export function ArticleForm(props: ArticleFormProps) {
             setValue={handleChangeText}
             value={scannedArticle.warehouse}
           />
+          {/* <Text>Elegir icono</Text> */}
           <View style={articleInfoModalStyles.buttonsContainer}>
             <TouchableOpacity
               onPress={() => console.log("create action!")}
