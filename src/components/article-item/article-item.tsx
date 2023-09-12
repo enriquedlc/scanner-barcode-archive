@@ -1,34 +1,18 @@
 import React, { useState } from "react";
-import { Text, View, TouchableOpacity, Image } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 import { Article } from "../../types/article";
 
-import { TOOLS } from "../../../assets";
+import { ArticleInfoModal } from "../article-info-modal/article-info-modal";
+import { ArticleItemHeader } from "./components/article-item-header";
+import { ArticleItemStats } from "./components/article-item-stats";
 
 import { articleItemStyles } from "./article-item-styles";
-import { ArticleInfoModal } from "../article-info-modal/article-info-modal";
-import { ArticleItemStats } from "./components/article-item-stats";
 
 interface ArticleItemProps {
   item: Article;
 }
-
-const ArticleItemHeader = ({ name, barcode }: Partial<Article>) => (
-  <View style={articleItemStyles.articleItemHeader}>
-    <Image
-      style={articleItemStyles.articleHeaderIcon}
-      source={TOOLS.toolBox}
-      alt="tool-box"
-    />
-    <View style={articleItemStyles.articleItemHeaderDescription}>
-      <Text style={articleItemStyles.articleItemTitle}>{name}</Text>
-      <Text style={articleItemStyles.articleItemBarcode}>
-        {barcode}123412341
-      </Text>
-    </View>
-  </View>
-);
 
 export const ArticleItem: React.FC<ArticleItemProps> = React.memo(
   ({ item }) => {
