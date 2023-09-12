@@ -6,6 +6,7 @@ import SPLASH_LOGO from "./splash-scanner.png";
 import work_tools from "./tools/work-tools.png";
 import hammer from "./tools/hammer.png";
 import saw from "./tools/saw.png";
+import toolBox from "./tools/tool-box.png";
 
 import box from "./landing/box.png";
 import scanner from "./landing/scanner.png";
@@ -27,7 +28,8 @@ const LOGOS = {
 const TOOLS = {
     work_tools,
     hammer,
-    saw
+    saw,
+    toolBox
 } as const;
 
 const LANDING = {

@@ -1,6 +1,6 @@
 import { Dimensions } from "react-native";
 
-import { BLUE_PALLETE } from "./colors";
+import { BLUE_PALLETE } from "../constants/colors/colors";
 
 export const getWidth = () => {
     return (Dimensions.get("window").width - 80) / 5;
