@@ -9,7 +9,7 @@ import { ProfileScreen } from "../../screens/profile-screen/profile-screen";
 import { BarcodeScanner } from "../barcode-scanner/barcode-scanner";
 
 import { useAppNavigation } from "../../hooks/useAppNavigation";
-import { getColor, getWidth } from "../../constants/colors/utils";
+import { getColor, getWidth } from "../../utils/utils";
 
 import { BARCODE } from "../../../assets";
 import { BLUE_PALLETE } from "../../constants/colors/colors";
