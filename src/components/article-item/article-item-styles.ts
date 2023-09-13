@@ -49,7 +49,9 @@ export const articleItemStyles = StyleSheet.create({
     articleItemBarcodeContainer: {
         borderRadius: 5,
         backgroundColor: BLUE_PALLETE.BLUE,
-        width: "50%",
+        width: "45%",
+        paddingHorizontal: 5,
+
     },
     articleItemBarcode: {
         fontSize: FONT_SIZES.SMALL,
