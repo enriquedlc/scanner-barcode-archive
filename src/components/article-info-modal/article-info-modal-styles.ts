@@ -65,7 +65,7 @@ export const articleInfoModalStyles = StyleSheet.create({
         right: "13%",
         ...Platform.select({
             ios: {
-                top: "32%",
+                top: WINDOW_HEIGHT - WINDOW_HEIGHT * 0.7,
             },
             android: {
                 top: WINDOW_HEIGHT - WINDOW_HEIGHT * 0.715,

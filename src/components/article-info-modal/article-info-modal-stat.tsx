@@ -52,8 +52,9 @@ export function ArticleInfoModalStats({ article }: { article: Article }) {
 
 const styles = StyleSheet.create({
   barcodeContainer: {
-    paddingHorizontal: 10,
     alignSelf: "center",
+    marginBottom: "4%",
+    paddingHorizontal: "4%",
   },
   label: {
     fontSize: FONT_SIZES.MEDIUM,
