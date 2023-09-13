@@ -1,5 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform, Dimensions } from 'react-native';
 import { FONT_SIZES } from '../../constants/font';
+
+const WINDOW_HEIGHT = Dimensions.get("window").height;
 
 export const articleInfoModalStyles = StyleSheet.create({
     centeredView: {
@@ -57,5 +59,25 @@ export const articleInfoModalStyles = StyleSheet.create({
     buttonsContainer: {
         flexDirection: 'row',
         gap: 20,
+    },
+    closeModalButton: {
+        position: "absolute",
+        right: "13%",
+        ...Platform.select({
+            ios: {
+                top: "32%",
+            },
+            android: {
+                top: WINDOW_HEIGHT - WINDOW_HEIGHT * 0.715,
+            },
+        }),
+        zIndex: 10,
+        backgroundColor: "red",
+        borderRadius: 100,
+        width: 30,
+        height: 30,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
     }
 });

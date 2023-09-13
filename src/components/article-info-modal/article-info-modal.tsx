@@ -1,12 +1,5 @@
-import {
-  Modal,
-  Text,
-  TouchableOpacity,
-  View,
-  Platform,
-  Dimensions,
-} from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { Modal, Text, TouchableOpacity, View } from "react-native";
 
 import { Article } from "../../types/article";
 import { formatDate } from "../../utils/date";
@@ -21,8 +14,6 @@ interface ArticleInfoModalProps {
   article: Article;
 }
 
-const WINDOW_HEIGHT = Dimensions.get("window").height;
-
 export function ArticleInfoModal(props: ArticleInfoModalProps) {
   const { showDeleteArticleModal, setShowDeleteArticleModal, article } = props;
 
@@ -35,26 +26,7 @@ export function ArticleInfoModal(props: ArticleInfoModalProps) {
       <View style={articleInfoModalStyles.centeredView}>
         <TouchableOpacity
           onPress={() => setShowDeleteArticleModal(false)}
-          style={{
-            position: "absolute",
-            right: "13%",
-            ...Platform.select({
-              ios: {
-                top: "32%",
-              },
-              android: {
-                top: WINDOW_HEIGHT - WINDOW_HEIGHT * 0.715,
-              },
-            }),
-            zIndex: 10,
-            backgroundColor: "red",
-            borderRadius: 100,
-            width: 30,
-            height: 30,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+          style={articleInfoModalStyles.closeModalButton}
         >
           {/* TODO: prettify this component */}
           <FontAwesome5 name="times" size={18} color="white" />
