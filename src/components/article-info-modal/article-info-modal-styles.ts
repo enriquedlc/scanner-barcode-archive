@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
 import { FONT_SIZES } from '../../constants/font';
-import { BLUE_PALLETE } from '../../constants/colors/colors';
 
 export const articleInfoModalStyles = StyleSheet.create({
     centeredView: {
@@ -31,15 +30,7 @@ export const articleInfoModalStyles = StyleSheet.create({
         marginBottom: 10,
         textAlign: 'center',
     },
-    label: {
-        fontSize: FONT_SIZES.MEDIUM,
-        color: BLUE_PALLETE.PRIMARY_BLACK,
-        fontWeight: 'bold',
-    }, value: {
-        fontSize: FONT_SIZES.MEDIUM,
-        color: BLUE_PALLETE.SECONDARY_BLACK,
-        fontWeight: 'normal'
-    },
+
     editButton: {
         backgroundColor: 'blue',
         marginTop: 10,

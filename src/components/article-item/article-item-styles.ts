@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
 import { FONT_SIZES } from '../../constants/font';
-import { BLUE_PALLETE } from '../../constants/colors/colors';
 
 export const articleItemStyles = StyleSheet.create({
     articleItemContainer: {
@@ -47,12 +46,9 @@ export const articleItemStyles = StyleSheet.create({
     },
     articleItemBarcode: {
         fontSize: FONT_SIZES.SMALL,
-        backgroundColor: BLUE_PALLETE.BLUE,
         color: 'white',
-        borderRadius: 5,
         textAlign: 'center',
-        width: "55%",
-        paddingVertical: 1
+        paddingVertical: 3,
     },
     articleItemDescription: {
         flexDirection: "row",
