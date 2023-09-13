@@ -1,54 +1,28 @@
 import React, { useState } from "react";
-import { Text, View, TouchableOpacity, Image } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 import { Article } from "../../types/article";
 
-import { TOOLS } from "../../../assets";
+import { ArticleInfoModal } from "../article-info-modal/article-info-modal";
+import { ArticleItemHeader } from "./components/article-item-header";
+import { ArticleItemStats } from "./components/article-item-stats";
 
 import { articleItemStyles } from "./article-item-styles";
-import { ArticleInfoModal } from "../article-info-modal/article-info-modal";
 
 interface ArticleItemProps {
-  item: Article;
+  article: Article;
 }
 
 export const ArticleItem: React.FC<ArticleItemProps> = React.memo(
-  ({ item }) => {
+  ({ article }) => {
     const [showDeleteArticleModal, setShowDeleteArticleModal] = useState(false);
 
     return (
       <View style={articleItemStyles.articleItemContainer}>
         <View style={[articleItemStyles.articleItem]}>
-          <View style={articleItemStyles.articleItemHeader}>
-            <Image
-              style={articleItemStyles.articleHeaderIcon}
-              source={TOOLS.toolBox}
-              alt="tool-box"
-            />
-            <View style={articleItemStyles.articleItemHeaderDescription}>
-              <Text style={articleItemStyles.articleItemTitle}>
-                {item.name}
-              </Text>
-              <Text style={articleItemStyles.articleItemBarcode}>
-                {item.barcode}123412341
-              </Text>
-            </View>
-          </View>
-          <View style={articleItemStyles.articleItemDescription}>
-            <View style={{ alignItems: "center" }}>
-              <Text>{item.exhibition}</Text>
-              <Text style={{ fontWeight: "bold" }}>Exhibición</Text>
-            </View>
-            <View style={{ alignItems: "center" }}>
-              <Text>{item.shelf}</Text>
-              <Text style={{ fontWeight: "bold" }}>Estantería</Text>
-            </View>
-            <View style={{ alignItems: "center" }}>
-              <Text>{item.warehouse}</Text>
-              <Text style={{ fontWeight: "bold" }}>Almacén</Text>
-            </View>
-          </View>
+          <ArticleItemHeader {...article} />
+          <ArticleItemStats {...article} />
           <View style={[articleItemStyles.iconContainer]}>
             <TouchableOpacity onPress={() => setShowDeleteArticleModal(true)}>
               <FontAwesome5 name="info-circle" size={24} color="blue" />
@@ -59,7 +33,7 @@ export const ArticleItem: React.FC<ArticleItemProps> = React.memo(
         <ArticleInfoModal
           showDeleteArticleModal={showDeleteArticleModal}
           setShowDeleteArticleModal={setShowDeleteArticleModal}
-          article={item}
+          article={article}
         />
       </View>
     );
