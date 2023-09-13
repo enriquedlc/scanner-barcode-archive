@@ -11,7 +11,7 @@ import { FONT_SIZES } from "../../constants/font";
 const articles: Article[] = articlesMock;
 
 interface ArticleListProps {
-  title: string;
+  title?: string;
   articleListStyleComponentProps: {
     height: DimensionValue;
   };

@@ -4,9 +4,10 @@ import "react-native-gesture-handler";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome5 } from "@expo/vector-icons";
 
-import { Home } from "../../home/home";
+import { Home } from "../home/home";
 import { ProfileScreen } from "../../screens/profile-screen/profile-screen";
 import { BarcodeScanner } from "../barcode-scanner/barcode-scanner";
+import { Search } from "../search/search";
 
 import { useAppNavigation } from "../../hooks/useAppNavigation";
 import { getColor, getWidth } from "../../utils/utils";
@@ -77,8 +78,8 @@ export function Navbar() {
         />
 
         <Tab.Screen
-          name={"Search"}
-          component={Home}
+          name={"SEARCH"}
+          component={Search}
           options={{
             tabBarIcon: ({ focused }) => (
               <View
