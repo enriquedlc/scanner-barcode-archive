@@ -38,7 +38,9 @@ export const articleInfoModalStyles = StyleSheet.create({
         marginTop: 10,
         paddingVertical: 10,
         paddingHorizontal: 20,
+        borderWidth: 2,
         borderRadius: 5,
+        borderColor: 'blue',
     },
     deleteText: {
         color: 'white',
