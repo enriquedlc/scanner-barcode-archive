@@ -1,14 +1,9 @@
-import {
-  Modal,
-  Text,
-  TouchableOpacity,
-  View,
-  Platform,
-  Dimensions,
-} from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { Modal, Text, TouchableOpacity, View } from "react-native";
 
 import { Article } from "../../types/article";
+
+import { ArticleInfoModalStats } from "./article-info-modal-stat";
 
 import { articleInfoModalStyles } from "./article-info-modal-styles";
 
@@ -17,8 +12,6 @@ interface ArticleInfoModalProps {
   setShowDeleteArticleModal: (showDeleteArticleModal: boolean) => void;
   article: Article;
 }
-
-const WINDOW_HEIGHT = Dimensions.get("window").height;
 
 export function ArticleInfoModal(props: ArticleInfoModalProps) {
   const { showDeleteArticleModal, setShowDeleteArticleModal, article } = props;
@@ -32,27 +25,7 @@ export function ArticleInfoModal(props: ArticleInfoModalProps) {
       <View style={articleInfoModalStyles.centeredView}>
         <TouchableOpacity
           onPress={() => setShowDeleteArticleModal(false)}
-          style={{
-            position: "absolute",
-            right: "13%",
-            // fix the button position to close the modal
-            ...Platform.select({
-              ios: {
-                top: "32%",
-              },
-              android: {
-                top: WINDOW_HEIGHT - 540,
-              },
-            }),
-            zIndex: 10,
-            backgroundColor: "red",
-            borderRadius: 100,
-            width: 30,
-            height: 30,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+          style={articleInfoModalStyles.closeModalButton}
         >
           {/* TODO: prettify this component */}
           <FontAwesome5 name="times" size={18} color="white" />
@@ -62,25 +35,7 @@ export function ArticleInfoModal(props: ArticleInfoModalProps) {
             <Text style={articleInfoModalStyles.title}>
               Información del artículo
             </Text>
-            <Text style={articleInfoModalStyles.label}>
-              Código de barras: {article.barcode}
-            </Text>
-            <Text style={articleInfoModalStyles.label}>
-              Nombre: {article.name}
-            </Text>
-            <Text style={articleInfoModalStyles.label}>
-              Fecha:{" "}
-              {article.createdAt.split("T")[0].split("-").reverse().join("/")}
-            </Text>
-            <Text style={articleInfoModalStyles.label}>
-              Exhibición: {article.exhibition}
-            </Text>
-            <Text style={articleInfoModalStyles.label}>
-              Almacén: {article.warehouse}
-            </Text>
-            <Text style={articleInfoModalStyles.label}>
-              Estantería: {article.shelf}
-            </Text>
+            <ArticleInfoModalStats article={article} />
           </View>
           <View style={articleInfoModalStyles.buttonsContainer}>
             <TouchableOpacity

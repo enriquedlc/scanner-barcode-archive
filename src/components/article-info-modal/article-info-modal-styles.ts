@@ -1,6 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform, Dimensions } from 'react-native';
 import { FONT_SIZES } from '../../constants/font';
-import { BLUE_PALLETE } from '../../constants/colors/colors';
+
+const WINDOW_HEIGHT = Dimensions.get("window").height;
 
 export const articleInfoModalStyles = StyleSheet.create({
     centeredView: {
@@ -26,15 +27,12 @@ export const articleInfoModalStyles = StyleSheet.create({
         elevation: 5,
     },
     title: {
-        fontSize: FONT_SIZES.LARGE,
+        fontSize: FONT_SIZES.EXTRA_LARGE,
         fontWeight: 'bold',
-        marginBottom: 10,
+        marginBottom: 5,
         textAlign: 'center',
     },
-    label: {
-        fontSize: FONT_SIZES.MEDIUM,
-        color: BLUE_PALLETE.SECONDARY_BLACK
-    },
+
     editButton: {
         backgroundColor: 'blue',
         marginTop: 10,
@@ -61,5 +59,25 @@ export const articleInfoModalStyles = StyleSheet.create({
     buttonsContainer: {
         flexDirection: 'row',
         gap: 20,
+    },
+    closeModalButton: {
+        position: "absolute",
+        right: "13%",
+        ...Platform.select({
+            ios: {
+                top: "32%",
+            },
+            android: {
+                top: WINDOW_HEIGHT - WINDOW_HEIGHT * 0.715,
+            },
+        }),
+        zIndex: 10,
+        backgroundColor: "red",
+        borderRadius: 100,
+        width: 30,
+        height: 30,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
     }
 });
