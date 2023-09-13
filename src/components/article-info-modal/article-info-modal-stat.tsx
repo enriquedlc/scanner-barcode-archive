@@ -1,14 +1,19 @@
-import { Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, View } from "react-native";
 
 import { BLUE_PALLETE } from "../../constants/colors/colors";
 import { FONT_SIZES } from "../../constants/font";
+import { formatDate } from "../../utils/date";
+
+import { Article } from "../../types/article";
+
+import { articleItemStyles } from "../article-item/article-item-styles";
 
 interface ArticleModalStatProps {
   label: string;
   value: string;
 }
 
-export function ArticleModalStat(props: ArticleModalStatProps) {
+function ArticleModalStat(props: ArticleModalStatProps) {
   const { label, value } = props;
 
   return (
@@ -18,7 +23,38 @@ export function ArticleModalStat(props: ArticleModalStatProps) {
   );
 }
 
+export function ArticleInfoModalStats({ article }: { article: Article }) {
+  return (
+    <>
+      <View
+        style={[
+          articleItemStyles.articleItemBarcodeContainer,
+          styles.barcodeContainer,
+        ]}
+      >
+        <Text style={articleItemStyles.articleItemBarcode}>
+          {article.barcode}
+        </Text>
+      </View>
+
+      <ArticleModalStat label="Nombre" value={article.name} />
+      <ArticleModalStat label="Exhibición" value={article.exhibition} />
+      <ArticleModalStat label="Estantería" value={article.shelf} />
+      <ArticleModalStat label="Almacén" value={article.warehouse} />
+      <ArticleModalStat label="Creado" value={formatDate(article.createdAt)} />
+      <ArticleModalStat
+        label="Actualizado"
+        value={formatDate(article.updatedAt)}
+      />
+    </>
+  );
+}
+
 const styles = StyleSheet.create({
+  barcodeContainer: {
+    paddingHorizontal: 10,
+    alignSelf: "center",
+  },
   label: {
     fontSize: FONT_SIZES.MEDIUM,
     color: BLUE_PALLETE.PRIMARY_BLACK,

@@ -29,7 +29,7 @@ export const articleInfoModalStyles = StyleSheet.create({
     title: {
         fontSize: FONT_SIZES.EXTRA_LARGE,
         fontWeight: 'bold',
-        marginBottom: 10,
+        marginBottom: 5,
         textAlign: 'center',
     },
 

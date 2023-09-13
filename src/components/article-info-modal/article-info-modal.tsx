@@ -2,9 +2,8 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { Modal, Text, TouchableOpacity, View } from "react-native";
 
 import { Article } from "../../types/article";
-import { formatDate } from "../../utils/date";
 
-import { ArticleModalStat } from "./article-info-modal-stat";
+import { ArticleInfoModalStats } from "./article-info-modal-stat";
 
 import { articleInfoModalStyles } from "./article-info-modal-styles";
 
@@ -36,19 +35,7 @@ export function ArticleInfoModal(props: ArticleInfoModalProps) {
             <Text style={articleInfoModalStyles.title}>
               Información del artículo
             </Text>
-            <ArticleModalStat label="Código" value={article.barcode} />
-            <ArticleModalStat label="Nombre" value={article.name} />
-            <ArticleModalStat label="Exhibición" value={article.exhibition} />
-            <ArticleModalStat label="Estantería" value={article.shelf} />
-            <ArticleModalStat label="Almacén" value={article.warehouse} />
-            <ArticleModalStat
-              label="Creado"
-              value={formatDate(article.createdAt)}
-            />
-            <ArticleModalStat
-              label="Actualizado"
-              value={formatDate(article.updatedAt)}
-            />
+            <ArticleInfoModalStats article={article} />
           </View>
           <View style={articleInfoModalStyles.buttonsContainer}>
             <TouchableOpacity
