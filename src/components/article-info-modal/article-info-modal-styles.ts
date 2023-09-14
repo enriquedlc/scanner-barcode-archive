@@ -1,7 +1,5 @@
-import { StyleSheet, Platform, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { FONT_SIZES } from '../../constants/font';
-
-const WINDOW_HEIGHT = Dimensions.get("window").height;
 
 export const articleInfoModalStyles = StyleSheet.create({
     centeredView: {
@@ -65,7 +63,7 @@ export const articleInfoModalStyles = StyleSheet.create({
     closeModalButton: {
         alignSelf: "flex-end",
         marginRight: "12%",
-        top: "2.5%",
+        top: "2.3%",
         zIndex: 10,
         backgroundColor: "red",
         borderRadius: 100,

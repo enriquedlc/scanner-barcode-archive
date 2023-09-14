@@ -8,6 +8,7 @@ import { Home } from "../home/home";
 import { ProfileScreen } from "../../screens/profile-screen/profile-screen";
 import { BarcodeScanner } from "../barcode-scanner/barcode-scanner";
 import { Search } from "../search/search";
+import { Export } from "../export/export";
 
 import { useAppNavigation } from "../../hooks/useAppNavigation";
 import { getColor, getWidth } from "../../utils/utils";
@@ -142,7 +143,7 @@ export function Navbar() {
         />
         <Tab.Screen
           name={"EXPORT"}
-          component={Home}
+          component={Export}
           options={{
             tabBarIcon: ({ focused }) => (
               <View
