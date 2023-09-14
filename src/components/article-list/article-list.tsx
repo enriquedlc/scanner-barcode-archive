@@ -15,10 +15,11 @@ interface ArticleListProps {
   articleListStyleComponentProps: {
     height: DimensionValue;
   };
+  data?: Article[];
 }
 
 export function ArticleList(props: ArticleListProps) {
-  const { articleListStyleComponentProps, title } = props;
+  const { articleListStyleComponentProps, title, data } = props;
 
   return (
     <View
@@ -29,7 +30,7 @@ export function ArticleList(props: ArticleListProps) {
     >
       <Text style={styles.title}>{title}</Text>
       <FlatList
-        data={articles}
+        data={data || articles}
         renderItem={({ item }) => <ArticleItem article={item} />}
         keyExtractor={(item) => item.id}
       />

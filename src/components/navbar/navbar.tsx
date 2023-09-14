@@ -12,7 +12,7 @@ import { Search } from "../search/search";
 import { useAppNavigation } from "../../hooks/useAppNavigation";
 import { getColor, getWidth } from "../../utils/utils";
 
-import { BARCODE } from "../../../assets";
+import { BARCODE, NAVBAR_ICONS } from "../../../assets";
 import { BLUE_PALLETE } from "../../constants/colors/colors";
 
 const Tab = createBottomTabNavigator();
@@ -141,7 +141,7 @@ export function Navbar() {
           })}
         />
         <Tab.Screen
-          name={"Notifications"}
+          name={"EXPORT"}
           component={Home}
           options={{
             tabBarIcon: ({ focused }) => (
@@ -151,7 +151,14 @@ export function Navbar() {
                   top: 20,
                 }}
               >
-                <FontAwesome5 name="bell" size={20} color={getColor(focused)} />
+                <Image
+                  source={NAVBAR_ICONS.FILE_EXPORT}
+                  style={{
+                    width: 22,
+                    height: 22,
+                    tintColor: getColor(focused),
+                  }}
+                />
               </View>
             ),
           }}

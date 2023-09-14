@@ -63,16 +63,9 @@ export const articleInfoModalStyles = StyleSheet.create({
         gap: 20,
     },
     closeModalButton: {
-        position: "absolute",
-        right: "13%",
-        ...Platform.select({
-            ios: {
-                top: WINDOW_HEIGHT - WINDOW_HEIGHT * 0.7,
-            },
-            android: {
-                top: WINDOW_HEIGHT - WINDOW_HEIGHT * 0.715,
-            },
-        }),
+        alignSelf: "flex-end",
+        marginRight: "12%",
+        top: "2.5%",
         zIndex: 10,
         backgroundColor: "red",
         borderRadius: 100,

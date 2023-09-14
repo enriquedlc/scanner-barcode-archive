@@ -1,17 +1,31 @@
+import { useState } from "react";
 import { SafeAreaView, StyleSheet, View, Platform } from "react-native";
 
+import { Article } from "../../types/article";
 import { SearchBar } from "@rneui/base/dist/SearchBar/index";
 import { ArticleList } from "../article-list/article-list";
 
 import { articleListStylesComponentProps } from "../home/home-styles";
 
+import articlesMock from "../../data/articles.json";
+const articles: Article[] = articlesMock;
+
 export function Search() {
-  // TODO: Implement search functionality
-  // TODO: Pass filtered articles to ArticleList component
+  const [searchText, setSearchText] = useState("");
+
+  const updateSearchText = (text: string) => setSearchText(text);
+
+  // TODO: Implement search functionality for different article properties
+  const filteredArticles = articles.filter((article) =>
+    article.name.toLowerCase().includes(searchText.toLowerCase())
+  );
+
   return (
     <SafeAreaView style={searchStyles.container}>
       <View style={{ maxWidth: "87%", minWidth: "87%", paddingTop: "20%" }}>
         <SearchBar
+          value={searchText}
+          onChangeText={updateSearchText}
           placeholder="Buscar artículo..."
           platform={Platform.OS === "ios" ? "ios" : "android"}
           containerStyle={searchStyles.searchbar}
@@ -19,6 +33,7 @@ export function Search() {
         />
       </View>
       <ArticleList
+        data={filteredArticles}
         articleListStyleComponentProps={articleListStylesComponentProps}
       />
     </SafeAreaView>

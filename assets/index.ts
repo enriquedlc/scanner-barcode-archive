@@ -21,6 +21,9 @@ import BLUE_GRADIENT_USER from "./users/blue-gradient-user.png";
 import SPANISH_SPAIN from "./languages/spain.png";
 import ENGLISH_USA from "./languages/usa.png";
 
+// navbar icons
+import FILE_EXPORT from "./navbar/file-export.png";
+
 const LOGOS = {
     SPLASH_LOGO
 } as const;
@@ -50,4 +53,9 @@ const LANGUAGE_FLAGS = {
     ENGLISH_USA
 } as const;
 
-export { LOGOS, TOOLS, LANDING, BARCODE, USER_PROFILE_IMAGES, LANGUAGE_FLAGS }
+const NAVBAR_ICONS = {
+    FILE_EXPORT,
+} as const;
+
+
+export { LOGOS, TOOLS, LANDING, BARCODE, USER_PROFILE_IMAGES, LANGUAGE_FLAGS, NAVBAR_ICONS }
