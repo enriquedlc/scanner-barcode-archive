@@ -1,7 +1,5 @@
-import { StyleSheet, Platform, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { FONT_SIZES } from '../../constants/font';
-
-const WINDOW_HEIGHT = Dimensions.get("window").height;
 
 export const articleInfoModalStyles = StyleSheet.create({
     centeredView: {
@@ -38,7 +36,9 @@ export const articleInfoModalStyles = StyleSheet.create({
         marginTop: 10,
         paddingVertical: 10,
         paddingHorizontal: 20,
+        borderWidth: 2,
         borderRadius: 5,
+        borderColor: 'blue',
     },
     deleteText: {
         color: 'white',
@@ -61,16 +61,9 @@ export const articleInfoModalStyles = StyleSheet.create({
         gap: 20,
     },
     closeModalButton: {
-        position: "absolute",
-        right: "13%",
-        ...Platform.select({
-            ios: {
-                top: WINDOW_HEIGHT - WINDOW_HEIGHT * 0.7,
-            },
-            android: {
-                top: WINDOW_HEIGHT - WINDOW_HEIGHT * 0.715,
-            },
-        }),
+        alignSelf: "flex-end",
+        marginRight: "12%",
+        top: "2.3%",
         zIndex: 10,
         backgroundColor: "red",
         borderRadius: 100,

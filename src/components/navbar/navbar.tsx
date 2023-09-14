@@ -4,14 +4,16 @@ import "react-native-gesture-handler";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome5 } from "@expo/vector-icons";
 
-import { Home } from "../../home/home";
+import { Home } from "../home/home";
 import { ProfileScreen } from "../../screens/profile-screen/profile-screen";
 import { BarcodeScanner } from "../barcode-scanner/barcode-scanner";
+import { Search } from "../search/search";
+import { Export } from "../export/export";
 
 import { useAppNavigation } from "../../hooks/useAppNavigation";
 import { getColor, getWidth } from "../../utils/utils";
 
-import { BARCODE } from "../../../assets";
+import { BARCODE, NAVBAR_ICONS } from "../../../assets";
 import { BLUE_PALLETE } from "../../constants/colors/colors";
 
 const Tab = createBottomTabNavigator();
@@ -77,8 +79,8 @@ export function Navbar() {
         />
 
         <Tab.Screen
-          name={"Search"}
-          component={Home}
+          name={"SEARCH"}
+          component={Search}
           options={{
             tabBarIcon: ({ focused }) => (
               <View
@@ -140,8 +142,8 @@ export function Navbar() {
           })}
         />
         <Tab.Screen
-          name={"Notifications"}
-          component={Home}
+          name={"EXPORT"}
+          component={Export}
           options={{
             tabBarIcon: ({ focused }) => (
               <View
@@ -150,7 +152,14 @@ export function Navbar() {
                   top: 20,
                 }}
               >
-                <FontAwesome5 name="bell" size={20} color={getColor(focused)} />
+                <Image
+                  source={NAVBAR_ICONS.FILE_EXPORT}
+                  style={{
+                    width: 22,
+                    height: 22,
+                    tintColor: getColor(focused),
+                  }}
+                />
               </View>
             ),
           }}
