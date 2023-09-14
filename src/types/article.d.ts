@@ -4,7 +4,7 @@ export interface Article {
     updatedAt: string;
     name: string;
     barcode: string;
-    exhibition: string;
-    shelf: string;
-    warehouse: string;
+    exhibition: number;
+    shelf: number;
+    warehouse: number;
 }
