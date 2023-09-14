@@ -5,5 +5,5 @@ interface ArticleListStylesComponentProps {
 }
 
 export const articleListStylesComponentProps: ArticleListStylesComponentProps = {
-    height: Platform.OS === "ios" ? "85%" : "80%",
+    height: Platform.OS === "ios" ? "92%" : "90%",
 };

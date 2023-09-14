@@ -12,6 +12,7 @@ interface ArticleFormInputProps {
 
 export function ArticleFormTextInput(props: ArticleFormInputProps) {
   const { value, setValue, placeholder } = props;
+  console.log(typeof value);
   return (
     <TextInput
       style={articleFormStyles.textInput}
