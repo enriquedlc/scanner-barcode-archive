@@ -2,20 +2,20 @@ import { useState } from "react";
 import { StyleProp, Text, TextInput, View, ViewStyle } from "react-native";
 
 import { ButtonLanding } from "../button-landing/button-landing";
+import { LoadingLandingModal } from "../modal/loading-landing-modal/loading-landing-modal";
+import { LoginInputFocus } from "../../screens/login-screen";
 
 import { useAppNavigation } from "../../hooks/useAppNavigation";
 import { useInputFocus } from "../../hooks/useLoginInput";
-import { User, useUserAuthStore } from "../../store/user-auth";
+import { useShowToast } from "../../hooks/useShowToast";
+import { LoginUserForm, useUserAuthStore } from "../../store/user-auth";
 
-import { LoginInputFocus } from "../../screens/login-screen";
 import {
   IS_FOCUSED_BORDER_INPUT_COLOR,
   IS_NOT_FOCUSED_BORDER_INPUT_COLOR,
 } from "../../constants/colors/colors";
 
 import { loginStyles } from "./login-styles";
-import { LoadingLandingModal } from "../modal/loading-landing-modal/loading-landing-modal";
-import { useShowToast } from "../../hooks/useShowToast";
 
 type LoginProps = {
   formTitle: string;
@@ -38,7 +38,7 @@ export function Login(props: LoginProps) {
 
   const login = useUserAuthStore((state) => state.login);
 
-  const [userLoginForm, setUserLoginForm] = useState<User>({
+  const [userLoginForm, setUserLoginForm] = useState<LoginUserForm>({
     username: "",
     password: "",
   });
@@ -58,16 +58,16 @@ export function Login(props: LoginProps) {
 
   const handleSubmit = async () => {
     setLoading(true);
-    if (
-      userLoginForm.username === "Test" &&
-      userLoginForm.password === "Test"
-    ) {
-      await login(userLoginForm);
+
+    const response = await login(userLoginForm);
+
+    if (response?.login) {
       setLoading(false);
       showToast("success", "Inicio de sesión exitoso", "Bienvenido! 🎉");
       navigation.navigate("HOME_SCREEN");
       return;
     }
+
     showToast(
       "error",
       "Inicio de sesión fallido",

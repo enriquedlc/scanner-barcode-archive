@@ -1,20 +1,28 @@
 import { create } from 'zustand';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { loginUser } from '../services/user';
 
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+type UserId = `${string}-${string}-${string}-${string}-${string}`
 
-export type User = {
+export interface User {
+    id: UserId;
     username: string;
     password: string;
-};
+    createdAt: Date;
+    updatedAt: Date;
+    email: string;
+}
 
-type State = {
+export type LoginUserForm = Pick<User, 'username' | 'password'>
+
+interface State {
     user: User | null;
-};
+}
 
-type Actions = {
+interface Actions {
     setUser: (user: User) => void;
     getUser: () => User | null;
-    login: (user: User) => Promise<void>;
+    login: (user: LoginUserForm) => ReturnType<typeof loginUser>;
     logout: () => void;
 }
 
@@ -28,11 +36,17 @@ export const useUserAuthStore = create<State & Actions>(
 
         login: async (user) => {
 
-            // Simulate a login request
-            await sleep(2000);
+            const response = await loginUser(user);
 
-            // Set the user
-            set({ user });
+            if (response?.login) {
+                await AsyncStorage.setItem(
+                    'user',
+                    JSON.stringify(response?.user),
+                );
+                set({ user: response?.user });
+            }
+
+            return response;
         },
 
         logout: () => set({ user: null }),
