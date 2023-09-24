@@ -12,10 +12,27 @@ import { RootStackParamList } from "./src/constants/routes";
 import { HomeScreen } from "./src/screens/home-screen";
 
 import Toast from "react-native-toast-message";
+import { User, useUserAuthStore } from "./src/store/user-auth";
+import { useEffect } from "react";
+import { getUserFromAsyncStorage } from "./src/utils/async-storage";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
+  const { user, setUser } = useUserAuthStore((state) => ({
+    user: state.user,
+    setUser: state.setUser,
+  }));
+
+  // TODO: logout and test this
+  useEffect(() => {
+    const getUser = async () => {
+      const user = await getUserFromAsyncStorage();
+      setUser(user as User);
+    };
+    getUser();
+  }, []);
+
   return (
     <SafeAreaProvider>
       <StatusBar barStyle={"dark-content"} />
@@ -23,7 +40,7 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{ animationEnabled: true }}
-          initialRouteName={"LANDING_SCREEN"}
+          initialRouteName={user ? "HOME_SCREEN" : "LANDING_SCREEN"}
         >
           <Stack.Group>
             <Stack.Screen
