@@ -1,6 +1,7 @@
 import { create } from 'zustand';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { loginUser } from '../services/user';
+import { setUserToStorage } from '../utils/async-storage';
 
 type UserId = `${string}-${string}-${string}-${string}-${string}`
 
@@ -39,10 +40,7 @@ export const useUserAuthStore = create<State & Actions>(
             const response = await loginUser(user);
 
             if (response?.login) {
-                await AsyncStorage.setItem(
-                    'user',
-                    JSON.stringify(response?.user),
-                );
+                setUserToStorage(response?.user);
                 set({ user: response?.user });
             }
 

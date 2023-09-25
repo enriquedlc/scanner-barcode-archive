@@ -1,8 +1,11 @@
+import { useEffect } from "react";
 import { StatusBar } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+
+import Toast from "react-native-toast-message";
 
 import { LandingScreen } from "./src/screens/landing-screen";
 import { LoginScreen } from "./src/screens/login-screen";
@@ -10,11 +13,8 @@ import { SignUpScreen } from "./src/screens/signup-screen";
 
 import { RootStackParamList } from "./src/constants/routes";
 import { HomeScreen } from "./src/screens/home-screen";
-
-import Toast from "react-native-toast-message";
 import { User, useUserAuthStore } from "./src/store/user-auth";
-import { useEffect } from "react";
-import { getUserFromAsyncStorage } from "./src/utils/async-storage";
+import { getUserFromStorage } from "./src/utils/async-storage";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -24,10 +24,9 @@ export default function App() {
     setUser: state.setUser,
   }));
 
-  // TODO: logout and test this
   useEffect(() => {
     const getUser = async () => {
-      const user = await getUserFromAsyncStorage();
+      const user = await getUserFromStorage();
       setUser(user as User);
     };
     getUser();
