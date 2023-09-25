@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 import { loginUser } from '../services/user';
-import { setUserToStorage } from '../utils/async-storage';
+import { clearStorage, setUserToStorage } from '../utils/async-storage';
 
 type UserId = `${string}-${string}-${string}-${string}-${string}`
 
@@ -47,6 +47,9 @@ export const useUserAuthStore = create<State & Actions>(
             return response;
         },
 
-        logout: () => set({ user: null }),
+        logout: () => {
+            set({ user: null });
+            clearStorage();
+        },
     }),
 )
