@@ -30,11 +30,10 @@ export function Login(props: LoginProps) {
   const { formTitle } = props;
 
   const { navigation } = useAppNavigation();
+  const { showToast } = useShowToast();
 
   const { handleInputFocus, isFocused } =
     useInputFocus<LoginInputFocus>(INITIAL_LOGIN_FOCUS);
-
-  const { showToast } = useShowToast();
 
   const login = useUserAuthStore((state) => state.login);
 
@@ -53,7 +52,6 @@ export function Login(props: LoginProps) {
 
   const handleChangeText = (text: string, input: keyof LoginInputFocus) => {
     setUserLoginForm({ ...userLoginForm, [input]: text });
-    console.log("user login", userLoginForm);
   };
 
   const handleSubmit = async () => {

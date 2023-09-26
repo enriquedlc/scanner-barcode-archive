@@ -14,11 +14,17 @@ import { LoadingLandingModal } from "../modal/loading-landing-modal/loading-land
 
 import { useAppNavigation } from "../../hooks/useAppNavigation";
 import { useInputFocus } from "../../hooks/useLoginInput";
+import { useShowToast } from "../../hooks/useShowToast";
 
 import {
   IS_FOCUSED_BORDER_INPUT_COLOR,
   IS_NOT_FOCUSED_BORDER_INPUT_COLOR,
 } from "../../constants/colors/colors";
+
+import {
+  PrettifiedRegisterUserForm,
+  useUserAuthStore,
+} from "../../store/user-auth";
 
 import { signUpStyles } from "./signup-styles";
 
@@ -37,10 +43,20 @@ export function SignUp(props: SignUpProps) {
   const { formTitle } = props;
 
   const { navigation } = useAppNavigation();
+  const { showToast } = useShowToast();
 
   const { handleInputFocus, isFocused } =
     useInputFocus<SignUpInputFocus>(INITIAL_SIGNUP_FOCUS);
 
+  const registerUser = useUserAuthStore((state) => state.registerUser);
+
+  const [registerUserForm, setRegisterUserForm] =
+    useState<PrettifiedRegisterUserForm>({
+      email: "",
+      username: "",
+      password: "",
+      confirmPassword: "",
+    });
   const [loading, setLoading] = useState(false);
 
   const inputStyles: StyleProp<ViewStyle> = {
@@ -50,7 +66,28 @@ export function SignUp(props: SignUpProps) {
     borderBottomWidth: 1,
   };
 
-  console.log("isFocused", isFocused);
+  const handleChangeText = (
+    text: string,
+    input: keyof PrettifiedRegisterUserForm
+  ) => {
+    setRegisterUserForm({ ...registerUserForm, [input]: text });
+  };
+
+  const handleSignIn = async () => {
+    setLoading(true);
+
+    const response = await registerUser(registerUserForm);
+
+    if (response?.created) {
+      setLoading(false);
+      showToast("success", "Cuenta creada exitosamente", "Bienvenido! 🎉");
+      navigation.navigate("HOME_SCREEN");
+      return;
+    }
+
+    showToast("error", "Error al crear la cuenta", "Inténtalo de nuevo 😢");
+    setLoading(false);
+  };
 
   return (
     <View style={signUpStyles.signUpContainer}>
@@ -78,6 +115,7 @@ export function SignUp(props: SignUpProps) {
               placeholder="Correo electrónico"
               onFocus={() => handleInputFocus("email", true)}
               onBlur={() => handleInputFocus("email", false)}
+              onChange={(e) => handleChangeText(e.nativeEvent.text, "email")}
             />
           </View>
           <View style={signUpStyles.inputContainer}>
@@ -88,6 +126,7 @@ export function SignUp(props: SignUpProps) {
               placeholder="Nombre de usuario"
               onFocus={() => handleInputFocus("username", true)}
               onBlur={() => handleInputFocus("username", false)}
+              onChange={(e) => handleChangeText(e.nativeEvent.text, "username")}
             />
           </View>
           <View style={signUpStyles.inputContainer}>
@@ -98,6 +137,7 @@ export function SignUp(props: SignUpProps) {
               placeholder="Contraseña"
               onFocus={() => handleInputFocus("password", true)}
               onBlur={() => handleInputFocus("password", false)}
+              onChange={(e) => handleChangeText(e.nativeEvent.text, "password")}
             />
           </View>
           <View style={signUpStyles.inputContainer}>
@@ -111,17 +151,17 @@ export function SignUp(props: SignUpProps) {
               placeholder="Confirmar contraseña"
               onFocus={() => handleInputFocus("confirmPassword", true)}
               onBlur={() => handleInputFocus("confirmPassword", false)}
+              onChange={(e) =>
+                handleChangeText(e.nativeEvent.text, "confirmPassword")
+              }
             />
           </View>
-          <ButtonLanding
-            title="Iniciar sesión"
-            onPress={() => console.log("signup action")}
-          />
+          <ButtonLanding title="Crear cuenta" onPress={handleSignIn} />
           <ButtonLanding
             title="Atrás"
-            onPress={() => navigation.navigate("LANDING_SCREEN")}
             width={120}
             outLined={true}
+            onPress={() => navigation.navigate("LANDING_SCREEN")}
           />
         </View>
       </ScrollView>
