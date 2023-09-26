@@ -36,3 +36,6 @@ yarn-error.*
 
 # vscode
 .vscode/
+
+# credentials
+credentials.ts

@@ -27,7 +27,7 @@ export function Navbar() {
   return (
     <>
       <Tab.Navigator
-        initialRouteName="PROFILE_SCREEN"
+        initialRouteName="HOME"
         screenOptions={{
           headerShown: false,
           tabBarShowLabel: false,
