@@ -1,20 +1,34 @@
 import { create } from 'zustand';
 
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+import { loginUser, registerUser } from '../services/user';
+import { clearStorage, setUserToStorage } from '../utils/async-storage';
 
-export type User = {
+import { Prettify } from '../types/types';
+
+type UserId = `${string}-${string}-${string}-${string}-${string}`
+
+export interface User {
+    id: UserId;
     username: string;
     password: string;
-};
+    createdAt: Date;
+    updatedAt: Date;
+    email: string;
+}
 
-type State = {
+export type LoginUserForm = Pick<User, 'username' | 'password'>
+type RegisterUserForm = Pick<User, 'username' | 'password' | 'email'> & { confirmPassword: string }
+export type PrettifiedRegisterUserForm = Prettify<RegisterUserForm>
+
+interface State {
     user: User | null;
-};
+}
 
-type Actions = {
+interface Actions {
     setUser: (user: User) => void;
     getUser: () => User | null;
-    login: (user: User) => Promise<void>;
+    login: (user: LoginUserForm) => ReturnType<typeof loginUser>;
+    registerUser: (user: PrettifiedRegisterUserForm) => ReturnType<typeof registerUser>;
     logout: () => void;
 }
 
@@ -28,13 +42,32 @@ export const useUserAuthStore = create<State & Actions>(
 
         login: async (user) => {
 
-            // Simulate a login request
-            await sleep(2000);
+            // TODO: refactor this 
+            const response = await loginUser(user);
 
-            // Set the user
-            set({ user });
+            if (response?.login) {
+                setUserToStorage(response?.user);
+                set({ user: response?.user });
+            }
+
+            return response;
         },
 
-        logout: () => set({ user: null }),
+        registerUser: async (user) => {
+            // TODO: refactor this 
+            const response = await registerUser(user);
+
+            if (response?.created) {
+                setUserToStorage(response?.user);
+                set({ user: response?.user });
+            }
+
+            return response;
+        },
+
+        logout: () => {
+            set({ user: null });
+            clearStorage();
+        },
     }),
 )

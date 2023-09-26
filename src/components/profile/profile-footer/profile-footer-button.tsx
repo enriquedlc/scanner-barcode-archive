@@ -12,12 +12,14 @@ interface ProfileFooterButtonProps {
   label: string;
   icon: ImageProps;
   outlineColor: string;
+  action: () => void;
 }
 
 export function ProfileFooterButton(props: ProfileFooterButtonProps) {
   const { label, icon, outlineColor } = props;
   return (
     <TouchableOpacity
+      onPress={props.action}
       style={[profileFooterButtonStyles.button, { borderColor: outlineColor }]}
     >
       <Text style={profileStyles.profileDefaultLabel}>{label}</Text>
