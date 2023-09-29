@@ -3,19 +3,16 @@ import { FlatList, View, DimensionValue, Text, StyleSheet } from "react-native";
 import { ArticleItem } from "../article-item/article-item";
 
 import { Article } from "../../types/article";
-import articlesMock from "../../data/articles.json";
 
 import { articleListStyles } from "./article-list-styles";
 import { FONT_SIZES } from "../../constants/font";
-
-const articles: Article[] = articlesMock;
 
 interface ArticleListProps {
   title?: string;
   articleListStyleComponentProps: {
     height: DimensionValue;
   };
-  data?: Article[];
+  data: Article[];
 }
 
 export function ArticleList(props: ArticleListProps) {
@@ -30,7 +27,7 @@ export function ArticleList(props: ArticleListProps) {
     >
       <Text style={styles.title}>{title}</Text>
       <FlatList
-        data={data || articles}
+        data={data}
         renderItem={({ item }) => <ArticleItem article={item} />}
         keyExtractor={(item) => item.id}
       />

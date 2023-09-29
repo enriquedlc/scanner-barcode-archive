@@ -12,12 +12,16 @@ export function ProfileFooter() {
   return (
     <View style={profileFooterStyles.profileFooterContainer}>
       <ProfileFooterButton
+        // TODO: implement modal with info about the app, its purpose and its
+        // creators and contributors mention to the people who made the icons
         icon={INFO_CIRCLE}
         label="Atribuciones"
         outlineColor={BLUE_PALLETE.BLUE}
         action={() => console.log("atribuciones")}
       />
       <ProfileFooterButton
+        // TODO: implement modal asking for confirmation,
+        // confirming will call logout and rederict to landing page
         icon={LOGOUT}
         label="Cerrar Sesión"
         outlineColor="red"

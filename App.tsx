@@ -24,10 +24,13 @@ export default function App() {
     setUser: state.setUser,
   }));
 
+  // TODO: extract to a custom hook
   useEffect(() => {
     const getUser = async () => {
       const user = await getUserFromStorage();
-      setUser(user as User);
+      if (user) {
+        setUser(user as User);
+      }
     };
     getUser();
   }, []);

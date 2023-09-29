@@ -8,8 +8,6 @@ export const useScanner = () => {
     const [hasPermission, setHasPermission] = useState(false);
     const [scannedBarcode, setScannedBarcode] = useState<ScannedData["data"]>("");
 
-    console.log('has persmission', hasPermission)
-
     useEffect(() => {
         if (hasPermission) return;
         (async () => {

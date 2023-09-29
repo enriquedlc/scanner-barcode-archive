@@ -7,6 +7,7 @@ import { profileStyles } from "../../screens/profile-screen/profile-styles";
 export function UpdateProfile() {
   return (
     <View>
+      {/* TODO: implement patching email password and username */}
       <TouchableOpacity style={updateProfileStyles.updateProfileButton}>
         <Text style={profileStyles.profileDefaultLabel}>Actualizar Perfil</Text>
         <Image style={profileStyles.profileIcon} source={USER_CIRCLE} />
