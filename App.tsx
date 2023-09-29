@@ -27,7 +27,11 @@ export default function App() {
   useEffect(() => {
     const getUser = async () => {
       const user = await getUserFromStorage();
-      setUser(user as User);
+      console.log("user get from storage", user);
+      if (user) {
+        console.log(user.id);
+        setUser(user as User);
+      }
     };
     getUser();
   }, []);

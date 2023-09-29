@@ -1,17 +1,20 @@
-import { Text, View, Image } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { Image, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-import { ThemeSelector } from "../../components/profile/theme-selector";
 import { LanguageSelector } from "../../components/profile/language-selector";
-import { UpdateProfile } from "../../components/profile/update-profile";
 import { ProfileFooter } from "../../components/profile/profile-footer/profile-footer";
+import { ThemeSelector } from "../../components/profile/theme-selector";
+import { UpdateProfile } from "../../components/profile/update-profile";
 
 import { USER_PROFILE_IMAGES } from "../../../assets";
 
+import { useUserAuthStore } from "../../store/user-auth";
 import { profileStyles } from "./profile-styles";
 
 export function ProfileScreen() {
+  const user = useUserAuthStore((state) => state.user);
+
   return (
     <View style={profileStyles.profileContainer}>
       <View style={profileStyles.profileCard}>
@@ -33,7 +36,7 @@ export function ProfileScreen() {
           </View>
         </View>
         <View style={profileStyles.infoLabelContainer}>
-          <Text style={profileStyles.name}>John Doe</Text>
+          <Text style={profileStyles.name}>{user?.username}</Text>
           <Text style={profileStyles.email}>johndoe@gmail.com</Text>
         </View>
       </View>
