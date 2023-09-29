@@ -3,7 +3,6 @@ import { FlatList, View, DimensionValue, Text, StyleSheet } from "react-native";
 import { ArticleItem } from "../article-item/article-item";
 
 import { Article } from "../../types/article";
-import articlesMock from "../../data/articles.json";
 
 import { articleListStyles } from "./article-list-styles";
 import { FONT_SIZES } from "../../constants/font";

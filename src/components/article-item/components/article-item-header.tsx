@@ -6,7 +6,10 @@ import { TOOLS } from "../../../../assets";
 
 import { articleItemStyles } from "../article-item-styles";
 
-export const ArticleItemHeader = ({ name, barcode }: Partial<Article>) => (
+export const ArticleItemHeader = ({
+  articleName,
+  barcode,
+}: Partial<Article>) => (
   <View style={articleItemStyles.articleItemHeader}>
     <Image
       style={articleItemStyles.articleHeaderIcon}
@@ -14,7 +17,7 @@ export const ArticleItemHeader = ({ name, barcode }: Partial<Article>) => (
       alt="tool-box"
     />
     <View style={articleItemStyles.articleItemHeaderDescription}>
-      <Text style={articleItemStyles.articleItemTitle}>{name}</Text>
+      <Text style={articleItemStyles.articleItemTitle}>{articleName}</Text>
       <View style={articleItemStyles.articleItemBarcodeContainer}>
         <Text style={articleItemStyles.articleItemBarcode}>{barcode}</Text>
       </View>

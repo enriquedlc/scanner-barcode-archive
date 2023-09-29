@@ -10,7 +10,7 @@ import { articleItemStyles } from "../article-item/article-item-styles";
 
 interface ArticleModalStatProps {
   label: string;
-  value: string;
+  value: string | number;
 }
 
 function ArticleModalStat(props: ArticleModalStatProps) {
@@ -37,7 +37,7 @@ export function ArticleInfoModalStats({ article }: { article: Article }) {
         </Text>
       </View>
 
-      <ArticleModalStat label="Nombre" value={article.name} />
+      <ArticleModalStat label="Nombre" value={article.articleName} />
       <ArticleModalStat label="Exhibición" value={article.exhibition} />
       <ArticleModalStat label="Estantería" value={article.shelf} />
       <ArticleModalStat label="Almacén" value={article.warehouse} />
