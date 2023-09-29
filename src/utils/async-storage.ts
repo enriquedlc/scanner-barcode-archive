@@ -15,7 +15,8 @@ export const getUserFromStorage = async (): Promise<User | null> => {
 
 export const setUserToStorage = async (user: User) => {
     try {
-        await AsyncStorage.setItem("user", JSON.parse(user as unknown as string));
+        console.log('user', user)
+        await AsyncStorage.setItem("user", JSON.stringify(user as unknown as string));
     } catch (error) {
         console.error("Error setting user to storage", error);
     }
