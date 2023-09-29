@@ -14,7 +14,7 @@ export const loginUser = async (user: LoginUserForm) => {
     try {
         const response = await axios.post<LoginResponse>(
             `${AXIOS_BASE_URL}/users/login/`,
-            user
+            user,
         );
         return response.data;
     } catch (error) {
