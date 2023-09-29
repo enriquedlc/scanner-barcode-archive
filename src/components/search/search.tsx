@@ -1,23 +1,22 @@
 import { useState } from "react";
-import { SafeAreaView, StyleSheet, View, Platform } from "react-native";
+import { Platform, SafeAreaView, StyleSheet, View } from "react-native";
 
-import { Article } from "../../types/article";
-import { SearchBar } from "@rneui/base/dist/SearchBar/index";
+import { useArticlesStore } from "../../store/articles";
 import { ArticleList } from "../article-list/article-list";
+import { SearchBar } from "@rneui/base/dist/SearchBar/index";
 
 import { articleListStylesComponentProps } from "../home/home-styles";
 
-import articlesMock from "../../data/articles.json";
-const articles: Article[] = articlesMock;
-
 export function Search() {
+  const articles = useArticlesStore((state) => state.articles);
+
   const [searchText, setSearchText] = useState("");
 
   const updateSearchText = (text: string) => setSearchText(text);
 
   // TODO: Implement search functionality for different article properties
   const filteredArticles = articles.filter((article) =>
-    article.name.toLowerCase().includes(searchText.toLowerCase())
+    article.articleName.toLowerCase().includes(searchText.toLowerCase())
   );
 
   return (
