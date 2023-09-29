@@ -30,17 +30,19 @@ export function ProfileScreen() {
             }}
           />
           <View style={profileStyles.editPhotoButton}>
-            <TouchableOpacity onPress={() => console.log("hola")}>
+            {/* TODO: implement changing profile photo */}
+            <TouchableOpacity onPress={() => console.log("change photo")}>
               <FontAwesome5 name="camera" size={16} color="white" />
             </TouchableOpacity>
           </View>
         </View>
         <View style={profileStyles.infoLabelContainer}>
           <Text style={profileStyles.name}>{user?.username}</Text>
-          <Text style={profileStyles.email}>johndoe@gmail.com</Text>
+          <Text style={profileStyles.email}>{user?.email} </Text>
         </View>
       </View>
       <Text style={profileStyles.scannedArticlesLabel}>
+        {/* TODO: */}
         Artículos escaneados: 10
       </Text>
       <View style={profileStyles.profileLabelContainer}>

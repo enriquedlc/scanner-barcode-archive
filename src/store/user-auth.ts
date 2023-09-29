@@ -46,7 +46,6 @@ export const useUserAuthStore = create<State & Actions>(
             const response = await loginUser(user);
 
             if (response?.login) {
-                console.log("response?.user", response?.user)
                 setUserToStorage(response?.user);
                 set({ user: response?.user });
             }
