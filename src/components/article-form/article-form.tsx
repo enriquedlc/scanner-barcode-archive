@@ -1,19 +1,20 @@
 import { useState } from "react";
 import { Modal, Text, TouchableOpacity, View } from "react-native";
 
-import { ScannedData } from "../../types/types";
-import { INITIAL_ARTICLE_FORM_STATE } from "../../constants/states/initial-states";
-import { Article } from "../../types/article";
-import { useShowToast } from "../../hooks/useShowToast";
-import { createArticle } from "../../services/articles";
 import { ArticleFormNumberInput } from "./article-form-input/article-form-number-input";
 import { ArticleFormTextInput } from "./article-form-input/article-form-text-input";
 
+import { INITIAL_ARTICLE_FORM_STATE } from "../../constants/states/initial-states";
+import { useAppNavigation } from "../../hooks/useAppNavigation";
+import { useShowToast } from "../../hooks/useShowToast";
+import { createArticle } from "../../services/articles";
+import { useArticlesStore } from "../../store/articles";
+import { User, useUserAuthStore } from "../../store/user-auth";
+import { Article } from "../../types/article";
+import { ScannedData } from "../../types/types";
+
 import { articleInfoModalStyles } from "../article-info-modal/article-info-modal-styles";
 import { articleFormStyles } from "./article-form-styles";
-import { useAppNavigation } from "../../hooks/useAppNavigation";
-import { User, useUserAuthStore } from "../../store/user-auth";
-import { useArticlesStore } from "../../store/articles";
 
 interface ArticleFormProps {
   visible: boolean;
@@ -26,8 +27,6 @@ export function ArticleForm(props: ArticleFormProps) {
   const { visible, scannedBarcode, setScannedBarcode, setShowArticleForm } =
     props;
 
-  console.log("aaaaaaaaaaaaaaaa", scannedBarcode);
-
   const [scannedArticle, setScannedArticle] = useState<Article>(
     INITIAL_ARTICLE_FORM_STATE
   );
@@ -39,7 +38,6 @@ export function ArticleForm(props: ArticleFormProps) {
 
   function handleChangeText<T>(text: T, input: keyof Article) {
     setScannedArticle({ ...scannedArticle, [input]: text });
-    console.log(scannedArticle);
   }
 
   const handleCreateArticle = async (
@@ -49,10 +47,7 @@ export function ArticleForm(props: ArticleFormProps) {
   ) => {
     const response = await createArticle(article, userId, scannedBarcode);
 
-    console.info("fasdfaskjdfklñasdj cJAFKLSDJFALÑKSDJF", response?.created);
     if (response?.created) {
-      console.log("article created");
-      console.log(response);
       showToast("success", "Artículo creado", "");
       setShowArticleForm(false);
       fetchArticles(userId);

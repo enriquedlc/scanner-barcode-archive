@@ -1,11 +1,10 @@
-import { Text, StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+
+import { Article } from "../../types/article";
+import { formatDate } from "../../utils/date";
 
 import { BLUE_PALLETE } from "../../constants/colors/colors";
 import { FONT_SIZES } from "../../constants/font";
-import { formatDate } from "../../utils/date";
-
-import { Article } from "../../types/article";
-
 import { articleItemStyles } from "../article-item/article-item-styles";
 
 interface ArticleModalStatProps {

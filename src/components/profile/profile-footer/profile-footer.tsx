@@ -1,10 +1,11 @@
-import { View, StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import { ProfileFooterButton } from "./profile-footer-button";
 
+import { useUserAuthStore } from "../../../store/user-auth";
+
 import { INFO_CIRCLE, LOGOUT } from "../../../../assets/profile-images";
 import { BLUE_PALLETE } from "../../../constants/colors/colors";
-import { useUserAuthStore } from "../../../store/user-auth";
 
 export function ProfileFooter() {
   const logout = useUserAuthStore((state) => state.logout);

@@ -1,6 +1,7 @@
 import { TextInput, View, Text, StyleSheet } from "react-native";
 
 import { Article } from "../../../types/article";
+
 import { FONT_SIZES } from "../../../constants/font";
 
 interface ArticleFormNumberInputProps {

@@ -2,8 +2,8 @@ import axios from "axios";
 
 import { AXIOS_BASE_URL } from "../../credentials";
 
-import { Article } from "../types/article";
 import { User } from "../store/user-auth";
+import { Article, ArticleFormP } from "../types/article";
 import { ScannedData } from "../types/types";
 
 interface ArticlesResponse {
@@ -28,10 +28,16 @@ interface CreateArticleResponse {
     article: Article;
 }
 
+interface CreateArticleData {
+    userId: User["id"];
+    article: ArticleFormP;
+}
+
 export const createArticle = async (article: Article, userId: User["id"], scannedBarcode: ScannedData["data"]) => {
     try {
         console.info('createArticle', scannedBarcode)
-        const response = await axios.post<CreateArticleResponse>(
+        // rome-ignore lint/suspicious/noExplicitAny: <explanation>
+        const response = await axios.post<CreateArticleResponse, any, CreateArticleData>(
             `${AXIOS_BASE_URL}/articles`,
             {
                 userId: userId,

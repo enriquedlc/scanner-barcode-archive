@@ -1,9 +1,9 @@
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Modal, Text, TouchableOpacity, View } from "react-native";
 
-import { Article } from "../../types/article";
-
 import { ArticleInfoModalStats } from "./article-info-modal-stat";
+
+import { Article } from "../../types/article";
 
 import { articleInfoModalStyles } from "./article-info-modal-styles";
 
