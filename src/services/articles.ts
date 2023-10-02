@@ -24,6 +24,7 @@ export const getArticlesByUserId = async (userId: string) => {
 
 interface CreateArticleResponse {
     message: string;
+    created: boolean;
     article: Article;
 }
 

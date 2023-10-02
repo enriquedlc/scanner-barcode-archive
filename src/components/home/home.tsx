@@ -14,8 +14,9 @@ export function Home() {
   // TODO: implement loading state
   // rome-ignore lint/nursery/useExhaustiveDependencies: <>
   useEffect(() => {
+    console.log("user", user);
     if (user?.id) fetchArticles(user.id);
-  }, []);
+  }, [user]);
 
   return (
     <SafeAreaView style={homeStyles.container}>

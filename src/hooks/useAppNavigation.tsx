@@ -9,5 +9,5 @@ export function useAppNavigation() {
       StackNavigationProp<RootStackParamList, RootStackParamName>
     >();
 
-  return {navigation};
+  return { navigation };
 }

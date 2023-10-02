@@ -13,6 +13,7 @@ import { articleInfoModalStyles } from "../article-info-modal/article-info-modal
 import { articleFormStyles } from "./article-form-styles";
 import { useAppNavigation } from "../../hooks/useAppNavigation";
 import { User, useUserAuthStore } from "../../store/user-auth";
+import { useArticlesStore } from "../../store/articles";
 
 interface ArticleFormProps {
   visible: boolean;
@@ -34,6 +35,7 @@ export function ArticleForm(props: ArticleFormProps) {
   const { showToast } = useShowToast();
   const { navigation } = useAppNavigation();
   const user = useUserAuthStore((state) => state.user);
+  const fetchArticles = useArticlesStore((state) => state.fetchArticles);
 
   function handleChangeText<T>(text: T, input: keyof Article) {
     setScannedArticle({ ...scannedArticle, [input]: text });
@@ -47,12 +49,13 @@ export function ArticleForm(props: ArticleFormProps) {
   ) => {
     const response = await createArticle(article, userId, scannedBarcode);
 
-    console.log(response);
-    if (response) {
+    console.info("fasdfaskjdfklñasdj cJAFKLSDJFALÑKSDJF", response?.created);
+    if (response?.created) {
       console.log("article created");
       console.log(response);
       showToast("success", "Artículo creado", "");
       setShowArticleForm(false);
+      fetchArticles(userId);
       navigation.navigate("HOME_SCREEN");
       return;
     }
