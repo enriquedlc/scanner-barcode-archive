@@ -12,6 +12,7 @@ export function Home() {
   const user = useUserAuthStore((state) => state.user);
 
   // TODO: implement loading state
+  // rome-ignore lint/nursery/useExhaustiveDependencies: <>
   useEffect(() => {
     if (user?.id) fetchArticles(user.id);
   }, []);

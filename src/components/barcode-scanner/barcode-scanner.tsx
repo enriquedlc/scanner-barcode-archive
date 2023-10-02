@@ -11,6 +11,8 @@ export function BarcodeScanner() {
     hasPermission,
     scannedBarcode,
     setScannedBarcode,
+    setShowArticleForm,
+    showArticleForm,
   } = useScanner();
 
   if (!hasPermission) {
@@ -28,7 +30,8 @@ export function BarcodeScanner() {
         onBarCodeScanned={scannedBarcode ? undefined : handleBarCodeScanned}
       />
       <ArticleForm
-        visible={scannedBarcode !== ""}
+        visible={scannedBarcode.length > 0 && showArticleForm}
+        setShowArticleForm={setShowArticleForm}
         scannedBarcode={scannedBarcode}
         setScannedBarcode={setScannedBarcode}
       />
