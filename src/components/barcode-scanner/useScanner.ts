@@ -7,6 +7,7 @@ export const useScanner = () => {
 
     const [hasPermission, setHasPermission] = useState(false);
     const [scannedBarcode, setScannedBarcode] = useState<ScannedData["data"]>("");
+    const [showArticleForm, setShowArticleForm] = useState(false);
 
     useEffect(() => {
         if (hasPermission) return;
@@ -18,10 +19,12 @@ export const useScanner = () => {
 
     const handleBarCodeScanned = (scannedData: ScannedData) => {
         setScannedBarcode(scannedData.data);
+        console.log('handleBarCodeScanned', scannedData.data)
+        setShowArticleForm(true)
 
         console.log(`Type: ${scannedData.type}`);
         console.log(`Data: ${scannedData.data}`);
     };
 
-    return { hasPermission, scannedBarcode, setScannedBarcode, handleBarCodeScanned }
+    return { hasPermission, scannedBarcode, setScannedBarcode, handleBarCodeScanned, setShowArticleForm, showArticleForm }
 }

@@ -7,6 +7,7 @@ export type RootStackParamList = {
     // 
     FEED: undefined;
     BARCODE_SCANNER: undefined;
+    HOME: undefined;
 }
 
 export type RootStackParamName = keyof RootStackParamList;

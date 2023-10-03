@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Platform, SafeAreaView, StyleSheet, View } from "react-native";
 
-import { useArticlesStore } from "../../store/articles";
-import { ArticleList } from "../article-list/article-list";
 import { SearchBar } from "@rneui/base/dist/SearchBar/index";
+import { ArticleList } from "../article-list/article-list";
+
+import { useArticlesStore } from "../../store/articles";
 
 import { articleListStylesComponentProps } from "../home/home-styles";
 
