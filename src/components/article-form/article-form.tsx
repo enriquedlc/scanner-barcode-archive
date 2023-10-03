@@ -1,33 +1,61 @@
 import { useState } from "react";
 import { Modal, Text, TouchableOpacity, View } from "react-native";
 
-import { ScannedData } from "../../types/types";
-import { INITIAL_ARTICLE_FORM_STATE } from "../../constants/states/initial-states";
-import { Article } from "../../types/article";
-
 import { ArticleFormNumberInput } from "./article-form-input/article-form-number-input";
 import { ArticleFormTextInput } from "./article-form-input/article-form-text-input";
+
+import { INITIAL_ARTICLE_FORM_STATE } from "../../constants/states/initial-states";
+import { useAppNavigation } from "../../hooks/useAppNavigation";
+import { useShowToast } from "../../hooks/useShowToast";
+import { createArticle } from "../../services/articles";
+import { useArticlesStore } from "../../store/articles";
+import { User, useUserAuthStore } from "../../store/user-auth";
+import { Article } from "../../types/article";
+import { ScannedData } from "../../types/types";
 
 import { articleInfoModalStyles } from "../article-info-modal/article-info-modal-styles";
 import { articleFormStyles } from "./article-form-styles";
 
 interface ArticleFormProps {
   visible: boolean;
+  setShowArticleForm: (showArticleForm: boolean) => void;
   scannedBarcode: ScannedData["data"];
   setScannedBarcode: (scannedBarcode: ScannedData["data"]) => void;
 }
 
 export function ArticleForm(props: ArticleFormProps) {
-  const { visible, scannedBarcode, setScannedBarcode } = props;
+  const { visible, scannedBarcode, setScannedBarcode, setShowArticleForm } =
+    props;
 
   const [scannedArticle, setScannedArticle] = useState<Article>(
     INITIAL_ARTICLE_FORM_STATE
   );
 
+  const { showToast } = useShowToast();
+  const { navigation } = useAppNavigation();
+  const user = useUserAuthStore((state) => state.user);
+  const fetchArticles = useArticlesStore((state) => state.fetchArticles);
+
   function handleChangeText<T>(text: T, input: keyof Article) {
     setScannedArticle({ ...scannedArticle, [input]: text });
-    console.log(scannedArticle);
   }
+
+  const handleCreateArticle = async (
+    article: Article,
+    userId: User["id"],
+    scannedBarcode: ScannedData["data"]
+  ) => {
+    const response = await createArticle(article, userId, scannedBarcode);
+
+    if (response?.created) {
+      showToast("success", "Artículo creado", "");
+      setShowArticleForm(false);
+      fetchArticles(userId);
+      navigation.navigate("HOME_SCREEN");
+      return;
+    }
+    showToast("error", "Error al crear artículo", "");
+  };
 
   return (
     <Modal animationType="fade" visible={visible}>
@@ -36,8 +64,13 @@ export function ArticleForm(props: ArticleFormProps) {
           <Text style={articleFormStyles.title}>Crear Artículo</Text>
           <Text style={articleFormStyles.title}>{scannedBarcode}</Text>
           <ArticleFormTextInput
-            value={scannedArticle.name}
-            setValue={(text) => handleChangeText(text, "name")}
+            value={scannedArticle.articleName}
+            setValue={(text) => handleChangeText(text, "articleName")}
+            placeholder={"Nombre"}
+          />
+          <ArticleFormTextInput
+            value={scannedArticle.articleName}
+            setValue={(text) => handleChangeText(text, "categoryName")}
             placeholder={"Nombre"}
           />
           <ArticleFormNumberInput
@@ -62,7 +95,11 @@ export function ArticleForm(props: ArticleFormProps) {
           {/* <Text>Elegir icono</Text> */}
           <View style={articleInfoModalStyles.buttonsContainer}>
             <TouchableOpacity
-              onPress={() => console.log("create action!")}
+              onPress={() => {
+                console.log(user?.id);
+                if (user)
+                  handleCreateArticle(scannedArticle, user?.id, scannedBarcode);
+              }}
               style={articleInfoModalStyles.editButton}
             >
               <Text style={articleInfoModalStyles.deleteText}>Crear</Text>

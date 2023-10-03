@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { TouchableOpacity, View } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 
-import { Article } from "../../types/article";
-
 import { ArticleInfoModal } from "../article-info-modal/article-info-modal";
 import { ArticleItemHeader } from "./components/article-item-header";
 import { ArticleItemStats } from "./components/article-item-stats";
+
+import { Article } from "../../types/article";
 
 import { articleItemStyles } from "./article-item-styles";
 

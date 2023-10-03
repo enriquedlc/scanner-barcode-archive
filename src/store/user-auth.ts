@@ -1,9 +1,9 @@
 import { create } from 'zustand';
 
 import { loginUser, registerUser } from '../services/user';
+import { Prettify } from '../types/types';
 import { clearStorage, setUserToStorage } from '../utils/async-storage';
 
-import { Prettify } from '../types/types';
 
 type UserId = `${string}-${string}-${string}-${string}-${string}`
 
