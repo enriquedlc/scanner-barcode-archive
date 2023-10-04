@@ -6,14 +6,16 @@ import { LanguageSelector } from "../../components/profile/language-selector";
 import { ProfileFooter } from "../../components/profile/profile-footer/profile-footer";
 import { ThemeSelector } from "../../components/profile/theme-selector";
 import { UpdateProfile } from "../../components/profile/update-profile";
+import { useArticlesStore } from "../../store/articles";
+import { useUserAuthStore } from "../../store/user-auth";
 
 import { USER_PROFILE_IMAGES } from "../../../assets";
 
-import { useUserAuthStore } from "../../store/user-auth";
 import { profileStyles } from "./profile-styles";
 
 export function ProfileScreen() {
   const user = useUserAuthStore((state) => state.user);
+  const articles = useArticlesStore((state) => state.articles);
 
   return (
     <View style={profileStyles.profileContainer}>
@@ -43,7 +45,7 @@ export function ProfileScreen() {
       </View>
       <Text style={profileStyles.scannedArticlesLabel}>
         {/* TODO: */}
-        Artículos escaneados: 10
+        Artículos escaneados {articles ? articles.length : 0}
       </Text>
       <View style={profileStyles.profileLabelContainer}>
         <ThemeSelector />

@@ -10,6 +10,7 @@ import Toast from "react-native-toast-message";
 import { LandingScreen } from "./src/screens/landing-screen";
 import { LoginScreen } from "./src/screens/login-screen";
 import { SignUpScreen } from "./src/screens/signup-screen";
+import { UserSettings } from "./src/components/user-settings/user-settings";
 
 import { RootStackParamList } from "./src/constants/routes";
 import { HomeScreen } from "./src/screens/home-screen";
@@ -64,6 +65,11 @@ export default function App() {
               options={{ headerShown: false }}
               name={"HOME_SCREEN"}
               component={HomeScreen}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name={"USER_SETTINGS_SCREEN"}
+              component={UserSettings}
             />
           </Stack.Group>
         </Stack.Navigator>
