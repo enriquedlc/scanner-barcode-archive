@@ -10,20 +10,20 @@ import { useArticlesStore } from "../../store/articles";
 import { profileStyles } from "./profile-styles";
 
 export function ProfileScreen() {
-  const articles = useArticlesStore((state) => state.articles);
+	const articles = useArticlesStore((state) => state.articles);
 
-  return (
-    <View style={profileStyles.profileContainer}>
-      <ProfileInfoCard />
-      <Text style={profileStyles.scannedArticlesLabel}>
-        Artículos escaneados {articles ? articles.length : 0}
-      </Text>
-      <View style={profileStyles.profileLabelContainer}>
-        <ThemeSelector />
-        <LanguageSelector />
-        <UpdateProfile />
-        <ProfileFooter />
-      </View>
-    </View>
-  );
+	return (
+		<View style={profileStyles.profileContainer}>
+			<ProfileInfoCard />
+			<Text style={profileStyles.scannedArticlesLabel}>
+				Artículos escaneados {articles ? articles.length : 0}
+			</Text>
+			<View style={profileStyles.profileLabelContainer}>
+				<ThemeSelector />
+				<LanguageSelector />
+				<UpdateProfile />
+				<ProfileFooter />
+			</View>
+		</View>
+	);
 }
