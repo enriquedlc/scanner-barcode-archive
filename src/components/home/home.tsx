@@ -17,7 +17,7 @@ export function Home() {
   useEffect(() => {
     console.log("user", user);
     if (user?.id) fetchArticles(user.id);
-  }, [user]);
+  }, []);
 
   return (
     <SafeAreaView style={homeStyles.container}>

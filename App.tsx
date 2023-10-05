@@ -16,6 +16,7 @@ import { RootStackParamList } from "./src/constants/routes";
 import { HomeScreen } from "./src/screens/home-screen";
 import { User, useUserAuthStore } from "./src/store/user-auth";
 import { getUserFromStorage } from "./src/utils/async-storage";
+import { useArticlesStore } from "./src/store/articles";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -23,6 +24,10 @@ export default function App() {
   const { user, setUser } = useUserAuthStore((state) => ({
     user: state.user,
     setUser: state.setUser,
+  }));
+
+  const { fetchArticles } = useArticlesStore((state) => ({
+    fetchArticles: state.fetchArticles,
   }));
 
   // TODO: extract to a custom hook
@@ -33,7 +38,8 @@ export default function App() {
         setUser(user as User);
       }
     };
-    getUser();
+    console.log("user", user);
+    getUser().then(() => fetchArticles(user?.id as User["id"]));
   }, []);
 
   return (
