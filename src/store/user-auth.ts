@@ -1,73 +1,69 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
-import { loginUser, registerUser } from '../services/user';
-import { Prettify } from '../types/types';
-import { clearStorage, setUserToStorage } from '../utils/async-storage';
+import { loginUser, registerUser } from "../services/user";
+import { Prettify } from "../types/types";
+import { clearStorage, setUserToStorage } from "../utils/async-storage";
 
-
-type UserId = `${string}-${string}-${string}-${string}-${string}`
+type UserId = `${string}-${string}-${string}-${string}-${string}`;
 
 export interface User {
-    id: UserId;
-    username: string;
-    password: string;
-    createdAt: Date;
-    updatedAt: Date;
-    email: string;
+	id: UserId;
+	username: string;
+	password: string;
+	createdAt: Date;
+	updatedAt: Date;
+	email: string;
 }
 
-export type LoginUserForm = Pick<User, 'username' | 'password'>
-type RegisterUserForm = Pick<User, 'username' | 'password' | 'email'> & { confirmPassword: string }
-export type PrettifiedRegisterUserForm = Prettify<RegisterUserForm>
+export type LoginUserForm = Pick<User, "username" | "password">;
+type RegisterUserForm = Pick<User, "username" | "password" | "email"> & { confirmPassword: string };
+export type PrettifiedRegisterUserForm = Prettify<RegisterUserForm>;
 
 interface State {
-    user: User | null;
+	user: User | null;
 }
 
 interface Actions {
-    setUser: (user: User) => void;
-    getUser: () => User | null;
-    login: (user: LoginUserForm) => ReturnType<typeof loginUser>;
-    registerUser: (user: PrettifiedRegisterUserForm) => ReturnType<typeof registerUser>;
-    logout: () => void;
+	setUser: (user: User) => void;
+	getUser: () => User | null;
+	login: (user: LoginUserForm) => ReturnType<typeof loginUser>;
+	registerUser: (user: PrettifiedRegisterUserForm) => ReturnType<typeof registerUser>;
+	logout: () => void;
 }
 
-export const useUserAuthStore = create<State & Actions>(
-    (set, get) => ({
-        user: null,
+export const useUserAuthStore = create<State & Actions>((set, get) => ({
+	user: null,
 
-        setUser: (user) => set({ user }),
+	setUser: (user) => set({ user }),
 
-        getUser: () => get().user,
+	getUser: () => get().user,
 
-        login: async (user) => {
+	login: async (user) => {
+		// TODO: refactor this
+		const response = await loginUser(user);
 
-            // TODO: refactor this 
-            const response = await loginUser(user);
+		if (response?.login) {
+			setUserToStorage(response?.user);
+			set({ user: response?.user });
+		}
 
-            if (response?.login) {
-                setUserToStorage(response?.user);
-                set({ user: response?.user });
-            }
+		return response;
+	},
 
-            return response;
-        },
+	registerUser: async (user) => {
+		// TODO: refactor this
+		const response = await registerUser(user);
 
-        registerUser: async (user) => {
-            // TODO: refactor this 
-            const response = await registerUser(user);
+		if (response?.created) {
+			setUserToStorage(response?.user);
+			set({ user: response?.user });
+		}
 
-            if (response?.created) {
-                setUserToStorage(response?.user);
-                set({ user: response?.user });
-            }
+		return response;
+	},
 
-            return response;
-        },
-
-        logout: () => {
-            set({ user: null });
-            clearStorage();
-        },
-    }),
-)
+	logout: () => {
+		set({ user: null });
+		clearStorage();
+	},
+}));
