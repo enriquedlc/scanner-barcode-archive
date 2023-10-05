@@ -23,7 +23,6 @@ export const useArticlesStore = create<State & Actions>((set, get) => ({
 
 	fetchArticles: async (userId: User["id"]) => {
 		const response = await getArticlesByUserId(userId);
-		console.log(response);
 		set({ articles: response?.articles });
 	},
 }));
