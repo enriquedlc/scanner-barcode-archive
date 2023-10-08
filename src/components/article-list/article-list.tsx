@@ -1,22 +1,22 @@
-import { FlatList, View, DimensionValue, Text, StyleSheet } from "react-native";
+import { DimensionValue, FlatList, StyleSheet, Text, View } from "react-native";
 
 import { ArticleItem } from "../article-item/article-item";
 
 import { Article } from "../../types/article";
 
-import { articleListStyles } from "./article-list-styles";
 import { FONT_SIZES } from "../../constants/font";
+import { articleListStyles } from "./article-list-styles";
 
 interface ArticleListProps {
 	title?: string;
 	articleListStyleComponentProps: {
 		height: DimensionValue;
 	};
-	data: Article[];
+	articles: Article[];
 }
 
 export function ArticleList(props: ArticleListProps) {
-	const { articleListStyleComponentProps, title, data } = props;
+	const { articleListStyleComponentProps, title, articles } = props;
 
 	return (
 		<View
@@ -26,11 +26,15 @@ export function ArticleList(props: ArticleListProps) {
 			}}
 		>
 			<Text style={styles.title}>{title}</Text>
-			<FlatList
-				data={data}
-				renderItem={({ item }) => <ArticleItem article={item} />}
-				keyExtractor={(item) => item.id}
-			/>
+			{articles === undefined || articles.length === 0 ? (
+				<Text>Esto está muy vacío, agrega tu primer artículo!</Text>
+			) : (
+				<FlatList
+					data={articles}
+					renderItem={({ item }) => <ArticleItem article={item} />}
+					keyExtractor={(item) => item.id}
+				/>
+			)}
 		</View>
 	);
 }
