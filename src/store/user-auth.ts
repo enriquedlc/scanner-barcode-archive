@@ -1,40 +1,69 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+import { loginUser, registerUser } from "../services/user";
+import { Prettify } from "../types/types";
+import { clearStorage, setUserToStorage } from "../utils/async-storage";
 
-export type User = {
-    username: string;
-    password: string;
-};
+type UserId = `${string}-${string}-${string}-${string}-${string}`;
 
-type State = {
-    user: User | null;
-};
-
-type Actions = {
-    setUser: (user: User) => void;
-    getUser: () => User | null;
-    login: (user: User) => Promise<void>;
-    logout: () => void;
+export interface User {
+	id: UserId;
+	username: string;
+	password: string;
+	createdAt: Date;
+	updatedAt: Date;
+	email: string;
 }
 
-export const useUserAuthStore = create<State & Actions>(
-    (set, get) => ({
-        user: null,
+export type LoginUserForm = Pick<User, "username" | "password">;
+type RegisterUserForm = Pick<User, "username" | "password" | "email"> & { confirmPassword: string };
+export type PrettifiedRegisterUserForm = Prettify<RegisterUserForm>;
 
-        setUser: (user) => set({ user }),
+interface State {
+	user: User | null;
+}
 
-        getUser: () => get().user,
+interface Actions {
+	setUser: (user: User) => void;
+	getUser: () => User | null;
+	login: (user: LoginUserForm) => ReturnType<typeof loginUser>;
+	registerUser: (user: PrettifiedRegisterUserForm) => ReturnType<typeof registerUser>;
+	logout: () => void;
+}
 
-        login: async (user) => {
+export const useUserAuthStore = create<State & Actions>((set, get) => ({
+	user: null,
 
-            // Simulate a login request
-            await sleep(2000);
+	setUser: (user) => set({ user }),
 
-            // Set the user
-            set({ user });
-        },
+	getUser: () => get().user,
 
-        logout: () => set({ user: null }),
-    }),
-)
+	login: async (user) => {
+		// TODO: refactor this
+		const response = await loginUser(user);
+
+		if (response?.login) {
+			setUserToStorage(response?.user);
+			set({ user: response?.user });
+		}
+
+		return response;
+	},
+
+	registerUser: async (user) => {
+		// TODO: refactor this
+		const response = await registerUser(user);
+
+		if (response?.created) {
+			setUserToStorage(response?.user);
+			set({ user: response?.user });
+		}
+
+		return response;
+	},
+
+	logout: () => {
+		set({ user: null });
+		clearStorage();
+	},
+}));
