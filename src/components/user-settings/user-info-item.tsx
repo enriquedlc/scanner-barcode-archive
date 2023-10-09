@@ -5,6 +5,7 @@ import { useUserAuthStore } from "../../store/user-auth";
 
 import { BLUE_PALLETE } from "../../constants/colors/colors";
 import { FONT_SIZES } from "../../constants/font";
+import { useAppNavigation } from "../../hooks/useAppNavigation";
 
 type UserBasicInformationLabels = "username" | "email" | "password";
 
@@ -15,6 +16,7 @@ interface UserInfoItemProps {
 export function UserInfoItem(props: UserInfoItemProps) {
 	const { label } = props;
 
+	const { navigation } = useAppNavigation();
 	const user = useUserAuthStore((state) => state.user);
 
 	return (
@@ -22,7 +24,10 @@ export function UserInfoItem(props: UserInfoItemProps) {
 			<Text style={styles.userSettingLabel}>
 				{label.charAt(0).toUpperCase() + label.slice(1)}
 			</Text>
-			<TouchableOpacity style={{ alignSelf: "flex-end" }}>
+			<TouchableOpacity
+				style={{ alignSelf: "flex-end" }}
+				onPress={() => navigation.navigate("CHANGE_USER_INFO_SCREEN")}
+			>
 				<Image style={styles.arrowBadgeRight} source={ARROW_BADGE_RIGHT} />
 			</TouchableOpacity>
 			<Text style={styles.userSettingValue}>

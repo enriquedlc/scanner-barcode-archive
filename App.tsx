@@ -16,6 +16,7 @@ import { RootStackParamList } from "./src/constants/routes";
 import { HomeScreen } from "./src/screens/home-screen";
 import { User, useUserAuthStore } from "./src/store/user-auth";
 import { getUserFromStorage } from "./src/utils/async-storage";
+import { ChangeInfo } from "./src/components/user-settings/change-info";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -71,6 +72,11 @@ export default function App() {
 							options={{ headerShown: false }}
 							name={"USER_SETTINGS_SCREEN"}
 							component={UserSettings}
+						/>
+						<Stack.Screen
+							options={{ headerShown: false }}
+							name={"CHANGE_USER_INFO_SCREEN"}
+							component={ChangeInfo}
 						/>
 					</Stack.Group>
 				</Stack.Navigator>

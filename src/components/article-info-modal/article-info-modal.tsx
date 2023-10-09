@@ -1,12 +1,11 @@
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Modal, Text, TouchableOpacity, View } from "react-native";
 
-import { ArticleInfoModalStats } from "./article-info-modal-stat";
-
 import { Article } from "../../types/article";
 
-import { articleInfoModalStyles } from "./article-info-modal-styles";
 import { ReactNode } from "react";
+import { articleInfoModalStyles } from "./article-info-modal-styles";
+import ActionButton from "./action-button";
 
 interface ArticleInfoModalProps {
 	showDeleteArticleModal: boolean;
@@ -16,7 +15,7 @@ interface ArticleInfoModalProps {
 }
 
 export function ArticleInfoModal(props: ArticleInfoModalProps) {
-	const { showDeleteArticleModal, setShowDeleteArticleModal, article, children } = props;
+	const { showDeleteArticleModal, setShowDeleteArticleModal, children } = props;
 
 	return (
 		<Modal animationType="fade" transparent={true} visible={showDeleteArticleModal}>
@@ -34,18 +33,18 @@ export function ArticleInfoModal(props: ArticleInfoModalProps) {
 						{children}
 					</View>
 					<View style={articleInfoModalStyles.buttonsContainer}>
-						<TouchableOpacity
+						<ActionButton
+							text="Editar"
 							onPress={() => console.log("edit action!")}
-							style={articleInfoModalStyles.editButton}
-						>
-							<Text style={articleInfoModalStyles.deleteText}>Editar</Text>
-						</TouchableOpacity>
-						<TouchableOpacity
+							buttonStyle={articleInfoModalStyles.editButton}
+							textStyle={articleInfoModalStyles.deleteText}
+						/>
+						<ActionButton
+							text="Borrar"
 							onPress={() => console.log("delete action!")}
-							style={articleInfoModalStyles.deleteButton}
-						>
-							<Text style={articleInfoModalStyles.cancelText}>Borrar</Text>
-						</TouchableOpacity>
+							buttonStyle={articleInfoModalStyles.deleteButton}
+							textStyle={articleInfoModalStyles.cancelText}
+						/>
 					</View>
 				</View>
 			</View>
