@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 
 import { User } from "../../store/user-auth";
 import { ArrowBack } from "./arrow-back";
@@ -40,5 +40,3 @@ export function ChangeInfo(props: ChangeInfoProps): ReactNode {
 		</View>
 	);
 }
-
-const styles = StyleSheet.create({});

@@ -13,7 +13,7 @@ export function UserSettings() {
 			<UserProfilePhoto />
 			<View style={styles.settingsBasicInformationContainer}>
 				<Text style={styles.basicInformationText}>Basic information</Text>
-				<UserInfoItem label={"username"} />
+				<UserInfoItem label={"username"} params={{ routeParams: "username" }} />
 				<UserInfoItem label={"email"} />
 				<UserInfoItem label={"password"} />
 			</View>
