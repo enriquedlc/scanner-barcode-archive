@@ -5,6 +5,8 @@ export type RootStackParamList = {
 	HOME_SCREEN: undefined;
 	PROFILE_SCREEN: undefined;
 	USER_SETTINGS_SCREEN: undefined;
+	// user settings
+	CHANGE_USER_INFO_SCREEN: undefined;
 	//
 	FEED: undefined;
 	BARCODE_SCANNER: undefined;
