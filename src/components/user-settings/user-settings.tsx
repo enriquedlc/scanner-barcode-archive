@@ -5,6 +5,8 @@ import { UserProfilePhoto } from "../profile/profile-info-card";
 import { ArrowBack } from "./arrow-back";
 import { UserInfoItem } from "./user-info-item";
 
+// TODO: add params to differentiating between username, email and password components
+
 export function UserSettings() {
 	return (
 		<View>
@@ -13,7 +15,7 @@ export function UserSettings() {
 			<UserProfilePhoto />
 			<View style={styles.settingsBasicInformationContainer}>
 				<Text style={styles.basicInformationText}>Basic information</Text>
-				<UserInfoItem label={"username"} params={{ routeParams: "username" }} />
+				{/* <UserInfoItem label={"username"} params={{ routeParams: "username" }} /> */}
 				<UserInfoItem label={"email"} />
 				<UserInfoItem label={"password"} />
 			</View>
