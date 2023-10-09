@@ -33,7 +33,7 @@ export function Search() {
 				/>
 			</View>
 			<ArticleList
-				data={filteredArticles}
+				articles={filteredArticles}
 				articleListStyleComponentProps={articleListStylesComponentProps}
 			/>
 		</SafeAreaView>

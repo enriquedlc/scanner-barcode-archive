@@ -13,18 +13,17 @@ export function Home() {
 	const user = useUserAuthStore((state) => state.user);
 
 	// TODO: implement loading state
-	// rome-ignore lint/nursery/useExhaustiveDependencies: <>
+	// biome-ignore lint/nursery/useExhaustiveDependencies: <>
 	useEffect(() => {
-		console.log("user", user);
 		if (user?.id) fetchArticles(user.id);
-	}, []);
+	}, [user]);
 
 	return (
 		<SafeAreaView style={homeStyles.container}>
 			<ArticleList
 				title="Últimos artículos añadidos"
 				articleListStyleComponentProps={articleListStylesComponentProps}
-				data={articles}
+				articles={articles}
 			/>
 		</SafeAreaView>
 	);
