@@ -1,20 +1,44 @@
-import { SafeAreaView, StyleSheet, Text } from "react-native";
+import { ReactNode } from "react";
+import { StyleSheet, Text, View } from "react-native";
 
-type ChangeInfoProps = {};
+import { User } from "../../store/user-auth";
+import { ArrowBack } from "./arrow-back";
 
-export function ChangeInfo() {
+type ChangeInfoProps = {
+	userInfoToChange: keyof User;
+};
+
+export function ChangeInfo(props: ChangeInfoProps): ReactNode {
+	const { userInfoToChange } = props;
+
+	let infoToChange: ReactNode;
+
+	switch (userInfoToChange) {
+		case "username": {
+			infoToChange = <Text>Change username</Text>;
+			break;
+		}
+		case "email": {
+			infoToChange = <Text>Change email</Text>;
+			break;
+		}
+		case "password": {
+			infoToChange = <Text>Change password</Text>;
+			break;
+		}
+		default: {
+			infoToChange = <Text>Change user info</Text>;
+			break;
+		}
+	}
+
 	return (
-		<SafeAreaView style={styles.changeInfoContainer}>
-			<Text>Change info</Text>
-		</SafeAreaView>
+		<View>
+			<ArrowBack />
+			<Text>Change user info</Text>
+			{infoToChange}
+		</View>
 	);
 }
 
-const styles = StyleSheet.create({
-	changeInfoContainer: {
-		flex: 1,
-		justifyContent: "flex-start",
-		alignItems: "center",
-		marginTop: 50,
-	},
-});
+const styles = StyleSheet.create({});

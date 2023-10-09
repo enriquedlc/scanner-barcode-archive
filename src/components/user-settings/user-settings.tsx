@@ -1,23 +1,14 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
-import { useAppNavigation } from "../../hooks/useAppNavigation";
-
-import { ARROW_BACK } from "../../../assets/profile-images";
-import { BLUE_PALLETE } from "../../constants/colors/colors";
 import { FONT_SIZES } from "../../constants/font";
 import { UserProfilePhoto } from "../profile/profile-info-card";
+import { ArrowBack } from "./arrow-back";
 import { UserInfoItem } from "./user-info-item";
 
 export function UserSettings() {
-	const { navigation } = useAppNavigation();
-
 	return (
 		<View>
-			<View style={styles.arrowBackContainer}>
-				<TouchableOpacity onPress={() => navigation.goBack()}>
-					<Image style={styles.arrowBack} source={ARROW_BACK} />
-				</TouchableOpacity>
-			</View>
+			<ArrowBack />
 			<Text style={styles.accountSettingsText}>Account Information</Text>
 			<UserProfilePhoto />
 			<View style={styles.settingsBasicInformationContainer}>
@@ -31,22 +22,6 @@ export function UserSettings() {
 }
 
 const styles = StyleSheet.create({
-	arrowBackContainer: {
-		display: "flex",
-		justifyContent: "center",
-		alignItems: "center",
-		backgroundColor: BLUE_PALLETE.BLUE,
-		margin: 10,
-		borderRadius: 50,
-		height: 40,
-		width: 40,
-	},
-	arrowBack: {
-		tintColor: "white",
-		objectFit: "contain",
-		width: 35,
-		height: 35,
-	},
 	accountSettingsText: {
 		fontSize: FONT_SIZES.EXTRA_EXTRA_LARGE,
 		fontWeight: "bold",

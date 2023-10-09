@@ -12,11 +12,11 @@ import { LandingScreen } from "./src/screens/landing-screen";
 import { LoginScreen } from "./src/screens/login-screen";
 import { SignUpScreen } from "./src/screens/signup-screen";
 
+import { ChangeInfo } from "./src/components/user-settings/change-info";
 import { RootStackParamList } from "./src/constants/routes";
 import { HomeScreen } from "./src/screens/home-screen";
 import { User, useUserAuthStore } from "./src/store/user-auth";
 import { getUserFromStorage } from "./src/utils/async-storage";
-import { ChangeInfo } from "./src/components/user-settings/change-info";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -76,6 +76,7 @@ export default function App() {
 						<Stack.Screen
 							options={{ headerShown: false }}
 							name={"CHANGE_USER_INFO_SCREEN"}
+							// @ts-ignore
 							component={ChangeInfo}
 						/>
 					</Stack.Group>

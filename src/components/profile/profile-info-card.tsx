@@ -9,16 +9,16 @@ import { profileStyles } from "../../screens/profile-screen/profile-styles";
 
 export const UserProfilePhoto = () => (
 	<View style={profileStyles.photo}>
-			<Image
-				source={USER_PROFILE_IMAGES.BLUE_GRADIENT_USER}
-				alt="user photo"
-				style={{
-					width: 50,
-					height: 50,
-					objectFit: "contain",
-					tintColor: "black",
-				}}
-			/>
+		<Image
+			source={USER_PROFILE_IMAGES.BLUE_GRADIENT_USER}
+			alt="user photo"
+			style={{
+				width: 50,
+				height: 50,
+				objectFit: "contain",
+				tintColor: "black",
+			}}
+		/>
 		<View style={profileStyles.editPhotoButton}>
 			{/* TODO: implement changing profile photo */}
 			<TouchableOpacity onPress={() => console.log("change photo")}>
@@ -26,14 +26,14 @@ export const UserProfilePhoto = () => (
 			</TouchableOpacity>
 		</View>
 	</View>
-)
+);
 
 export function ProfileInfoCard() {
 	const user = useUserAuthStore((state) => state.user);
 
 	return (
 		<View style={profileStyles.profileCard}>
-			<UserProfilePhoto/>
+			<UserProfilePhoto />
 			<View style={profileStyles.infoLabelContainer}>
 				<Text style={profileStyles.name}>{user?.username}</Text>
 				<Text style={profileStyles.email}>{user?.email} </Text>
