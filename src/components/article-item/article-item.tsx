@@ -1,6 +1,6 @@
+import { FontAwesome5 } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { TouchableOpacity, View } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
 
 import { ArticleInfoModal } from "../article-info-modal/article-info-modal";
 import { ArticleItemHeader } from "./components/article-item-header";
@@ -8,6 +8,7 @@ import { ArticleItemStats } from "./components/article-item-stats";
 
 import { Article } from "../../types/article";
 
+import { ArticleInfoModalStats } from "../article-info-modal/article-info-modal-stat";
 import { articleItemStyles } from "./article-item-styles";
 
 interface ArticleItemProps {
@@ -33,7 +34,9 @@ export const ArticleItem: React.FC<ArticleItemProps> = React.memo(({ article }) 
 				showDeleteArticleModal={showDeleteArticleModal}
 				setShowDeleteArticleModal={setShowDeleteArticleModal}
 				article={article}
-			/>
+			>
+				<ArticleInfoModalStats article={article} />
+			</ArticleInfoModal>
 		</View>
 	);
 });

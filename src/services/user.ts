@@ -33,3 +33,23 @@ export const registerUser = async (user: PrettifiedRegisterUserForm) => {
 		console.error(error);
 	}
 };
+
+interface ChangeSpecificUserFieldResponse {
+	message: string;
+	changed: boolean;
+	user: User;
+}
+
+export const changeUserName = async (userName: User["username"], userId: User["id"]) => {
+	try {
+		const response = await axios.patch<ChangeSpecificUserFieldResponse>(
+			`${AXIOS_BASE_URL}/users/username/${userId}`,
+			{
+				username: userName,
+			},
+		);
+		return response.data;
+	} catch (error) {
+		console.error(error);
+	}
+};

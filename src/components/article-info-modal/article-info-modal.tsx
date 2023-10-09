@@ -6,15 +6,17 @@ import { ArticleInfoModalStats } from "./article-info-modal-stat";
 import { Article } from "../../types/article";
 
 import { articleInfoModalStyles } from "./article-info-modal-styles";
+import { ReactNode } from "react";
 
 interface ArticleInfoModalProps {
 	showDeleteArticleModal: boolean;
 	setShowDeleteArticleModal: (showDeleteArticleModal: boolean) => void;
 	article: Article;
+	children: ReactNode;
 }
 
 export function ArticleInfoModal(props: ArticleInfoModalProps) {
-	const { showDeleteArticleModal, setShowDeleteArticleModal, article } = props;
+	const { showDeleteArticleModal, setShowDeleteArticleModal, article, children } = props;
 
 	return (
 		<Modal animationType="fade" transparent={true} visible={showDeleteArticleModal}>
@@ -29,7 +31,7 @@ export function ArticleInfoModal(props: ArticleInfoModalProps) {
 				<View style={articleInfoModalStyles.modalView}>
 					<View style={{ gap: 5, marginBottom: 15 }}>
 						<Text style={articleInfoModalStyles.title}>Información del artículo</Text>
-						<ArticleInfoModalStats article={article} />
+						{children}
 					</View>
 					<View style={articleInfoModalStyles.buttonsContainer}>
 						<TouchableOpacity
