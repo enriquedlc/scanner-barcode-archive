@@ -7,7 +7,7 @@ import { BLUE_PALLETE } from "../../constants/colors/colors";
 import { FONT_SIZES } from "../../constants/font";
 import { useAppNavigation } from "../../hooks/useAppNavigation";
 
-type UserBasicInformationLabels = "username" | "email" | "password";
+export type UserBasicInformationLabels = "username" | "email" | "password";
 
 interface UserInfoItemProps {
 	label: UserBasicInformationLabels;
@@ -26,7 +26,9 @@ export function UserInfoItem(props: UserInfoItemProps) {
 			</Text>
 			<TouchableOpacity
 				style={{ alignSelf: "flex-end" }}
-				onPress={() => navigation.navigate("CHANGE_USER_INFO_SCREEN")}
+				onPress={() =>
+					navigation.navigate("CHANGE_USER_INFO_SCREEN", { routeparams: label })
+				}
 			>
 				<Image style={styles.arrowBadgeRight} source={ARROW_BADGE_RIGHT} />
 			</TouchableOpacity>
