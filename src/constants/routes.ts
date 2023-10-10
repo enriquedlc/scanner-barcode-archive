@@ -1,7 +1,7 @@
 import { UserBasicInformationLabels } from "../components/user-settings/user-info-item";
 
 interface ChangeUserInfoScreenParams {
-	routeparams: UserBasicInformationLabels;
+	userInfoToChange: UserBasicInformationLabels;
 }
 
 export type RootStackParamList = {

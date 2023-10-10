@@ -15,7 +15,6 @@ interface UserInfoItemProps {
 
 export function UserInfoItem(props: UserInfoItemProps) {
 	const { label } = props;
-
 	const { navigation } = useAppNavigation();
 	const user = useUserAuthStore((state) => state.user);
 
@@ -26,9 +25,9 @@ export function UserInfoItem(props: UserInfoItemProps) {
 			</Text>
 			<TouchableOpacity
 				style={{ alignSelf: "flex-end" }}
-				onPress={() =>
-					navigation.navigate("CHANGE_USER_INFO_SCREEN", { routeparams: label })
-				}
+				onPress={() => {
+					navigation.navigate("CHANGE_USER_INFO_SCREEN", { userInfoToChange: label });
+				}}
 			>
 				<Image style={styles.arrowBadgeRight} source={ARROW_BADGE_RIGHT} />
 			</TouchableOpacity>

@@ -5,11 +5,15 @@ import { User } from "../../store/user-auth";
 import { ArrowBack } from "./arrow-back";
 
 type ChangeInfoProps = {
-	userInfoToChange: keyof User;
+	route: {
+		params: {
+			userInfoToChange: keyof User;
+		};
+	};
 };
 
 export function ChangeInfo(props: ChangeInfoProps): ReactNode {
-	const { userInfoToChange } = props;
+	const { userInfoToChange } = props.route.params;
 
 	let infoToChange: ReactNode;
 
