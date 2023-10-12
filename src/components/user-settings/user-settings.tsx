@@ -5,9 +5,6 @@ import { UserProfilePhoto } from "../profile/profile-info-card";
 import { ArrowBack } from "./arrow-back";
 import { UserInfoItem } from "./user-info-item";
 
-// TODO: add params to differentiating between username, email and password components
-//
-
 export function UserSettings() {
 	return (
 		<View>

@@ -39,7 +39,6 @@ export const useUserAuthStore = create<State & Actions>((set, get) => ({
 	getUser: () => get().user,
 
 	login: async (user) => {
-		// TODO: refactor this
 		const response = await loginUser(user);
 
 		if (response?.login) {
@@ -51,7 +50,6 @@ export const useUserAuthStore = create<State & Actions>((set, get) => ({
 	},
 
 	registerUser: async (user) => {
-		// TODO: refactor this
 		const response = await registerUser(user);
 
 		if (response?.created) {

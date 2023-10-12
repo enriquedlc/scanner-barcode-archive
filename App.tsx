@@ -7,12 +7,12 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import Toast from "react-native-toast-message";
 
+import { ChangeInfo } from "./src/components/user-settings/change-info";
 import { UserSettings } from "./src/components/user-settings/user-settings";
 import { LandingScreen } from "./src/screens/landing-screen";
 import { LoginScreen } from "./src/screens/login-screen";
 import { SignUpScreen } from "./src/screens/signup-screen";
 
-import { ChangeInfo } from "./src/components/user-settings/change-info";
 import { RootStackParamList } from "./src/constants/routes";
 import { HomeScreen } from "./src/screens/home-screen";
 import { User, useUserAuthStore } from "./src/store/user-auth";
@@ -41,7 +41,6 @@ export default function App() {
 	return (
 		<SafeAreaProvider>
 			<StatusBar barStyle={"dark-content"} />
-
 			<NavigationContainer>
 				<Stack.Navigator
 					screenOptions={{ animationEnabled: true }}
@@ -76,7 +75,6 @@ export default function App() {
 						<Stack.Screen
 							options={{ headerShown: false }}
 							name={"CHANGE_USER_INFO_SCREEN"}
-							// @ts-ignore
 							component={ChangeInfo}
 						/>
 					</Stack.Group>

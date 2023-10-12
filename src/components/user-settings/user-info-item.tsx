@@ -6,6 +6,7 @@ import { useUserAuthStore } from "../../store/user-auth";
 import { BLUE_PALLETE } from "../../constants/colors/colors";
 import { FONT_SIZES } from "../../constants/font";
 import { useAppNavigation } from "../../hooks/useAppNavigation";
+import { capitalize } from "../../utils/general";
 
 export type UserBasicInformationLabels = "username" | "email" | "password";
 
@@ -20,9 +21,7 @@ export function UserInfoItem(props: UserInfoItemProps) {
 
 	return (
 		<View style={styles.basicInformationItem}>
-			<Text style={styles.userSettingLabel}>
-				{label.charAt(0).toUpperCase() + label.slice(1)}
-			</Text>
+			<Text style={styles.userSettingLabel}>{capitalize(label)}</Text>
 			<TouchableOpacity
 				style={{ alignSelf: "flex-end" }}
 				onPress={() => {
@@ -44,7 +43,7 @@ const styles = StyleSheet.create({
 	basicInformationItem: {
 		display: "flex",
 		alignItems: "flex-start",
-		width: "80%",
+		width: "85%",
 		marginBottom: 40,
 		borderBottomColor: BLUE_PALLETE.GRAY,
 		borderBottomWidth: 1,

@@ -1,7 +1,9 @@
 import { ReactNode } from "react";
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
+import { FONT_SIZES } from "../../constants/font";
 import { User } from "../../store/user-auth";
+import { capitalize } from "../../utils/general";
 import { ArrowBack } from "./arrow-back";
 
 type ChangeInfoProps = {
@@ -12,7 +14,7 @@ type ChangeInfoProps = {
 	};
 };
 
-export function ChangeInfo(props: ChangeInfoProps): ReactNode {
+export function ChangeInfo(props: ChangeInfoProps) {
 	const { userInfoToChange } = props.route.params;
 
 	let infoToChange: ReactNode;
@@ -39,8 +41,37 @@ export function ChangeInfo(props: ChangeInfoProps): ReactNode {
 	return (
 		<View>
 			<ArrowBack />
-			<Text>Change user info</Text>
-			{infoToChange}
+			<View style={styles.headerContainer}>
+				<Text style={styles.headerTitleText}>Article Scanner Account</Text>
+			</View>
+			<View style={styles.infoToChangeContainer}>
+				<Text style={styles.infoToChange}> {capitalize(userInfoToChange)} </Text>
+				{infoToChange}
+			</View>
 		</View>
 	);
 }
+
+const styles = StyleSheet.create({
+	headerContainer: {
+		display: "flex",
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "center",
+	},
+	headerTitleText: {
+		fontSize: FONT_SIZES.MEDIUM,
+		paddingBottom: 40,
+		fontWeight: "500",
+		alignSelf: "center",
+	},
+	infoToChangeContainer: {
+		display: "flex",
+		alignItems: "flex-start",
+		paddingLeft: 15,
+	},
+	infoToChange: {
+		fontSize: FONT_SIZES.EXTRA_LARGE,
+		fontWeight: "bold",
+	},
+});
