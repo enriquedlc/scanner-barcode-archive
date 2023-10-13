@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 import { changeInfoDescription } from "../../../constants/lang/change-user-info-description";
 import { UserBasicInformationLabels } from "../user-info-item";

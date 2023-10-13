@@ -36,7 +36,7 @@ export const registerUser = async (user: PrettifiedRegisterUserForm) => {
 
 interface ChangeSpecificUserFieldResponse {
 	message: string;
-	changed: boolean;
+	updated: boolean;
 	user: User;
 }
 

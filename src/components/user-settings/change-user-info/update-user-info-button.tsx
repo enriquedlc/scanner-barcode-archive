@@ -3,10 +3,16 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { BLUE_PALLETE } from "../../../constants/colors/colors";
 import { FONT_SIZES } from "../../../constants/font";
 
-export function UpdateUserInfoButton() {
+interface UpdateUserInfoButtonProps {
+	action: () => void;
+}
+
+export function UpdateUserInfoButton(props: UpdateUserInfoButtonProps) {
+	const { action } = props;
+
 	return (
-		<TouchableOpacity style={styles.updateUserInfoButton}>
-			<Text style={styles.updateUserInfoButtonText}>Save</Text>
+		<TouchableOpacity style={styles.updateUserInfoButton} onPress={action}>
+			<Text style={styles.updateUserInfoButtonText}>Update</Text>
 		</TouchableOpacity>
 	);
 }

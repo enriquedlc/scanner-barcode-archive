@@ -3,5 +3,5 @@ export const capitalize = (str: string) => {
 };
 
 export const hidePassword = (str: string) => {
-	return str.replace(/./g, "*").slice(0, 12);
+	return new Array(str?.length).fill("*").join("").substring(0, 12);
 };

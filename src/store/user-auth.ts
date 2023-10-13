@@ -34,7 +34,10 @@ interface Actions {
 export const useUserAuthStore = create<State & Actions>((set, get) => ({
 	user: null,
 
-	setUser: (user) => set({ user }),
+	setUser: (user) => {
+		set({ user });
+		setUserToStorage(user);
+	},
 
 	getUser: () => get().user,
 

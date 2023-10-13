@@ -1,18 +1,29 @@
 import { useState } from "react";
 import { Text, TextInput } from "react-native";
 
-import { useUserAuthStore } from "../../../../store/user-auth";
+import { User, useUserAuthStore } from "../../../../store/user-auth";
 import { UpdateUserInfoButton } from "../update-user-info-button";
 
+import { useShowToast } from "../../../../hooks/useShowToast";
+import { changeUserName } from "../../../../services/user";
 import { changeUserInfoStyles } from "./styles/change-user-info-styles";
 
 export function ChangeUsernameInput() {
-	const user = useUserAuthStore((state) => state.user);
+	const { user, setUser } = useUserAuthStore((state) => state);
+	const { showToast } = useShowToast();
 
 	const [username, setUsername] = useState(user?.username as unknown as string);
 
 	const handleUsernameChange = (text: string) => {
 		setUsername(text);
+	};
+
+	const updateUserName = async () => {
+		const response = await changeUserName(username, user?.id as User["id"]);
+		if (response?.updated) {
+			setUser({ ...(response.user as User), password: user?.password as string });
+			showToast("success", "Username updated successfully", "");
+		}
 	};
 
 	return (
@@ -24,7 +35,7 @@ export function ChangeUsernameInput() {
 				onChangeText={handleUsernameChange}
 				value={username}
 			/>
-			<UpdateUserInfoButton />
+			<UpdateUserInfoButton action={updateUserName} />
 		</>
 	);
 }
