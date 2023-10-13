@@ -7,7 +7,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import Toast from "react-native-toast-message";
 
-import { ChangeInfo } from "./src/components/user-settings/change-info";
+import { ChangeInfo } from "./src/components/user-settings/change-user-info/change-info";
 import { UserSettings } from "./src/components/user-settings/user-settings";
 import { LandingScreen } from "./src/screens/landing-screen";
 import { LoginScreen } from "./src/screens/login-screen";

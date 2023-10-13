@@ -1,17 +1,18 @@
-import { ReactNode } from "react";
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
-import { User, useUserAuthStore } from "../../store/user-auth";
-import { capitalize, hidePassword } from "../../utils/general";
-import { ArrowBack } from "./arrow-back";
+import { useUserAuthStore } from "../../../store/user-auth";
+import { capitalize, hidePassword } from "../../../utils/general";
+import { ArrowBack } from "../arrow-back";
 
-import { BLUE_PALLETE } from "../../constants/colors/colors";
-import { FONT_SIZES } from "../../constants/font";
+import { BLUE_PALLETE } from "../../../constants/colors/colors";
+import { FONT_SIZES } from "../../../constants/font";
+import { changeInfoDescription } from "../../../constants/lang/change-user-info-description";
+import { UserBasicInformationLabels } from "../user-info-item";
 
 type ChangeInfoProps = {
 	route: {
 		params: {
-			userInfoToChange: keyof User;
+			userInfoToChange: UserBasicInformationLabels;
 		};
 	};
 };
@@ -19,39 +20,6 @@ type ChangeInfoProps = {
 export function ChangeInfo(props: ChangeInfoProps) {
 	const { userInfoToChange } = props.route.params;
 	const user = useUserAuthStore((state) => state.user);
-
-	let infoToChangeDescription: ReactNode;
-
-	switch (userInfoToChange) {
-		case "username": {
-			infoToChangeDescription = (
-				<Text>
-					This is your username, this will be displayed in your profile and will use it to
-					login.
-				</Text>
-			);
-			break;
-		}
-		case "email": {
-			infoToChangeDescription = (
-				<Text>This is your email, this will be displayed in your profile.</Text>
-			);
-			break;
-		}
-		case "password": {
-			infoToChangeDescription = (
-				<Text>
-					Your password is encrypted, and we don't have access to it, but you can change
-					it whenever you want. It must be at least 8 characters long.
-				</Text>
-			);
-			break;
-		}
-		default: {
-			infoToChangeDescription = <Text>Change user info</Text>;
-			break;
-		}
-	}
 
 	return (
 		<View>
@@ -61,7 +29,9 @@ export function ChangeInfo(props: ChangeInfoProps) {
 			</View>
 			<View style={styles.infoToChangeContainer}>
 				<Text style={styles.infoToChange}>{capitalize(userInfoToChange)}</Text>
-				<Text style={styles.infoToChangeDescription}>{infoToChangeDescription}</Text>
+				<Text style={styles.infoToChangeDescription}>
+					{changeInfoDescription[userInfoToChange]}
+				</Text>
 
 				{userInfoToChange === "password" ? (
 					<>
