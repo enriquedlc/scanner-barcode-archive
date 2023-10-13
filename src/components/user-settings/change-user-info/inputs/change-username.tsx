@@ -5,7 +5,7 @@ import { User, useUserAuthStore } from "../../../../store/user-auth";
 import { UpdateUserInfoButton } from "../update-user-info-button";
 
 import { useShowToast } from "../../../../hooks/useShowToast";
-import { changeUserName } from "../../../../services/user";
+import { changeUsername } from "../../../../services/user";
 import { changeUserInfoStyles } from "./styles/change-user-info-styles";
 
 export function ChangeUsernameInput() {
@@ -19,10 +19,10 @@ export function ChangeUsernameInput() {
 	};
 
 	const updateUserName = async () => {
-		const response = await changeUserName(username, user?.id as User["id"]);
+		const response = await changeUsername(username, user?.id as User["id"]);
 		if (response?.updated) {
 			setUser({ ...(response.user as User), password: user?.password as string });
-			showToast("success", "Username updated successfully", "");
+			showToast("success", "Username updated successfully 👍", "");
 		}
 	};
 

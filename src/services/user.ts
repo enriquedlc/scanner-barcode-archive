@@ -40,12 +40,26 @@ interface ChangeSpecificUserFieldResponse {
 	user: User;
 }
 
-export const changeUserName = async (userName: User["username"], userId: User["id"]) => {
+export const changeUsername = async (userName: User["username"], userId: User["id"]) => {
 	try {
 		const response = await axios.patch<ChangeSpecificUserFieldResponse>(
 			`${AXIOS_BASE_URL}/users/username/${userId}`,
 			{
 				username: userName,
+			},
+		);
+		return response.data;
+	} catch (error) {
+		console.error(error);
+	}
+};
+
+export const changeUserEmail = async (email: User["email"], userId: User["id"]) => {
+	try {
+		const response = await axios.patch<ChangeSpecificUserFieldResponse>(
+			`${AXIOS_BASE_URL}/users/email/${userId}`,
+			{
+				email,
 			},
 		);
 		return response.data;
