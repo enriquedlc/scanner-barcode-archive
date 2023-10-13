@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Modal, Text, TouchableOpacity, View } from "react-native";
+import { Modal, ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 import { ArticleFormNumberInput } from "./article-form-input/article-form-number-input";
 import { ArticleFormTextInput } from "./article-form-input/article-form-text-input";
@@ -42,13 +42,15 @@ export function ArticleForm(props: ArticleFormProps) {
 		userId: User["id"],
 		scannedBarcode: ScannedData["data"],
 	) => {
+		console.log(article);
 		const response = await createArticle(article, userId, scannedBarcode);
-
+		console.log(response);
 		if (response?.created) {
-			showToast("success", "Artículo creado", "");
+			showToast("success", "Artículo creado", "Artículo creado con éxito!📦");
 			setShowArticleForm(false);
 			fetchArticles(userId);
 			navigation.navigate("HOME_SCREEN");
+			setScannedBarcode("");
 			return;
 		}
 		showToast("error", "Error al crear artículo", "");
@@ -60,57 +62,63 @@ export function ArticleForm(props: ArticleFormProps) {
 				<View style={articleFormStyles.modalView}>
 					<Text style={articleFormStyles.title}>Crear Artículo</Text>
 					<Text style={articleFormStyles.title}>{scannedBarcode}</Text>
-					<ArticleFormTextInput
-						value={scannedArticle.articleName}
-						setValue={(text) => handleChangeText(text, "articleName")}
-						placeholder={"Nombre"}
-					/>
-					<ArticleFormTextInput
-						value={scannedArticle.articleName}
-						setValue={(text) => handleChangeText(text, "categoryName")}
-						placeholder={"Nombre"}
-					/>
-					<ArticleFormNumberInput
-						label="Exibición"
-						placeholder="0"
-						setValue={(text) => handleChangeText(Number(text), "exhibition")}
-						value={String(scannedArticle.exhibition)}
-					/>
-					<ArticleFormNumberInput
-						label="Estantería"
-						placeholder="0"
-						setValue={(text) => handleChangeText(Number(text), "shelf")}
-						value={String(scannedArticle.shelf)}
-					/>
-					<ArticleFormNumberInput
-						label="Almacén"
-						placeholder="0"
-						setValue={(text) => handleChangeText(Number(text), "warehouse")}
-						value={String(scannedArticle.warehouse)}
-					/>
+					<ScrollView style={{ width: "100%" }}>
+						<View style={{ alignItems: "center", justifyContent: "center" }}>
+							<ArticleFormTextInput
+								value={scannedArticle.articleName}
+								setValue={(text) => handleChangeText(text, "articleName")}
+								placeholder={"Nombre"}
+							/>
+							<ArticleFormTextInput
+								value={scannedArticle.articleName}
+								setValue={(text) => handleChangeText(text, "categoryName")}
+								placeholder={"Categoría"}
+							/>
+							<ArticleFormNumberInput
+								label="Exibición"
+								placeholder="0"
+								setValue={(text) => handleChangeText(Number(text), "exhibition")}
+								value={String(scannedArticle.exhibition)}
+							/>
+							<ArticleFormNumberInput
+								label="Estantería"
+								placeholder="0"
+								setValue={(text) => handleChangeText(Number(text), "shelf")}
+								value={String(scannedArticle.shelf)}
+							/>
+							<ArticleFormNumberInput
+								label="Almacén"
+								placeholder="0"
+								setValue={(text) => handleChangeText(Number(text), "warehouse")}
+								value={String(scannedArticle.warehouse)}
+							/>
 
-					{/* <Text>Elegir icono</Text> */}
-					<View style={articleInfoModalStyles.buttonsContainer}>
-						<TouchableOpacity
-							onPress={() => {
-								console.log(user?.id);
-								if (user)
-									handleCreateArticle(scannedArticle, user?.id, scannedBarcode);
-							}}
-							style={articleInfoModalStyles.editButton}
-						>
-							<Text style={articleInfoModalStyles.deleteText}>Crear</Text>
-						</TouchableOpacity>
-						<TouchableOpacity
-							onPress={() => {
-								setScannedBarcode("");
-								console.log("go back home!");
-							}}
-							style={articleInfoModalStyles.deleteButton}
-						>
-							<Text style={articleInfoModalStyles.cancelText}>Volver</Text>
-						</TouchableOpacity>
-					</View>
+							{/* <Text>Elegir icono</Text> */}
+							<View style={articleInfoModalStyles.buttonsContainer}>
+								<TouchableOpacity
+									onPress={() => {
+										if (user)
+											handleCreateArticle(
+												scannedArticle,
+												user.id,
+												scannedBarcode,
+											);
+									}}
+									style={articleInfoModalStyles.editButton}
+								>
+									<Text style={articleInfoModalStyles.deleteText}>Crear</Text>
+								</TouchableOpacity>
+								<TouchableOpacity
+									onPress={() => {
+										setScannedBarcode("");
+									}}
+									style={articleInfoModalStyles.deleteButton}
+								>
+									<Text style={articleInfoModalStyles.cancelText}>Volver</Text>
+								</TouchableOpacity>
+							</View>
+						</View>
+					</ScrollView>
 				</View>
 			</View>
 		</Modal>

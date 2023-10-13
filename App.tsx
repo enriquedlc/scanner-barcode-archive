@@ -42,10 +42,7 @@ export default function App() {
 		<SafeAreaProvider>
 			<StatusBar barStyle={"dark-content"} />
 			<NavigationContainer>
-				<Stack.Navigator
-					screenOptions={{ animationEnabled: true }}
-					initialRouteName={user ? "HOME_SCREEN" : "LANDING_SCREEN"}
-				>
+				<Stack.Navigator initialRouteName={user ? "HOME_SCREEN" : "LANDING_SCREEN"}>
 					<Stack.Group>
 						<Stack.Screen
 							options={{ headerShown: false }}
