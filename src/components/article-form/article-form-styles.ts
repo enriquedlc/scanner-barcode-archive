@@ -34,6 +34,6 @@ export const articleFormStyles = StyleSheet.create({
 		borderBottomColor: "lightgray",
 		borderBottomWidth: 1,
 		width: "80%",
-		marginBottom: 25,
+		marginBottom: 15,
 	},
 });

@@ -15,6 +15,7 @@ import { ScannedData } from "../../types/types";
 
 import { articleInfoModalStyles } from "../article-info-modal/article-info-modal-styles";
 import { articleFormStyles } from "./article-form-styles";
+import { CategoryDropdown } from "./category-dropdown/category-dropdown";
 
 interface ArticleFormProps {
 	visible: boolean;
@@ -99,16 +100,25 @@ export function ArticleForm(props: ArticleFormProps) {
 								placeholder={"Nombre"}
 								value={scannedArticle.articleName}
 							/>
-							<ArticleFormTextInput
-								value={scannedArticle.categoryName}
-								setValue={(text) => handleChangeText(text, "categoryName")}
-								placeholder={"Categoría"}
-							/>
-							<ArticleFormNumberInput
-								label="Exibición"
-								placeholder="0"
-								setValue={(text) => handleChangeText(Number(text), "exhibition")}
-								value={String(scannedArticle.exhibition)}
+							<CategoryDropdown
+								options={[
+									{ label: "Java", value: "java" },
+									{ label: "JavaScript", value: "js" },
+									{ label: "JavaScript", value: "js" },
+									{ label: "JavaScript", value: "js" },
+									{ label: "JavaScript", value: "js" },
+									{ label: "JavaScript", value: "js" },
+									{ label: "JavaScript", value: "js" },
+									{ label: "JavaScript", value: "js" },
+									{ label: "JavaScript", value: "js" },
+									{ label: "JavaScript", value: "js" },
+									{ label: "JavaScript", value: "js" },
+									{ label: "JavaScript", value: "js" },
+									{ label: "JavaScript", value: "js" },
+									{ label: "JavaScript", value: "js" },
+									{ label: "JavaScript", value: "js" },
+								]}
+								onSelect={(value) => console.log(value)}
 							/>
 							<ArticleFormNumberInput
 								label="Estantería"
@@ -121,6 +131,12 @@ export function ArticleForm(props: ArticleFormProps) {
 								placeholder="0"
 								setValue={(text) => handleChangeText(Number(text), "warehouse")}
 								value={String(scannedArticle.warehouse)}
+							/>
+							<ArticleFormNumberInput
+								label="Exhibición"
+								placeholder="0"
+								setValue={(text) => handleChangeText(Number(text), "warehouse")}
+								value={String(scannedArticle.exhibition)}
 							/>
 
 							{/* <Text>Elegir icono</Text> */}
