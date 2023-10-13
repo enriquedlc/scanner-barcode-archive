@@ -1,3 +1,9 @@
+import { UserBasicInformationLabels } from "../components/user-settings/user-info-item";
+
+interface ChangeUserInfoScreenParams {
+	userInfoToChange: UserBasicInformationLabels;
+}
+
 export type RootStackParamList = {
 	LANDING_SCREEN: undefined;
 	LOGIN_SCREEN: undefined;
@@ -6,7 +12,7 @@ export type RootStackParamList = {
 	PROFILE_SCREEN: undefined;
 	USER_SETTINGS_SCREEN: undefined;
 	// user settings
-	CHANGE_USER_INFO_SCREEN: undefined;
+	CHANGE_USER_INFO_SCREEN: ChangeUserInfoScreenParams;
 	//
 	FEED: undefined;
 	BARCODE_SCANNER: undefined;

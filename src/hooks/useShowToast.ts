@@ -7,14 +7,14 @@ export const useShowToast = () => {
 		type: ToastType,
 		title: string,
 		message: string,
-		visibilityTime?: number,
+		visibilityTimeMs?: number,
 	) => {
 		Toast.show({
 			type,
 			position: "top",
 			text1: title,
 			text2: message,
-			visibilityTime: 4000 ?? visibilityTime,
+			visibilityTime: 4000 ?? visibilityTimeMs,
 			autoHide: true,
 			topOffset: 60,
 		});

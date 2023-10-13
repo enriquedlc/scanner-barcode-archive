@@ -1,13 +1,14 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import { ARROW_BADGE_RIGHT } from "../../../assets/profile-images";
+import { useAppNavigation } from "../../hooks/useAppNavigation";
 import { useUserAuthStore } from "../../store/user-auth";
+import { capitalize, hidePassword } from "../../utils/general";
 
 import { BLUE_PALLETE } from "../../constants/colors/colors";
 import { FONT_SIZES } from "../../constants/font";
-import { useAppNavigation } from "../../hooks/useAppNavigation";
 
-type UserBasicInformationLabels = "username" | "email" | "password";
+export type UserBasicInformationLabels = "username" | "email" | "password";
 
 interface UserInfoItemProps {
 	label: UserBasicInformationLabels;
@@ -15,25 +16,22 @@ interface UserInfoItemProps {
 
 export function UserInfoItem(props: UserInfoItemProps) {
 	const { label } = props;
-
 	const { navigation } = useAppNavigation();
 	const user = useUserAuthStore((state) => state.user);
 
 	return (
 		<View style={styles.basicInformationItem}>
-			<Text style={styles.userSettingLabel}>
-				{label.charAt(0).toUpperCase() + label.slice(1)}
-			</Text>
+			<Text style={styles.userSettingLabel}>{capitalize(label)}</Text>
 			<TouchableOpacity
 				style={{ alignSelf: "flex-end" }}
-				onPress={() => navigation.navigate("CHANGE_USER_INFO_SCREEN")}
+				onPress={() => {
+					navigation.navigate("CHANGE_USER_INFO_SCREEN", { userInfoToChange: label });
+				}}
 			>
 				<Image style={styles.arrowBadgeRight} source={ARROW_BADGE_RIGHT} />
 			</TouchableOpacity>
 			<Text style={styles.userSettingValue}>
-				{label === "password"
-					? new Array(user?.[label].length).fill("*").join("").substring(0, 12)
-					: user?.[label]}
+				{label === "password" ? hidePassword(user?.[label] as string) : user?.[label]}
 			</Text>
 		</View>
 	);
@@ -43,7 +41,7 @@ const styles = StyleSheet.create({
 	basicInformationItem: {
 		display: "flex",
 		alignItems: "flex-start",
-		width: "80%",
+		width: "85%",
 		marginBottom: 40,
 		borderBottomColor: BLUE_PALLETE.GRAY,
 		borderBottomWidth: 1,
