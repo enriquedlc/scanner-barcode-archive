@@ -41,7 +41,7 @@ export const createArticle = async (
 ) => {
 	try {
 		console.info("createArticle", scannedBarcode);
-		// rome-ignore lint/suspicious/noExplicitAny: <explanation>
+		// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 		const response = await axios.post<CreateArticleResponse, any, CreateArticleData>(
 			`${AXIOS_BASE_URL}/articles`,
 			{

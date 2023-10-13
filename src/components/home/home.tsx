@@ -9,7 +9,7 @@ import { useUserAuthStore } from "../../store/user-auth";
 import { articleListStylesComponentProps } from "./home-styles";
 
 export function Home() {
-	const { articles, fetchArticles } = useArticlesStore((state) => state);
+	const { fetchArticles, getArticles } = useArticlesStore((state) => state);
 	const user = useUserAuthStore((state) => state.user);
 
 	// TODO: implement loading state
@@ -23,7 +23,7 @@ export function Home() {
 			<ArticleList
 				title="Últimos artículos añadidos"
 				articleListStyleComponentProps={articleListStylesComponentProps}
-				articles={articles}
+				articles={getArticles()}
 			/>
 		</SafeAreaView>
 	);

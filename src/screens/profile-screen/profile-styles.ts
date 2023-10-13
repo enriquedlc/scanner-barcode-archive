@@ -1,4 +1,4 @@
-import { StyleSheet, Platform } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 
 import { BLUE_PALLETE } from "../../constants/colors/colors";
 import { FONT_SIZES } from "../../constants/font";
@@ -18,7 +18,7 @@ export const profileStyles = StyleSheet.create({
 		height: "17%",
 		backgroundColor: "#fff",
 		borderRadius: 10,
-		marginTop: 80,
+		marginTop: Platform.OS === "ios" ? 80 : 40,
 		shadowColor: BLUE_PALLETE.BLUE,
 		shadowOffset: {
 			width: 0,
@@ -75,6 +75,7 @@ export const profileStyles = StyleSheet.create({
 		color: BLUE_PALLETE.SECONDARY_BLACK,
 		paddingTop: 3,
 		paddingLeft: 1,
+		maxWidth: "85%",
 	},
 	scannedArticlesLabel: {
 		fontSize: FONT_SIZES.EXTRA_LARGE,

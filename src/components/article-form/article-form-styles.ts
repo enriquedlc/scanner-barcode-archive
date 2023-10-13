@@ -6,7 +6,7 @@ export const articleFormStyles = StyleSheet.create({
 	centeredView: {
 		flex: 1,
 		justifyContent: "flex-start",
-		paddingTop: 100,
+		paddingTop: 50,
 		alignItems: "center",
 		backgroundColor: "rgba(0, 0, 0, 0.5)",
 	},
