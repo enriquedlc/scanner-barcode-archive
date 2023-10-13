@@ -6,6 +6,8 @@ import { Article } from "../../types/article";
 import { ArticleForm } from "../article-form/article-form";
 import ActionButton from "./action-button";
 
+import { deleteArticle } from "../../services/articles";
+import { useArticlesStore } from "../../store/articles";
 import { useScanner } from "../barcode-scanner/useScanner";
 import { articleInfoModalStyles } from "./article-info-modal-styles";
 
@@ -18,8 +20,17 @@ interface ArticleInfoModalProps {
 
 export function ArticleInfoModal(props: ArticleInfoModalProps) {
 	const { showDeleteArticleModal, setShowDeleteArticleModal, children, article } = props;
-	console.log(article);
 	const { setScannedBarcode, setShowArticleForm, showArticleForm } = useScanner();
+	const { setArticles, articles } = useArticlesStore((state) => state);
+
+	const handleDeleteArticle = async () => {
+		const response = await deleteArticle(article.id);
+		if (response?.deleted) {
+			setShowDeleteArticleModal(false);
+			setArticles(articles.filter((art) => art.id !== article.id));
+		}
+	};
+
 	return (
 		<Modal animationType="fade" transparent={true} visible={showDeleteArticleModal}>
 			<View style={articleInfoModalStyles.centeredView}>
@@ -44,7 +55,7 @@ export function ArticleInfoModal(props: ArticleInfoModalProps) {
 						/>
 						<ActionButton
 							text="Borrar"
-							onPress={() => console.log("delete action!")}
+							onPress={handleDeleteArticle}
 							buttonStyle={articleInfoModalStyles.deleteButton}
 							textStyle={articleInfoModalStyles.cancelText}
 						/>

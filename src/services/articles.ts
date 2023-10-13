@@ -83,3 +83,19 @@ export const updateArticle = async (article: Article, articleId: Article["id"]) 
 		console.error(error);
 	}
 };
+
+interface DeleteArticleResponse {
+	message: string;
+	deleted: boolean;
+}
+
+export const deleteArticle = async (articleId: Article["id"]) => {
+	try {
+		const response = await axios.delete<DeleteArticleResponse>(
+			`${AXIOS_BASE_URL}/articles/${articleId}`,
+		);
+		return response.data;
+	} catch (error) {
+		console.error(error);
+	}
+};
