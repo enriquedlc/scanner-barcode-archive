@@ -1,15 +1,16 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-import { useUserAuthStore } from "../../../store/user-auth";
+import { changeInfoDescription } from "../../../constants/lang/change-user-info-description";
+import { UserBasicInformationLabels } from "../user-info-item";
+import { ChangeEmailInput } from "./inputs/change-email";
+import { ChangePasswordInput } from "./inputs/change-password";
+import { ChangeUsernameInput } from "./inputs/change-username";
+
 import { capitalize } from "../../../utils/general";
 import { ArrowBack } from "../arrow-back";
 
 import { BLUE_PALLETE } from "../../../constants/colors/colors";
 import { FONT_SIZES } from "../../../constants/font";
-import { changeInfoDescription } from "../../../constants/lang/change-user-info-description";
-import { UserBasicInformationLabels } from "../user-info-item";
-import { ChangeEmailInput } from "./inputs/change-email";
-import { ChangeUsernameInput } from "./inputs/change-username";
 
 type ChangeInfoProps = {
 	route: {
@@ -21,7 +22,6 @@ type ChangeInfoProps = {
 
 export function ChangeInfo(props: ChangeInfoProps) {
 	const { userInfoToChange } = props.route.params;
-	const user = useUserAuthStore((state) => state.user);
 
 	return (
 		<View>
@@ -37,34 +37,7 @@ export function ChangeInfo(props: ChangeInfoProps) {
 
 				{userInfoToChange === "username" && <ChangeUsernameInput />}
 				{userInfoToChange === "email" && <ChangeEmailInput />}
-				{/* {userInfoToChange === "password" && <ChangePasswordInput />} */}
-
-				{/* {userInfoToChange === "password" ? (
-					<>
-						<Text style={styles.infoToChangeLabel}>
-							New {capitalize(userInfoToChange)}
-						</Text>
-						<TextInput
-							style={styles.infoToChangeInput}
-							placeholder={hidePassword(user?.[userInfoToChange] as string)}
-						/>
-						<Text style={styles.infoToChangeLabel}>
-							Confirm new {capitalize(userInfoToChange)}
-						</Text>
-						<TextInput
-							style={styles.infoToChangeInput}
-							placeholder={hidePassword(user?.[userInfoToChange] as string)}
-						/>
-					</>
-				) : (
-					<>
-						<Text style={styles.infoToChangeLabel}>{capitalize(userInfoToChange)}</Text>
-						<TextInput
-							style={styles.infoToChangeInput}
-							placeholder={user?.[userInfoToChange] as unknown as string}
-						/>
-					</>
-				)} */}
+				{userInfoToChange === "password" && <ChangePasswordInput />}
 
 				<TouchableOpacity style={styles.updateUserInfoButton}>
 					<Text style={styles.updateUserInfoButtonText}>Save</Text>
