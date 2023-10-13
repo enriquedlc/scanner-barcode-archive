@@ -4,11 +4,16 @@ import { ProfileFooterButton } from "./profile-footer-button";
 
 import { useUserAuthStore } from "../../../store/user-auth";
 
+import { useState } from "react";
 import { INFO_CIRCLE, LOGOUT } from "../../../../assets/profile-images";
 import { BLUE_PALLETE } from "../../../constants/colors/colors";
+import { ConfirmLogout } from "../modals/confirm-logout";
 
 export function ProfileFooter() {
 	const logout = useUserAuthStore((state) => state.logout);
+
+	const [showAttributionsModal, setShowAttributionsModal] = useState(false);
+	const [showConfirmLogoutModal, setShowConfirmLogoutModal] = useState(false);
 
 	return (
 		<View style={profileFooterStyles.profileFooterContainer}>
@@ -26,7 +31,11 @@ export function ProfileFooter() {
 				icon={LOGOUT}
 				label="Cerrar Sesión"
 				outlineColor="red"
-				action={logout}
+				action={() => setShowConfirmLogoutModal(true)}
+			/>
+			<ConfirmLogout
+				visible={showConfirmLogoutModal}
+				setShowConfirmLogoutModal={setShowConfirmLogoutModal}
 			/>
 		</View>
 	);
