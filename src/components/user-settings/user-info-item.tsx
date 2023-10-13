@@ -1,12 +1,12 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import { ARROW_BADGE_RIGHT } from "../../../assets/profile-images";
+import { useAppNavigation } from "../../hooks/useAppNavigation";
 import { useUserAuthStore } from "../../store/user-auth";
+import { capitalize, hidePassword } from "../../utils/general";
 
 import { BLUE_PALLETE } from "../../constants/colors/colors";
 import { FONT_SIZES } from "../../constants/font";
-import { useAppNavigation } from "../../hooks/useAppNavigation";
-import { capitalize } from "../../utils/general";
 
 export type UserBasicInformationLabels = "username" | "email" | "password";
 
@@ -31,9 +31,7 @@ export function UserInfoItem(props: UserInfoItemProps) {
 				<Image style={styles.arrowBadgeRight} source={ARROW_BADGE_RIGHT} />
 			</TouchableOpacity>
 			<Text style={styles.userSettingValue}>
-				{label === "password"
-					? new Array(user?.[label].length).fill("*").join("").substring(0, 12)
-					: user?.[label]}
+				{label === "password" ? hidePassword(user?.[label] as string) : user?.[label]}
 			</Text>
 		</View>
 	);
