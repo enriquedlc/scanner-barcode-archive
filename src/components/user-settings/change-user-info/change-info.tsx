@@ -8,6 +8,7 @@ import { BLUE_PALLETE } from "../../../constants/colors/colors";
 import { FONT_SIZES } from "../../../constants/font";
 import { changeInfoDescription } from "../../../constants/lang/change-user-info-description";
 import { UserBasicInformationLabels } from "../user-info-item";
+import { ChangeEmailInput } from "./inputs/change-email";
 import { ChangeUsernameInput } from "./inputs/change-username";
 
 type ChangeInfoProps = {
@@ -34,7 +35,9 @@ export function ChangeInfo(props: ChangeInfoProps) {
 					{changeInfoDescription[userInfoToChange]}
 				</Text>
 
-				<ChangeUsernameInput />
+				{userInfoToChange === "username" && <ChangeUsernameInput />}
+				{userInfoToChange === "email" && <ChangeEmailInput />}
+				{/* {userInfoToChange === "password" && <ChangePasswordInput />} */}
 
 				{/* {userInfoToChange === "password" ? (
 					<>
