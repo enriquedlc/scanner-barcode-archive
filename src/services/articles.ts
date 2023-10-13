@@ -60,3 +60,26 @@ export const createArticle = async (
 		console.error(error);
 	}
 };
+
+interface UpdateArticleResponse {
+	message: string;
+	updated: boolean;
+	article: Article;
+}
+
+export const updateArticle = async (article: Article, articleId: Article["id"]) => {
+	try {
+		const response = await axios.put<UpdateArticleResponse>(
+			`${AXIOS_BASE_URL}/articles/${articleId}`,
+			{
+				...article,
+				category: {
+					categoryName: article.categoryName,
+				},
+			},
+		);
+		return response.data;
+	} catch (error) {
+		console.error(error);
+	}
+};

@@ -7,7 +7,7 @@ import { ArticleFormTextInput } from "./article-form-input/article-form-text-inp
 import { INITIAL_ARTICLE_FORM_STATE } from "../../constants/states/initial-states";
 import { useAppNavigation } from "../../hooks/useAppNavigation";
 import { useShowToast } from "../../hooks/useShowToast";
-import { createArticle } from "../../services/articles";
+import { createArticle, updateArticle } from "../../services/articles";
 import { useArticlesStore } from "../../store/articles";
 import { User, useUserAuthStore } from "../../store/user-auth";
 import { Article } from "../../types/article";
@@ -21,12 +21,25 @@ interface ArticleFormProps {
 	setShowArticleForm: (showArticleForm: boolean) => void;
 	scannedBarcode: ScannedData["data"];
 	setScannedBarcode: (scannedBarcode: ScannedData["data"]) => void;
+	articleButtonActionText: string;
+	articleFormTitle: string;
+	article?: Article;
 }
 
 export function ArticleForm(props: ArticleFormProps) {
-	const { visible, scannedBarcode, setScannedBarcode, setShowArticleForm } = props;
+	const {
+		visible,
+		scannedBarcode,
+		setScannedBarcode,
+		setShowArticleForm,
+		articleButtonActionText,
+		articleFormTitle,
+		article: currentArticle,
+	} = props;
 
-	const [scannedArticle, setScannedArticle] = useState<Article>(INITIAL_ARTICLE_FORM_STATE);
+	const [scannedArticle, setScannedArticle] = useState<Article>(
+		currentArticle || INITIAL_ARTICLE_FORM_STATE,
+	);
 
 	const { showToast } = useShowToast();
 	const { navigation } = useAppNavigation();
@@ -37,14 +50,26 @@ export function ArticleForm(props: ArticleFormProps) {
 		setScannedArticle({ ...scannedArticle, [input]: text });
 	}
 
-	const handleCreateArticle = async (
+	const handleArticleAction = async (
 		article: Article,
 		userId: User["id"],
 		scannedBarcode: ScannedData["data"],
 	) => {
-		console.log(article);
+		if (currentArticle) {
+			const response = await updateArticle(article, article.id);
+
+			if (response?.updated) {
+				showToast("success", "Article updated", "Article updated succesfully!📦");
+				setShowArticleForm(false);
+				fetchArticles(userId);
+				navigation.navigate("HOME_SCREEN");
+				setScannedBarcode("");
+				return;
+			}
+			return;
+		}
 		const response = await createArticle(article, userId, scannedBarcode);
-		console.log(response);
+
 		if (response?.created) {
 			showToast("success", "Artículo creado", "Artículo creado con éxito!📦");
 			setShowArticleForm(false);
@@ -56,21 +81,26 @@ export function ArticleForm(props: ArticleFormProps) {
 		showToast("error", "Error al crear artículo", "");
 	};
 
+	const handleAction = () => {
+		setShowArticleForm(false);
+		setScannedBarcode("");
+	};
+
 	return (
 		<Modal animationType="fade" visible={visible}>
 			<View style={articleFormStyles.centeredView}>
 				<View style={articleFormStyles.modalView}>
-					<Text style={articleFormStyles.title}>Crear Artículo</Text>
+					<Text style={articleFormStyles.title}>{articleFormTitle}</Text>
 					<Text style={articleFormStyles.title}>{scannedBarcode}</Text>
 					<ScrollView style={{ width: "100%" }}>
 						<View style={{ alignItems: "center", justifyContent: "center" }}>
 							<ArticleFormTextInput
-								value={scannedArticle.articleName}
 								setValue={(text) => handleChangeText(text, "articleName")}
 								placeholder={"Nombre"}
+								value={scannedArticle.articleName}
 							/>
 							<ArticleFormTextInput
-								value={scannedArticle.articleName}
+								value={scannedArticle.categoryName}
 								setValue={(text) => handleChangeText(text, "categoryName")}
 								placeholder={"Categoría"}
 							/>
@@ -98,7 +128,7 @@ export function ArticleForm(props: ArticleFormProps) {
 								<TouchableOpacity
 									onPress={() => {
 										if (user)
-											handleCreateArticle(
+											handleArticleAction(
 												scannedArticle,
 												user.id,
 												scannedBarcode,
@@ -106,12 +136,12 @@ export function ArticleForm(props: ArticleFormProps) {
 									}}
 									style={articleInfoModalStyles.editButton}
 								>
-									<Text style={articleInfoModalStyles.deleteText}>Crear</Text>
+									<Text style={articleInfoModalStyles.deleteText}>
+										{articleButtonActionText}
+									</Text>
 								</TouchableOpacity>
 								<TouchableOpacity
-									onPress={() => {
-										setScannedBarcode("");
-									}}
+									onPress={handleAction}
 									style={articleInfoModalStyles.deleteButton}
 								>
 									<Text style={articleInfoModalStyles.cancelText}>Volver</Text>

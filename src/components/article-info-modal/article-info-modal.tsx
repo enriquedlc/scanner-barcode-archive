@@ -1,11 +1,13 @@
 import { FontAwesome5 } from "@expo/vector-icons";
+import { ReactNode } from "react";
 import { Modal, Text, TouchableOpacity, View } from "react-native";
 
 import { Article } from "../../types/article";
-
-import { ReactNode } from "react";
-import { articleInfoModalStyles } from "./article-info-modal-styles";
+import { ArticleForm } from "../article-form/article-form";
 import ActionButton from "./action-button";
+
+import { useScanner } from "../barcode-scanner/useScanner";
+import { articleInfoModalStyles } from "./article-info-modal-styles";
 
 interface ArticleInfoModalProps {
 	showDeleteArticleModal: boolean;
@@ -15,8 +17,9 @@ interface ArticleInfoModalProps {
 }
 
 export function ArticleInfoModal(props: ArticleInfoModalProps) {
-	const { showDeleteArticleModal, setShowDeleteArticleModal, children } = props;
-
+	const { showDeleteArticleModal, setShowDeleteArticleModal, children, article } = props;
+	console.log(article);
+	const { setScannedBarcode, setShowArticleForm, showArticleForm } = useScanner();
 	return (
 		<Modal animationType="fade" transparent={true} visible={showDeleteArticleModal}>
 			<View style={articleInfoModalStyles.centeredView}>
@@ -35,7 +38,7 @@ export function ArticleInfoModal(props: ArticleInfoModalProps) {
 					<View style={articleInfoModalStyles.buttonsContainer}>
 						<ActionButton
 							text="Editar"
-							onPress={() => console.log("edit action!")}
+							onPress={() => setShowArticleForm(true)}
 							buttonStyle={articleInfoModalStyles.editButton}
 							textStyle={articleInfoModalStyles.deleteText}
 						/>
@@ -44,6 +47,15 @@ export function ArticleInfoModal(props: ArticleInfoModalProps) {
 							onPress={() => console.log("delete action!")}
 							buttonStyle={articleInfoModalStyles.deleteButton}
 							textStyle={articleInfoModalStyles.cancelText}
+						/>
+						<ArticleForm
+							visible={showArticleForm}
+							setShowArticleForm={setShowArticleForm}
+							scannedBarcode={article.barcode}
+							setScannedBarcode={setScannedBarcode}
+							article={article}
+							articleButtonActionText="Editar"
+							articleFormTitle="Editar artículo"
 						/>
 					</View>
 				</View>

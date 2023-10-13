@@ -15,6 +15,7 @@ export function ArticleFormTextInput(props: ArticleFormInputProps) {
 
 	return (
 		<TextInput
+			value={value}
 			style={articleFormStyles.textInput}
 			placeholder={placeholder}
 			placeholderTextColor={"lightgray"}
