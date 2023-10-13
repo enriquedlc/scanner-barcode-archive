@@ -1,13 +1,14 @@
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import { useUserAuthStore } from "../../../store/user-auth";
-import { capitalize, hidePassword } from "../../../utils/general";
+import { capitalize } from "../../../utils/general";
 import { ArrowBack } from "../arrow-back";
 
 import { BLUE_PALLETE } from "../../../constants/colors/colors";
 import { FONT_SIZES } from "../../../constants/font";
 import { changeInfoDescription } from "../../../constants/lang/change-user-info-description";
 import { UserBasicInformationLabels } from "../user-info-item";
+import { ChangeUsernameInput } from "./inputs/change-username";
 
 type ChangeInfoProps = {
 	route: {
@@ -33,7 +34,9 @@ export function ChangeInfo(props: ChangeInfoProps) {
 					{changeInfoDescription[userInfoToChange]}
 				</Text>
 
-				{userInfoToChange === "password" ? (
+				<ChangeUsernameInput />
+
+				{/* {userInfoToChange === "password" ? (
 					<>
 						<Text style={styles.infoToChangeLabel}>
 							New {capitalize(userInfoToChange)}
@@ -58,7 +61,7 @@ export function ChangeInfo(props: ChangeInfoProps) {
 							placeholder={user?.[userInfoToChange] as unknown as string}
 						/>
 					</>
-				)}
+				)} */}
 
 				<TouchableOpacity style={styles.updateUserInfoButton}>
 					<Text style={styles.updateUserInfoButtonText}>Save</Text>
@@ -97,21 +100,7 @@ const styles = StyleSheet.create({
 		paddingBottom: 50,
 		width: "80%",
 	},
-	infoToChangeLabel: {
-		fontSize: FONT_SIZES.MEDIUM,
-		color: BLUE_PALLETE.PRIMARY_BLACK,
-		fontWeight: "600",
-		paddingBottom: 5,
-	},
-	infoToChangeInput: {
-		fontSize: FONT_SIZES.MEDIUM,
-		color: BLUE_PALLETE.SECONDARY_BLACK,
-		borderRadius: 5,
-		width: "90%",
-		padding: 7,
-		marginBottom: 20,
-		backgroundColor: BLUE_PALLETE.SECONDARY_WHITE,
-	},
+
 	updateUserInfoButton: {
 		backgroundColor: BLUE_PALLETE.BLUE,
 
