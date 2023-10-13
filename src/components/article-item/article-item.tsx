@@ -32,7 +32,7 @@ export const ArticleItem: React.FC<ArticleItemProps> = React.memo(({ article }) 
 			{/* Delete confirmation modal */}
 			<ArticleInfoModal
 				showDeleteArticleModal={showDeleteArticleModal}
-				setShowDeleteArticleModal={setShowDeleteArticleModal}
+				setShowArticleInfoModal={setShowDeleteArticleModal}
 				article={article}
 			>
 				<ArticleInfoModalStats article={article} />
