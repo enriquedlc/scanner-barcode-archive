@@ -18,7 +18,7 @@ export const profileStyles = StyleSheet.create({
 		height: "17%",
 		backgroundColor: "#fff",
 		borderRadius: 10,
-		marginTop: 40,
+		marginTop: Platform.OS === "ios" ? 80 : 40,
 		shadowColor: BLUE_PALLETE.BLUE,
 		shadowOffset: {
 			width: 0,
