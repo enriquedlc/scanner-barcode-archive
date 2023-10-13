@@ -1,14 +1,5 @@
-import { useState } from "react";
-
-import { LoginLayout } from "../layout/login-layout";
 import { SignUp } from "../components/signup/signup";
-
-const INITIAL_SIGNUP_INPUT_FOCUS_STATE: SignUpInputFocus = {
-	email: false,
-	password: false,
-	confirmPassword: false,
-	username: false,
-};
+import { LoginLayout } from "../layout/login-layout";
 
 export type SignUpInputFocus = {
 	email: boolean;
@@ -18,20 +9,12 @@ export type SignUpInputFocus = {
 };
 
 export function SignUpScreen() {
-	const [isFocused, setIsFocused] = useState<SignUpInputFocus>(INITIAL_SIGNUP_INPUT_FOCUS_STATE);
-
 	return (
 		<LoginLayout
 			firstBubbleButtomY={-100}
 			secondBubbleButtomY={-150}
 			thirdBubbleButtomY={-90}
-			children={
-				<SignUp
-					formTitle="Crear cuenta"
-					isFocused={isFocused}
-					setIsFocused={setIsFocused}
-				/>
-			}
+			children={<SignUp formTitle="Crear cuenta" />}
 		/>
 	);
 }

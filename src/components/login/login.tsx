@@ -106,6 +106,7 @@ export function Login(props: LoginProps) {
 				width={120}
 				outLined={true}
 			/>
+			{/* TODO: recover password */}
 		</View>
 	);
 }

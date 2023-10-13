@@ -67,3 +67,17 @@ export const changeUserEmail = async (email: User["email"], userId: User["id"]) 
 		console.error(error);
 	}
 };
+
+export const changePassword = async (password: User["password"], userId: User["id"]) => {
+	try {
+		const response = await axios.patch<ChangeSpecificUserFieldResponse>(
+			`${AXIOS_BASE_URL}/users/password/${userId}`,
+			{
+				password,
+			},
+		);
+		return response.data;
+	} catch (error) {
+		console.error(error);
+	}
+};
