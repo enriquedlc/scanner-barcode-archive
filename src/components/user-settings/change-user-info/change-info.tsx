@@ -38,10 +38,6 @@ export function ChangeInfo(props: ChangeInfoProps) {
 				{userInfoToChange === "username" && <ChangeUsernameInput />}
 				{userInfoToChange === "email" && <ChangeEmailInput />}
 				{userInfoToChange === "password" && <ChangePasswordInput />}
-
-				<TouchableOpacity style={styles.updateUserInfoButton}>
-					<Text style={styles.updateUserInfoButtonText}>Save</Text>
-				</TouchableOpacity>
 			</View>
 		</View>
 	);
@@ -75,22 +71,5 @@ const styles = StyleSheet.create({
 		color: BLUE_PALLETE.SECONDARY_BLACK,
 		paddingBottom: 50,
 		width: "80%",
-	},
-
-	updateUserInfoButton: {
-		backgroundColor: BLUE_PALLETE.BLUE,
-
-		padding: 10,
-		borderRadius: 5,
-		width: "90%",
-		display: "flex",
-		alignItems: "center",
-		justifyContent: "center",
-		marginTop: 50,
-	},
-	updateUserInfoButtonText: {
-		fontSize: FONT_SIZES.MEDIUM,
-		color: BLUE_PALLETE.PRIMARY_WHITE,
-		fontWeight: "bold",
 	},
 });
