@@ -75,7 +75,8 @@ export const profileStyles = StyleSheet.create({
 		color: BLUE_PALLETE.SECONDARY_BLACK,
 		paddingTop: 3,
 		paddingLeft: 1,
-		maxWidth: "85%",
+		flexWrap: "wrap",
+		maxWidth: 200,
 	},
 	scannedArticlesLabel: {
 		fontSize: FONT_SIZES.EXTRA_LARGE,

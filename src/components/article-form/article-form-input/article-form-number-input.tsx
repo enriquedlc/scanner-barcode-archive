@@ -1,4 +1,4 @@
-import { TextInput, View, Text, StyleSheet } from "react-native";
+import { StyleSheet, Text, TextInput, View } from "react-native";
 
 import { Article } from "../../../types/article";
 
@@ -17,6 +17,7 @@ export function ArticleFormNumberInput(props: ArticleFormNumberInputProps) {
 		<View style={styles.numericInputContainer}>
 			<Text style={styles.label}>{label}</Text>
 			<TextInput
+				value={value}
 				style={styles.input}
 				keyboardType="numeric"
 				placeholder={placeholder}

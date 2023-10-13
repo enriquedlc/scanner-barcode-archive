@@ -1,27 +1,52 @@
 import { FontAwesome5 } from "@expo/vector-icons";
+import { ReactNode, useState } from "react";
 import { Modal, Text, TouchableOpacity, View } from "react-native";
 
 import { Article } from "../../types/article";
-
-import { ReactNode } from "react";
-import { articleInfoModalStyles } from "./article-info-modal-styles";
+import { ArticleForm } from "../article-form/article-form";
 import ActionButton from "./action-button";
+
+import { useShowToast } from "../../hooks/useShowToast";
+import { deleteArticle } from "../../services/articles";
+import { useArticlesStore } from "../../store/articles";
+import { ArticleDeleteModal } from "../article-delete-modal/article-delete-modal";
+import { useScanner } from "../barcode-scanner/useScanner";
+import { articleInfoModalStyles } from "./article-info-modal-styles";
 
 interface ArticleInfoModalProps {
 	showDeleteArticleModal: boolean;
-	setShowDeleteArticleModal: (showDeleteArticleModal: boolean) => void;
+	setShowArticleInfoModal: (showDeleteArticleModal: boolean) => void;
 	article: Article;
 	children: ReactNode;
 }
 
 export function ArticleInfoModal(props: ArticleInfoModalProps) {
-	const { showDeleteArticleModal, setShowDeleteArticleModal, children } = props;
+	const { showDeleteArticleModal, setShowArticleInfoModal, children, article } = props;
+	const { setScannedBarcode, setShowArticleForm, showArticleForm } = useScanner();
+	const { setArticles, articles } = useArticlesStore((state) => state);
+	const { showToast } = useShowToast();
+
+	const [showConfirmDeleteArticleModal, setShowConfirmDeleteArticleModal] = useState(false);
+
+	const handleDeleteArticle = async () => {
+		const response = await deleteArticle(article.id);
+		if (response?.deleted) {
+			showToast("success", "Artículo borrado 🗑", "");
+			setShowArticleInfoModal(false);
+			setArticles(articles.filter((art) => art.id !== article.id));
+		}
+	};
 
 	return (
 		<Modal animationType="fade" transparent={true} visible={showDeleteArticleModal}>
+			<ArticleDeleteModal
+				visible={showConfirmDeleteArticleModal}
+				setShowConfirmDeleteArticleModal={setShowConfirmDeleteArticleModal}
+				action={handleDeleteArticle}
+			/>
 			<View style={articleInfoModalStyles.centeredView}>
 				<TouchableOpacity
-					onPress={() => setShowDeleteArticleModal(false)}
+					onPress={() => setShowArticleInfoModal(false)}
 					style={articleInfoModalStyles.closeModalButton}
 				>
 					{/* TODO: prettify this component */}
@@ -35,15 +60,24 @@ export function ArticleInfoModal(props: ArticleInfoModalProps) {
 					<View style={articleInfoModalStyles.buttonsContainer}>
 						<ActionButton
 							text="Editar"
-							onPress={() => console.log("edit action!")}
+							onPress={() => setShowArticleForm(true)}
 							buttonStyle={articleInfoModalStyles.editButton}
 							textStyle={articleInfoModalStyles.deleteText}
 						/>
 						<ActionButton
 							text="Borrar"
-							onPress={() => console.log("delete action!")}
+							onPress={() => setShowConfirmDeleteArticleModal(true)}
 							buttonStyle={articleInfoModalStyles.deleteButton}
 							textStyle={articleInfoModalStyles.cancelText}
+						/>
+						<ArticleForm
+							visible={showArticleForm}
+							setShowArticleForm={setShowArticleForm}
+							scannedBarcode={article.barcode}
+							setScannedBarcode={setScannedBarcode}
+							article={article}
+							articleButtonActionText="Editar"
+							articleFormTitle="Editar artículo"
 						/>
 					</View>
 				</View>

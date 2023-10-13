@@ -1,41 +1,79 @@
-// import { Modal, Text, TouchableOpacity, View } from "react-native";
+import { Modal, StyleSheet, Text, View } from "react-native";
 
-// import { Article } from "../../types/article";
+import { ProfileFooterButton } from "../profile/profile-footer/profile-footer-button";
 
-// import { articleInfoModalStyles } from "./article-info-modal-styles";
+import { ARROW_BACK, TRASH } from "../../../assets/profile-images";
 
-// interface ArticleInfoModalProps {
-//   showDeleteArticleModal: boolean;
-//   setShowDeleteArticleModal: (showDeleteArticleModal: boolean) => void;
-//   article: Article;
-// }
+import { BLUE_PALLETE } from "../../constants/colors/colors";
+import { FONT_SIZES } from "../../constants/font";
 
-// export function ArticleInfoModal(props: ArticleInfoModalProps) {
-//   const { showDeleteArticleModal, setShowDeleteArticleModal, article } = props;
+interface ConfirmLogoutProps {
+	visible: boolean;
+	setShowConfirmDeleteArticleModal: (show: boolean) => void;
+	action: () => void;
+}
 
-//   return (
-//     <Modal
-//       animationType="fade"
-//       transparent={true}
-//       visible={showDeleteArticleModal}
-//     >
-//       <View style={articleInfoModalStyles.centeredView}>
-//         <View style={articleInfoModalStyles.modalView}>
-//           <Text>Do you want to delete this item?</Text>
-//           <TouchableOpacity
-//             onPress={() => setShowDeleteArticleModal(true)}
-//             style={articleInfoModalStyles.deleteButton}
-//           >
-//             <Text style={articleInfoModalStyles.deleteText}>Delete</Text>
-//           </TouchableOpacity>
-//           <TouchableOpacity
-//             onPress={() => setShowDeleteArticleModal(false)}
-//             style={articleInfoModalStyles.cancelButton}
-//           >
-//             <Text style={articleInfoModalStyles.cancelText}>Cancel</Text>
-//           </TouchableOpacity>
-//         </View>
-//       </View>
-//     </Modal>
-//   );
-// }
+export function ArticleDeleteModal(props: ConfirmLogoutProps) {
+	const { visible, setShowConfirmDeleteArticleModal: setShowConfirmLogoutModal, action } = props;
+
+	return (
+		<Modal animationType="fade" transparent={true} visible={visible}>
+			<View style={styles.centeredView}>
+				<View style={styles.confirmLogoutModal}>
+					<Text style={styles.confirmLogoutModalTitle}>
+						Confirmación: borrar artículo
+					</Text>
+					<View style={styles.buttonsContainer}>
+						<ProfileFooterButton
+							icon={ARROW_BACK}
+							label="Volver"
+							outlineColor={BLUE_PALLETE.BLUE}
+							action={() => setShowConfirmLogoutModal(false)}
+						/>
+						<ProfileFooterButton
+							icon={TRASH}
+							label="Borrar"
+							outlineColor="red"
+							action={action}
+						/>
+					</View>
+				</View>
+			</View>
+		</Modal>
+	);
+}
+
+const styles = StyleSheet.create({
+	centeredView: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+		backgroundColor: "rgba(0, 0, 0, 0.5)",
+	},
+	confirmLogoutModal: {
+		width: "90%",
+		backgroundColor: "white",
+		borderRadius: 10,
+		padding: 20,
+		alignItems: "center",
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 4,
+		elevation: 5,
+	},
+	confirmLogoutModalTitle: {
+		fontSize: FONT_SIZES.LARGE,
+		fontWeight: "bold",
+		paddingBottom: 20,
+	},
+	buttonsContainer: {
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "center",
+		gap: 20,
+	},
+});

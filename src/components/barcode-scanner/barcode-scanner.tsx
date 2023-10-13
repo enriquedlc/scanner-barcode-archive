@@ -34,6 +34,8 @@ export function BarcodeScanner() {
 				setShowArticleForm={setShowArticleForm}
 				scannedBarcode={scannedBarcode}
 				setScannedBarcode={setScannedBarcode}
+				articleButtonActionText="Crear"
+				articleFormTitle="Crear artículo"
 			/>
 		</View>
 	);
