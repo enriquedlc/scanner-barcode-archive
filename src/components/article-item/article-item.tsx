@@ -29,7 +29,6 @@ export const ArticleItem: React.FC<ArticleItemProps> = React.memo(({ article }) 
 					</TouchableOpacity>
 				</View>
 			</View>
-			{/* Delete confirmation modal */}
 			<ArticleInfoModal
 				showDeleteArticleModal={showDeleteArticleModal}
 				setShowArticleInfoModal={setShowDeleteArticleModal}

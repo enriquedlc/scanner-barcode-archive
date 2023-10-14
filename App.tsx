@@ -15,6 +15,7 @@ import { SignUpScreen } from "./src/screens/signup-screen";
 
 import { RootStackParamList } from "./src/constants/routes";
 import { HomeScreen } from "./src/screens/home-screen";
+import { useCategoriesStore } from "./src/store/categories";
 import { User, useUserAuthStore } from "./src/store/user-auth";
 import { getUserFromStorage } from "./src/utils/async-storage";
 
@@ -26,6 +27,10 @@ export default function App() {
 		setUser: state.setUser,
 	}));
 
+	const { fetchCategories } = useCategoriesStore((state) => ({
+		fetchCategories: state.fetchCategories,
+	}));
+
 	// TODO: extract to a custom hook
 	// biome-ignore lint/nursery/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
@@ -34,6 +39,7 @@ export default function App() {
 			if (user) {
 				setUser(user as User);
 			}
+			fetchCategories();
 		};
 		getUser();
 	}, []);

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-import { getArticlesByUserId } from "../services/articles";
+import { getArticlesByUserId } from "../services/article";
 import { Article } from "../types/article";
 import { User } from "./user-auth";
 

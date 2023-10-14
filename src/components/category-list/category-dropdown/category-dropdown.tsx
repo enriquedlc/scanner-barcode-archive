@@ -5,7 +5,7 @@ import { CATEGORY_ICONS } from "../../../../assets";
 const { CHEVRON_CIRCLE_DOWN, CHEVRON_CIRCLE_UP } = CATEGORY_ICONS;
 
 import { FONT_SIZES } from "../../../constants/font";
-import { CategoryItem } from "../category-item";
+import { CategoryList } from "../category-list";
 
 export interface DropdownOption {
 	label: string;
@@ -13,11 +13,12 @@ export interface DropdownOption {
 }
 
 export interface DropdownProps {
+	defaultCategory: DropdownOption["value"];
 	options: DropdownOption[];
 	onSelect: (value: string) => void;
 }
 
-export function CategoryDropdown({ options, onSelect }: DropdownProps) {
+export function CategoryDropdown({ options, onSelect, defaultCategory }: DropdownProps) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(null);
 
@@ -27,34 +28,21 @@ export function CategoryDropdown({ options, onSelect }: DropdownProps) {
 		onSelect(option.value);
 	}
 
+	const defaultValueText = defaultCategory || "Select a category";
+
 	return (
 		<View style={styles.container}>
 			<TouchableOpacity style={styles.selectedOption} onPress={() => setIsOpen(!isOpen)}>
 				<Text style={styles.selectedOptionLabel}>
-					{selectedOption ? selectedOption.label : "Select an option"}
+					{selectedOption ? selectedOption?.label : defaultValueText}
 				</Text>
-				{/* TODO: ICONS */}
-
 				{isOpen ? (
 					<Image source={CHEVRON_CIRCLE_UP} style={styles.dropdownIcon} />
 				) : (
 					<Image source={CHEVRON_CIRCLE_DOWN} style={styles.dropdownIcon} />
 				)}
 			</TouchableOpacity>
-			{isOpen && (
-				<View style={styles.optionsContainer}>
-					{/* TODO: FlatList */}
-					{/* TODO: fetch categories */}
-					{/* TODO: categories store zustand */}
-					{options.map((option) => (
-						<CategoryItem
-							option={option}
-							handleSelect={handleSelect}
-							key={option.label}
-						/>
-					))}
-				</View>
-			)}
+			{isOpen && <CategoryList handleSelect={handleSelect} options={options} />}
 		</View>
 	);
 }
@@ -77,21 +65,5 @@ const styles = StyleSheet.create({
 	selectedOptionLabel: {
 		fontSize: FONT_SIZES.MEDIUM,
 	},
-
-	optionsContainer: {
-		position: "absolute",
-		top: "100%",
-		left: 0,
-		right: 0,
-		backgroundColor: "white",
-		borderWidth: 1,
-		borderColor: "gray",
-		borderRadius: 5,
-		padding: 10,
-		maxHeight: 150,
-		overflow: "scroll",
-		zIndex: 1,
-	},
-
 	dropdownIcon: { height: 20, width: 20, alignSelf: "center", paddingBottom: 5 },
 });
