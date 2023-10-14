@@ -4,16 +4,17 @@ import { AXIOS_BASE_URL } from "../../credentials";
 
 type CategoryId = `${string}-${string}-${string}-${string}-${string}`;
 
-interface Category {
+export interface Category {
 	id: CategoryId;
 	categoryName: string;
 }
 
 interface CategoriesResponse {
+	message: string;
 	categories: Category[];
 }
 
-export const getCategories = async () => {
+export const getAllCategories = async () => {
 	try {
 		const response = await axios.get<CategoriesResponse>(`${AXIOS_BASE_URL}/categories/`);
 		return response.data;

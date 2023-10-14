@@ -13,11 +13,12 @@ export interface DropdownOption {
 }
 
 export interface DropdownProps {
+	defaultCategory: DropdownOption["value"];
 	options: DropdownOption[];
 	onSelect: (value: string) => void;
 }
 
-export function CategoryDropdown({ options, onSelect }: DropdownProps) {
+export function CategoryDropdown({ options, onSelect, defaultCategory }: DropdownProps) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedOption, setSelectedOption] = useState<DropdownOption | null>(null);
 
@@ -27,11 +28,13 @@ export function CategoryDropdown({ options, onSelect }: DropdownProps) {
 		onSelect(option.value);
 	}
 
+	const defaultValueText = defaultCategory || "Select a category";
+
 	return (
 		<View style={styles.container}>
 			<TouchableOpacity style={styles.selectedOption} onPress={() => setIsOpen(!isOpen)}>
 				<Text style={styles.selectedOptionLabel}>
-					{selectedOption ? selectedOption.label : "Select an option"}
+					{selectedOption ? selectedOption?.label : defaultValueText}
 				</Text>
 				{isOpen ? (
 					<Image source={CHEVRON_CIRCLE_UP} style={styles.dropdownIcon} />

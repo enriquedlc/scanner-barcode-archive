@@ -13,6 +13,7 @@ import { User, useUserAuthStore } from "../../store/user-auth";
 import { Article } from "../../types/article";
 import { ScannedData } from "../../types/types";
 
+import { useCategoriesStore } from "../../store/categories";
 import { articleInfoModalStyles } from "../article-info-modal/article-info-modal-styles";
 import { CategoryDropdown } from "../category-list/category-dropdown/category-dropdown";
 import { articleFormStyles } from "./article-form-styles";
@@ -38,6 +39,8 @@ export function ArticleForm(props: ArticleFormProps) {
 		article: currentArticle,
 	} = props;
 
+	const categories = useCategoriesStore((state) => state.categories);
+
 	const [scannedArticle, setScannedArticle] = useState<Article>(
 		currentArticle || INITIAL_ARTICLE_FORM_STATE,
 	);
@@ -50,6 +53,8 @@ export function ArticleForm(props: ArticleFormProps) {
 	function handleChangeText<T>(text: T, input: keyof Article) {
 		setScannedArticle({ ...scannedArticle, [input]: text });
 	}
+
+	console.log("scannedArticle", scannedArticle);
 
 	const handleArticleAction = async (
 		article: Article,
@@ -87,6 +92,8 @@ export function ArticleForm(props: ArticleFormProps) {
 		setScannedBarcode("");
 	};
 
+	console.log(scannedArticle.categoryName);
+
 	return (
 		<Modal animationType="fade" visible={visible}>
 			<View style={articleFormStyles.centeredView}>
@@ -101,16 +108,12 @@ export function ArticleForm(props: ArticleFormProps) {
 							value={scannedArticle.articleName}
 						/>
 						<CategoryDropdown
-							options={[
-								{ label: "Tornillería", value: "Tornillería" },
-								{ label: "Herramientas", value: "Herramientas" },
-								{ label: "Pintura", value: "Pintura" },
-								{ label: "Electricidad", value: "Electricidad" },
-								{ label: "Pesca", value: "Pesca" },
-								{ label: "Ruedas", value: "Ruedas" },
-								{ label: "Guantes", value: "Guantes" },
-							]}
-							onSelect={(value) => console.log(value)}
+							defaultCategory={scannedArticle.categoryName}
+							options={categories.map((category) => ({
+								label: category.categoryName,
+								value: category.categoryName,
+							}))}
+							onSelect={(value) => handleChangeText(value, "categoryName")}
 						/>
 						<ArticleFormNumberInput
 							label="Estantería"
@@ -127,7 +130,7 @@ export function ArticleForm(props: ArticleFormProps) {
 						<ArticleFormNumberInput
 							label="Exhibición"
 							placeholder="0"
-							setValue={(text) => handleChangeText(Number(text), "warehouse")}
+							setValue={(text) => handleChangeText(Number(text), "exhibition")}
 							value={String(scannedArticle.exhibition)}
 						/>
 
