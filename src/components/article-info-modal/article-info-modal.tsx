@@ -7,7 +7,7 @@ import { ArticleForm } from "../article-form/article-form";
 import ActionButton from "./action-button";
 
 import { useShowToast } from "../../hooks/useShowToast";
-import { deleteArticle } from "../../services/articles";
+import { deleteArticle } from "../../services/article";
 import { useArticlesStore } from "../../store/articles";
 import { ArticleDeleteModal } from "../article-delete-modal/article-delete-modal";
 import { useScanner } from "../barcode-scanner/useScanner";

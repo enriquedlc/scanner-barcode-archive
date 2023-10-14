@@ -30,6 +30,9 @@ export function Home() {
 }
 
 const homeStyles = StyleSheet.create({
+	gradientContainer: {
+		flex: 1,
+	},
 	container: {
 		flex: 1,
 		alignItems: "center",

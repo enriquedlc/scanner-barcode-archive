@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Modal, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { Modal, Text, TouchableOpacity, View } from "react-native";
 
 import { ArticleFormNumberInput } from "./article-form-input/article-form-number-input";
 import { ArticleFormTextInput } from "./article-form-input/article-form-text-input";
@@ -7,15 +7,16 @@ import { ArticleFormTextInput } from "./article-form-input/article-form-text-inp
 import { INITIAL_ARTICLE_FORM_STATE } from "../../constants/states/initial-states";
 import { useAppNavigation } from "../../hooks/useAppNavigation";
 import { useShowToast } from "../../hooks/useShowToast";
-import { createArticle, updateArticle } from "../../services/articles";
+import { createArticle, updateArticle } from "../../services/article";
 import { useArticlesStore } from "../../store/articles";
 import { User, useUserAuthStore } from "../../store/user-auth";
 import { Article } from "../../types/article";
 import { ScannedData } from "../../types/types";
 
+import { useCategoriesStore } from "../../store/categories";
 import { articleInfoModalStyles } from "../article-info-modal/article-info-modal-styles";
+import { CategoryDropdown } from "../category-list/category-dropdown/category-dropdown";
 import { articleFormStyles } from "./article-form-styles";
-import { CategoryDropdown } from "./category-dropdown/category-dropdown";
 
 interface ArticleFormProps {
 	visible: boolean;
@@ -37,6 +38,8 @@ export function ArticleForm(props: ArticleFormProps) {
 		articleFormTitle,
 		article: currentArticle,
 	} = props;
+
+	const categories = useCategoriesStore((state) => state.categories);
 
 	const [scannedArticle, setScannedArticle] = useState<Article>(
 		currentArticle || INITIAL_ARTICLE_FORM_STATE,
@@ -93,78 +96,65 @@ export function ArticleForm(props: ArticleFormProps) {
 				<View style={articleFormStyles.modalView}>
 					<Text style={articleFormStyles.title}>{articleFormTitle}</Text>
 					<Text style={articleFormStyles.title}>{scannedBarcode}</Text>
-					<ScrollView style={{ width: "100%" }}>
-						<View style={{ alignItems: "center", justifyContent: "center" }}>
-							<ArticleFormTextInput
-								setValue={(text) => handleChangeText(text, "articleName")}
-								placeholder={"Nombre"}
-								value={scannedArticle.articleName}
-							/>
-							<CategoryDropdown
-								options={[
-									{ label: "Java", value: "java" },
-									{ label: "JavaScript", value: "js" },
-									{ label: "JavaScript", value: "js" },
-									{ label: "JavaScript", value: "js" },
-									{ label: "JavaScript", value: "js" },
-									{ label: "JavaScript", value: "js" },
-									{ label: "JavaScript", value: "js" },
-									{ label: "JavaScript", value: "js" },
-									{ label: "JavaScript", value: "js" },
-									{ label: "JavaScript", value: "js" },
-									{ label: "JavaScript", value: "js" },
-									{ label: "JavaScript", value: "js" },
-									{ label: "JavaScript", value: "js" },
-									{ label: "JavaScript", value: "js" },
-									{ label: "JavaScript", value: "js" },
-								]}
-								onSelect={(value) => console.log(value)}
-							/>
-							<ArticleFormNumberInput
-								label="Estantería"
-								placeholder="0"
-								setValue={(text) => handleChangeText(Number(text), "shelf")}
-								value={String(scannedArticle.shelf)}
-							/>
-							<ArticleFormNumberInput
-								label="Almacén"
-								placeholder="0"
-								setValue={(text) => handleChangeText(Number(text), "warehouse")}
-								value={String(scannedArticle.warehouse)}
-							/>
-							<ArticleFormNumberInput
-								label="Exhibición"
-								placeholder="0"
-								setValue={(text) => handleChangeText(Number(text), "warehouse")}
-								value={String(scannedArticle.exhibition)}
-							/>
+					{/* TODO: make this scrollable */}
+					<View style={{ width: "100%", alignItems: "center", justifyContent: "center" }}>
+						<ArticleFormTextInput
+							setValue={(text) => handleChangeText(text, "articleName")}
+							placeholder={"Nombre"}
+							value={scannedArticle.articleName}
+						/>
+						<CategoryDropdown
+							defaultCategory={scannedArticle.categoryName}
+							options={categories.map((category) => ({
+								label: category.categoryName,
+								value: category.categoryName,
+							}))}
+							onSelect={(value) => handleChangeText(value, "categoryName")}
+						/>
+						<ArticleFormNumberInput
+							label="Estantería"
+							placeholder="0"
+							setValue={(text) => handleChangeText(Number(text), "shelf")}
+							value={String(scannedArticle.shelf)}
+						/>
+						<ArticleFormNumberInput
+							label="Almacén"
+							placeholder="0"
+							setValue={(text) => handleChangeText(Number(text), "warehouse")}
+							value={String(scannedArticle.warehouse)}
+						/>
+						<ArticleFormNumberInput
+							label="Exhibición"
+							placeholder="0"
+							setValue={(text) => handleChangeText(Number(text), "exhibition")}
+							value={String(scannedArticle.exhibition)}
+						/>
 
-							{/* <Text>Elegir icono</Text> */}
-							<View style={articleInfoModalStyles.buttonsContainer}>
-								<TouchableOpacity
-									onPress={() => {
-										if (user)
-											handleArticleAction(
-												scannedArticle,
-												user.id,
-												scannedBarcode,
-											);
-									}}
-									style={articleInfoModalStyles.editButton}
-								>
-									<Text style={articleInfoModalStyles.deleteText}>
-										{articleButtonActionText}
-									</Text>
-								</TouchableOpacity>
-								<TouchableOpacity
-									onPress={handleAction}
-									style={articleInfoModalStyles.deleteButton}
-								>
-									<Text style={articleInfoModalStyles.cancelText}>Volver</Text>
-								</TouchableOpacity>
-							</View>
+						{/* <Text>Elegir icono</Text> */}
+						<View style={articleInfoModalStyles.buttonsContainer}>
+							<TouchableOpacity
+								onPress={() => {
+									if (user)
+										handleArticleAction(
+											scannedArticle,
+											user.id,
+											scannedBarcode,
+										);
+								}}
+								style={articleInfoModalStyles.editButton}
+							>
+								<Text style={articleInfoModalStyles.deleteText}>
+									{articleButtonActionText}
+								</Text>
+							</TouchableOpacity>
+							<TouchableOpacity
+								onPress={handleAction}
+								style={articleInfoModalStyles.deleteButton}
+							>
+								<Text style={articleInfoModalStyles.cancelText}>Volver</Text>
+							</TouchableOpacity>
 						</View>
-					</ScrollView>
+					</View>
 				</View>
 			</View>
 		</Modal>
