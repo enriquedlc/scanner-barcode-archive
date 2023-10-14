@@ -15,9 +15,11 @@ export function Search() {
 
 	const updateSearchText = (text: string) => setSearchText(text);
 
-	// TODO: Implement search functionality for different article properties
 	const filteredArticles = articles.filter((article) =>
-		article.articleName.toLowerCase().includes(searchText.toLowerCase()),
+		Object.values(article).some(
+			(value) =>
+				typeof value === "string" && value.toLowerCase().includes(searchText.toLowerCase()),
+		),
 	);
 
 	return (
