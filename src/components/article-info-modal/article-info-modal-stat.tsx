@@ -1,11 +1,11 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text } from "react-native";
 
 import { Article } from "../../types/article";
 import { formatDate } from "../../utils/date";
+import { BarcodeCategoryTags } from "../barcode-category-tags/barcode-category-tags";
 
 import { BLUE_PALLETE } from "../../constants/colors/colors";
 import { FONT_SIZES } from "../../constants/font";
-import { articleItemStyles } from "../article-item/article-item-styles";
 
 interface ArticleModalStatProps {
 	label: string;
@@ -25,24 +25,7 @@ function ArticleModalStat(props: ArticleModalStatProps) {
 export function ArticleInfoModalStats({ article }: { article: Article }) {
 	return (
 		<>
-			<View
-				style={{
-					flexDirection: "row",
-					justifyContent: "center",
-					gap: 7,
-				}}
-			>
-				<View
-					style={[articleItemStyles.articleItemBarcodeContainer, styles.barcodeContainer]}
-				>
-					<Text style={articleItemStyles.articleItemBarcode}>{article.barcode}</Text>
-				</View>
-				<View
-					style={[articleItemStyles.articleItemBarcodeContainer, styles.barcodeContainer]}
-				>
-					<Text style={articleItemStyles.articleItemBarcode}>{article.categoryName}</Text>
-				</View>
-			</View>
+			<BarcodeCategoryTags barcode={article.barcode} categoryName={article.categoryName} />
 
 			<ArticleModalStat label="Nombre" value={article.articleName} />
 			<ArticleModalStat label="Exhibición" value={article.exhibition} />
@@ -55,11 +38,6 @@ export function ArticleInfoModalStats({ article }: { article: Article }) {
 }
 
 const styles = StyleSheet.create({
-	barcodeContainer: {
-		alignSelf: "center",
-		marginBottom: "4%",
-		paddingHorizontal: "4%",
-	},
 	label: {
 		fontSize: FONT_SIZES.MEDIUM,
 		color: BLUE_PALLETE.PRIMARY_BLACK,
