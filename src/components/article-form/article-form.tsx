@@ -14,8 +14,8 @@ import { Article } from "../../types/article";
 import { ScannedData } from "../../types/types";
 
 import { articleInfoModalStyles } from "../article-info-modal/article-info-modal-styles";
+import { CategoryDropdown } from "../category-list/category-dropdown/category-dropdown";
 import { articleFormStyles } from "./article-form-styles";
-import { CategoryDropdown } from "./category-dropdown/category-dropdown";
 
 interface ArticleFormProps {
 	visible: boolean;
@@ -102,21 +102,13 @@ export function ArticleForm(props: ArticleFormProps) {
 							/>
 							<CategoryDropdown
 								options={[
-									{ label: "Java", value: "java" },
-									{ label: "JavaScript", value: "js" },
-									{ label: "JavaScript", value: "js" },
-									{ label: "JavaScript", value: "js" },
-									{ label: "JavaScript", value: "js" },
-									{ label: "JavaScript", value: "js" },
-									{ label: "JavaScript", value: "js" },
-									{ label: "JavaScript", value: "js" },
-									{ label: "JavaScript", value: "js" },
-									{ label: "JavaScript", value: "js" },
-									{ label: "JavaScript", value: "js" },
-									{ label: "JavaScript", value: "js" },
-									{ label: "JavaScript", value: "js" },
-									{ label: "JavaScript", value: "js" },
-									{ label: "JavaScript", value: "js" },
+									{ label: "Tornillería", value: "Tornillería" },
+									{ label: "Herramientas", value: "Herramientas" },
+									{ label: "Pintura", value: "Pintura" },
+									{ label: "Electricidad", value: "Electricidad" },
+									{ label: "Pesca", value: "Pesca" },
+									{ label: "Ruedas", value: "Ruedas" },
+									{ label: "Guantes", value: "Guantes" },
 								]}
 								onSelect={(value) => console.log(value)}
 							/>

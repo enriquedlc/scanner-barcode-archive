@@ -1,13 +1,18 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { FONT_SIZES } from "../../../constants/font";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-interface DropdownOption {
+import { CATEGORY_ICONS } from "../../../../assets";
+const { CHEVRON_CIRCLE_DOWN, CHEVRON_CIRCLE_UP } = CATEGORY_ICONS;
+
+import { FONT_SIZES } from "../../../constants/font";
+import { CategoryItem } from "../category-item";
+
+export interface DropdownOption {
 	label: string;
 	value: string;
 }
 
-interface DropdownProps {
+export interface DropdownProps {
 	options: DropdownOption[];
 	onSelect: (value: string) => void;
 }
@@ -29,21 +34,24 @@ export function CategoryDropdown({ options, onSelect }: DropdownProps) {
 					{selectedOption ? selectedOption.label : "Select an option"}
 				</Text>
 				{/* TODO: ICONS */}
-				<Text style={styles.arrow}>{isOpen ? "▲" : "▼"}</Text>
+
+				{isOpen ? (
+					<Image source={CHEVRON_CIRCLE_UP} style={styles.dropdownIcon} />
+				) : (
+					<Image source={CHEVRON_CIRCLE_DOWN} style={styles.dropdownIcon} />
+				)}
 			</TouchableOpacity>
 			{isOpen && (
 				<View style={styles.optionsContainer}>
 					{/* TODO: FlatList */}
 					{/* TODO: fetch categories */}
 					{/* TODO: categories store zustand */}
-					{options.map((option, index) => (
-						<TouchableOpacity
-							key={option.value + index}
-							style={styles.option}
-							onPress={() => handleSelect(option)}
-						>
-							<Text style={styles.optionLabel}>{option.label}</Text>
-						</TouchableOpacity>
+					{options.map((option) => (
+						<CategoryItem
+							option={option}
+							handleSelect={handleSelect}
+							key={option.label}
+						/>
 					))}
 				</View>
 			)}
@@ -69,9 +77,7 @@ const styles = StyleSheet.create({
 	selectedOptionLabel: {
 		fontSize: FONT_SIZES.MEDIUM,
 	},
-	arrow: {
-		fontSize: 12,
-	},
+
 	optionsContainer: {
 		position: "absolute",
 		top: "100%",
@@ -86,10 +92,6 @@ const styles = StyleSheet.create({
 		overflow: "scroll",
 		zIndex: 1,
 	},
-	option: {
-		padding: 10,
-	},
-	optionLabel: {
-		fontSize: 16,
-	},
+
+	dropdownIcon: { height: 20, width: 20, alignSelf: "center", paddingBottom: 5 },
 });
