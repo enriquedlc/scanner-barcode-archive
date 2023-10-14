@@ -25,8 +25,23 @@ function ArticleModalStat(props: ArticleModalStatProps) {
 export function ArticleInfoModalStats({ article }: { article: Article }) {
 	return (
 		<>
-			<View style={[articleItemStyles.articleItemBarcodeContainer, styles.barcodeContainer]}>
-				<Text style={articleItemStyles.articleItemBarcode}>{article.barcode}</Text>
+			<View
+				style={{
+					flexDirection: "row",
+					justifyContent: "center",
+					gap: 7,
+				}}
+			>
+				<View
+					style={[articleItemStyles.articleItemBarcodeContainer, styles.barcodeContainer]}
+				>
+					<Text style={articleItemStyles.articleItemBarcode}>{article.barcode}</Text>
+				</View>
+				<View
+					style={[articleItemStyles.articleItemBarcodeContainer, styles.barcodeContainer]}
+				>
+					<Text style={articleItemStyles.articleItemBarcode}>{article.categoryName}</Text>
+				</View>
 			</View>
 
 			<ArticleModalStat label="Nombre" value={article.articleName} />

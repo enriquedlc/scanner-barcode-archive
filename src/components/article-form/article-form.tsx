@@ -54,8 +54,6 @@ export function ArticleForm(props: ArticleFormProps) {
 		setScannedArticle({ ...scannedArticle, [input]: text });
 	}
 
-	console.log("scannedArticle", scannedArticle);
-
 	const handleArticleAction = async (
 		article: Article,
 		userId: User["id"],
@@ -91,8 +89,6 @@ export function ArticleForm(props: ArticleFormProps) {
 		setShowArticleForm(false);
 		setScannedBarcode("");
 	};
-
-	console.log(scannedArticle.categoryName);
 
 	return (
 		<Modal animationType="fade" visible={visible}>
