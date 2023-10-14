@@ -5,7 +5,7 @@ import { CATEGORY_ICONS } from "../../../../assets";
 const { CHEVRON_CIRCLE_DOWN, CHEVRON_CIRCLE_UP } = CATEGORY_ICONS;
 
 import { FONT_SIZES } from "../../../constants/font";
-import { CategoryItem } from "../category-item";
+import { CategoryList } from "../category-list";
 
 export interface DropdownOption {
 	label: string;
@@ -34,7 +34,6 @@ export function CategoryDropdown({ options, onSelect }: DropdownProps) {
 					{selectedOption ? selectedOption.label : "Select an option"}
 				</Text>
 				{/* TODO: ICONS */}
-
 				{isOpen ? (
 					<Image source={CHEVRON_CIRCLE_UP} style={styles.dropdownIcon} />
 				) : (
@@ -42,18 +41,11 @@ export function CategoryDropdown({ options, onSelect }: DropdownProps) {
 				)}
 			</TouchableOpacity>
 			{isOpen && (
-				<View style={styles.optionsContainer}>
-					{/* TODO: FlatList */}
-					{/* TODO: fetch categories */}
-					{/* TODO: categories store zustand */}
-					{options.map((option) => (
-						<CategoryItem
-							option={option}
-							handleSelect={handleSelect}
-							key={option.label}
-						/>
-					))}
-				</View>
+				<CategoryList 
+					handleSelect={handleSelect}
+					options={options}
+				/>
+				
 			)}
 		</View>
 	);
@@ -78,20 +70,7 @@ const styles = StyleSheet.create({
 		fontSize: FONT_SIZES.MEDIUM,
 	},
 
-	optionsContainer: {
-		position: "absolute",
-		top: "100%",
-		left: 0,
-		right: 0,
-		backgroundColor: "white",
-		borderWidth: 1,
-		borderColor: "gray",
-		borderRadius: 5,
-		padding: 10,
-		maxHeight: 150,
-		overflow: "scroll",
-		zIndex: 1,
-	},
+
 
 	dropdownIcon: { height: 20, width: 20, alignSelf: "center", paddingBottom: 5 },
 });
