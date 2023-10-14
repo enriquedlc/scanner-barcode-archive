@@ -33,20 +33,13 @@ export function CategoryDropdown({ options, onSelect }: DropdownProps) {
 				<Text style={styles.selectedOptionLabel}>
 					{selectedOption ? selectedOption.label : "Select an option"}
 				</Text>
-				{/* TODO: ICONS */}
 				{isOpen ? (
 					<Image source={CHEVRON_CIRCLE_UP} style={styles.dropdownIcon} />
 				) : (
 					<Image source={CHEVRON_CIRCLE_DOWN} style={styles.dropdownIcon} />
 				)}
 			</TouchableOpacity>
-			{isOpen && (
-				<CategoryList 
-					handleSelect={handleSelect}
-					options={options}
-				/>
-				
-			)}
+			{isOpen && <CategoryList handleSelect={handleSelect} options={options} />}
 		</View>
 	);
 }
@@ -69,8 +62,5 @@ const styles = StyleSheet.create({
 	selectedOptionLabel: {
 		fontSize: FONT_SIZES.MEDIUM,
 	},
-
-
-
 	dropdownIcon: { height: 20, width: 20, alignSelf: "center", paddingBottom: 5 },
 });

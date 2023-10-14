@@ -7,7 +7,7 @@ import { ArticleFormTextInput } from "./article-form-input/article-form-text-inp
 import { INITIAL_ARTICLE_FORM_STATE } from "../../constants/states/initial-states";
 import { useAppNavigation } from "../../hooks/useAppNavigation";
 import { useShowToast } from "../../hooks/useShowToast";
-import { createArticle, updateArticle } from "../../services/articles";
+import { createArticle, updateArticle } from "../../services/article";
 import { useArticlesStore } from "../../store/articles";
 import { User, useUserAuthStore } from "../../store/user-auth";
 import { Article } from "../../types/article";
