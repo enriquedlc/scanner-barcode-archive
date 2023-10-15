@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
-import { DropdownOption } from "./category-dropdown/category-dropdown";
+import { DropdownOption } from "./category-dropdown";
 
 interface CategoryItemProps {
 	option: DropdownOption;

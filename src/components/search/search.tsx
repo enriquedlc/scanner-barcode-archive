@@ -1,13 +1,13 @@
-import { StatusBar } from "expo-status-bar";
-import * as React from "react";
-import { Platform, StyleSheet, View, useWindowDimensions } from "react-native";
+import { useState } from "react";
+import { Platform, StyleSheet, useWindowDimensions } from "react-native";
 import { SceneMap, TabBar, TabView } from "react-native-tab-view";
 import { BLUE_PALLETE } from "../../constants/colors/colors";
+import { ArticleLists } from "../artcile-list-by-category/article-lists";
 import { SearchArticles } from "./search-articles";
 
 const FirstRoute = () => <SearchArticles />;
 
-const SecondRoute = () => <View style={{ flex: 1, backgroundColor: "#673ab7" }} />;
+const SecondRoute = () => <ArticleLists/>
 
 const renderScene = SceneMap({
 	first: FirstRoute,
@@ -17,15 +17,14 @@ const renderScene = SceneMap({
 export function Search() {
 	const layout = useWindowDimensions();
 
-	const [index, setIndex] = React.useState(0);
-	const [routes] = React.useState([
+	const [index, setIndex] = useState(0);
+	const [routes] = useState([
 		{ key: "first", title: "All articles" },
 		{ key: "second", title: "Lists" },
 	]);
 
 	return (
 		<>
-			<StatusBar hidden={true} />
 			<TabView
 				navigationState={{ index, routes }}
 				renderScene={renderScene}

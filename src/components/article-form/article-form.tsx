@@ -15,7 +15,7 @@ import { ScannedData } from "../../types/types";
 
 import { useCategoriesStore } from "../../store/categories";
 import { articleInfoModalStyles } from "../article-info-modal/article-info-modal-styles";
-import { CategoryDropdown } from "../category-list/category-dropdown/category-dropdown";
+import { CategoryDropdown } from "../category-dropdown/category-dropdown";
 import { articleFormStyles } from "./article-form-styles";
 
 interface ArticleFormProps {
