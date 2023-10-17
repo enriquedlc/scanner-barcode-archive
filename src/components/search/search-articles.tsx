@@ -15,7 +15,7 @@ export function SearchArticles() {
 
 	const updateSearchText = (text: string) => setSearchText(text);
 
-	const filteredArticles = articles.filter((article) =>
+	const filteredArticles = articles?.filter((article) =>
 		Object.values(article).some(
 			(value) =>
 				typeof value === "string" && value.toLowerCase().includes(searchText.toLowerCase()),

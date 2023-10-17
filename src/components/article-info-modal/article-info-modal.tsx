@@ -33,7 +33,7 @@ export function ArticleInfoModal(props: ArticleInfoModalProps) {
 		if (response?.deleted) {
 			showToast("success", "Artículo borrado 🗑", "");
 			setShowArticleInfoModal(false);
-			setArticles(articles.filter((art) => art.id !== article.id));
+			setArticles(articles?.filter((art) => art.id !== article.id));
 		}
 	};
 

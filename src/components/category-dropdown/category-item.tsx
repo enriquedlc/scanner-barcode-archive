@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { Image, ImageProps, StyleSheet, Text, TouchableOpacity } from "react-native";
 
 import { DropdownOption } from "./category-dropdown";
 
@@ -19,7 +19,10 @@ export function CategoryItem(props: CategoryItemProps) {
 			onPress={() => handleSelect(option)}
 		>
 			<Image
-				source={CATEGORY_ITEM_LIST_ICONS.find((icon) => icon.icon === option.label)}
+				source={
+					CATEGORY_ITEM_LIST_ICONS.find((icon) => icon.name === option.value)
+						?.icon as ImageProps["source"]
+				}
 				style={{ width: 24, height: 24 }}
 			/>
 			<Text style={styles.optionLabel}>{option.label}</Text>

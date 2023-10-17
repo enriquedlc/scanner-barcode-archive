@@ -7,9 +7,9 @@ interface CategoryItemListIcons {
 	readonly icon: "*.png";
 }
 
-export const CATEGORY_ITEM_LIST_ICONS: CategoryItemListIcons = [
+export const CATEGORY_ITEM_LIST_ICONS: CategoryItemListIcons[] = [
 	{
-		name: "Tornillría",
+		name: "Tornillería",
 		icon: SCREWS,
 	},
 	{
