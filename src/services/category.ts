@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ImageProps } from "react-native";
 
 import { AXIOS_BASE_URL } from "../../credentials";
 
@@ -7,6 +8,7 @@ type CategoryId = `${string}-${string}-${string}-${string}-${string}`;
 export interface Category {
 	id: CategoryId;
 	categoryName: string;
+	icon: ImageProps["source"];
 }
 
 interface CategoriesResponse {

@@ -1,71 +1,73 @@
+import { ImageProps } from "@rneui/base";
+
 import { CATEGORY_ICONS } from "../../../assets";
 
 const { TOOL_BOX, SCREWS, GLOVES, POWER_PLANT, LIGHT_BULB, CAR } = CATEGORY_ICONS;
 
 interface CategoryItemListIcons {
-	readonly name: string;
-	readonly icon: "*.png";
+	readonly categoryName: string;
+	icon: ImageProps["source"];
 }
 
 export const CATEGORY_ITEM_LIST_ICONS: CategoryItemListIcons[] = [
 	{
-		name: "Tornillería",
+		categoryName: "Tornillería",
 		icon: SCREWS,
 	},
 	{
-		name: "Herramientas",
+		categoryName: "Herramientas",
 		icon: TOOL_BOX,
 	},
 	{
-		name: "Guantes",
+		categoryName: "Guantes",
 		icon: GLOVES,
 	},
 	{
-		name: "Electricidad",
+		categoryName: "Electricidad",
 		icon: POWER_PLANT,
 	},
 	{
-		name: "Iluminación",
+		categoryName: "Iluminación",
 		icon: LIGHT_BULB,
 	},
 	{
-		name: "Coches",
+		categoryName: "Coches",
 		icon: CAR,
 	},
 	{
-		name: "Bicicletas",
+		categoryName: "Bicicletas",
 		icon: CATEGORY_ICONS.BIKE,
 	},
 	{
-		name: "Deporte",
+		categoryName: "Deporte",
 		icon: CATEGORY_ICONS.SPORTS,
 	},
 	{
-		name: "Ruedas",
+		categoryName: "Ruedas",
 		icon: CATEGORY_ICONS.TIRE,
 	},
 	{
-		name: "Carteles",
+		categoryName: "Carteles",
 		icon: CATEGORY_ICONS.SIGN,
 	},
 	{
-		name: "Pesca",
+		categoryName: "Pesca",
 		icon: CATEGORY_ICONS.FISHING_ROD,
 	},
 	{
-		name: "Cutters",
+		categoryName: "Cutters",
 		icon: CATEGORY_ICONS.CUTTER,
 	},
 	{
-		name: "Cordelería",
+		categoryName: "Cordelería",
 		icon: CATEGORY_ICONS.ROPE,
 	},
 	{
-		name: "Pintura",
+		categoryName: "Pintura",
 		icon: CATEGORY_ICONS.PAINT,
 	},
 	{
-		name: "Jardinería",
+		categoryName: "Jardinería",
 		icon: CATEGORY_ICONS.GARDENING,
 	},
 ] as const;

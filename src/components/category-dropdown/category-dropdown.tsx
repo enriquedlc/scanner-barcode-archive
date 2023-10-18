@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, ImageProps, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import { CATEGORY_ICONS } from "../../../assets";
 const { CHEVRON_CIRCLE_DOWN, CHEVRON_CIRCLE_UP } = CATEGORY_ICONS;
@@ -10,6 +10,7 @@ import { CategoryList } from "./category-list";
 export interface DropdownOption {
 	label: string;
 	value: string;
+	icon: ImageProps["source"];
 }
 
 export interface DropdownProps {
