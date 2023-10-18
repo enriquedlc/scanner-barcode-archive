@@ -5,6 +5,7 @@ import { CATEGORY_ICONS } from "../../../assets";
 const { CHEVRON_CIRCLE_DOWN, CHEVRON_CIRCLE_UP } = CATEGORY_ICONS;
 
 import { FONT_SIZES } from "../../constants/font";
+import { CategoryIcon } from "./category-icon";
 import { CategoryList } from "./category-list";
 
 export interface DropdownOption {
@@ -34,9 +35,12 @@ export function CategoryDropdown({ options, onSelect, defaultCategory }: Dropdow
 	return (
 		<View style={styles.container}>
 			<TouchableOpacity style={styles.selectedOption} onPress={() => setIsOpen(!isOpen)}>
-				<Text style={styles.selectedOptionLabel}>
-					{selectedOption ? selectedOption?.label : defaultValueText}
-				</Text>
+				<View style={{ flexDirection: "row", gap: 15, justifyContent: "center" }}>
+					<CategoryIcon categoryName={defaultCategory as string} />
+					<Text style={styles.selectedOptionLabel}>
+						{selectedOption ? selectedOption?.label : defaultValueText}
+					</Text>
+				</View>
 				{isOpen ? (
 					<Image source={CHEVRON_CIRCLE_UP} style={styles.dropdownIcon} />
 				) : (
@@ -66,5 +70,5 @@ const styles = StyleSheet.create({
 	selectedOptionLabel: {
 		fontSize: FONT_SIZES.MEDIUM,
 	},
-	dropdownIcon: { height: 20, width: 20, alignSelf: "center", paddingBottom: 5 },
+	dropdownIcon: { height: 20, width: 20, alignSelf: "flex-end", paddingBottom: 5 },
 });

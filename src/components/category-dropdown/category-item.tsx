@@ -1,7 +1,7 @@
-import { Image, ImageProps, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
-import { CATEGORY_ITEM_LIST_ICONS } from "../../constants/category-item-list-icons/category-item-list-icons";
 import { DropdownOption } from "./category-dropdown";
+import { CategoryIcon } from "./category-icon";
 
 interface CategoryItemProps {
 	option: DropdownOption;
@@ -17,14 +17,7 @@ export function CategoryItem(props: CategoryItemProps) {
 			style={styles.option}
 			onPress={() => handleSelect(option)}
 		>
-			{/* TODO: make the this image bellow a component */}
-			<Image
-				source={
-					CATEGORY_ITEM_LIST_ICONS.find((icon) => icon.categoryName === option.value)
-						?.icon as ImageProps["source"]
-				}
-				style={{ width: 24, height: 24 }}
-			/>
+			<CategoryIcon categoryName={option.label} />
 			<Text style={styles.optionLabel}>{option.label}</Text>
 		</TouchableOpacity>
 	);
