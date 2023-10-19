@@ -1,6 +1,6 @@
 import { FlatList, StyleSheet, View } from "react-native";
 
-import { DropdownOption } from "./category-dropdown/category-dropdown";
+import { DropdownOption } from "./category-dropdown";
 import { CategoryItem } from "./category-item";
 
 interface CategoryListProps {

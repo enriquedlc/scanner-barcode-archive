@@ -1,42 +1,66 @@
 import { useState } from "react";
-import { Platform, SafeAreaView, StyleSheet, View } from "react-native";
+import {
+	Platform,
+	StyleSheet,
+	Text,
+	TouchableOpacity,
+	View,
+	useWindowDimensions,
+} from "react-native";
+import { SceneMap, TabBar, TabView } from "react-native-tab-view";
+import { BLUE_PALLETE } from "../../constants/colors/colors";
+import { ArticleLists } from "../artcile-list-by-category/article-lists";
+import { SearchArticles } from "./search-articles";
 
-import { SearchBar } from "@rneui/base/dist/SearchBar/index";
-import { ArticleList } from "../article-list/article-list";
+const FirstRoute = () => <SearchArticles />;
 
-import { useArticlesStore } from "../../store/articles";
+const SecondRoute = () => <ArticleLists />;
 
-import { articleListStylesComponentProps } from "../home/home-styles";
+const goToSecondTab = (jumpTo: (route: string) => void) => () => {
+	jumpTo("second");
+};
+
+const ThirdRoute = ({ jumpTo }: { jumpTo: () => void }) => (
+	<View style={searchStyles.container}>
+		<TouchableOpacity onPress={goToSecondTab(jumpTo)}>
+			<Text style={searchStyles.button}>Go to Second Tab</Text>
+		</TouchableOpacity>
+	</View>
+);
+
+const renderScene = SceneMap({
+	first: FirstRoute,
+	second: SecondRoute,
+	third: ThirdRoute,
+});
 
 export function Search() {
-	const articles = useArticlesStore((state) => state.articles);
+	const layout = useWindowDimensions();
 
-	const [searchText, setSearchText] = useState("");
-
-	const updateSearchText = (text: string) => setSearchText(text);
-
-	// TODO: Implement search functionality for different article properties
-	const filteredArticles = articles.filter((article) =>
-		article.articleName.toLowerCase().includes(searchText.toLowerCase()),
-	);
+	const [index, setIndex] = useState(0);
+	const [routes] = useState([
+		{ key: "first", title: "All articles" },
+		{ key: "second", title: "Lists" },
+		{ key: "third", title: "Detalles" },
+	]);
 
 	return (
-		<SafeAreaView style={searchStyles.container}>
-			<View style={{ maxWidth: "87%", minWidth: "87%", paddingTop: "20%" }}>
-				<SearchBar
-					value={searchText}
-					onChangeText={updateSearchText}
-					placeholder="Buscar artículo..."
-					platform={Platform.OS === "ios" ? "ios" : "android"}
-					containerStyle={searchStyles.searchbar}
-					inputContainerStyle={{ borderRadius: 10, maxHeight: 30 }}
-				/>
-			</View>
-			<ArticleList
-				articles={filteredArticles}
-				articleListStyleComponentProps={articleListStylesComponentProps}
+		<>
+			<TabView
+				navigationState={{ index, routes }}
+				renderScene={renderScene}
+				onIndexChange={setIndex}
+				initialLayout={{ width: layout.width }}
+				renderTabBar={(props) => (
+					<TabBar
+						{...props}
+						style={searchStyles.tabBar}
+						labelStyle={searchStyles.tabLabel}
+						indicatorStyle={searchStyles.tabIndicator}
+					/>
+				)}
 			/>
-		</SafeAreaView>
+		</>
 	);
 }
 
@@ -56,5 +80,24 @@ const searchStyles = StyleSheet.create({
 			height: 10,
 		},
 		elevation: 20,
+	},
+	tabBar: {
+		paddingTop: Platform.OS === "ios" ? "8%" : 0,
+		backgroundColor: BLUE_PALLETE.BLUE,
+		elevation: 0,
+		shadowOpacity: 0,
+	},
+	tabLabel: {
+		color: BLUE_PALLETE.PRIMARY_WHITE,
+		fontWeight: "bold",
+	},
+	tabIndicator: {
+		backgroundColor: "white",
+	},
+	button: {
+		color: BLUE_PALLETE.PRIMARY_WHITE,
+		fontWeight: "bold",
+		fontSize: 20,
+		backgroundColor: BLUE_PALLETE.BLUE,
 	},
 });
