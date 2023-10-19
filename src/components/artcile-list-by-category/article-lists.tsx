@@ -1,8 +1,20 @@
 import { SearchBar } from "@rneui/base/dist/SearchBar/index";
 import { useState } from "react";
 import { FlatList, Platform, StyleSheet, View } from "react-native";
+
 import { useCategoriesStore } from "../../store/categories";
 import { ArticleListItem } from "./article-list-item";
+
+/**
+ * 
+ * TODO: LISTS: 
+
+ - ArticleListItem component 
+        - boton que lleve a la pestaña de detalles
+	- icono que represente dicha categoria
+	- número de artículos que hay con esa categoría
+	- estilar componente
+ */
 
 export function ArticleLists() {
 	const categories = useCategoriesStore((state) => state.categories);
