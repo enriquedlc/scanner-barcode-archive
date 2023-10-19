@@ -32,7 +32,7 @@ export function Navbar() {
 					headerShown: false,
 					tabBarShowLabel: false,
 					tabBarStyle: {
-						backgroundColor: "white",
+						backgroundColor: BLUE_PALLETE.PRIMARY_WHITE,
 						position: "relative",
 						minWidth: "95%",
 						bottom: 25,

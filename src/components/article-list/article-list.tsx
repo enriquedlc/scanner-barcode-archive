@@ -9,7 +9,7 @@ import { articleListStyles } from "./article-list-styles";
 
 interface ArticleListProps {
 	title?: string;
-	articleListStyleComponentProps: {
+	articleListStyleComponentProps?: {
 		height: DimensionValue;
 	};
 	articles: Article[];
@@ -21,7 +21,7 @@ export function ArticleList(props: ArticleListProps) {
 	return (
 		<View
 			style={{
-				height: articleListStyleComponentProps.height,
+				height: articleListStyleComponentProps?.height,
 				...articleListStyles.articleListContainer,
 			}}
 		>

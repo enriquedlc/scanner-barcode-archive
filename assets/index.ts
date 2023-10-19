@@ -24,9 +24,24 @@ import ENGLISH_USA from "./languages/usa.png";
 // navbar icons
 import FILE_EXPORT from "./navbar/file-export.png";
 
+import BIKE from "./category-list/bike.png";
+import CAR from "./category-list/car.png";
 // category icons
 import CHEVRON_CIRCLE_DOWN from "./category-list/circle-chevron-down.png";
 import CHEVRON_CIRCLE_UP from "./category-list/circle-chevron-up.png";
+import CUTTER from "./category-list/cutter.png";
+import FISHING_ROD from "./category-list/fishing-rod.png";
+import GARDENING from "./category-list/gardening.png";
+import GLOVES from "./category-list/gloves.png";
+import LIGHT_BULB from "./category-list/light-bulb.png";
+import PAINT from "./category-list/paint.png";
+import POWER_PLANT from "./category-list/power-plant.png";
+import ROPE from "./category-list/rope.png";
+import SCREWS from "./category-list/screws.png";
+import SIGN from "./category-list/sign.png";
+import SPORTS from "./category-list/sports.png";
+import TIRE from "./category-list/tire.png";
+import TOOL_BOX from "./category-list/tools.png";
 
 const LOGOS = {
 	SPLASH_LOGO,
@@ -64,6 +79,21 @@ const NAVBAR_ICONS = {
 const CATEGORY_ICONS = {
 	CHEVRON_CIRCLE_DOWN,
 	CHEVRON_CIRCLE_UP,
+	SCREWS,
+	BIKE,
+	CAR,
+	CUTTER,
+	FISHING_ROD,
+	GARDENING,
+	GLOVES,
+	LIGHT_BULB,
+	PAINT,
+	POWER_PLANT,
+	ROPE,
+	SIGN,
+	SPORTS,
+	TIRE,
+	TOOL_BOX,
 } as const;
 
 export {

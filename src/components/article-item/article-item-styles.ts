@@ -16,7 +16,7 @@ export const articleItemStyles = StyleSheet.create({
 		shadowOpacity: 0.5,
 		shadowRadius: 5,
 		elevation: 5,
-		minWidth: "95%",
+		minWidth: "97%",
 		borderRadius: 10,
 		alignSelf: "center",
 	},
