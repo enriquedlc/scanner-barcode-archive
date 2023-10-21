@@ -1,6 +1,6 @@
 import { StyleSheet, View } from "react-native";
 
-import { ProfileFooterButton } from "./profile-footer-button";
+import { ButtonIcon } from "../../button-icon/profile-footer-button";
 
 import { useUserAuthStore } from "../../../store/user-auth";
 
@@ -12,12 +12,12 @@ import { ConfirmLogout } from "../modals/confirm-logout";
 export function ProfileFooter() {
 	const logout = useUserAuthStore((state) => state.logout);
 
-	const [showAttributionsModal, setShowAttributionsModal] = useState(false);
+	// const [showAttributionsModal, setShowAttributionsModal] = useState(false);
 	const [showConfirmLogoutModal, setShowConfirmLogoutModal] = useState(false);
 
 	return (
 		<View style={profileFooterStyles.profileFooterContainer}>
-			<ProfileFooterButton
+			<ButtonIcon
 				// TODO: implement modal with info about the app, its purpose and its
 				// creators and contributors mention to the people who made the icons
 				icon={INFO_CIRCLE}
@@ -25,9 +25,7 @@ export function ProfileFooter() {
 				outlineColor={BLUE_PALLETE.BLUE}
 				action={() => console.log("atribuciones")}
 			/>
-			<ProfileFooterButton
-				// TODO: implement modal asking for confirmation,
-				// confirming will call logout and rederict to landing page
+			<ButtonIcon
 				icon={LOGOUT}
 				label="Cerrar Sesión"
 				outlineColor="red"

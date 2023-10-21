@@ -2,7 +2,7 @@ import { Modal, StyleSheet, Text, View } from "react-native";
 
 import { useAppNavigation } from "../../../hooks/useAppNavigation";
 import { useUserAuthStore } from "../../../store/user-auth";
-import { ProfileFooterButton } from "../profile-footer/profile-footer-button";
+import { ButtonIcon } from "../../button-icon/profile-footer-button";
 
 import { ARROW_BACK, LOGOUT } from "../../../../assets/profile-images";
 import { BLUE_PALLETE } from "../../../constants/colors/colors";
@@ -38,13 +38,13 @@ export function ConfirmLogout(props: ConfirmLogoutProps) {
 						¿Estás seguro que deseas cerrar sesión?
 					</Text>
 					<View style={styles.buttonsContainer}>
-						<ProfileFooterButton
+						<ButtonIcon
 							icon={ARROW_BACK}
 							label="Volver"
 							outlineColor={BLUE_PALLETE.BLUE}
 							action={goBack}
 						/>
-						<ProfileFooterButton
+						<ButtonIcon
 							icon={LOGOUT}
 							label="Cerrar Sesión"
 							outlineColor="red"

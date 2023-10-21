@@ -1,15 +1,15 @@
-import { Image, Text, TouchableOpacity, ImageProps, StyleSheet } from "react-native";
+import { Image, ImageProps, StyleSheet, Text, TouchableOpacity } from "react-native";
 
-import { profileStyles } from "../../../screens/profile-screen/profile-styles";
+import { profileStyles } from "../../screens/profile-screen/profile-styles";
 
-interface ProfileFooterButtonProps {
+interface ButtonIconsProps {
 	label: string;
 	icon: ImageProps;
 	outlineColor: string;
 	action: () => void;
 }
 
-export function ProfileFooterButton(props: ProfileFooterButtonProps) {
+export function ButtonIcon(props: ButtonIconsProps) {
 	const { label, icon, outlineColor } = props;
 	return (
 		<TouchableOpacity

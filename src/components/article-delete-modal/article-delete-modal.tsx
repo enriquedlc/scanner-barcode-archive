@@ -1,6 +1,6 @@
 import { Modal, StyleSheet, Text, View } from "react-native";
 
-import { ProfileFooterButton } from "../profile/profile-footer/profile-footer-button";
+import { ButtonIcon } from "../button-icon/profile-footer-button";
 
 import { ARROW_BACK, TRASH } from "../../../assets/profile-images";
 
@@ -24,13 +24,13 @@ export function ArticleDeleteModal(props: ConfirmLogoutProps) {
 						Confirmación: borrar artículo
 					</Text>
 					<View style={styles.buttonsContainer}>
-						<ProfileFooterButton
+						<ButtonIcon
 							icon={ARROW_BACK}
 							label="Volver"
 							outlineColor={BLUE_PALLETE.BLUE}
 							action={() => setShowConfirmLogoutModal(false)}
 						/>
-						<ProfileFooterButton
+						<ButtonIcon
 							icon={TRASH}
 							label="Borrar"
 							outlineColor="red"
