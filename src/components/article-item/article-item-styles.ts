@@ -34,8 +34,8 @@ export const articleItemStyles = StyleSheet.create({
 		gap: 15,
 	},
 	articleHeaderIcon: {
-		width: 50,
-		height: 50,
+		width: 45,
+		height: 45,
 	},
 	articleItemHeaderDescription: {
 		flex: 1,

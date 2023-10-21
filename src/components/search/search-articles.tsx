@@ -32,6 +32,7 @@ export function SearchArticles() {
 					platform={Platform.OS === "ios" ? "ios" : "android"}
 					containerStyle={searchStyles.searchbar}
 					inputContainerStyle={{ borderRadius: 10, maxHeight: 30 }}
+					inputStyle={{ fontSize: 15 }}
 				/>
 			</View>
 			<ArticleList

@@ -36,7 +36,10 @@ export function CategoryDropdown({ options, onSelect, defaultCategory }: Dropdow
 		<View style={styles.container}>
 			<TouchableOpacity style={styles.selectedOption} onPress={() => setIsOpen(!isOpen)}>
 				<View style={{ flexDirection: "row", gap: 15, justifyContent: "center" }}>
-					<CategoryIcon categoryName={defaultCategory as string} />
+					<CategoryIcon
+						categoryName={defaultCategory as string}
+						imageStyles={{ width: 25, height: 25 }}
+					/>
 					<Text style={styles.selectedOptionLabel}>
 						{selectedOption ? selectedOption?.label : defaultValueText}
 					</Text>
@@ -69,6 +72,7 @@ const styles = StyleSheet.create({
 	},
 	selectedOptionLabel: {
 		fontSize: FONT_SIZES.MEDIUM,
+		alignSelf: "center",
 	},
 	dropdownIcon: { height: 20, width: 20, alignSelf: "flex-end", paddingBottom: 5 },
 });
