@@ -1,6 +1,6 @@
 import { StyleSheet, View } from "react-native";
 
-import { ButtonIcon } from "../../button-icon/profile-footer-button";
+import { ButtonIcon } from "../../button-icon/button-icon";
 
 import { useUserAuthStore } from "../../../store/user-auth";
 

@@ -1,6 +1,6 @@
 import { Modal, StyleSheet, Text, View } from "react-native";
 
-import { ButtonIcon } from "../button-icon/profile-footer-button";
+import { ButtonIcon } from "../button-icon/button-icon";
 
 import { ARROW_BACK, TRASH } from "../../../assets/profile-images";
 
