@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View } from "react-native";
-import { DETAILS_ICONS } from "../../../assets";
-import { BLUE_PALLETE } from "../../constants/colors/colors";
-import { FONT_SIZES } from "../../constants/font";
+
 import { Category } from "../../services/category";
 import { useArticlesStore } from "../../store/articles";
 import { ButtonIcon } from "../button-icon/button-icon";
 import { CategoryIcon } from "../category-dropdown/category-icon";
+
+import { DETAILS_ICONS } from "../../../assets";
+import { BLUE_PALLETE } from "../../constants/colors/colors";
+import { FONT_SIZES } from "../../constants/font";
 
 interface ArticleListItemProps {
 	title: Category["categoryName"];
