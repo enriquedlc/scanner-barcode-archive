@@ -24,6 +24,7 @@ export function Home() {
 				title="Últimos artículos añadidos"
 				articleListStyleComponentProps={articleListStylesComponentProps}
 				articles={getArticles()}
+				articleListStyle={{ paddingBottom: "4%" }}
 			/>
 		</SafeAreaView>
 	);

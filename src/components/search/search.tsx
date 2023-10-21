@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Platform, StyleSheet, View, useWindowDimensions } from "react-native";
+import { Platform, StyleSheet, Text, View, useWindowDimensions } from "react-native";
 import { SceneMap, TabBar, TabView } from "react-native-tab-view";
 
 import { useArticleListDetailStore } from "../../store/article-list-detail";
@@ -24,10 +24,14 @@ const ThirdRoute = () => {
 
 	return (
 		<View style={searchStyles.container}>
+			<Text style={searchStyles.listTitle}>
+				Detalles de la categoría {articleCategoryDetailListName}
+			</Text>
 			<ArticleList
 				articles={articles.filter(
 					(articles) => articles.categoryName === articleCategoryDetailListName,
 				)}
+				articleListStyle={{ paddingBottom: "20%" }}
 			/>
 		</View>
 	);
@@ -103,5 +107,10 @@ const searchStyles = StyleSheet.create({
 		color: BLUE_PALLETE.BLUE,
 		fontWeight: "bold",
 		fontSize: 16,
+	},
+	listTitle: {
+		fontSize: 16,
+		fontWeight: "bold",
+		paddingTop: "12%",
 	},
 });

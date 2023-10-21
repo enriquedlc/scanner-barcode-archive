@@ -1,4 +1,12 @@
-import { DimensionValue, FlatList, StyleSheet, Text, View } from "react-native";
+import {
+	DimensionValue,
+	FlatList,
+	StyleProp,
+	StyleSheet,
+	Text,
+	View,
+	ViewStyle,
+} from "react-native";
 
 import { ArticleItem } from "../article-item/article-item";
 
@@ -8,22 +16,26 @@ import { FONT_SIZES } from "../../constants/font";
 import { articleListStyles } from "./article-list-styles";
 
 interface ArticleListProps {
+	articles: Article[];
 	title?: string;
 	articleListStyleComponentProps?: {
 		height: DimensionValue;
 	};
-	articles: Article[];
+	articleListStyle?: StyleProp<ViewStyle>;
 }
 
 export function ArticleList(props: ArticleListProps) {
-	const { articleListStyleComponentProps, title, articles } = props;
+	const { articleListStyleComponentProps, title, articles, articleListStyle } = props;
 
 	return (
 		<View
-			style={{
-				height: articleListStyleComponentProps?.height,
-				...articleListStyles.articleListContainer,
-			}}
+			style={[
+				{
+					height: articleListStyleComponentProps?.height,
+					...articleListStyles.articleListContainer,
+				},
+				articleListStyle,
+			]}
 		>
 			<Text style={styles.title}>{title}</Text>
 			{articles === undefined || articles.length === 0 ? (

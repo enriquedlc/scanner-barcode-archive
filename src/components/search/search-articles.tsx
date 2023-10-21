@@ -6,8 +6,6 @@ import { ArticleList } from "../article-list/article-list";
 
 import { useArticlesStore } from "../../store/articles";
 
-import { articleListStylesComponentSearchProps } from "../home/home-styles";
-
 export function SearchArticles() {
 	const articles = useArticlesStore((state) => state.articles);
 
@@ -35,10 +33,7 @@ export function SearchArticles() {
 					inputStyle={{ fontSize: 15 }}
 				/>
 			</View>
-			<ArticleList
-				articles={filteredArticles}
-				articleListStyleComponentProps={articleListStylesComponentSearchProps}
-			/>
+			<ArticleList articles={filteredArticles} articleListStyle={{ paddingBottom: "28%" }} />
 		</SafeAreaView>
 	);
 }
