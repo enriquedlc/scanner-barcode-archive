@@ -1,19 +1,29 @@
 import { StyleSheet, Text, View } from "react-native";
-import { DETAILS_ICONS } from "../../../assets";
-import { BLUE_PALLETE } from "../../constants/colors/colors";
-import { FONT_SIZES } from "../../constants/font";
+
 import { Category } from "../../services/category";
+import { useArticleListDetailStore } from "../../store/article-list-detail";
 import { useArticlesStore } from "../../store/articles";
 import { ButtonIcon } from "../button-icon/button-icon";
 import { CategoryIcon } from "../category-dropdown/category-icon";
 
+import { DETAILS_ICONS } from "../../../assets";
+import { BLUE_PALLETE } from "../../constants/colors/colors";
+import { FONT_SIZES } from "../../constants/font";
+
 interface ArticleListItemProps {
 	title: Category["categoryName"];
+	jumpTo: (route: string) => void;
 }
 
 export function ArticleListItem(props: ArticleListItemProps) {
-	const { title } = props;
+	const { title, jumpTo } = props;
 	const articles = useArticlesStore((state) => state.articles);
+	const { setArticleCategoryDetailListName } = useArticleListDetailStore((state) => state);
+
+	const handlePress = () => {
+		setArticleCategoryDetailListName(title);
+		jumpTo("third");
+	};
 
 	return (
 		<View style={styles.container}>
@@ -25,7 +35,7 @@ export function ArticleListItem(props: ArticleListItemProps) {
 				</Text>
 			</View>
 			<ButtonIcon
-				action={() => console.log("details")}
+				action={handlePress}
 				icon={DETAILS_ICONS.DETAILS}
 				label="Detalles"
 				outlineColor={BLUE_PALLETE.PRIMARY_WHITE}
