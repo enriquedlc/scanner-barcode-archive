@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
 	articleListsContainer: {
 		alignItems: "center",
 		justifyContent: "center",
+		paddingBottom: "20%",
 	},
 });
 

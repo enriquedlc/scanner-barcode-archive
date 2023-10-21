@@ -3,7 +3,9 @@ import { DETAILS_ICONS } from "../../../assets";
 import { BLUE_PALLETE } from "../../constants/colors/colors";
 import { FONT_SIZES } from "../../constants/font";
 import { Category } from "../../services/category";
+import { useArticlesStore } from "../../store/articles";
 import { ButtonIcon } from "../button-icon/button-icon";
+import { CategoryIcon } from "../category-dropdown/category-icon";
 
 interface ArticleListItemProps {
 	title: Category["categoryName"];
@@ -11,10 +13,17 @@ interface ArticleListItemProps {
 
 export function ArticleListItem(props: ArticleListItemProps) {
 	const { title } = props;
+	const articles = useArticlesStore((state) => state.articles);
 
 	return (
 		<View style={styles.container}>
-			<Text>{title}</Text>
+			<View style={styles.listDescription}>
+				<CategoryIcon categoryName={title} imageStyles={{ width: 25, height: 25 }} />
+				<Text style={styles.categoryListTitle}>{title}</Text>
+				<Text style={styles.categoryListCountText}>
+					{articles.filter((article) => article.categoryName === title).length}
+				</Text>
+			</View>
 			<ButtonIcon
 				action={() => console.log("details")}
 				icon={DETAILS_ICONS.DETAILS}
@@ -37,12 +46,26 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		minWidth: "90%",
 		maxWidth: "90%",
-		height: 100,
 		backgroundColor: "white",
 		borderRadius: 10,
 		borderColor: "gray",
 		borderWidth: 1,
-		marginVertical: 10,
+		paddingVertical: 5,
+		marginVertical: 5,
+	},
+	listDescription: {
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "flex-start",
+		paddingLeft: 10,
+		gap: 10,
+	},
+	categoryListCountText: {
+		fontSize: FONT_SIZES.MEDIUM,
+	},
+	categoryListTitle: {
+		fontSize: FONT_SIZES.MEDIUM_MEDIUM,
+		fontWeight: "bold",
 	},
 	touchableStyles: {
 		gap: 7,
