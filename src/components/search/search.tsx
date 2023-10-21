@@ -14,16 +14,14 @@ import { SearchArticles } from "./search-articles";
 
 const FirstRoute = () => <SearchArticles />;
 
-const SecondRoute = () => <ArticleLists />;
+const SecondRoute = ({ jumpTo }: { jumpTo: (route: string) => void }) => (
+	<ArticleLists jumpTo={jumpTo} />
+);
 
-const goToSecondTab = (jumpTo: (route: string) => void) => () => {
-	jumpTo("second");
-};
-
-const ThirdRoute = ({ jumpTo }: { jumpTo: () => void }) => (
+const ThirdRoute = ({ jumpTo }: { jumpTo: (route: string) => void }) => (
 	<View style={searchStyles.container}>
-		<TouchableOpacity onPress={goToSecondTab(jumpTo)}>
-			<Text style={searchStyles.button}>Go to Second Tab</Text>
+		<TouchableOpacity onPress={() => jumpTo("second")}>
+			<Text style={searchStyles.button}>Choose a list to see the content</Text>
 		</TouchableOpacity>
 	</View>
 );
@@ -95,9 +93,8 @@ const searchStyles = StyleSheet.create({
 		backgroundColor: "white",
 	},
 	button: {
-		color: BLUE_PALLETE.PRIMARY_WHITE,
+		color: BLUE_PALLETE.BLUE,
 		fontWeight: "bold",
-		fontSize: 20,
-		backgroundColor: BLUE_PALLETE.BLUE,
+		fontSize: 16,
 	},
 });

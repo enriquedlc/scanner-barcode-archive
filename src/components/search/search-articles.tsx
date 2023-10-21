@@ -1,7 +1,7 @@
+import { SearchBar } from "@rneui/base/dist/SearchBar/index";
 import { useState } from "react";
 import { Platform, SafeAreaView, StyleSheet, View } from "react-native";
 
-import { SearchBar } from "@rneui/base/dist/SearchBar/index";
 import { ArticleList } from "../article-list/article-list";
 
 import { useArticlesStore } from "../../store/articles";

@@ -9,10 +9,11 @@ import { CategoryIcon } from "../category-dropdown/category-icon";
 
 interface ArticleListItemProps {
 	title: Category["categoryName"];
+	jumpTo: (route: string) => void;
 }
 
 export function ArticleListItem(props: ArticleListItemProps) {
-	const { title } = props;
+	const { title, jumpTo } = props;
 	const articles = useArticlesStore((state) => state.articles);
 
 	return (
@@ -25,7 +26,7 @@ export function ArticleListItem(props: ArticleListItemProps) {
 				</Text>
 			</View>
 			<ButtonIcon
-				action={() => console.log("details")}
+				action={() => jumpTo("third")}
 				icon={DETAILS_ICONS.DETAILS}
 				label="Detalles"
 				outlineColor={BLUE_PALLETE.PRIMARY_WHITE}
