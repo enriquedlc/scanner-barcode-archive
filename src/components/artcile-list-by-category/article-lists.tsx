@@ -35,10 +35,11 @@ export function ArticleLists() {
 			<SearchBar
 				value={searchText}
 				onChangeText={updateSearchText}
-				placeholder="Buscar artículo..."
+				placeholder="Buscar lista de artículos..."
 				platform={Platform.OS === "ios" ? "ios" : "android"}
 				containerStyle={searchStyles.searchbar}
 				inputContainerStyle={{ borderRadius: 10, maxHeight: 30 }}
+				inputStyle={{ fontSize: 15 }}
 			/>
 			<FlatList
 				data={filteredCategories}

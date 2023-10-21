@@ -28,7 +28,7 @@ export function ArticleListItem(props: ArticleListItemProps) {
 				action={() => console.log("details")}
 				icon={DETAILS_ICONS.DETAILS}
 				label="Detalles"
-				outlineColor={BLUE_PALLETE.BLUE}
+				outlineColor={BLUE_PALLETE.PRIMARY_WHITE}
 				displayLabel={false}
 				touchableStyles={styles.touchableStyles}
 				textStyles={styles.textStyles}
@@ -40,18 +40,26 @@ export function ArticleListItem(props: ArticleListItemProps) {
 
 const styles = StyleSheet.create({
 	container: {
+		minWidth: "85%",
+		maxWidth: "85%",
+		width: "47%",
 		display: "flex",
 		flexDirection: "row",
 		justifyContent: "space-between",
 		alignItems: "center",
-		minWidth: "90%",
-		maxWidth: "90%",
 		backgroundColor: "white",
 		borderRadius: 10,
 		borderColor: "gray",
-		borderWidth: 1,
-		paddingVertical: 5,
+		paddingVertical: 15,
 		marginVertical: 5,
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowOpacity: 0.5,
+		shadowRadius: 5,
+		elevation: 10,
 	},
 	listDescription: {
 		flexDirection: "row",
