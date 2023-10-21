@@ -5,6 +5,7 @@ import { CATEGORY_ICONS } from "../../../assets";
 const { TOOL_BOX, SCREWS, GLOVES, POWER_PLANT, LIGHT_BULB, CAR } = CATEGORY_ICONS;
 
 export type CategoryName =
+	| ""
 	| "Tornillería"
 	| "Herramientas"
 	| "Guantes"

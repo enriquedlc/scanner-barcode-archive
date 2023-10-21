@@ -1,3 +1,4 @@
+import { Category } from "../services/category";
 import { Prettify } from "./types";
 
 export interface Article {
@@ -9,7 +10,7 @@ export interface Article {
 	exhibition: number;
 	shelf: number;
 	warehouse: number;
-	categoryName: string;
+	categoryName: Category["categoryName"];
 }
 
 type ArticleForm = Omit<Article, "id" | "createdAt" | "updatedAt"> & {

@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 
 import { Category } from "../../services/category";
+import { useArticleListDetailStore } from "../../store/article-list-detail";
 import { useArticlesStore } from "../../store/articles";
 import { ButtonIcon } from "../button-icon/button-icon";
 import { CategoryIcon } from "../category-dropdown/category-icon";
@@ -17,6 +18,12 @@ interface ArticleListItemProps {
 export function ArticleListItem(props: ArticleListItemProps) {
 	const { title, jumpTo } = props;
 	const articles = useArticlesStore((state) => state.articles);
+	const { setArticleCategoryDetailListName } = useArticleListDetailStore((state) => state);
+
+	const handlePress = () => {
+		setArticleCategoryDetailListName(title);
+		jumpTo("third");
+	};
 
 	return (
 		<View style={styles.container}>
@@ -28,7 +35,7 @@ export function ArticleListItem(props: ArticleListItemProps) {
 				</Text>
 			</View>
 			<ButtonIcon
-				action={() => jumpTo("third")}
+				action={handlePress}
 				icon={DETAILS_ICONS.DETAILS}
 				label="Detalles"
 				outlineColor={BLUE_PALLETE.PRIMARY_WHITE}

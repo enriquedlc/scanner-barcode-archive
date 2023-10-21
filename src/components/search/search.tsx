@@ -1,16 +1,14 @@
 import { useState } from "react";
-import {
-	Platform,
-	StyleSheet,
-	Text,
-	TouchableOpacity,
-	View,
-	useWindowDimensions,
-} from "react-native";
+import { Platform, StyleSheet, View, useWindowDimensions } from "react-native";
 import { SceneMap, TabBar, TabView } from "react-native-tab-view";
-import { BLUE_PALLETE } from "../../constants/colors/colors";
+
+import { useArticleListDetailStore } from "../../store/article-list-detail";
+import { useArticlesStore } from "../../store/articles";
 import { ArticleLists } from "../artcile-list-by-category/article-lists";
+import { ArticleList } from "../article-list/article-list";
 import { SearchArticles } from "./search-articles";
+
+import { BLUE_PALLETE } from "../../constants/colors/colors";
 
 const FirstRoute = () => <SearchArticles />;
 
@@ -18,13 +16,22 @@ const SecondRoute = ({ jumpTo }: { jumpTo: (route: string) => void }) => (
 	<ArticleLists jumpTo={jumpTo} />
 );
 
-const ThirdRoute = ({ jumpTo }: { jumpTo: (route: string) => void }) => (
-	<View style={searchStyles.container}>
-		<TouchableOpacity onPress={() => jumpTo("second")}>
-			<Text style={searchStyles.button}>Choose a list to see the content</Text>
-		</TouchableOpacity>
-	</View>
-);
+const ThirdRoute = () => {
+	const articles = useArticlesStore((state) => state.articles);
+	const articleCategoryDetailListName = useArticleListDetailStore(
+		(state) => state.articleCategoryDetailListName,
+	);
+
+	return (
+		<View style={searchStyles.container}>
+			<ArticleList
+				articles={articles.filter(
+					(articles) => articles.categoryName === articleCategoryDetailListName,
+				)}
+			/>
+		</View>
+	);
+};
 
 const renderScene = SceneMap({
 	first: FirstRoute,
