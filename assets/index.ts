@@ -43,6 +43,9 @@ import SPORTS from "./category-list/sports.png";
 import TIRE from "./category-list/tire.png";
 import TOOL_BOX from "./category-list/tools.png";
 
+// VARIOUS
+import DETAILS from "./various/details.png";
+
 const LOGOS = {
 	SPLASH_LOGO,
 } as const;
@@ -96,9 +99,14 @@ const CATEGORY_ICONS = {
 	TOOL_BOX,
 } as const;
 
+const DETAILS_ICONS = {
+	DETAILS,
+} as const;
+
 export {
 	BARCODE,
 	CATEGORY_ICONS,
+	DETAILS_ICONS,
 	LANDING,
 	LANGUAGE_FLAGS,
 	LOGOS,

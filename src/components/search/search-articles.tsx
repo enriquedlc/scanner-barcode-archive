@@ -1,12 +1,10 @@
+import { SearchBar } from "@rneui/base/dist/SearchBar/index";
 import { useState } from "react";
 import { Platform, SafeAreaView, StyleSheet, View } from "react-native";
 
-import { SearchBar } from "@rneui/base/dist/SearchBar/index";
 import { ArticleList } from "../article-list/article-list";
 
 import { useArticlesStore } from "../../store/articles";
-
-import { articleListStylesComponentSearchProps } from "../home/home-styles";
 
 export function SearchArticles() {
 	const articles = useArticlesStore((state) => state.articles);
@@ -32,12 +30,10 @@ export function SearchArticles() {
 					platform={Platform.OS === "ios" ? "ios" : "android"}
 					containerStyle={searchStyles.searchbar}
 					inputContainerStyle={{ borderRadius: 10, maxHeight: 30 }}
+					inputStyle={{ fontSize: 15 }}
 				/>
 			</View>
-			<ArticleList
-				articles={filteredArticles}
-				articleListStyleComponentProps={articleListStylesComponentSearchProps}
-			/>
+			<ArticleList articles={filteredArticles} articleListStyle={{ paddingBottom: "28%" }} />
 		</SafeAreaView>
 	);
 }

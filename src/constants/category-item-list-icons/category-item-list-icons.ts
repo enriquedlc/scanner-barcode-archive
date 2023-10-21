@@ -4,9 +4,27 @@ import { CATEGORY_ICONS } from "../../../assets";
 
 const { TOOL_BOX, SCREWS, GLOVES, POWER_PLANT, LIGHT_BULB, CAR } = CATEGORY_ICONS;
 
+export type CategoryName =
+	| ""
+	| "Tornillería"
+	| "Herramientas"
+	| "Guantes"
+	| "Electricidad"
+	| "Iluminación"
+	| "Coches"
+	| "Bicicletas"
+	| "Deporte"
+	| "Ruedas"
+	| "Carteles"
+	| "Pesca"
+	| "Cutters"
+	| "Cordelería"
+	| "Pintura"
+	| "Jardinería";
+
 interface CategoryItemListIcons {
-	readonly categoryName: string;
-	icon: ImageProps["source"];
+	readonly categoryName: CategoryName;
+	readonly icon: ImageProps["source"];
 }
 
 export const CATEGORY_ITEM_LIST_ICONS: CategoryItemListIcons[] = [

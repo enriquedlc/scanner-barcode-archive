@@ -5,18 +5,13 @@ import { FlatList, Platform, StyleSheet, View } from "react-native";
 import { useCategoriesStore } from "../../store/categories";
 import { ArticleListItem } from "./article-list-item";
 
-/**
- * 
- * TODO: LISTS: 
+interface ArticleListsProps {
+	jumpTo: (route: string) => void;
+}
 
- - ArticleListItem component 
-        - boton que lleve a la pestaña de detalles
-	- icono que represente dicha categoria
-	- número de artículos que hay con esa categoría
-	- estilar componente
- */
+export function ArticleLists(props: ArticleListsProps) {
+	const { jumpTo } = props;
 
-export function ArticleLists() {
 	const categories = useCategoriesStore((state) => state.categories);
 
 	const [searchText, setSearchText] = useState("");
@@ -35,14 +30,17 @@ export function ArticleLists() {
 			<SearchBar
 				value={searchText}
 				onChangeText={updateSearchText}
-				placeholder="Buscar artículo..."
+				placeholder="Buscar lista de artículos..."
 				platform={Platform.OS === "ios" ? "ios" : "android"}
 				containerStyle={searchStyles.searchbar}
 				inputContainerStyle={{ borderRadius: 10, maxHeight: 30 }}
+				inputStyle={{ fontSize: 15 }}
 			/>
 			<FlatList
 				data={filteredCategories}
-				renderItem={({ item }) => <ArticleListItem title={item.categoryName} />}
+				renderItem={({ item }) => (
+					<ArticleListItem jumpTo={jumpTo} title={item.categoryName} />
+				)}
 				keyExtractor={(item) => item.id.toString()}
 				contentContainerStyle={styles.articleListsContainer}
 			/>
@@ -54,6 +52,7 @@ const styles = StyleSheet.create({
 	articleListsContainer: {
 		alignItems: "center",
 		justifyContent: "center",
+		paddingBottom: "20%",
 	},
 });
 

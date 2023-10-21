@@ -1,32 +1,41 @@
 import { useState } from "react";
-import {
-	Platform,
-	StyleSheet,
-	Text,
-	TouchableOpacity,
-	View,
-	useWindowDimensions,
-} from "react-native";
+import { Platform, StyleSheet, Text, View, useWindowDimensions } from "react-native";
 import { SceneMap, TabBar, TabView } from "react-native-tab-view";
-import { BLUE_PALLETE } from "../../constants/colors/colors";
+
+import { useArticleListDetailStore } from "../../store/article-list-detail";
+import { useArticlesStore } from "../../store/articles";
 import { ArticleLists } from "../artcile-list-by-category/article-lists";
+import { ArticleList } from "../article-list/article-list";
 import { SearchArticles } from "./search-articles";
+
+import { BLUE_PALLETE } from "../../constants/colors/colors";
 
 const FirstRoute = () => <SearchArticles />;
 
-const SecondRoute = () => <ArticleLists />;
-
-const goToSecondTab = (jumpTo: (route: string) => void) => () => {
-	jumpTo("second");
-};
-
-const ThirdRoute = ({ jumpTo }: { jumpTo: () => void }) => (
-	<View style={searchStyles.container}>
-		<TouchableOpacity onPress={goToSecondTab(jumpTo)}>
-			<Text style={searchStyles.button}>Go to Second Tab</Text>
-		</TouchableOpacity>
-	</View>
+const SecondRoute = ({ jumpTo }: { jumpTo: (route: string) => void }) => (
+	<ArticleLists jumpTo={jumpTo} />
 );
+
+const ThirdRoute = () => {
+	const articles = useArticlesStore((state) => state.articles);
+	const articleCategoryDetailListName = useArticleListDetailStore(
+		(state) => state.articleCategoryDetailListName,
+	);
+
+	return (
+		<View style={searchStyles.container}>
+			<Text style={searchStyles.listTitle}>
+				Detalles de la categoría {articleCategoryDetailListName}
+			</Text>
+			<ArticleList
+				articles={articles.filter(
+					(articles) => articles.categoryName === articleCategoryDetailListName,
+				)}
+				articleListStyle={{ paddingBottom: "20%" }}
+			/>
+		</View>
+	);
+};
 
 const renderScene = SceneMap({
 	first: FirstRoute,
@@ -95,9 +104,13 @@ const searchStyles = StyleSheet.create({
 		backgroundColor: "white",
 	},
 	button: {
-		color: BLUE_PALLETE.PRIMARY_WHITE,
+		color: BLUE_PALLETE.BLUE,
 		fontWeight: "bold",
-		fontSize: 20,
-		backgroundColor: BLUE_PALLETE.BLUE,
+		fontSize: 16,
+	},
+	listTitle: {
+		fontSize: 16,
+		fontWeight: "bold",
+		paddingTop: "12%",
 	},
 });

@@ -5,10 +5,11 @@ import { Category } from "../../services/category";
 
 interface CategoryIconProps {
 	categoryName: Category["categoryName"];
+	imageStyles?: ImageProps["style"];
 }
 
 export function CategoryIcon(props: CategoryIconProps) {
-	const { categoryName } = props;
+	const { categoryName, imageStyles } = props;
 
 	return (
 		<Image
@@ -16,7 +17,7 @@ export function CategoryIcon(props: CategoryIconProps) {
 				CATEGORY_ITEM_LIST_ICONS.find((icon) => icon.categoryName === categoryName)
 					?.icon as ImageProps["source"]
 			}
-			style={{ width: 24, height: 24 }}
+			style={imageStyles}
 		/>
 	);
 }
