@@ -26,6 +26,7 @@ import FILE_EXPORT from "./navbar/file-export.png";
 
 import BIKE from "./category-list/bike.png";
 import CAR from "./category-list/car.png";
+
 // category icons
 import CHEVRON_CIRCLE_DOWN from "./category-list/circle-chevron-down.png";
 import CHEVRON_CIRCLE_UP from "./category-list/circle-chevron-up.png";
@@ -45,6 +46,11 @@ import TOOL_BOX from "./category-list/tools.png";
 
 // VARIOUS
 import DETAILS from "./various/details.png";
+import BARCODE_SCANNER from "./various/barcode-scanner.png";
+
+// CHARTS
+import CHART_BAR from "./charts/chart-bar.png";
+import CHART_HISTOGRAM from "./charts/chart-histogram.png";
 
 const LOGOS = {
 	SPLASH_LOGO,
@@ -103,6 +109,11 @@ const DETAILS_ICONS = {
 	DETAILS,
 } as const;
 
+const CHART_ICONS = {
+	CHART_BAR,
+	CHART_HISTOGRAM,
+} as const;
+
 export {
 	BARCODE,
 	CATEGORY_ICONS,
@@ -113,4 +124,6 @@ export {
 	NAVBAR_ICONS,
 	TOOLS,
 	USER_PROFILE_IMAGES,
+	CHART_ICONS,
+	BARCODE_SCANNER,
 };

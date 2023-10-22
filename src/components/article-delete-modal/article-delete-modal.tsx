@@ -29,12 +29,14 @@ export function ArticleDeleteModal(props: ConfirmLogoutProps) {
 							label="Volver"
 							outlineColor={BLUE_PALLETE.BLUE}
 							action={() => setShowConfirmLogoutModal(false)}
+							displayLabel={true}
 						/>
 						<ButtonIcon
 							icon={TRASH}
 							label="Borrar"
 							outlineColor="red"
 							action={action}
+							displayLabel={true}
 						/>
 					</View>
 				</View>

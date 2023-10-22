@@ -43,12 +43,14 @@ export function ConfirmLogout(props: ConfirmLogoutProps) {
 							label="Volver"
 							outlineColor={BLUE_PALLETE.BLUE}
 							action={goBack}
+							displayLabel={true}
 						/>
 						<ButtonIcon
 							icon={LOGOUT}
 							label="Cerrar Sesión"
 							outlineColor="red"
 							action={handleLogout}
+							displayLabel={true}
 						/>
 					</View>
 				</View>
