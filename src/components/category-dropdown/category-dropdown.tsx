@@ -4,13 +4,15 @@ import { Image, ImageProps, StyleSheet, Text, TouchableOpacity, View } from "rea
 import { CATEGORY_ICONS } from "../../../assets";
 const { CHEVRON_CIRCLE_DOWN, CHEVRON_CIRCLE_UP } = CATEGORY_ICONS;
 
-import { FONT_SIZES } from "../../constants/font";
+import { Category } from "../../services/category";
 import { CategoryIcon } from "./category-icon";
 import { CategoryList } from "./category-list";
 
+import { FONT_SIZES } from "../../constants/font";
+
 export interface DropdownOption {
 	label: string;
-	value: string;
+	value: Category["categoryName"];
 	icon: ImageProps["source"];
 }
 
@@ -37,7 +39,7 @@ export function CategoryDropdown({ options, onSelect, defaultCategory }: Dropdow
 			<TouchableOpacity style={styles.selectedOption} onPress={() => setIsOpen(!isOpen)}>
 				<View style={{ flexDirection: "row", gap: 15, justifyContent: "center" }}>
 					<CategoryIcon
-						categoryName={defaultCategory as string}
+						categoryName={defaultCategory}
 						imageStyles={{ width: 25, height: 25 }}
 					/>
 					<Text style={styles.selectedOptionLabel}>

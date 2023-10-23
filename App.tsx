@@ -16,7 +16,7 @@ import { SignUpScreen } from "./src/screens/signup-screen";
 import { RootStackParamList } from "./src/constants/routes";
 import { HomeScreen } from "./src/screens/home-screen";
 import { useCategoriesStore } from "./src/store/categories";
-import { User, useUserAuthStore } from "./src/store/user-auth";
+import { useUserAuthStore } from "./src/store/user-auth";
 import { getUserFromStorage } from "./src/utils/async-storage";
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -37,7 +37,7 @@ export default function App() {
 		const getUser = async () => {
 			const user = await getUserFromStorage();
 			if (user) {
-				setUser(user as User);
+				setUser(user);
 			}
 			fetchCategories();
 		};

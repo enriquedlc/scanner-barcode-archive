@@ -113,7 +113,7 @@ const chartStyles = StyleSheet.create({
 });
 
 export function Home() {
-	const { fetchArticles, getArticles } = useArticlesStore((state) => state);
+	const { fetchArticles, articles } = useArticlesStore((state) => state);
 	const user = useUserAuthStore((state) => state.user);
 
 	// TODO: implement loading state
@@ -132,8 +132,8 @@ export function Home() {
 				<Charts />
 				<Text style={homeStyles.articleListTitle}>Últimos artículos escaneados</Text>
 				<View style={homeStyles.container}>
-					{getArticles()
-						.map((article) => (
+					{articles
+						?.map((article) => (
 							<ArticleItem
 								article={article}
 								key={article.id}
