@@ -5,8 +5,8 @@ import { useUserAuthStore } from "../../../store/user-auth";
 import { ButtonIcon } from "../../button-icon/button-icon";
 
 import { ARROW_BACK, LOGOUT } from "../../../../assets/profile-images";
-import { BLUE_PALLETE } from "../../../constants/colors/colors";
 import { FONT_SIZES } from "../../../constants/font";
+import { useUserPreferencesStore } from "../../../store/user-preferences";
 
 interface ConfirmLogoutProps {
 	visible: boolean;
@@ -15,6 +15,8 @@ interface ConfirmLogoutProps {
 
 export function ConfirmLogout(props: ConfirmLogoutProps) {
 	const { visible, setShowConfirmLogoutModal } = props;
+
+	const { colorScheme } = useUserPreferencesStore((state) => state.userPreferences);
 
 	const logout = useUserAuthStore((state) => state.logout);
 	const { navigation } = useAppNavigation();
@@ -41,7 +43,7 @@ export function ConfirmLogout(props: ConfirmLogoutProps) {
 						<ButtonIcon
 							icon={ARROW_BACK}
 							label="Volver"
-							outlineColor={BLUE_PALLETE.BLUE}
+							outlineColor={colorScheme.MAIN}
 							action={goBack}
 							displayLabel={true}
 						/>

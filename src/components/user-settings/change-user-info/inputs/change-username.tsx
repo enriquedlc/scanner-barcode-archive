@@ -6,11 +6,13 @@ import { UpdateUserInfoButton } from "../update-user-info-button";
 
 import { useShowToast } from "../../../../hooks/useShowToast";
 import { changeUsername } from "../../../../services/user";
+import { useUserPreferencesStore } from "../../../../store/user-preferences";
 import { changeUserInfoStyles } from "./styles/change-user-info-styles";
 
 export function ChangeUsernameInput() {
 	const { user, setUser } = useUserAuthStore((state) => state);
 	const { showToast } = useShowToast();
+	const { colorScheme } = useUserPreferencesStore((state) => state.userPreferences);
 
 	const [username, setUsername] = useState(user?.username as unknown as string);
 
@@ -28,9 +30,24 @@ export function ChangeUsernameInput() {
 
 	return (
 		<>
-			<Text style={changeUserInfoStyles.infoToChangeLabel}>Username</Text>
+			<Text
+				style={[
+					changeUserInfoStyles.infoToChangeLabel,
+					{
+						color: colorScheme.PRIMARY_BLACK,
+					},
+				]}
+			>
+				Username
+			</Text>
 			<TextInput
-				style={changeUserInfoStyles.infoToChangeInput}
+				style={[
+					changeUserInfoStyles.infoToChangeInput,
+					{
+						color: colorScheme.SECONDARY_BLACK,
+						backgroundColor: colorScheme.SECONDARY_WHITE,
+					},
+				]}
 				placeholder={user?.username as unknown as string}
 				onChangeText={handleUsernameChange}
 				value={username}

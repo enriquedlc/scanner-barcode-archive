@@ -9,8 +9,8 @@ import { ChangeUsernameInput } from "./inputs/change-username";
 import { capitalize } from "../../../utils/general";
 import { ArrowBack } from "../arrow-back";
 
-import { BLUE_PALLETE } from "../../../constants/colors/colors";
 import { FONT_SIZES } from "../../../constants/font";
+import { useUserPreferencesStore } from "../../../store/user-preferences";
 
 type ChangeInfoProps = {
 	route: {
@@ -23,6 +23,8 @@ type ChangeInfoProps = {
 export function ChangeInfo(props: ChangeInfoProps) {
 	const { userInfoToChange } = props.route.params;
 
+	const { colorScheme } = useUserPreferencesStore((state) => state.userPreferences);
+
 	return (
 		<SafeAreaView>
 			<ArrowBack />
@@ -31,7 +33,14 @@ export function ChangeInfo(props: ChangeInfoProps) {
 			</View>
 			<View style={styles.infoToChangeContainer}>
 				<Text style={styles.infoToChange}>{capitalize(userInfoToChange)}</Text>
-				<Text style={styles.infoToChangeDescription}>
+				<Text
+					style={[
+						styles.infoToChangeDescription,
+						{
+							color: colorScheme.SECONDARY_BLACK,
+						},
+					]}
+				>
 					{changeInfoDescription[userInfoToChange]}
 				</Text>
 
@@ -68,7 +77,7 @@ const styles = StyleSheet.create({
 	},
 	infoToChangeDescription: {
 		fontSize: FONT_SIZES.MEDIUM,
-		color: BLUE_PALLETE.SECONDARY_BLACK,
+
 		paddingBottom: 50,
 		width: "80%",
 	},

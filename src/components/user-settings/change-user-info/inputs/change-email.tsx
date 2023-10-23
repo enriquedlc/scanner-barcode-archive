@@ -6,11 +6,13 @@ import { changeUserEmail } from "../../../../services/user";
 import { User, useUserAuthStore } from "../../../../store/user-auth";
 import { UpdateUserInfoButton } from "../update-user-info-button";
 
+import { useUserPreferencesStore } from "../../../../store/user-preferences";
 import { changeUserInfoStyles } from "./styles/change-user-info-styles";
 
 export function ChangeEmailInput() {
 	const { user, setUser } = useUserAuthStore((state) => state);
 	const { showToast } = useShowToast();
+	const { colorScheme } = useUserPreferencesStore((state) => state.userPreferences);
 
 	const [email, setEmail] = useState(user?.email as unknown as string);
 
@@ -28,9 +30,24 @@ export function ChangeEmailInput() {
 
 	return (
 		<>
-			<Text style={changeUserInfoStyles.infoToChangeLabel}>Email</Text>
+			<Text
+				style={[
+					changeUserInfoStyles.infoToChangeLabel,
+					{
+						color: colorScheme.PRIMARY_BLACK,
+					},
+				]}
+			>
+				Email
+			</Text>
 			<TextInput
-				style={changeUserInfoStyles.infoToChangeInput}
+				style={[
+					changeUserInfoStyles.infoToChangeInput,
+					{
+						color: colorScheme.SECONDARY_BLACK,
+						backgroundColor: colorScheme.SECONDARY_WHITE,
+					},
+				]}
 				placeholder={user?.email as unknown as string}
 				onChangeText={handleEmailChange}
 				value={email}

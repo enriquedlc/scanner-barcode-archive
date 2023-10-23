@@ -11,6 +11,7 @@ import {
 } from "react-native";
 
 import { profileStyles } from "../../screens/profile-screen/profile-styles";
+import { useUserPreferencesStore } from "../../store/user-preferences";
 
 interface ButtonIconsProps {
 	label: string;
@@ -35,6 +36,9 @@ export function ButtonIcon(props: ButtonIconsProps) {
 		textStyles,
 		touchableStyles,
 	} = props;
+
+	const { colorScheme } = useUserPreferencesStore((state) => state.userPreferences);
+
 	return (
 		<TouchableOpacity
 			onPress={action}
@@ -44,7 +48,16 @@ export function ButtonIcon(props: ButtonIconsProps) {
 			]}
 		>
 			{displayLabel && (
-				<Text style={textStyles || profileStyles.profileDefaultLabel}>{label}</Text>
+				<Text
+					style={[
+						textStyles || profileStyles.profileDefaultLabel,
+						{
+							color: colorScheme.SECONDARY_BLACK,
+						},
+					]}
+				>
+					{label}
+				</Text>
 			)}
 			<Image source={icon} style={imageSytles || profileStyles.profileIcon} />
 		</TouchableOpacity>

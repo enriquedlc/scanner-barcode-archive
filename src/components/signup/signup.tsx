@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleProp, Text, TextInput, View, ViewStyle, ScrollView } from "react-native";
+import { ScrollView, StyleProp, Text, TextInput, View, ViewStyle } from "react-native";
 
 import { SignUpInputFocus } from "../../screens/signup-screen";
 import { ButtonLanding } from "../button-landing/button-landing";
@@ -16,6 +16,7 @@ import {
 
 import { PrettifiedRegisterUserForm, useUserAuthStore } from "../../store/user-auth";
 
+import { useUserPreferencesStore } from "../../store/user-preferences";
 import { signUpStyles } from "./signup-styles";
 
 type SignUpProps = {
@@ -32,6 +33,7 @@ const INITIAL_SIGNUP_FOCUS: SignUpInputFocus = {
 export function SignUp(props: SignUpProps) {
 	const { formTitle } = props;
 
+	const { colorScheme } = useUserPreferencesStore((state) => state.userPreferences);
 	const { navigation } = useAppNavigation();
 	const { showToast } = useShowToast();
 
@@ -81,7 +83,9 @@ export function SignUp(props: SignUpProps) {
 				setModalVisible={setLoading}
 				modalText="Iniciando sesión..."
 			/>
-			<Text style={signUpStyles.formTitle}>{formTitle}</Text>
+			<Text style={[signUpStyles.formTitle, { color: colorScheme.PRIMARY_WHITE }]}>
+				{formTitle}
+			</Text>
 			<ScrollView>
 				<View
 					style={{
@@ -93,10 +97,26 @@ export function SignUp(props: SignUpProps) {
 					}}
 				>
 					<View style={signUpStyles.inputContainer}>
-						<Text style={signUpStyles.inputLabel}>Correo electrónico</Text>
+						<Text
+							style={[
+								signUpStyles.inputLabel,
+								{
+									color: colorScheme.PRIMARY_WHITE,
+								},
+							]}
+						>
+							Correo electrónico
+						</Text>
 						<TextInput
 							placeholderTextColor={"lightgray"}
-							style={[signUpStyles.input, isFocused.email && inputStyles]}
+							style={[
+								signUpStyles.input,
+								isFocused.email && inputStyles,
+								{
+									color: colorScheme.SECONDARY_WHITE,
+									backgroundColor: colorScheme.SECONDARY,
+								},
+							]}
 							placeholder="Correo electrónico"
 							onFocus={() => handleInputFocus("email", true)}
 							onBlur={() => handleInputFocus("email", false)}

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
-import { BLUE_PALLETE } from "../../../constants/colors/colors";
 import { FONT_SIZES } from "../../../constants/font";
+import { useUserPreferencesStore } from "../../../store/user-preferences";
 
 interface UpdateUserInfoButtonProps {
 	action: () => void;
@@ -10,17 +10,34 @@ interface UpdateUserInfoButtonProps {
 export function UpdateUserInfoButton(props: UpdateUserInfoButtonProps) {
 	const { action } = props;
 
+	const { colorScheme } = useUserPreferencesStore((state) => state.userPreferences);
+
 	return (
-		<TouchableOpacity style={styles.updateUserInfoButton} onPress={action}>
-			<Text style={styles.updateUserInfoButtonText}>Update</Text>
+		<TouchableOpacity
+			style={[
+				styles.updateUserInfoButton,
+				{
+					backgroundColor: colorScheme.MAIN,
+				},
+			]}
+			onPress={action}
+		>
+			<Text
+				style={[
+					styles.updateUserInfoButtonText,
+					{
+						color: colorScheme.PRIMARY_WHITE,
+					},
+				]}
+			>
+				Update
+			</Text>
 		</TouchableOpacity>
 	);
 }
 
 const styles = StyleSheet.create({
 	updateUserInfoButton: {
-		backgroundColor: BLUE_PALLETE.BLUE,
-
 		padding: 10,
 		borderRadius: 5,
 		width: "90%",
@@ -31,7 +48,6 @@ const styles = StyleSheet.create({
 	},
 	updateUserInfoButtonText: {
 		fontSize: FONT_SIZES.MEDIUM,
-		color: BLUE_PALLETE.PRIMARY_WHITE,
 		fontWeight: "bold",
 	},
 });

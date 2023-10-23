@@ -4,12 +4,13 @@ import { StyleSheet, View } from "react-native";
 import { ButtonIcon } from "../../button-icon/button-icon";
 
 import { INFO_CIRCLE, LOGOUT } from "../../../../assets/profile-images";
-import { BLUE_PALLETE } from "../../../constants/colors/colors";
+import { useUserPreferencesStore } from "../../../store/user-preferences";
 import { ConfirmLogout } from "../modals/confirm-logout";
 
 export function ProfileFooter() {
 	// const [showAttributionsModal, setShowAttributionsModal] = useState(false);
 	const [showConfirmLogoutModal, setShowConfirmLogoutModal] = useState(false);
+	const { colorScheme } = useUserPreferencesStore((state) => state.userPreferences);
 
 	return (
 		<View style={profileFooterStyles.profileFooterContainer}>
@@ -18,7 +19,7 @@ export function ProfileFooter() {
 				// creators and contributors mention to the people who made the icons
 				icon={INFO_CIRCLE}
 				label="Atribuciones"
-				outlineColor={BLUE_PALLETE.BLUE}
+				outlineColor={colorScheme.MAIN}
 				action={() => console.log("atribuciones")}
 				displayLabel={true}
 			/>

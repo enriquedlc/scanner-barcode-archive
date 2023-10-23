@@ -15,6 +15,7 @@ import {
 	IS_NOT_FOCUSED_BORDER_INPUT_COLOR,
 } from "../../constants/colors/colors";
 
+import { useUserPreferencesStore } from "../../store/user-preferences";
 import { loginStyles } from "./login-styles";
 
 type LoginProps = {
@@ -28,6 +29,8 @@ const INITIAL_LOGIN_FOCUS: LoginInputFocus = {
 
 export function Login(props: LoginProps) {
 	const { formTitle } = props;
+
+	const { colorScheme } = useUserPreferencesStore((state) => state.userPreferences);
 
 	const { navigation } = useAppNavigation();
 	const { showToast } = useShowToast();
@@ -77,18 +80,31 @@ export function Login(props: LoginProps) {
 	};
 
 	return (
-		<View style={loginStyles.loginContainer}>
+		<View style={[loginStyles.loginContainer]}>
 			<LoadingLandingModal
 				modalVisible={loading}
 				setModalVisible={setLoading}
 				modalText="Iniciando sesión..."
 			/>
-			<Text style={loginStyles.formTitle}>{formTitle}</Text>
+			<Text style={[loginStyles.formTitle, { backgroundColor: colorScheme.PRIMARY_WHITE }]}>
+				{formTitle}
+			</Text>
 			<View style={loginStyles.inputContainer}>
-				<Text style={loginStyles.inputLabel}>Usuario</Text>
+				<Text
+					style={[loginStyles.inputLabel, { backgroundColor: colorScheme.PRIMARY_WHITE }]}
+				>
+					Usuario
+				</Text>
 				<TextInput
 					placeholderTextColor={"lightgray"}
-					style={[loginStyles.input, isFocused.username && inputStyles]}
+					style={[
+						loginStyles.input,
+						isFocused.username && inputStyles,
+						{
+							color: colorScheme.SECONDARY_WHITE,
+							backgroundColor: colorScheme.SECONDARY,
+						},
+					]}
 					placeholder="Usuario"
 					onFocus={() => handleInputFocus("username", true)}
 					onBlur={() => handleInputFocus("username", false)}
