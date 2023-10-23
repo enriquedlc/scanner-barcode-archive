@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { StyleProp, Text, TextInput, View, ViewStyle } from "react-native";
+import { Keyboard, StyleProp, Text, TextInput, View, ViewStyle } from "react-native";
 
+import { LoginInputFocus } from "../../screens/login-screen";
 import { ButtonLanding } from "../button-landing/button-landing";
 import { LoadingLandingModal } from "../modal/loading-landing-modal/loading-landing-modal";
-import { LoginInputFocus } from "../../screens/login-screen";
 
 import { useAppNavigation } from "../../hooks/useAppNavigation";
 import { useInputFocus } from "../../hooks/useLoginInput";
@@ -54,19 +54,26 @@ export function Login(props: LoginProps) {
 	};
 
 	const handleSubmit = async () => {
-		setLoading(true);
+		try {
+			setLoading(true);
 
-		const response = await login(userLoginForm);
+			const response = await login(userLoginForm);
 
-		if (response?.login) {
+			if (response?.login) {
+				setLoading(false);
+				showToast("success", "Inicio de sesión exitoso", "Bienvenido! 🎉");
+				navigation.navigate("HOME_SCREEN");
+				return;
+			}
+
+			showToast("error", "Inicio de sesión fallido", "Usuario o contraseña incorrectos ❌");
 			setLoading(false);
-			showToast("success", "Inicio de sesión exitoso", "Bienvenido! 🎉");
-			navigation.navigate("HOME_SCREEN");
-			return;
+			Keyboard.dismiss();
+		} catch (error) {
+			console.error(error);
+		} finally {
+			setLoading(false);
 		}
-
-		showToast("error", "Inicio de sesión fallido", "Usuario o contraseña incorrectos ❌");
-		setLoading(false);
 	};
 
 	return (

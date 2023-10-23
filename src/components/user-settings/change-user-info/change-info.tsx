@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 
 import { changeInfoDescription } from "../../../constants/lang/change-user-info-description";
 import { UserBasicInformationLabels } from "../user-info-item";
@@ -24,7 +24,7 @@ export function ChangeInfo(props: ChangeInfoProps) {
 	const { userInfoToChange } = props.route.params;
 
 	return (
-		<View>
+		<SafeAreaView>
 			<ArrowBack />
 			<View style={styles.headerContainer}>
 				<Text style={styles.headerTitleText}>Article Scanner Account</Text>
@@ -39,7 +39,7 @@ export function ChangeInfo(props: ChangeInfoProps) {
 				{userInfoToChange === "email" && <ChangeEmailInput />}
 				{userInfoToChange === "password" && <ChangePasswordInput />}
 			</View>
-		</View>
+		</SafeAreaView>
 	);
 }
 
