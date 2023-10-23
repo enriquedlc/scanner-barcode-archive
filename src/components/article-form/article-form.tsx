@@ -114,6 +114,7 @@ export function ArticleForm(props: ArticleFormProps) {
 							options={categories.map((category) => ({
 								label: category.categoryName,
 								value: category.categoryName,
+								icon: category.icon,
 							}))}
 							onSelect={(value) => handleChangeText(value, "categoryName")}
 						/>

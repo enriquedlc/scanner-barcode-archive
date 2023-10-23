@@ -10,7 +10,7 @@ import { FONT_SIZES } from "../../constants/font";
 const { CHEVRON_CIRCLE_DOWN, CHEVRON_CIRCLE_UP } = CATEGORY_ICONS;
 
 export interface DropdownOption {
-	label: string;
+	label: Category["categoryName"];
 	value: Category["categoryName"];
 	icon: ImageProps["source"];
 }
