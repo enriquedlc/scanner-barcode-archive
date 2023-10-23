@@ -41,15 +41,6 @@ const Charts = () => {
 	const width = Dimensions.get("screen").width - 16;
 	const height = 230;
 	return chartConfigs.map((chartConfig) => {
-		const labelStyle = {
-			marginVertical: 10,
-			// textAlign: "center",
-			textAlign: "left",
-			marginLeft: "5%",
-			fontSize: FONT_SIZES.LARGE,
-			color: "black",
-			paddingTop: 20,
-		};
 		const graphStyle = {
 			...chartConfig.style,
 			marginHorizontal: 10,
@@ -89,28 +80,6 @@ const Charts = () => {
 		);
 	});
 };
-
-const chartStyles = StyleSheet.create({
-	chartLabelContainer: {
-		flexDirection: "row",
-		justifyContent: "flex-start",
-		alignItems: "center",
-		paddingTop: 20,
-		marginLeft: "5%",
-		gap: 10,
-	},
-	chartLabel: {
-		marginVertical: 10,
-		// textAlign: "center",
-		fontSize: FONT_SIZES.LARGE,
-		color: "black",
-		alignSelf: "center",
-	},
-	chartLabelIcon: {
-		width: 24,
-		height: 24,
-	},
-});
 
 export function Home() {
 	const { fetchArticles, articles } = useArticlesStore((state) => state);
