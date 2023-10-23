@@ -46,7 +46,7 @@ export default function App() {
 
 	return (
 		<SafeAreaProvider>
-			<StatusBar barStyle={"default"} />
+			<StatusBar barStyle={"dark-content"} />
 			<NavigationContainer>
 				<Stack.Navigator initialRouteName={user ? "HOME_SCREEN" : "LANDING_SCREEN"}>
 					<Stack.Group>

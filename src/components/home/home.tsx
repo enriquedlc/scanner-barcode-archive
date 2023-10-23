@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Dimensions, Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Dimensions, Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
 import { BarChart, LineChart } from "react-native-chart-kit";
 
 import { useArticlesStore } from "../../store/articles";
@@ -123,29 +123,31 @@ export function Home() {
 	}, [user]);
 
 	return (
-		<ScrollView showsVerticalScrollIndicator={false}>
-			<View style={homeStyles.headerContainer}>
-				<Image style={homeStyles.headerBarcodeImage} source={BARCODE_SCANNER} />
-				<Text style={homeStyles.headerText}>Article Scanner</Text>
-			</View>
-			<Charts />
-			<Text style={homeStyles.articleListTitle}>Últimos artículos escaneados</Text>
-			<View style={homeStyles.container}>
-				{getArticles()
-					.map((article) => (
-						<ArticleItem
-							article={article}
-							key={article.id}
-							articleContainerStyle={{
-								width: "97%",
-								alignItems: "center",
-								marginVertical: 10,
-							}}
-						/>
-					))
-					.splice(0, 5)}
-			</View>
-		</ScrollView>
+		<SafeAreaView>
+			<ScrollView showsVerticalScrollIndicator={false}>
+				<View style={homeStyles.headerContainer}>
+					<Image style={homeStyles.headerBarcodeImage} source={BARCODE_SCANNER} />
+					<Text style={homeStyles.headerText}>Article Scanner</Text>
+				</View>
+				<Charts />
+				<Text style={homeStyles.articleListTitle}>Últimos artículos escaneados</Text>
+				<View style={homeStyles.container}>
+					{getArticles()
+						.map((article) => (
+							<ArticleItem
+								article={article}
+								key={article.id}
+								articleContainerStyle={{
+									width: "97%",
+									alignItems: "center",
+									marginVertical: 10,
+								}}
+							/>
+						))
+						.splice(0, 5)}
+				</View>
+			</ScrollView>
+		</SafeAreaView>
 	);
 }
 
