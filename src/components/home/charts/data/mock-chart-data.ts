@@ -1,4 +1,4 @@
-export const data = {
+export const MOCK_CHART_DATA = {
 	labels: ["January", "February", "March", "April", "May", "June"],
 	datasets: [
 		{
