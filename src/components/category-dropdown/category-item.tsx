@@ -17,7 +17,7 @@ export function CategoryItem(props: CategoryItemProps) {
 			style={styles.option}
 			onPress={() => handleSelect(option)}
 		>
-			<CategoryIcon imageStyles={{ width: 28, height: 28 }} categoryName={option.label} />
+			<CategoryIcon imageStyles={{ width: 28, height: 28 }} categoryName={option.value} />
 			<Text style={styles.optionLabel}>{option.label}</Text>
 		</TouchableOpacity>
 	);

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Modal, Text, TouchableOpacity, View } from "react-native";
+import { Modal, ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 import { ArticleFormNumberInput } from "./article-form-input/article-form-number-input";
 import { ArticleFormTextInput } from "./article-form-input/article-form-text-input";
@@ -97,7 +97,13 @@ export function ArticleForm(props: ArticleFormProps) {
 					<Text style={articleFormStyles.title}>{articleFormTitle}</Text>
 					<Text style={articleFormStyles.title}>{scannedBarcode}</Text>
 					{/* TODO: make this scrollable */}
-					<View style={{ width: "100%", alignItems: "center", justifyContent: "center" }}>
+					<View
+						style={{
+							width: "100%",
+							alignItems: "center",
+							justifyContent: "center",
+						}}
+					>
 						<ArticleFormTextInput
 							setValue={(text) => handleChangeText(text, "articleName")}
 							placeholder={"Nombre"}
@@ -111,24 +117,36 @@ export function ArticleForm(props: ArticleFormProps) {
 							}))}
 							onSelect={(value) => handleChangeText(value, "categoryName")}
 						/>
-						<ArticleFormNumberInput
-							label="Estantería"
-							placeholder="0"
-							setValue={(text) => handleChangeText(Number(text), "shelf")}
-							value={String(scannedArticle.shelf)}
-						/>
-						<ArticleFormNumberInput
-							label="Almacén"
-							placeholder="0"
-							setValue={(text) => handleChangeText(Number(text), "warehouse")}
-							value={String(scannedArticle.warehouse)}
-						/>
-						<ArticleFormNumberInput
-							label="Exhibición"
-							placeholder="0"
-							setValue={(text) => handleChangeText(Number(text), "exhibition")}
-							value={String(scannedArticle.exhibition)}
-						/>
+						<ScrollView>
+							<View
+								style={{
+									maxWidth: "100%",
+									justifyContent: "center",
+									alignItems: "center",
+								}}
+							>
+								<ArticleFormNumberInput
+									label="Estantería"
+									placeholder="0"
+									setValue={(text) => handleChangeText(Number(text), "shelf")}
+									value={String(scannedArticle.shelf)}
+								/>
+								<ArticleFormNumberInput
+									label="Almacén"
+									placeholder="0"
+									setValue={(text) => handleChangeText(Number(text), "warehouse")}
+									value={String(scannedArticle.warehouse)}
+								/>
+								<ArticleFormNumberInput
+									label="Exhibición"
+									placeholder="0"
+									setValue={(text) =>
+										handleChangeText(Number(text), "exhibition")
+									}
+									value={String(scannedArticle.exhibition)}
+								/>
+							</View>
+						</ScrollView>
 
 						{/* <Text>Elegir icono</Text> */}
 						<View style={articleInfoModalStyles.buttonsContainer}>
