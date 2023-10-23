@@ -4,34 +4,11 @@ import { Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-n
 import { useArticlesStore } from "../../store/articles";
 import { useUserAuthStore } from "../../store/user-auth";
 import { ArticleItem } from "../article-item/article-item";
+import { ScannedArticlesHistoryLineChart } from "./charts/scanned-articles-history-line-chart";
 
 import { BARCODE_SCANNER } from "../../../assets";
 import { FONT_SIZES } from "../../constants/font";
-import { ScannedArticlesHistoryLineChart } from "./charts/scanned-articles-history-line-chart";
-
-// const Charts = () => {
-
-// 	return chartConfigs.map((chartConfig) => {
-
-// 		return (
-// 			<View style={{ justifyContent: "center", alignContent: "center", flex: 1 }}>
-
-// 				<View style={chartStyles.chartLabelContainer}>
-// 					<Text style={chartStyles.chartLabel}>Artículos por categoría</Text>
-// 					<Image style={chartStyles.chartLabelIcon} source={CHART_ICONS.CHART_BAR} />
-// 				</View>
-// 				<BarChart
-// 					width={width}
-// 					height={height}
-// 					data={data}
-// 					chartConfig={chartConfig}
-// 					style={graphStyle}
-// 					key="2"
-// 				/>
-// 			</View>
-// 		);
-// 	});
-// };
+import { CategoriesUsageBarChart } from "./charts/categories-usage-bar-chart";
 
 export function Home() {
 	const { fetchArticles, articles } = useArticlesStore((state) => state);
@@ -51,6 +28,7 @@ export function Home() {
 					<Text style={homeStyles.headerText}>Article Scanner</Text>
 				</View>
 				<ScannedArticlesHistoryLineChart />
+				<CategoriesUsageBarChart />
 				<Text style={homeStyles.articleListTitle}>Últimos artículos escaneados</Text>
 				<View style={homeStyles.container}>
 					{articles

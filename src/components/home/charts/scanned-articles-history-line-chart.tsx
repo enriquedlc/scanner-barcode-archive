@@ -1,11 +1,12 @@
 import { Image, Text, View } from "react-native";
+import { LineChart } from "react-native-chart-kit";
+
+import { useChartConfig } from "./config/useChartConfig";
+
+import { CHART_ICONS } from "../../../../assets";
+import { chartStyles } from "./styles/chart-styles";
 
 import { MOCK_CHART_DATA } from "./data/mock-chart-data";
-
-import { LineChart } from "react-native-chart-kit";
-import { CHART_ICONS } from "../../../../assets";
-import { useChartConfig } from "./config/useChartConfig";
-import { chartStyles } from "./styles/chart-styles";
 
 export function ScannedArticlesHistoryLineChart() {
 	const { chartConfigs, graphStyle, height, width } = useChartConfig();
