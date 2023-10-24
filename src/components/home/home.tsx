@@ -31,7 +31,12 @@ export function Home() {
 				<Text style={homeStyles.articleListTitle}>Últimos artículos escaneados</Text>
 				<View style={homeStyles.container}>
 					{articles
-						?.map((article) => (
+						?.sort(
+							(a, b) =>
+								new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+						)
+						.slice(0, 5)
+						.map((article) => (
 							<ArticleItem
 								article={article}
 								key={article.id}
@@ -41,8 +46,7 @@ export function Home() {
 									marginVertical: 10,
 								}}
 							/>
-						))
-						.splice(0, 5)}
+						))}
 				</View>
 			</ScrollView>
 		</SafeAreaView>
