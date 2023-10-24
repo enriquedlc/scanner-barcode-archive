@@ -38,7 +38,7 @@ export const UserProfilePhoto = () => {
 					},
 				]}
 			>
-				<TouchableOpacity onPress={() => console.log("change photo")}>
+				<TouchableOpacity onPress={() => console.info("change photo")}>
 					<FontAwesome5 name="camera" size={16} color="white" />
 				</TouchableOpacity>
 			</View>

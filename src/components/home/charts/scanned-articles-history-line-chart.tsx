@@ -48,8 +48,8 @@ export function ScannedArticlesHistoryLineChart() {
 		datasets: [
 			{
 				data: findArticlesCreatedPerDay()?.values,
-				color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, // optional
-				strokeWidth: 2, // optional
+				color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+				strokeWidth: 2,
 			},
 		],
 	};
