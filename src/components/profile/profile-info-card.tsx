@@ -38,7 +38,6 @@ export const UserProfilePhoto = () => {
 					},
 				]}
 			>
-				{/* TODO: implement changing profile photo */}
 				<TouchableOpacity onPress={() => console.log("change photo")}>
 					<FontAwesome5 name="camera" size={16} color="white" />
 				</TouchableOpacity>

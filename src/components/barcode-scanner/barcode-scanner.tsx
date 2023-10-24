@@ -1,5 +1,5 @@
 import { BarCodeScanner } from "expo-barcode-scanner";
-import { Dimensions, StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View } from "react-native";
 
 import { ArticleForm } from "../article-form/article-form";
 
@@ -49,9 +49,8 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 	},
 	barcodeScannerCamera: {
-		width: Dimensions.get("window").width - 30,
-		height: Dimensions.get("window").height - 250,
+		width: Platform.OS === "ios" ? "100%" : "90%",
+		height: Platform.OS === "ios" ? "80%" : "80%",
 		borderRadius: 20,
-		overflow: "hidden",
 	},
 });

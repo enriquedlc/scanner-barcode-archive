@@ -14,7 +14,6 @@ export function Home() {
 	const { fetchArticles, articles } = useArticlesStore((state) => state);
 	const user = useUserAuthStore((state) => state.user);
 
-	// TODO: implement loading state
 	// biome-ignore lint/nursery/useExhaustiveDependencies: <>
 	useEffect(() => {
 		if (user?.id) fetchArticles(user.id);

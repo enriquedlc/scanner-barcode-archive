@@ -96,7 +96,6 @@ export function ArticleForm(props: ArticleFormProps) {
 				<View style={articleFormStyles.modalView}>
 					<Text style={articleFormStyles.title}>{articleFormTitle}</Text>
 					<Text style={articleFormStyles.title}>{scannedBarcode}</Text>
-					{/* TODO: make this scrollable */}
 					<View
 						style={{
 							width: "100%",
@@ -148,8 +147,6 @@ export function ArticleForm(props: ArticleFormProps) {
 								/>
 							</View>
 						</ScrollView>
-
-						{/* <Text>Elegir icono</Text> */}
 						<View style={articleInfoModalStyles.buttonsContainer}>
 							<TouchableOpacity
 								onPress={() => {

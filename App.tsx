@@ -31,7 +31,6 @@ export default function App() {
 		fetchCategories: state.fetchCategories,
 	}));
 
-	// TODO: extract to a custom hook
 	// biome-ignore lint/nursery/useExhaustiveDependencies: <explanation>
 	useEffect(() => {
 		const getUser = async () => {
@@ -46,7 +45,7 @@ export default function App() {
 
 	return (
 		<SafeAreaProvider>
-			<StatusBar barStyle={"dark-content"} />
+			<StatusBar barStyle={"default"} />
 			<NavigationContainer>
 				<Stack.Navigator initialRouteName={user ? "HOME_SCREEN" : "LANDING_SCREEN"}>
 					<Stack.Group>

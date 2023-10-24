@@ -23,8 +23,6 @@ export function Navbar() {
 
 	const { colorScheme } = useUserPreferencesStore((state) => state.userPreferences);
 
-	console.log(JSON.stringify(colorScheme, null, 2));
-
 	const [isOnFocusableTap, setIsOnFocusableTab] = useState(true);
 	const tabOffsetValue = useRef(new Animated.Value(0)).current;
 
@@ -116,7 +114,7 @@ export function Navbar() {
 								style={{
 									width: 55,
 									height: 55,
-									backgroundColor: "blue",
+									backgroundColor: colorScheme.MAIN,
 									borderRadius: 30,
 									justifyContent: "center",
 									alignItems: "center",
@@ -206,7 +204,7 @@ export function Navbar() {
 					style={{
 						width: 40,
 						height: 2,
-						backgroundColor: "blue",
+						backgroundColor: colorScheme.MAIN,
 						position: "absolute",
 						bottom: 83,
 						left: "11.5%",

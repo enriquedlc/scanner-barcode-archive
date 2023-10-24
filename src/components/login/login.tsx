@@ -86,13 +86,11 @@ export function Login(props: LoginProps) {
 				setModalVisible={setLoading}
 				modalText="Iniciando sesión..."
 			/>
-			<Text style={[loginStyles.formTitle, { backgroundColor: colorScheme.PRIMARY_WHITE }]}>
+			<Text style={[loginStyles.formTitle, { color: colorScheme.PRIMARY_WHITE }]}>
 				{formTitle}
 			</Text>
 			<View style={loginStyles.inputContainer}>
-				<Text
-					style={[loginStyles.inputLabel, { backgroundColor: colorScheme.PRIMARY_WHITE }]}
-				>
+				<Text style={[loginStyles.inputLabel, { color: colorScheme.PRIMARY_WHITE }]}>
 					Usuario
 				</Text>
 				<TextInput
@@ -112,10 +110,19 @@ export function Login(props: LoginProps) {
 				/>
 			</View>
 			<View style={loginStyles.inputContainer}>
-				<Text style={loginStyles.inputLabel}>Contraseña</Text>
+				<Text style={[loginStyles.inputLabel, { color: colorScheme.PRIMARY_WHITE }]}>
+					Contraseña
+				</Text>
 				<TextInput
 					placeholderTextColor={"lightgray"}
-					style={[loginStyles.input, isFocused.password && inputStyles]}
+					style={[
+						loginStyles.input,
+						isFocused.password && inputStyles,
+						{
+							backgroundColor: colorScheme.SECONDARY,
+							color: colorScheme.SECONDARY_WHITE,
+						},
+					]}
 					placeholder="Contraseña"
 					onFocus={() => handleInputFocus("password", true)}
 					onBlur={() => handleInputFocus("password", false)}

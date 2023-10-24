@@ -2,7 +2,12 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import { BRUSH } from "../../../assets/profile-images";
 
-import { GREEN_PALLETE, ORANGE_PALLETE, PURPLE_PALLETE } from "../../constants/colors/colors";
+import {
+	BLUE_PALLETE,
+	GREEN_PALLETE,
+	ORANGE_PALLETE,
+	PURPLE_PALLETE,
+} from "../../constants/colors/colors";
 import { profileStyles } from "../../screens/profile-screen/profile-styles";
 import { ColorPalette, useUserPreferencesStore } from "../../store/user-preferences";
 
@@ -33,9 +38,9 @@ export function ThemeSelector() {
 				<TouchableOpacity
 					style={[
 						applicationThemeSelector.themeColor,
-						{ backgroundColor: colorScheme.MAIN },
+						{ backgroundColor: BLUE_PALLETE.MAIN },
 					]}
-					onPress={() => handleThemeChange(colorScheme)}
+					onPress={() => handleThemeChange(BLUE_PALLETE)}
 				/>
 				<TouchableOpacity
 					style={[

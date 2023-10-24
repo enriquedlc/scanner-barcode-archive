@@ -8,6 +8,7 @@ import { ArticleLists } from "../artcile-list-by-category/article-lists";
 import { ArticleList } from "../article-list/article-list";
 import { SearchArticles } from "./search-articles";
 
+import { FONT_SIZES } from "../../constants/font";
 import { useUserPreferencesStore } from "../../store/user-preferences";
 
 const FirstRoute = () => <SearchArticles />;
@@ -28,7 +29,7 @@ const ThirdRoute = () => {
 				Detalles de la categoría {articleCategoryDetailListName}
 			</Text>
 			<ArticleList
-				articles={articles.filter(
+				articles={articles?.filter(
 					(articles) => articles.categoryName === articleCategoryDetailListName,
 				)}
 				articleListStyle={{ paddingBottom: "20%" }}
@@ -68,13 +69,13 @@ export function Search() {
 						style={[
 							searchStyles.tabBar,
 							{
-								backgroundColor: "blue",
+								backgroundColor: colorScheme.MAIN,
 							},
 						]}
 						labelStyle={[
 							searchStyles.tabLabel,
 							{
-								color: "blue",
+								color: colorScheme.PRIMARY_WHITE,
 							},
 						]}
 						indicatorStyle={searchStyles.tabIndicator}
@@ -110,6 +111,7 @@ const searchStyles = StyleSheet.create({
 	},
 	tabLabel: {
 		fontWeight: "bold",
+		fontSize: FONT_SIZES.SMALL,
 	},
 	tabIndicator: {
 		backgroundColor: "white",

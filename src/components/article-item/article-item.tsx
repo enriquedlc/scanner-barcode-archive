@@ -8,6 +8,7 @@ import { ArticleItemStats } from "./components/article-item-stats";
 
 import { Article } from "../../types/article";
 
+import { useUserPreferencesStore } from "../../store/user-preferences";
 import { ArticleInfoModalStats } from "../article-info-modal/article-info-modal-stat";
 import { articleItemStyles } from "./article-item-styles";
 
@@ -20,6 +21,8 @@ export const ArticleItem: React.FC<ArticleItemProps> = React.memo(
 	({ article, articleContainerStyle }) => {
 		const [showDeleteArticleModal, setShowDeleteArticleModal] = useState(false);
 
+		const { colorScheme } = useUserPreferencesStore((state) => state.userPreferences);
+
 		return (
 			<View style={articleContainerStyle || articleItemStyles.articleItemContainer}>
 				<View style={[articleItemStyles.articleItem]}>
@@ -27,7 +30,7 @@ export const ArticleItem: React.FC<ArticleItemProps> = React.memo(
 					<ArticleItemStats {...article} />
 					<View style={[articleItemStyles.iconContainer]}>
 						<TouchableOpacity onPress={() => setShowDeleteArticleModal(true)}>
-							<FontAwesome5 name="info-circle" size={24} color="blue" />
+							<FontAwesome5 name="info-circle" size={24} color={colorScheme.MAIN} />
 						</TouchableOpacity>
 					</View>
 				</View>
