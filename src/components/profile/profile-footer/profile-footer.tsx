@@ -1,26 +1,33 @@
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 
+import { useUserPreferencesStore } from "../../../store/user-preferences";
 import { ButtonIcon } from "../../button-icon/button-icon";
+import { ConfirmLogout } from "../modals/confirm-logout";
+import { AttributionsModal } from "./attributions/attributions-modal";
 
 import { INFO_CIRCLE, LOGOUT } from "../../../../assets/profile-images";
-import { useUserPreferencesStore } from "../../../store/user-preferences";
-import { ConfirmLogout } from "../modals/confirm-logout";
 
 export function ProfileFooter() {
 	// const [showAttributionsModal, setShowAttributionsModal] = useState(false);
 	const [showConfirmLogoutModal, setShowConfirmLogoutModal] = useState(false);
 	const { colorScheme } = useUserPreferencesStore((state) => state.userPreferences);
 
+	const [showAttributionsModal, setShowAttributionsModal] = useState(false);
+
 	return (
 		<View style={profileFooterStyles.profileFooterContainer}>
+			<AttributionsModal
+				visible={showAttributionsModal}
+				setShowAttributionsModal={setShowAttributionsModal}
+			/>
 			<ButtonIcon
 				// TODO: implement modal with info about the app, its purpose and its
 				// creators and contributors mention to the people who made the icons
 				icon={INFO_CIRCLE}
 				label="Atribuciones"
 				outlineColor={colorScheme.MAIN}
-				action={() => console.log("atribuciones")}
+				action={() => setShowAttributionsModal(true)}
 				displayLabel={true}
 			/>
 			<ButtonIcon
