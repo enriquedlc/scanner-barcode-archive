@@ -34,17 +34,14 @@ const styles = StyleSheet.create({
 		borderRadius: 5,
 		marginVertical: 5,
 		borderBottomColor: "#000",
-		borderBottomWidth: 0.3,
-		paddingBottom: 20,
-		width: "100%",
+		width: "98%",
 	},
 	image: {
 		width: 30,
 		height: 30,
-		marginRight: 10,
+		marginRight: 7,
 	},
 	text: {
 		fontSize: 12,
-		fontWeight: "bold",
 	},
 });

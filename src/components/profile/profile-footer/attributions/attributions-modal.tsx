@@ -25,9 +25,9 @@ export function AttributionsModal(props: AttributionsModalProps) {
 				<View style={styles.modalView}>
 					<Text style={styles.modalTitle}>Atribuciones</Text>
 					<ScrollView
+						indicatorStyle="black"
 						style={{
-							maxHeight: "80%",
-							maxWidth: "90%",
+							maxHeight: "95%",
 						}}
 					>
 						<View style={{ justifyContent: "flex-start", alignItems: "flex-start" }}>
