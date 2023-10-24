@@ -6,6 +6,12 @@ interface AttributionItemProps {
 	linkUrl: string;
 }
 
+const parseUrl = (url: string) => {
+	const parsedUrl = url.split("www.")[1];
+	if (url.length > 50) return `${parsedUrl.substring(0, 35)}...`;
+	return parsedUrl;
+};
+
 export function AttributionItem({ image, linkUrl }: AttributionItemProps) {
 	const handlePress = () => {
 		Linking.openURL(linkUrl);
@@ -14,7 +20,7 @@ export function AttributionItem({ image, linkUrl }: AttributionItemProps) {
 	return (
 		<TouchableOpacity style={styles.container} onPress={handlePress}>
 			<Image source={image} style={styles.image} />
-			<Text style={styles.text}>{linkUrl}</Text>
+			<Text style={styles.text}>{parseUrl(linkUrl)}</Text>
 		</TouchableOpacity>
 	);
 }
@@ -30,6 +36,7 @@ const styles = StyleSheet.create({
 		borderBottomColor: "#000",
 		borderBottomWidth: 0.3,
 		paddingBottom: 20,
+		width: "100%",
 	},
 	image: {
 		width: 30,
