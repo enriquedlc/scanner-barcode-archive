@@ -1,6 +1,10 @@
 import { Image, Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import { SQUARE_X } from "../../../../../assets/profile-images";
 import { FONT_SIZES } from "../../../../constants/font";
+import { AttributionItem } from "./attribution-item";
+
+import { ATTRIBUTION_DATA } from "../../../../constants/attributions/data";
 
 interface AttributionsModalProps {
 	visible: boolean;
@@ -19,7 +23,23 @@ export function AttributionsModal(props: AttributionsModalProps) {
 		>
 			<View style={styles.centeredView}>
 				<View style={styles.modalView}>
-					<Text style={styles.modalTitle}>Attributions</Text>
+					<Text style={styles.modalTitle}>Atribuciones</Text>
+					<ScrollView
+						style={{
+							maxHeight: "80%",
+							maxWidth: "90%",
+						}}
+					>
+						<View style={{ justifyContent: "flex-start", alignItems: "flex-start" }}>
+							{ATTRIBUTION_DATA.map((attribution) => (
+								<AttributionItem
+									key={attribution.id}
+									image={attribution.image}
+									linkUrl={attribution.link}
+								/>
+							))}
+						</View>
+					</ScrollView>
 					<TouchableOpacity
 						style={styles.closeButton}
 						onPress={() => setShowAttributionsModal(false)}
