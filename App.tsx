@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { StatusBar } from "react-native";
+import { Platform, StatusBar } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -45,7 +45,7 @@ export default function App() {
 
 	return (
 		<SafeAreaProvider>
-			<StatusBar barStyle={"default"} />
+			<StatusBar barStyle={Platform.OS === "android" ? "light-content" : "dark-content"} />
 			<NavigationContainer>
 				<Stack.Navigator initialRouteName={user ? "HOME_SCREEN" : "LANDING_SCREEN"}>
 					<Stack.Group>

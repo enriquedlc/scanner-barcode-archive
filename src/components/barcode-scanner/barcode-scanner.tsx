@@ -49,8 +49,8 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 	},
 	barcodeScannerCamera: {
-		width: Platform.OS === "ios" ? "100%" : "90%",
+		borderRadius: 10,
+		width: Platform.OS === "ios" ? "90%" : "90%",
 		height: Platform.OS === "ios" ? "80%" : "80%",
-		borderRadius: 20,
 	},
 });
