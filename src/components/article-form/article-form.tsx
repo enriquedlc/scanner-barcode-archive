@@ -60,7 +60,7 @@ export function ArticleForm(props: ArticleFormProps) {
 		userId: User["id"],
 		scannedBarcode: ScannedData["data"],
 	) => {
-		if (currentArticle) {
+		if (currentArticle || findedArticle) {
 			const response = await updateArticle(article, article.id);
 
 			if (response?.updated) {
@@ -91,14 +91,13 @@ export function ArticleForm(props: ArticleFormProps) {
 		setScannedBarcode("");
 	};
 
-	// biome-ignore lint/nursery/useExhaustiveDependencies: <explanation>
+	const findedArticle = articles.find((article) => article.barcode === scannedBarcode);
+
 	useEffect(() => {
-		const article = articles.find((article) => article.barcode === scannedBarcode);
-		if (article) {
-			setScannedArticle(article);
-			showToast("info", "Artículo encontrado", "Artículo encontrado!📦");
+		if (findedArticle) {
+			setScannedArticle(findedArticle);
 		}
-	}, [scannedArticle]);
+	}, [findedArticle]);
 
 	return (
 		<Modal animationType="fade" visible={visible}>
@@ -170,7 +169,7 @@ export function ArticleForm(props: ArticleFormProps) {
 								style={articleInfoModalStyles.editButton}
 							>
 								<Text style={articleInfoModalStyles.deleteText}>
-									{articleButtonActionText}
+									{findedArticle ? "Editar" : articleButtonActionText}
 								</Text>
 							</TouchableOpacity>
 							<TouchableOpacity

@@ -2,7 +2,6 @@ import { BarCodeScanner } from "expo-barcode-scanner";
 import { Platform, StyleSheet, Text, View } from "react-native";
 
 import { ArticleForm } from "../article-form/article-form";
-
 import { useScanner } from "./useScanner";
 
 export function BarcodeScanner() {
@@ -27,7 +26,7 @@ export function BarcodeScanner() {
 		<View style={styles.container}>
 			<BarCodeScanner
 				style={styles.barcodeScannerCamera}
-				onBarCodeScanned={scannedBarcode ? undefined : handleBarCodeScanned}
+				onBarCodeScanned={handleBarCodeScanned}
 			/>
 			<ArticleForm
 				visible={scannedBarcode.length > 0 && showArticleForm}

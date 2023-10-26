@@ -18,11 +18,7 @@ export const useScanner = () => {
 
 	const handleBarCodeScanned = (scannedData: ScannedData) => {
 		setScannedBarcode(scannedData.data);
-		console.log("handleBarCodeScanned", scannedData.data);
 		setShowArticleForm(true);
-
-		console.log(`Type: ${scannedData.type}`);
-		console.log(`Data: ${scannedData.data}`);
 	};
 
 	return {

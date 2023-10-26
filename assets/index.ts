@@ -52,6 +52,9 @@ import BARCODE_SCANNER from "./various/barcode-scanner.png";
 import CHART_BAR from "./charts/chart-bar.png";
 import CHART_HISTOGRAM from "./charts/chart-histogram.png";
 
+// ERROR
+import ERROR from "./error/error.png";
+
 const LOGOS = {
 	SPLASH_LOGO,
 } as const;
@@ -126,4 +129,5 @@ export {
 	USER_PROFILE_IMAGES,
 	CHART_ICONS,
 	BARCODE_SCANNER,
+	ERROR,
 };

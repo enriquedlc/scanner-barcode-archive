@@ -13,6 +13,7 @@ import { LandingScreen } from "./src/screens/landing-screen";
 import { LoginScreen } from "./src/screens/login-screen";
 import { SignUpScreen } from "./src/screens/signup-screen";
 
+import { ErrorBoundary } from "./src/components/error-boundary/error-boundary";
 import { RootStackParamList } from "./src/constants/routes";
 import { HomeScreen } from "./src/screens/home-screen";
 import { useCategoriesStore } from "./src/store/categories";
@@ -46,43 +47,45 @@ export default function App() {
 	return (
 		<SafeAreaProvider>
 			<StatusBar barStyle={Platform.OS === "android" ? "light-content" : "dark-content"} />
-			<NavigationContainer>
-				<Stack.Navigator initialRouteName={user ? "HOME_SCREEN" : "LANDING_SCREEN"}>
-					<Stack.Group>
-						<Stack.Screen
-							options={{ headerShown: false }}
-							name={"LANDING_SCREEN"}
-							component={LandingScreen}
-						/>
-						<Stack.Screen
-							options={{ headerShown: false }}
-							name={"LOGIN_SCREEN"}
-							component={LoginScreen}
-						/>
-						<Stack.Screen
-							options={{ headerShown: false }}
-							name={"SIGN_UP_SCREEN"}
-							component={SignUpScreen}
-						/>
-						<Stack.Screen
-							options={{ headerShown: false }}
-							name={"HOME_SCREEN"}
-							component={HomeScreen}
-						/>
-						<Stack.Screen
-							options={{ headerShown: false }}
-							name={"USER_SETTINGS_SCREEN"}
-							component={UserSettings}
-						/>
-						<Stack.Screen
-							options={{ headerShown: false }}
-							name={"CHANGE_USER_INFO_SCREEN"}
-							component={ChangeInfo}
-						/>
-					</Stack.Group>
-				</Stack.Navigator>
-			</NavigationContainer>
-			<Toast />
+			<ErrorBoundary>
+				<NavigationContainer>
+					<Stack.Navigator initialRouteName={user ? "HOME_SCREEN" : "LANDING_SCREEN"}>
+						<Stack.Group>
+							<Stack.Screen
+								options={{ headerShown: false }}
+								name={"LANDING_SCREEN"}
+								component={LandingScreen}
+							/>
+							<Stack.Screen
+								options={{ headerShown: false }}
+								name={"LOGIN_SCREEN"}
+								component={LoginScreen}
+							/>
+							<Stack.Screen
+								options={{ headerShown: false }}
+								name={"SIGN_UP_SCREEN"}
+								component={SignUpScreen}
+							/>
+							<Stack.Screen
+								options={{ headerShown: false }}
+								name={"HOME_SCREEN"}
+								component={HomeScreen}
+							/>
+							<Stack.Screen
+								options={{ headerShown: false }}
+								name={"USER_SETTINGS_SCREEN"}
+								component={UserSettings}
+							/>
+							<Stack.Screen
+								options={{ headerShown: false }}
+								name={"CHANGE_USER_INFO_SCREEN"}
+								component={ChangeInfo}
+							/>
+						</Stack.Group>
+					</Stack.Navigator>
+				</NavigationContainer>
+				<Toast />
+			</ErrorBoundary>
 		</SafeAreaProvider>
 	);
 }
