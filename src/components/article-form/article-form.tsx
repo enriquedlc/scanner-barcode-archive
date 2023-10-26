@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal, ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 import { ArticleFormNumberInput } from "./article-form-input/article-form-number-input";
@@ -40,6 +40,7 @@ export function ArticleForm(props: ArticleFormProps) {
 	} = props;
 
 	const categories = useCategoriesStore((state) => state.categories);
+	const articles = useArticlesStore((state) => state.articles);
 
 	const [scannedArticle, setScannedArticle] = useState<Article>(
 		currentArticle || INITIAL_ARTICLE_FORM_STATE,
@@ -89,6 +90,15 @@ export function ArticleForm(props: ArticleFormProps) {
 		setShowArticleForm(false);
 		setScannedBarcode("");
 	};
+
+	// biome-ignore lint/nursery/useExhaustiveDependencies: <explanation>
+	useEffect(() => {
+		const article = articles.find((article) => article.barcode === scannedBarcode);
+		if (article) {
+			setScannedArticle(article);
+			showToast("info", "Artículo encontrado", "Artículo encontrado!📦");
+		}
+	}, [scannedArticle]);
 
 	return (
 		<Modal animationType="fade" visible={visible}>
