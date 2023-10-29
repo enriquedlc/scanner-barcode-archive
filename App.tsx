@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { Platform, StatusBar } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -45,7 +44,7 @@ export default function App() {
 	}, []);
 
 	return (
-		<SafeAreaProvider>
+		<>
 			<StatusBar barStyle={Platform.OS === "android" ? "light-content" : "dark-content"} />
 			<ErrorBoundary>
 				<NavigationContainer>
@@ -86,6 +85,6 @@ export default function App() {
 				</NavigationContainer>
 				<Toast />
 			</ErrorBoundary>
-		</SafeAreaProvider>
+		</>
 	);
 }
