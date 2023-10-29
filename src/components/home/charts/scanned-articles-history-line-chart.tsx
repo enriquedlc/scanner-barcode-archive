@@ -54,6 +54,8 @@ export function ScannedArticlesHistoryLineChart() {
 		],
 	};
 
+	if (articles.length === 0) return null;
+
 	return (
 		<>
 			<ChartTitle icon={CHART_ICONS.CHART_HISTOGRAM} title="Histórico de artículos" />

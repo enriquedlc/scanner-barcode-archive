@@ -49,6 +49,8 @@ export function CategoriesUsageBarChart() {
 		],
 	};
 
+	if (articles.length === 0) return null;
+
 	return (
 		<>
 			<ChartTitle title="Uso de categorías" icon={CHART_ICONS.CHART_BAR} />
