@@ -2,8 +2,6 @@ import { Platform, StyleSheet } from "react-native";
 
 import { FONT_SIZES } from "../../constants/font";
 
-// TODO: refactor colors to constants
-
 export const profileStyles = StyleSheet.create({
 	profileContainer: {
 		flex: 1,

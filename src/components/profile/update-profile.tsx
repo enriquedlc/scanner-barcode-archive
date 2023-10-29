@@ -13,7 +13,6 @@ export function UpdateProfile() {
 
 	return (
 		<View>
-			{/* TODO: implement patching email password and username */}
 			<TouchableOpacity
 				onPress={() => navigation.navigate("USER_SETTINGS_SCREEN")}
 				style={updateProfileStyles.updateProfileButton}

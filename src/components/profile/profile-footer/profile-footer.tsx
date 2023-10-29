@@ -22,8 +22,6 @@ export function ProfileFooter() {
 				setShowAttributionsModal={setShowAttributionsModal}
 			/>
 			<ButtonIcon
-				// TODO: implement modal with info about the app, its purpose and its
-				// creators and contributors mention to the people who made the icons
 				icon={INFO_CIRCLE}
 				label="Atribuciones"
 				outlineColor={colorScheme.MAIN}
