@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { LoginUserForm, PrettifiedRegisterUserForm, User } from "../store/user-auth";
 
-import { AXIOS_BASE_URL } from "../../credentials";
+const AXIOS_BASE_URL = "https://article-scanner-server-dev-dzcf.3.us-1.fl0.io";
 
 interface LoginResponse {
 	message: string;

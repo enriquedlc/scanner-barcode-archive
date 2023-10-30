@@ -1,7 +1,5 @@
 import axios from "axios";
 
-import { AXIOS_BASE_URL } from "../../credentials";
-
 import { User } from "../store/user-auth";
 import { Article, ArticleFormP } from "../types/article";
 import { ScannedData } from "../types/types";
@@ -10,6 +8,8 @@ interface ArticlesResponse {
 	message: string;
 	articles: Article[];
 }
+
+const AXIOS_BASE_URL = "https://article-scanner-server-dev-dzcf.3.us-1.fl0.io";
 
 export const getArticlesByUserId = async (userId: string) => {
 	try {
