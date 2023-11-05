@@ -41,7 +41,7 @@ export default function App() {
 			fetchCategories();
 		};
 		getUser();
-	}, []);
+	}, [user?.id]);
 
 	return (
 		<>
