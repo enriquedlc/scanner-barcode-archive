@@ -39,7 +39,7 @@ export function ArticleForm(props: ArticleFormProps) {
 		article: currentArticle,
 	} = props;
 
-	const categories = useCategoriesStore((state) => state.categories);
+	const { getCategories } = useCategoriesStore((state) => state);
 	const articles = useArticlesStore((state) => state.articles);
 
 	const [scannedArticle, setScannedArticle] = useState<Article>(
@@ -119,7 +119,7 @@ export function ArticleForm(props: ArticleFormProps) {
 						/>
 						<CategoryDropdown
 							defaultCategory={scannedArticle.categoryName}
-							options={categories.map((category) => ({
+							options={getCategories().map((category) => ({
 								label: category.categoryName,
 								value: category.categoryName,
 								icon: category.icon,

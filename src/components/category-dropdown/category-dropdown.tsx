@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Image, ImageProps, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import { Category } from "../../services/category";
@@ -7,6 +7,7 @@ import { CategoryList } from "./category-list";
 
 import { CATEGORY_ICONS } from "../../../assets";
 import { FONT_SIZES } from "../../constants/font";
+import { useCategoriesStore } from "../../store/categories";
 const { CHEVRON_CIRCLE_DOWN, CHEVRON_CIRCLE_UP } = CATEGORY_ICONS;
 
 export interface DropdownOption {
@@ -30,6 +31,13 @@ export function CategoryDropdown({ options, onSelect, defaultCategory }: Dropdow
 		setIsOpen(false);
 		onSelect(option.value);
 	}
+
+	const fetchCategories = useCategoriesStore((state) => state.fetchCategories);
+
+	// biome-ignore lint/nursery/useExhaustiveDependencies: <explanation>
+	useEffect(() => {
+		fetchCategories();
+	}, []);
 
 	const defaultValueText = defaultCategory || "Select a category";
 
