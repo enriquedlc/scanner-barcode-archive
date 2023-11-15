@@ -1,4 +1,6 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 import {
 	BLUE_PALLETE,
@@ -33,19 +35,29 @@ type Actions = {
 	getColorScheme: () => ColorPalette;
 };
 
-export const useUserPreferencesStore = create<State & Actions>((set, get) => ({
-	userPreferences: {
-		colorScheme: BLUE_PALLETE,
-		lang: "es",
-	},
+export const useUserPreferencesStore = create<State & Actions>()(
+	persist(
+		(set, get) => ({
+			userPreferences: {
+				colorScheme: BLUE_PALLETE,
+				lang: "en",
+			},
 
-	setUserPreferences: (userPreferences) => set({ userPreferences }),
-	getUserPreferences: () => get().userPreferences,
+			setUserPreferences: (userPreferences) => set({ userPreferences }),
 
-	setColorScheme: (colorScheme) =>
-		set({ userPreferences: { ...get().userPreferences, colorScheme } }),
-	setLang: (lang) => set({ userPreferences: { ...get().userPreferences, lang } }),
+			getUserPreferences: () => get().userPreferences,
 
-	getLang: () => get().userPreferences.lang,
-	getColorScheme: () => get().userPreferences.colorScheme,
-}));
+			setColorScheme: (color) =>
+				set({ userPreferences: { ...get().userPreferences, colorScheme: color } }),
+
+			setLang: (lang) => set({ userPreferences: { ...get().userPreferences, lang: lang } }),
+
+			getColorScheme: () => get().userPreferences.colorScheme,
+			getLang: () => get().userPreferences.lang,
+		}),
+		{
+			name: "user-preferences-storage",
+			storage: createJSONStorage(() => AsyncStorage),
+		},
+	),
+);
