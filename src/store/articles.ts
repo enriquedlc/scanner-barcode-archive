@@ -1,4 +1,6 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 import { getArticlesByUserId } from "../services/article";
 import { Article } from "../types/article";
@@ -14,15 +16,23 @@ interface Actions {
 	fetchArticles: (userId: User["id"]) => Promise<void>;
 }
 
-export const useArticlesStore = create<State & Actions>((set, get) => ({
-	articles: [],
+export const useArticlesStore = create<State & Actions>()(
+	persist(
+		(set, get) => ({
+			articles: [],
 
-	setArticles: (articles: Article[]) => set({ articles }),
+			setArticles: (articles: Article[]) => set({ articles }),
 
-	getArticles: () => get().articles,
+			getArticles: () => get().articles,
 
-	fetchArticles: async (userId: User["id"]) => {
-		const response = await getArticlesByUserId(userId);
-		set({ articles: response?.articles });
-	},
-}));
+			fetchArticles: async (userId: User["id"]) => {
+				const response = await getArticlesByUserId(userId);
+				set({ articles: response?.articles });
+			},
+		}),
+		{
+			name: "articles-storage",
+			storage: createJSONStorage(() => AsyncStorage),
+		},
+	),
+);
