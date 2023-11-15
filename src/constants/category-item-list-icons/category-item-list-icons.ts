@@ -6,6 +6,7 @@ const { TOOL_BOX, SCREWS, GLOVES, POWER_PLANT, LIGHT_BULB, CAR } = CATEGORY_ICON
 
 export type CategoryName =
 	| ""
+	| "All"
 	| "Tornillería"
 	| "Herramientas"
 	| "Guantes"
