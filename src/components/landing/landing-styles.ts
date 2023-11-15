@@ -1,7 +1,6 @@
 import { StyleSheet } from "react-native";
 
 import { FONT_SIZES } from "../../constants/font";
-import { BLUE_PALLETE } from "../../constants/colors/colors";
 
 export const landingStyles = StyleSheet.create({
 	container: {
@@ -26,7 +25,6 @@ export const landingStyles = StyleSheet.create({
 	firstBubble: {
 		zIndex: -10,
 		width: "130%",
-		backgroundColor: BLUE_PALLETE.PRIMARY,
 		height: "30%",
 		borderTopEndRadius: 400,
 		borderTopStartRadius: 400,
@@ -43,7 +41,6 @@ export const landingStyles = StyleSheet.create({
 	secondBubble: {
 		zIndex: -20,
 		width: "130%",
-		backgroundColor: BLUE_PALLETE.TERTIARY,
 		height: "30%",
 		borderTopEndRadius: 400,
 		borderTopStartRadius: 400,
@@ -53,7 +50,6 @@ export const landingStyles = StyleSheet.create({
 	thridBubble: {
 		zIndex: -30,
 		width: "130%",
-		backgroundColor: BLUE_PALLETE.QUATERNARY,
 		height: "30%",
 		borderTopEndRadius: 400,
 		borderTopStartRadius: 400,
@@ -77,7 +73,7 @@ export const toolStyles = StyleSheet.create({
 		bottom: 170,
 		alignSelf: "center",
 	},
-	work_tools: {
+	workTools: {
 		width: 80,
 		height: 80,
 		position: "absolute",

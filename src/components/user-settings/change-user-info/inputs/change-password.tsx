@@ -7,10 +7,12 @@ import { useShowToast } from "../../../../hooks/useShowToast";
 import { changePassword } from "../../../../services/user";
 import { User, useUserAuthStore } from "../../../../store/user-auth";
 import { changeUserInfoStyles } from "./styles/change-user-info-styles";
+import { useUserPreferencesStore } from "../../../../store/user-preferences";
 
 export function ChangePasswordInput() {
 	const { user, setUser } = useUserAuthStore((state) => state);
 	const { showToast } = useShowToast();
+	const { colorScheme } = useUserPreferencesStore((state) => state.userPreferences);
 
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
@@ -37,15 +39,45 @@ export function ChangePasswordInput() {
 
 	return (
 		<>
-			<Text style={changeUserInfoStyles.infoToChangeLabel}>New password</Text>
+			<Text
+				style={[
+					changeUserInfoStyles.infoToChangeLabel,
+					{
+						color: colorScheme.PRIMARY_BLACK,
+					},
+				]}
+			>
+				New password
+			</Text>
 			<TextInput
-				style={changeUserInfoStyles.infoToChangeInput}
+				style={[
+					changeUserInfoStyles.infoToChangeInput,
+					{
+						color: colorScheme.SECONDARY_BLACK,
+						backgroundColor: colorScheme.SECONDARY_WHITE,
+					},
+				]}
 				onChangeText={handlePasswordChange}
 				value={password}
 			/>
-			<Text style={changeUserInfoStyles.infoToChangeLabel}>Confirm new password</Text>
+			<Text
+				style={[
+					changeUserInfoStyles.infoToChangeLabel,
+					{
+						color: colorScheme.PRIMARY_BLACK,
+					},
+				]}
+			>
+				Confirm new password
+			</Text>
 			<TextInput
-				style={changeUserInfoStyles.infoToChangeInput}
+				style={[
+					changeUserInfoStyles.infoToChangeInput,
+					{
+						color: colorScheme.SECONDARY_BLACK,
+						backgroundColor: colorScheme.SECONDARY_WHITE,
+					},
+				]}
 				onChangeText={setConfirmPassword}
 				value={confirmPassword}
 			/>

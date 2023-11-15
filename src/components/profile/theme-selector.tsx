@@ -1,42 +1,67 @@
-import { View, Text, StyleSheet, Image } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-import { BLUE_PALLETE } from "../../constants/colors/colors";
 import { BRUSH } from "../../../assets/profile-images";
 
+import {
+	BLUE_PALLETE,
+	GREEN_PALLETE,
+	ORANGE_PALLETE,
+	PURPLE_PALLETE,
+} from "../../constants/colors/colors";
 import { profileStyles } from "../../screens/profile-screen/profile-styles";
+import { ColorPalette, useUserPreferencesStore } from "../../store/user-preferences";
 
 export function ThemeSelector() {
-	// TODO: implement theme selector zustand store
+	const { getColorScheme, setColorScheme } = useUserPreferencesStore((state) => state);
+	const colorScheme = getColorScheme();
+
+	const handleThemeChange = (colorScheme: ColorPalette) => {
+		setColorScheme(colorScheme);
+	};
+
 	return (
 		<View style={applicationThemeSelector.appThemeChangerLabelContainer}>
 			<View style={{ flexDirection: "row" }}>
-				<Text style={profileStyles.profileDefaultLabel}>Tema de la applicación</Text>
+				<Text
+					style={[
+						profileStyles.profileDefaultLabel,
+						{
+							color: colorScheme.SECONDARY_BLACK,
+						},
+					]}
+				>
+					Tema de la applicación
+				</Text>
 				<Image source={BRUSH} style={profileStyles.profileIcon} />
 			</View>
 			<View style={applicationThemeSelector.themeColorsContainer}>
-				<LinearGradient
-					style={applicationThemeSelector.themeColor}
-					colors={["blue", "#3b5998", "blue"]}
-					start={{ x: 0, y: 3 }}
+				<TouchableOpacity
+					style={[
+						applicationThemeSelector.themeColor,
+						{ backgroundColor: BLUE_PALLETE.MAIN },
+					]}
+					onPress={() => handleThemeChange(BLUE_PALLETE)}
 				/>
-				<LinearGradient
-					style={applicationThemeSelector.themeColor}
-					// orange
-					colors={["#ff9966", "#ff5e62", "#ff9966"]}
-					start={{ x: 0, y: 3 }}
+				<TouchableOpacity
+					style={[
+						applicationThemeSelector.themeColor,
+						{ backgroundColor: ORANGE_PALLETE.MAIN },
+					]}
+					onPress={() => handleThemeChange(ORANGE_PALLETE)}
 				/>
-				<LinearGradient
-					style={applicationThemeSelector.themeColor}
-					// purple
-					colors={["#cc2b5e", "#753a88", "#cc2b5e"]}
-					start={{ x: 0, y: 3 }}
+				<TouchableOpacity
+					style={[
+						applicationThemeSelector.themeColor,
+						{ backgroundColor: PURPLE_PALLETE.MAIN },
+					]}
+					onPress={() => handleThemeChange(PURPLE_PALLETE)}
 				/>
-				<LinearGradient
-					style={applicationThemeSelector.themeColor}
-					// green
-					colors={["#11998e", "#38ef7d", "#11998e"]}
-					start={{ x: 0, y: 3 }}
+				<TouchableOpacity
+					style={[
+						applicationThemeSelector.themeColor,
+						{ backgroundColor: GREEN_PALLETE.MAIN },
+					]}
+					onPress={() => handleThemeChange(GREEN_PALLETE)}
 				/>
 			</View>
 		</View>
@@ -66,7 +91,7 @@ const applicationThemeSelector = StyleSheet.create({
 		borderWidth: 1,
 		marginRight: 40,
 		marginTop: 10,
-		borderColor: BLUE_PALLETE.BLUE,
-		backgroundColor: BLUE_PALLETE.BLUE,
+		// borderColor: colorScheme.MAIN,
+		// backgroundColor: colorScheme.MAIN,
 	},
 });

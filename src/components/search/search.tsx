@@ -8,7 +8,8 @@ import { ArticleLists } from "../artcile-list-by-category/article-lists";
 import { ArticleList } from "../article-list/article-list";
 import { SearchArticles } from "./search-articles";
 
-import { BLUE_PALLETE } from "../../constants/colors/colors";
+import { FONT_SIZES } from "../../constants/font";
+import { useUserPreferencesStore } from "../../store/user-preferences";
 
 const FirstRoute = () => <SearchArticles />;
 
@@ -28,7 +29,7 @@ const ThirdRoute = () => {
 				Detalles de la categoría {articleCategoryDetailListName}
 			</Text>
 			<ArticleList
-				articles={articles.filter(
+				articles={articles?.filter(
 					(articles) => articles.categoryName === articleCategoryDetailListName,
 				)}
 				articleListStyle={{ paddingBottom: "20%" }}
@@ -45,6 +46,8 @@ const renderScene = SceneMap({
 
 export function Search() {
 	const layout = useWindowDimensions();
+
+	const { colorScheme } = useUserPreferencesStore((state) => state.userPreferences);
 
 	const [index, setIndex] = useState(0);
 	const [routes] = useState([
@@ -63,8 +66,18 @@ export function Search() {
 				renderTabBar={(props) => (
 					<TabBar
 						{...props}
-						style={searchStyles.tabBar}
-						labelStyle={searchStyles.tabLabel}
+						style={[
+							searchStyles.tabBar,
+							{
+								backgroundColor: colorScheme.MAIN,
+							},
+						]}
+						labelStyle={[
+							searchStyles.tabLabel,
+							{
+								color: colorScheme.PRIMARY_WHITE,
+							},
+						]}
 						indicatorStyle={searchStyles.tabIndicator}
 					/>
 				)}
@@ -92,21 +105,16 @@ const searchStyles = StyleSheet.create({
 	},
 	tabBar: {
 		paddingTop: Platform.OS === "ios" ? "8%" : 0,
-		backgroundColor: BLUE_PALLETE.BLUE,
+
 		elevation: 0,
 		shadowOpacity: 0,
 	},
 	tabLabel: {
-		color: BLUE_PALLETE.PRIMARY_WHITE,
 		fontWeight: "bold",
+		fontSize: FONT_SIZES.SMALL,
 	},
 	tabIndicator: {
 		backgroundColor: "white",
-	},
-	button: {
-		color: BLUE_PALLETE.BLUE,
-		fontWeight: "bold",
-		fontSize: 16,
 	},
 	listTitle: {
 		fontSize: 16,

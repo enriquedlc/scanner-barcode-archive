@@ -1,8 +1,7 @@
 import { BarCodeScanner } from "expo-barcode-scanner";
-import { Dimensions, StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View } from "react-native";
 
 import { ArticleForm } from "../article-form/article-form";
-
 import { useScanner } from "./useScanner";
 
 export function BarcodeScanner() {
@@ -27,7 +26,7 @@ export function BarcodeScanner() {
 		<View style={styles.container}>
 			<BarCodeScanner
 				style={styles.barcodeScannerCamera}
-				onBarCodeScanned={scannedBarcode ? undefined : handleBarCodeScanned}
+				onBarCodeScanned={handleBarCodeScanned}
 			/>
 			<ArticleForm
 				visible={scannedBarcode.length > 0 && showArticleForm}
@@ -49,9 +48,8 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 	},
 	barcodeScannerCamera: {
-		width: Dimensions.get("window").width - 30,
-		height: Dimensions.get("window").height - 250,
-		borderRadius: 20,
-		overflow: "hidden",
+		borderRadius: 10,
+		width: Platform.OS === "ios" ? "90%" : "90%",
+		height: Platform.OS === "ios" ? "80%" : "80%",
 	},
 });

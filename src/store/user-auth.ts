@@ -1,8 +1,10 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 import { loginUser, registerUser } from "../services/user";
 import { Prettify } from "../types/types";
-import { clearStorage, setUserToStorage } from "../utils/async-storage";
+import { clearStorage } from "../utils/async-storage";
 
 type UserId = `${string}-${string}-${string}-${string}-${string}`;
 
@@ -31,40 +33,45 @@ interface Actions {
 	logout: () => void;
 }
 
-export const useUserAuthStore = create<State & Actions>((set, get) => ({
-	user: null,
+export const useUserAuthStore = create<State & Actions>()(
+	persist(
+		(set, get) => ({
+			user: null,
 
-	setUser: (user) => {
-		set({ user });
-		setUserToStorage(user);
-	},
+			setUser: (user) => {
+				set({ user });
+			},
 
-	getUser: () => get().user,
+			getUser: () => get().user,
 
-	login: async (user) => {
-		const response = await loginUser(user);
+			login: async (user) => {
+				const response = await loginUser(user);
 
-		if (response?.login) {
-			setUserToStorage(response?.user);
-			set({ user: response?.user });
-		}
+				if (response?.login) {
+					set({ user: response?.user });
+				}
 
-		return response;
-	},
+				return response;
+			},
 
-	registerUser: async (user) => {
-		const response = await registerUser(user);
+			registerUser: async (user) => {
+				const response = await registerUser(user);
 
-		if (response?.created) {
-			setUserToStorage(response?.user);
-			set({ user: response?.user });
-		}
+				if (response?.created) {
+					set({ user: response?.user });
+				}
 
-		return response;
-	},
+				return response;
+			},
 
-	logout: () => {
-		set({ user: null });
-		clearStorage();
-	},
-}));
+			logout: () => {
+				set({ user: null });
+				clearStorage();
+			},
+		}),
+		{
+			name: "user-auth-storage",
+			storage: createJSONStorage(() => AsyncStorage),
+		},
+	),
+);

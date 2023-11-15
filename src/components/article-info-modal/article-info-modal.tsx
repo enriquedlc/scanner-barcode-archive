@@ -49,7 +49,6 @@ export function ArticleInfoModal(props: ArticleInfoModalProps) {
 					onPress={() => setShowArticleInfoModal(false)}
 					style={articleInfoModalStyles.closeModalButton}
 				>
-					{/* TODO: prettify this component */}
 					<FontAwesome5 name="times" size={18} color="white" />
 				</TouchableOpacity>
 				<View style={articleInfoModalStyles.modalView}>

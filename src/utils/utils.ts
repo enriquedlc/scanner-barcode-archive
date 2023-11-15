@@ -1,11 +1,12 @@
 import { Dimensions } from "react-native";
 
-import { BLUE_PALLETE } from "../constants/colors/colors";
+import { useUserPreferencesStore } from "../store/user-preferences";
 
 export const getWidth = () => {
 	return (Dimensions.get("window").width - 80) / 5;
 };
 
 export const getColor = (isFocused: boolean) => {
-	return isFocused ? BLUE_PALLETE.BLUE : BLUE_PALLETE.GRAY;
+	const { colorScheme } = useUserPreferencesStore((state) => state.userPreferences);
+	return isFocused ? colorScheme.MAIN : colorScheme.GRAY;
 };

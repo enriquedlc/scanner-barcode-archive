@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { StyleProp, Text, TextInput, View, ViewStyle } from "react-native";
+import { Keyboard, StyleProp, Text, TextInput, View, ViewStyle } from "react-native";
 
+import { LoginInputFocus } from "../../screens/login-screen";
 import { ButtonLanding } from "../button-landing/button-landing";
 import { LoadingLandingModal } from "../modal/loading-landing-modal/loading-landing-modal";
-import { LoginInputFocus } from "../../screens/login-screen";
 
 import { useAppNavigation } from "../../hooks/useAppNavigation";
 import { useInputFocus } from "../../hooks/useLoginInput";
@@ -15,6 +15,7 @@ import {
 	IS_NOT_FOCUSED_BORDER_INPUT_COLOR,
 } from "../../constants/colors/colors";
 
+import { useUserPreferencesStore } from "../../store/user-preferences";
 import { loginStyles } from "./login-styles";
 
 type LoginProps = {
@@ -28,6 +29,8 @@ const INITIAL_LOGIN_FOCUS: LoginInputFocus = {
 
 export function Login(props: LoginProps) {
 	const { formTitle } = props;
+
+	const { colorScheme } = useUserPreferencesStore((state) => state.userPreferences);
 
 	const { navigation } = useAppNavigation();
 	const { showToast } = useShowToast();
@@ -54,34 +57,52 @@ export function Login(props: LoginProps) {
 	};
 
 	const handleSubmit = async () => {
-		setLoading(true);
+		try {
+			setLoading(true);
 
-		const response = await login(userLoginForm);
+			const response = await login(userLoginForm);
 
-		if (response?.login) {
+			if (response?.login) {
+				setLoading(false);
+				showToast("success", "Inicio de sesión exitoso", "Bienvenido! 🎉");
+				navigation.navigate("HOME_SCREEN");
+				return;
+			}
+
+			showToast("error", "Inicio de sesión fallido", "Usuario o contraseña incorrectos ❌");
 			setLoading(false);
-			showToast("success", "Inicio de sesión exitoso", "Bienvenido! 🎉");
-			navigation.navigate("HOME_SCREEN");
-			return;
+			Keyboard.dismiss();
+		} catch (error) {
+			console.error(error);
+		} finally {
+			setLoading(false);
 		}
-
-		showToast("error", "Inicio de sesión fallido", "Usuario o contraseña incorrectos ❌");
-		setLoading(false);
 	};
 
 	return (
-		<View style={loginStyles.loginContainer}>
+		<View style={[loginStyles.loginContainer]}>
 			<LoadingLandingModal
 				modalVisible={loading}
 				setModalVisible={setLoading}
 				modalText="Iniciando sesión..."
 			/>
-			<Text style={loginStyles.formTitle}>{formTitle}</Text>
+			<Text style={[loginStyles.formTitle, { color: colorScheme.PRIMARY_WHITE }]}>
+				{formTitle}
+			</Text>
 			<View style={loginStyles.inputContainer}>
-				<Text style={loginStyles.inputLabel}>Usuario</Text>
+				<Text style={[loginStyles.inputLabel, { color: colorScheme.PRIMARY_WHITE }]}>
+					Usuario
+				</Text>
 				<TextInput
 					placeholderTextColor={"lightgray"}
-					style={[loginStyles.input, isFocused.username && inputStyles]}
+					style={[
+						loginStyles.input,
+						isFocused.username && inputStyles,
+						{
+							color: colorScheme.SECONDARY_WHITE,
+							backgroundColor: colorScheme.SECONDARY,
+						},
+					]}
 					placeholder="Usuario"
 					onFocus={() => handleInputFocus("username", true)}
 					onBlur={() => handleInputFocus("username", false)}
@@ -89,10 +110,19 @@ export function Login(props: LoginProps) {
 				/>
 			</View>
 			<View style={loginStyles.inputContainer}>
-				<Text style={loginStyles.inputLabel}>Contraseña</Text>
+				<Text style={[loginStyles.inputLabel, { color: colorScheme.PRIMARY_WHITE }]}>
+					Contraseña
+				</Text>
 				<TextInput
 					placeholderTextColor={"lightgray"}
-					style={[loginStyles.input, isFocused.password && inputStyles]}
+					style={[
+						loginStyles.input,
+						isFocused.password && inputStyles,
+						{
+							backgroundColor: colorScheme.SECONDARY,
+							color: colorScheme.SECONDARY_WHITE,
+						},
+					]}
 					placeholder="Contraseña"
 					onFocus={() => handleInputFocus("password", true)}
 					onBlur={() => handleInputFocus("password", false)}

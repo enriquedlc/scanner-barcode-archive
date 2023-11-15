@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Modal, Text, TouchableOpacity, View } from "react-native";
+import { useEffect, useState } from "react";
+import { Modal, ScrollView, Text, TouchableOpacity, View } from "react-native";
 
 import { ArticleFormNumberInput } from "./article-form-input/article-form-number-input";
 import { ArticleFormTextInput } from "./article-form-input/article-form-text-input";
@@ -39,7 +39,8 @@ export function ArticleForm(props: ArticleFormProps) {
 		article: currentArticle,
 	} = props;
 
-	const categories = useCategoriesStore((state) => state.categories);
+	const { getCategories } = useCategoriesStore((state) => state);
+	const articles = useArticlesStore((state) => state.articles);
 
 	const [scannedArticle, setScannedArticle] = useState<Article>(
 		currentArticle || INITIAL_ARTICLE_FORM_STATE,
@@ -59,7 +60,7 @@ export function ArticleForm(props: ArticleFormProps) {
 		userId: User["id"],
 		scannedBarcode: ScannedData["data"],
 	) => {
-		if (currentArticle) {
+		if (currentArticle || findedArticle) {
 			const response = await updateArticle(article, article.id);
 
 			if (response?.updated) {
@@ -90,14 +91,27 @@ export function ArticleForm(props: ArticleFormProps) {
 		setScannedBarcode("");
 	};
 
+	const findedArticle = articles.find((article) => article.barcode === scannedBarcode);
+
+	useEffect(() => {
+		if (findedArticle) {
+			setScannedArticle(findedArticle);
+		}
+	}, [findedArticle]);
+
 	return (
 		<Modal animationType="fade" visible={visible}>
 			<View style={articleFormStyles.centeredView}>
 				<View style={articleFormStyles.modalView}>
 					<Text style={articleFormStyles.title}>{articleFormTitle}</Text>
 					<Text style={articleFormStyles.title}>{scannedBarcode}</Text>
-					{/* TODO: make this scrollable */}
-					<View style={{ width: "100%", alignItems: "center", justifyContent: "center" }}>
+					<View
+						style={{
+							width: "100%",
+							alignItems: "center",
+							justifyContent: "center",
+						}}
+					>
 						<ArticleFormTextInput
 							setValue={(text) => handleChangeText(text, "articleName")}
 							placeholder={"Nombre"}
@@ -105,32 +119,43 @@ export function ArticleForm(props: ArticleFormProps) {
 						/>
 						<CategoryDropdown
 							defaultCategory={scannedArticle.categoryName}
-							options={categories.map((category) => ({
+							options={getCategories().map((category) => ({
 								label: category.categoryName,
 								value: category.categoryName,
+								icon: category.icon,
 							}))}
 							onSelect={(value) => handleChangeText(value, "categoryName")}
 						/>
-						<ArticleFormNumberInput
-							label="Estantería"
-							placeholder="0"
-							setValue={(text) => handleChangeText(Number(text), "shelf")}
-							value={String(scannedArticle.shelf)}
-						/>
-						<ArticleFormNumberInput
-							label="Almacén"
-							placeholder="0"
-							setValue={(text) => handleChangeText(Number(text), "warehouse")}
-							value={String(scannedArticle.warehouse)}
-						/>
-						<ArticleFormNumberInput
-							label="Exhibición"
-							placeholder="0"
-							setValue={(text) => handleChangeText(Number(text), "exhibition")}
-							value={String(scannedArticle.exhibition)}
-						/>
-
-						{/* <Text>Elegir icono</Text> */}
+						<ScrollView>
+							<View
+								style={{
+									maxWidth: "100%",
+									justifyContent: "center",
+									alignItems: "center",
+								}}
+							>
+								<ArticleFormNumberInput
+									label="Estantería"
+									placeholder="0"
+									setValue={(text) => handleChangeText(Number(text), "shelf")}
+									value={String(scannedArticle.shelf)}
+								/>
+								<ArticleFormNumberInput
+									label="Almacén"
+									placeholder="0"
+									setValue={(text) => handleChangeText(Number(text), "warehouse")}
+									value={String(scannedArticle.warehouse)}
+								/>
+								<ArticleFormNumberInput
+									label="Exhibición"
+									placeholder="0"
+									setValue={(text) =>
+										handleChangeText(Number(text), "exhibition")
+									}
+									value={String(scannedArticle.exhibition)}
+								/>
+							</View>
+						</ScrollView>
 						<View style={articleInfoModalStyles.buttonsContainer}>
 							<TouchableOpacity
 								onPress={() => {
@@ -144,7 +169,7 @@ export function ArticleForm(props: ArticleFormProps) {
 								style={articleInfoModalStyles.editButton}
 							>
 								<Text style={articleInfoModalStyles.deleteText}>
-									{articleButtonActionText}
+									{findedArticle ? "Editar" : articleButtonActionText}
 								</Text>
 							</TouchableOpacity>
 							<TouchableOpacity

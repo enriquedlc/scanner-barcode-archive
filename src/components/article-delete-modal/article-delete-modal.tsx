@@ -4,8 +4,8 @@ import { ButtonIcon } from "../button-icon/button-icon";
 
 import { ARROW_BACK, TRASH } from "../../../assets/profile-images";
 
-import { BLUE_PALLETE } from "../../constants/colors/colors";
 import { FONT_SIZES } from "../../constants/font";
+import { useUserPreferencesStore } from "../../store/user-preferences";
 
 interface ConfirmLogoutProps {
 	visible: boolean;
@@ -15,6 +15,8 @@ interface ConfirmLogoutProps {
 
 export function ArticleDeleteModal(props: ConfirmLogoutProps) {
 	const { visible, setShowConfirmDeleteArticleModal: setShowConfirmLogoutModal, action } = props;
+
+	const { colorScheme } = useUserPreferencesStore((state) => state.userPreferences);
 
 	return (
 		<Modal animationType="fade" transparent={true} visible={visible}>
@@ -27,14 +29,16 @@ export function ArticleDeleteModal(props: ConfirmLogoutProps) {
 						<ButtonIcon
 							icon={ARROW_BACK}
 							label="Volver"
-							outlineColor={BLUE_PALLETE.BLUE}
+							outlineColor={colorScheme.MAIN}
 							action={() => setShowConfirmLogoutModal(false)}
+							displayLabel={true}
 						/>
 						<ButtonIcon
 							icon={TRASH}
 							label="Borrar"
 							outlineColor="red"
 							action={action}
+							displayLabel={true}
 						/>
 					</View>
 				</View>

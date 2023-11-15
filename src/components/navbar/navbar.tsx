@@ -14,12 +14,14 @@ import { useAppNavigation } from "../../hooks/useAppNavigation";
 import { getColor, getWidth } from "../../utils/utils";
 
 import { BARCODE, NAVBAR_ICONS } from "../../../assets";
-import { BLUE_PALLETE } from "../../constants/colors/colors";
+import { useUserPreferencesStore } from "../../store/user-preferences";
 
 const Tab = createBottomTabNavigator();
 
 export function Navbar() {
 	const { navigation } = useAppNavigation();
+
+	const { colorScheme } = useUserPreferencesStore((state) => state.userPreferences);
 
 	const [isOnFocusableTap, setIsOnFocusableTab] = useState(true);
 	const tabOffsetValue = useRef(new Animated.Value(0)).current;
@@ -32,7 +34,7 @@ export function Navbar() {
 					headerShown: false,
 					tabBarShowLabel: false,
 					tabBarStyle: {
-						backgroundColor: BLUE_PALLETE.PRIMARY_WHITE,
+						backgroundColor: colorScheme.PRIMARY_WHITE,
 						position: "relative",
 						minWidth: "95%",
 						bottom: 25,
@@ -112,7 +114,7 @@ export function Navbar() {
 								style={{
 									width: 55,
 									height: 55,
-									backgroundColor: BLUE_PALLETE.BLUE,
+									backgroundColor: colorScheme.MAIN,
 									borderRadius: 30,
 									justifyContent: "center",
 									alignItems: "center",
@@ -202,7 +204,7 @@ export function Navbar() {
 					style={{
 						width: 40,
 						height: 2,
-						backgroundColor: BLUE_PALLETE.BLUE,
+						backgroundColor: colorScheme.MAIN,
 						position: "absolute",
 						bottom: 83,
 						left: "11.5%",

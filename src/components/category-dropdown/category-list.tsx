@@ -26,17 +26,12 @@ export function CategoryList(props: CategoryListProps) {
 
 const styles = StyleSheet.create({
 	optionsContainer: {
-		position: "absolute",
-		top: "100%",
-		left: 0,
-		right: 0,
+		position: "relative",
 		backgroundColor: "white",
 		borderWidth: 1,
 		borderColor: "gray",
 		borderRadius: 5,
 		padding: 10,
-		maxHeight: 150,
-		overflow: "scroll",
-		zIndex: 1,
+		height: 200,
 	},
 });

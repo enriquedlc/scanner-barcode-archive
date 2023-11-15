@@ -1,5 +1,6 @@
 import { StyleProp, StyleSheet, Text, View, ViewStyle } from "react-native";
 
+import { useUserPreferencesStore } from "../../store/user-preferences";
 import { articleItemStyles } from "../article-item/article-item-styles";
 
 interface BarcodeProps {
@@ -9,12 +10,20 @@ interface BarcodeProps {
 }
 
 export function BarcodeCategoryTags({ barcode, categoryName, optionalStyles }: BarcodeProps) {
+	const { colorScheme } = useUserPreferencesStore((state) => state.userPreferences);
+
+	const articleItemBarcodeContainer = {
+		borderRadius: 5,
+		backgroundColor: colorScheme.MAIN,
+		paddingHorizontal: 5,
+	};
+
 	return (
 		<View style={optionalStyles ? optionalStyles : mainViewStyles.mainView}>
-			<View style={[articleItemStyles.articleItemBarcodeContainer, styles.barcodeContainer]}>
+			<View style={[articleItemBarcodeContainer, styles.barcodeContainer]}>
 				<Text style={articleItemStyles.articleItemBarcode}>{barcode}</Text>
 			</View>
-			<View style={[articleItemStyles.articleItemBarcodeContainer, styles.barcodeContainer]}>
+			<View style={[articleItemBarcodeContainer, styles.barcodeContainer]}>
 				<Text style={articleItemStyles.articleItemBarcode}>{categoryName}</Text>
 			</View>
 		</View>

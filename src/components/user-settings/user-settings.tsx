@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 
 import { FONT_SIZES } from "../../constants/font";
 import { UserProfilePhoto } from "../profile/profile-info-card";
@@ -7,7 +7,7 @@ import { UserInfoItem } from "./user-info-item";
 
 export function UserSettings() {
 	return (
-		<View>
+		<SafeAreaView>
 			<ArrowBack />
 			<Text style={styles.accountSettingsText}>Account Information</Text>
 			<UserProfilePhoto />
@@ -17,7 +17,7 @@ export function UserSettings() {
 				<UserInfoItem label={"email"} />
 				<UserInfoItem label={"password"} />
 			</View>
-		</View>
+		</SafeAreaView>
 	);
 }
 

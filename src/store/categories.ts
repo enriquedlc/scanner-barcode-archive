@@ -1,4 +1,6 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 import { Category, getAllCategories } from "../services/category";
 
@@ -12,15 +14,23 @@ interface Actions {
 	fetchCategories: () => Promise<void>;
 }
 
-export const useCategoriesStore = create<State & Actions>((set, get) => ({
-	categories: [],
+export const useCategoriesStore = create<State & Actions>()(
+	persist(
+		(set, get) => ({
+			categories: [],
 
-	setCategories: (categories: Category[]) => set({ categories }),
+			setCategories: (categories: Category[]) => set({ categories }),
 
-	getCategories: () => get().categories,
+			getCategories: () => get().categories,
 
-	fetchCategories: async () => {
-		const response = await getAllCategories();
-		if (response?.categories) set({ categories: response.categories });
-	},
-}));
+			fetchCategories: async () => {
+				const response = await getAllCategories();
+				set({ categories: response?.categories });
+			},
+		}),
+		{
+			name: "categories-storage",
+			storage: createJSONStorage(() => AsyncStorage),
+		},
+	),
+);

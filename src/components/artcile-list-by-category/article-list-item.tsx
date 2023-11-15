@@ -7,8 +7,8 @@ import { ButtonIcon } from "../button-icon/button-icon";
 import { CategoryIcon } from "../category-dropdown/category-icon";
 
 import { DETAILS_ICONS } from "../../../assets";
-import { BLUE_PALLETE } from "../../constants/colors/colors";
 import { FONT_SIZES } from "../../constants/font";
+import { useUserPreferencesStore } from "../../store/user-preferences";
 
 interface ArticleListItemProps {
 	title: Category["categoryName"];
@@ -17,6 +17,8 @@ interface ArticleListItemProps {
 
 export function ArticleListItem(props: ArticleListItemProps) {
 	const { title, jumpTo } = props;
+
+	const { colorScheme } = useUserPreferencesStore((state) => state.userPreferences);
 	const articles = useArticlesStore((state) => state.articles);
 	const { setArticleCategoryDetailListName } = useArticleListDetailStore((state) => state);
 
@@ -38,7 +40,7 @@ export function ArticleListItem(props: ArticleListItemProps) {
 				action={handlePress}
 				icon={DETAILS_ICONS.DETAILS}
 				label="Detalles"
-				outlineColor={BLUE_PALLETE.PRIMARY_WHITE}
+				outlineColor={colorScheme.PRIMARY_WHITE}
 				displayLabel={false}
 				touchableStyles={styles.touchableStyles}
 				textStyles={styles.textStyles}

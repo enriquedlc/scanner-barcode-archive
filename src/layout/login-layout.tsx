@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
-import { StyleSheet, View, Image, TouchableWithoutFeedback, Keyboard } from "react-native";
-import { BLUE_PALLETE } from "../constants/colors/colors";
+import { Image, Keyboard, StyleSheet, TouchableWithoutFeedback, View } from "react-native";
 import { LANDING } from "../../assets";
+import { useUserPreferencesStore } from "../store/user-preferences";
 
 type LoginLayoutProps = {
 	children: ReactNode;
@@ -13,12 +13,40 @@ type LoginLayoutProps = {
 export function LoginLayout(props: LoginLayoutProps) {
 	const { children, firstBubbleButtomY, secondBubbleButtomY, thirdBubbleButtomY } = props;
 
+	const { colorScheme } = useUserPreferencesStore((state) => state.userPreferences);
+
 	return (
 		<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
 			<View style={styles.container}>
-				<View style={[{ bottom: firstBubbleButtomY }, styles.firstBubble]}>{children}</View>
-				<View style={[{ bottom: secondBubbleButtomY }, styles.secondBubble]} />
-				<View style={[{ bottom: thirdBubbleButtomY }, styles.thridBubble]}>
+				<View
+					style={[
+						{ bottom: firstBubbleButtomY },
+						styles.firstBubble,
+						{
+							backgroundColor: colorScheme.PRIMARY,
+						},
+					]}
+				>
+					{children}
+				</View>
+				<View
+					style={[
+						{ bottom: secondBubbleButtomY },
+						styles.secondBubble,
+						{
+							backgroundColor: colorScheme.SECONDARY,
+						},
+					]}
+				/>
+				<View
+					style={[
+						{ bottom: thirdBubbleButtomY },
+						styles.thridBubble,
+						{
+							backgroundColor: colorScheme.TERTIARY,
+						},
+					]}
+				>
 					<Image source={LANDING.scanner} style={styles.icon} alt="scanner" />
 					<Image source={LANDING.box} style={styles.icon} alt="box" />
 				</View>
@@ -34,17 +62,9 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 	},
-	title: {
-		fontSize: 26,
-		fontWeight: "bold",
-		color: BLUE_PALLETE.PRIMARY_BLACK,
-		alignSelf: "center",
-		bottom: 30,
-	},
 	firstBubble: {
 		zIndex: -10,
 		width: "130%",
-		backgroundColor: BLUE_PALLETE.PRIMARY,
 		height: "100%",
 		borderTopEndRadius: 400,
 		borderTopStartRadius: 400,
@@ -56,7 +76,6 @@ const styles = StyleSheet.create({
 	secondBubble: {
 		zIndex: -20,
 		width: "130%",
-		backgroundColor: BLUE_PALLETE.SECONDARY,
 		height: "100%",
 		borderTopEndRadius: 400,
 		borderTopStartRadius: 400,
@@ -66,7 +85,6 @@ const styles = StyleSheet.create({
 	thridBubble: {
 		zIndex: -30,
 		width: "130%",
-		backgroundColor: BLUE_PALLETE.TERTIARY,
 		height: "100%",
 		borderTopEndRadius: 400,
 		borderTopStartRadius: 400,

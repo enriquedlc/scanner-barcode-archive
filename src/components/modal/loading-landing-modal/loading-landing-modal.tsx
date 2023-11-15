@@ -1,5 +1,5 @@
-import { Alert, Modal, StyleSheet, Text, ActivityIndicator, View } from "react-native";
-import { BLUE_PALLETE } from "../../../constants/colors/colors";
+import { ActivityIndicator, Alert, Modal, StyleSheet, Text, View } from "react-native";
+import { useUserPreferencesStore } from "../../../store/user-preferences";
 
 interface LoadingLandingModalProps {
 	modalVisible: boolean;
@@ -9,6 +9,8 @@ interface LoadingLandingModalProps {
 
 export function LoadingLandingModal(props: LoadingLandingModalProps) {
 	const { modalVisible, setModalVisible, modalText } = props;
+
+	const { colorScheme } = useUserPreferencesStore((state) => state.userPreferences);
 
 	return (
 		<View style={styles.centeredView}>
@@ -25,7 +27,7 @@ export function LoadingLandingModal(props: LoadingLandingModalProps) {
 				<View style={styles.centeredView}>
 					<View style={styles.modalView}>
 						<Text style={styles.modalText}>{modalText}</Text>
-						<ActivityIndicator size="large" color={BLUE_PALLETE.BLUE} />
+						<ActivityIndicator size="large" color={colorScheme.MAIN} />
 					</View>
 				</View>
 			</Modal>

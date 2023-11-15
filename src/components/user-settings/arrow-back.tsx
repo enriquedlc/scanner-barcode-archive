@@ -2,13 +2,23 @@ import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 
 import { ARROW_BACK } from "../../../assets/profile-images";
 
-import { BLUE_PALLETE } from "../../constants/colors/colors";
 import { useAppNavigation } from "../../hooks/useAppNavigation";
+import { useUserPreferencesStore } from "../../store/user-preferences";
 
 export function ArrowBack() {
 	const { navigation } = useAppNavigation();
+
+	const { colorScheme } = useUserPreferencesStore((state) => state.userPreferences);
+
 	return (
-		<View style={styles.arrowBackContainer}>
+		<View
+			style={[
+				styles.arrowBackContainer,
+				{
+					backgroundColor: colorScheme.MAIN,
+				},
+			]}
+		>
 			<TouchableOpacity onPress={() => navigation.goBack()}>
 				<Image style={styles.arrowBack} source={ARROW_BACK} />
 			</TouchableOpacity>
@@ -21,7 +31,6 @@ const styles = StyleSheet.create({
 		display: "flex",
 		justifyContent: "center",
 		alignItems: "center",
-		backgroundColor: BLUE_PALLETE.BLUE,
 		margin: 10,
 		borderRadius: 50,
 		height: 40,

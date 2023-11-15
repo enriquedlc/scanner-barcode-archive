@@ -1,7 +1,6 @@
 import axios from "axios";
 import { ImageProps } from "react-native";
 
-import { AXIOS_BASE_URL } from "../../credentials";
 import { CategoryName } from "../constants/category-item-list-icons/category-item-list-icons";
 
 type CategoryId = `${string}-${string}-${string}-${string}-${string}`;
@@ -16,6 +15,8 @@ interface CategoriesResponse {
 	message: string;
 	categories: Category[];
 }
+
+import { AXIOS_BASE_URL } from "../../credentials";
 
 export const getAllCategories = async () => {
 	try {

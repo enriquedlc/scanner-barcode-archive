@@ -4,8 +4,8 @@ import { Article } from "../../types/article";
 import { formatDate } from "../../utils/date";
 import { BarcodeCategoryTags } from "../barcode-category-tags/barcode-category-tags";
 
-import { BLUE_PALLETE } from "../../constants/colors/colors";
 import { FONT_SIZES } from "../../constants/font";
+import { useUserPreferencesStore } from "../../store/user-preferences";
 
 interface ArticleModalStatProps {
 	label: string;
@@ -15,9 +15,28 @@ interface ArticleModalStatProps {
 function ArticleModalStat(props: ArticleModalStatProps) {
 	const { label, value } = props;
 
+	const { colorScheme } = useUserPreferencesStore((state) => state.userPreferences);
+
 	return (
-		<Text style={styles.label}>
-			{label}: <Text style={styles.value}>{value}</Text>
+		<Text
+			style={[
+				styles.label,
+				{
+					color: colorScheme.PRIMARY_BLACK,
+				},
+			]}
+		>
+			{label}:{" "}
+			<Text
+				style={[
+					styles.value,
+					{
+						color: colorScheme.SECONDARY_BLACK,
+					},
+				]}
+			>
+				{value}
+			</Text>
 		</Text>
 	);
 }
@@ -40,12 +59,10 @@ export function ArticleInfoModalStats({ article }: { article: Article }) {
 const styles = StyleSheet.create({
 	label: {
 		fontSize: FONT_SIZES.MEDIUM,
-		color: BLUE_PALLETE.PRIMARY_BLACK,
 		fontWeight: "bold",
 	},
 	value: {
 		fontSize: FONT_SIZES.MEDIUM,
-		color: BLUE_PALLETE.SECONDARY_BLACK,
 		fontWeight: "normal",
 	},
 });

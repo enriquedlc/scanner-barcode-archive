@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+
 import { FONT_SIZES } from "../../constants/font";
 
 export const articleInfoModalStyles = StyleSheet.create({

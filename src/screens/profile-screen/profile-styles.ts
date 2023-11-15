@@ -1,9 +1,6 @@
 import { Platform, StyleSheet } from "react-native";
 
-import { BLUE_PALLETE } from "../../constants/colors/colors";
 import { FONT_SIZES } from "../../constants/font";
-
-// TODO: refactor colors to constants
 
 export const profileStyles = StyleSheet.create({
 	profileContainer: {
@@ -19,7 +16,7 @@ export const profileStyles = StyleSheet.create({
 		backgroundColor: "#fff",
 		borderRadius: 10,
 		marginTop: Platform.OS === "ios" ? 80 : 40,
-		shadowColor: BLUE_PALLETE.BLUE,
+
 		shadowOffset: {
 			width: 0,
 			height: 5,
@@ -30,7 +27,7 @@ export const profileStyles = StyleSheet.create({
 	},
 	photo: {
 		borderWidth: 2,
-		borderColor: BLUE_PALLETE.BLUE,
+
 		backgroundColor: "#fff",
 		borderRadius: 100,
 		width: 95,
@@ -39,7 +36,6 @@ export const profileStyles = StyleSheet.create({
 		marginLeft: 20,
 		alignItems: "center",
 		justifyContent: "center",
-		shadowColor: BLUE_PALLETE.BLUE,
 		shadowOffset: {
 			width: 0,
 			height: 5,
@@ -52,7 +48,6 @@ export const profileStyles = StyleSheet.create({
 		position: "absolute",
 		borderRadius: 100,
 		borderWidth: 1,
-		backgroundColor: BLUE_PALLETE.BLUE,
 		alignItems: "center",
 		justifyContent: "center",
 		width: 30,
@@ -68,11 +63,9 @@ export const profileStyles = StyleSheet.create({
 	name: {
 		fontSize: 20,
 		fontWeight: "bold",
-		color: BLUE_PALLETE.PRIMARY_BLACK,
 	},
 	email: {
 		fontSize: 15,
-		color: BLUE_PALLETE.SECONDARY_BLACK,
 		paddingTop: 3,
 		paddingLeft: 1,
 		flexWrap: "wrap",
@@ -98,7 +91,6 @@ export const profileStyles = StyleSheet.create({
 	profileDefaultLabelValue: {
 		fontSize: FONT_SIZES.MEDIUM,
 		textAlign: "left",
-		color: BLUE_PALLETE.SECONDARY_BLACK,
 	},
 	profileIcon: {
 		width: 20,

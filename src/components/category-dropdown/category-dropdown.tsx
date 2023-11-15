@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Image, ImageProps, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-import { CATEGORY_ICONS } from "../../../assets";
-const { CHEVRON_CIRCLE_DOWN, CHEVRON_CIRCLE_UP } = CATEGORY_ICONS;
-
-import { FONT_SIZES } from "../../constants/font";
+import { Category } from "../../services/category";
 import { CategoryIcon } from "./category-icon";
 import { CategoryList } from "./category-list";
 
+import { CATEGORY_ICONS } from "../../../assets";
+import { FONT_SIZES } from "../../constants/font";
+import { useCategoriesStore } from "../../store/categories";
+const { CHEVRON_CIRCLE_DOWN, CHEVRON_CIRCLE_UP } = CATEGORY_ICONS;
+
 export interface DropdownOption {
-	label: string;
-	value: string;
+	label: Category["categoryName"];
+	value: Category["categoryName"];
 	icon: ImageProps["source"];
 }
 
@@ -30,6 +32,13 @@ export function CategoryDropdown({ options, onSelect, defaultCategory }: Dropdow
 		onSelect(option.value);
 	}
 
+	const fetchCategories = useCategoriesStore((state) => state.fetchCategories);
+
+	// biome-ignore lint/nursery/useExhaustiveDependencies: <explanation>
+	useEffect(() => {
+		fetchCategories();
+	}, []);
+
 	const defaultValueText = defaultCategory || "Select a category";
 
 	return (
@@ -37,7 +46,7 @@ export function CategoryDropdown({ options, onSelect, defaultCategory }: Dropdow
 			<TouchableOpacity style={styles.selectedOption} onPress={() => setIsOpen(!isOpen)}>
 				<View style={{ flexDirection: "row", gap: 15, justifyContent: "center" }}>
 					<CategoryIcon
-						categoryName={defaultCategory as string}
+						categoryName={defaultCategory}
 						imageStyles={{ width: 25, height: 25 }}
 					/>
 					<Text style={styles.selectedOptionLabel}>
